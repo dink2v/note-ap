@@ -1,0 +1,11 @@
+{
+  "name": "Note AP — Apotek Prapatan",
+  "short_name": "Note AP",
+  "description": "Workspace perencanaan dan pengelolaan konten Apotek Prapatan.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f8fafa",
+  "theme_color": "#00B3B3",
+  "icons": []
+}

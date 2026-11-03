@@ -23,7 +23,16 @@
         <button class="icon-button sidebar-close" id="sidebarClose" aria-label="Tutup menu">×</button>
       </div>
       <div class="workspace-label">WORKSPACE</div>
-      <div class="workspace-card"><div class="workspace-avatar">AP</div><div><strong>Apotek Prapatan</strong><small>Content workspace</small></div><span class="chevron">⌄</span></div>
+      <div class="workspace-filter-wrap">
+        <button class="workspace-card" id="workspaceFilterToggle" type="button" aria-expanded="false" aria-controls="workspaceFormatMenu"><span class="workspace-avatar">AP</span><span class="workspace-copy"><strong>Apotek Prapatan</strong><small id="workspaceFormatLabel">Semua Konten</small></span><span class="chevron">⌄</span></button>
+        <div class="workspace-format-menu" id="workspaceFormatMenu" hidden>
+          <div class="workspace-menu-title">FILTER JENIS KONTEN</div>
+          <button type="button" data-format-filter="Semua Jenis">Semua Konten</button>
+          <button type="button" data-format-filter="Postingan">Postingan</button>
+          <button type="button" data-format-filter="Carousel">Carousel</button>
+          <button type="button" data-format-filter="Reels">Reels</button>
+        </div>
+      </div>
       <nav class="main-nav" aria-label="Navigasi utama">
         <button class="nav-item active" data-page="dashboard"><span class="nav-icon">▦</span>Dashboard</button>
         <button class="nav-item" data-page="calendar"><span class="nav-icon">▦</span>Kalender</button>

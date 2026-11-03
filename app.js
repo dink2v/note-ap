@@ -1,7 +1,7 @@
 const $ = (s, root=document) => root.querySelector(s);
 const $$ = (s, root=document) => [...root.querySelectorAll(s)];
 const STATUSES = ["Ideation","Planning","Production","Editing","Review","Ready to Publish","Published"];
-const PLATFORMS = ["Instagram","TikTok","Facebook"];
+const PLATFORMS = ["Instagram","TikTok"];
 const today = new Date();
 const iso = d => new Date(d).toISOString().slice(0,10);
 const shiftDate = (n) => { const d=new Date(); d.setDate(d.getDate()+n); return iso(d); };
@@ -18,7 +18,7 @@ let searchTerm = "";
 let currentPage = "dashboard";
 let calendarDate = new Date(today.getFullYear(),today.getMonth(),1);
 let editingId = null;
-function loadContents(){try{const v=JSON.parse(localStorage.getItem("noteap_contents"));return Array.isArray(v)?v:seed.map(x=>({...x}));}catch{return seed.map(x=>({...x}));}}
+function loadContents(){try{const v=JSON.parse(localStorage.getItem("noteap_contents"));return Array.isArray(v)?v:[];}catch{return [];}}
 function saveContents(){localStorage.setItem("noteap_contents",JSON.stringify(contents));}
 function esc(v=""){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function platformClass(p){return p.toLowerCase();}
@@ -59,7 +59,7 @@ function closeSidebar(){$("#sidebar").classList.remove("open");$("#mobileOverlay
 function openModal(html){$("#modal").innerHTML=html;$("#modalBackdrop").classList.add("open");}
 function closeModal(){$("#modalBackdrop").classList.remove("open");}
 function detailModal(c){editingId=c.id;openModal('<div class="modal-head"><div><div class="eyebrow">DETAIL CONTENT</div><h2>'+esc(c.title)+'</h2><p>Detail materi, jadwal, dan progres konten.</p></div><button class="modal-close" data-action="close">×</button></div><form id="contentForm" class="modal-form">'+contentFields(c)+'</form>');}
-function contentFields(c={}){return '<div class="detail-section"><h3>Informasi Konten</h3><div class="field-grid">'+field("Judul / Topik","title",c.title,"text",true)+selectField("Platform","platform",PLATFORMS,c.platform||"Instagram")+selectField("Format Konten","format",["Reels","Video","Carousel","Story","Feed","Live"],c.format||"Reels")+field("Durasi / Slide","duration",c.duration||"","text")+field("Pilar Konten","pillar",c.pillar||"","text")+selectField("Funnel","funnel",["Awareness","Consideration","Conversion","Retention"],c.funnel||"Awareness")+field("Objective","objective",c.objective||"","text")+selectField("Status Pengerjaan","status",STATUSES,c.status||"Ideation")+field("Tanggal Posting","date",c.date||shiftDate(1),"date",true)+field("Waktu Posting","time",c.time||"10:00","time")+field("Judul Keranjang","basket",c.basket||"","text")+'</div></div>'+
+function contentFields(c={}){return '<div class="detail-section"><h3>Informasi Konten</h3><div class="field-grid">'+field("Judul / Topik","title",c.title,"text",true)+selectField("Platform","platform",PLATFORMS,c.platform||"Instagram")+selectField("Format Konten","format",["Reels","Video","Carousel","Story","Feed","Live"],c.format||"Reels")+field("Durasi / Slide","duration",c.duration||"","text")+field("Pilar Konten","pillar",c.pillar||"","text")+selectField("Funnel","funnel",["Awareness","Consideration","Conversion","Retention"],c.funnel||"Awareness")+field("Objective","objective",c.objective||"","text")+selectField("Status Pengerjaan","status",STATUSES,c.status||"Ideation")+field("Tanggal Posting","date",c.date||"","date",false)+field("Waktu Posting","time",c.time||"","time")+field("Judul Keranjang","basket",c.basket||"","text")+'</div></div>'+
 '<div class="detail-section"><h3>Referensi Konten & Pengembangan Materi</h3><div class="field-grid">'+field("Referensi Konten","reference",c.reference||"","url",false,true)+field("Hook / Opening","hook",c.hook||"","textarea",false,true)+field("Visual (Hook)","visualHook",c.visualHook||"","textarea",false,true)+field("Body (Naskah)","body",c.body||"","textarea",false,true)+field("Visual (Body)","visualBody",c.visualBody||"","textarea",false,true)+field("CTA (Call To Action)","cta",c.cta||"","textarea",false,true)+field("Visual (CTA)","visualCta",c.visualCta||"","textarea",false,true)+'</div></div>'+
 '<div class="detail-section"><h3>Caption & Notes</h3><div class="field-grid">'+field("Caption","caption",c.caption||"","textarea",false,true)+field("Hashtag","hashtags",c.hashtags||"","textarea",false,true)+field("Notes","notes",c.notes||"","textarea",false,true)+'</div></div>'+
 '<div class="detail-actions">'+(c.id?'<button type="button" class="btn" data-action="duplicate">Duplicate</button><button type="button" class="btn" data-action="delete">Hapus</button>':'')+'<button type="button" class="btn" data-action="close">Batal</button><button type="submit" class="btn btn-primary">Simpan Konten</button></div>';}

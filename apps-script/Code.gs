@@ -66,23 +66,72 @@ function setupNoteAP() {
     settings.getRange(2, 1, SETTINGS_DEFAULTS.length, 3).setValues(SETTINGS_DEFAULTS);
   }
 
-  dashboard.clearContents();
-  dashboard.getRange(1, 1, 1, 2).setValues([["RINGKASAN NOTE AP", "JUMLAH"]]);
-  dashboard.getRange(2, 1, 4, 2).setValues([
-    ["Total Konten", ""],
-    ["Publish", ""],
-    ["Terjadwal", ""],
-    ["Dalam Produksi", ""]
-  ]);
-  dashboard.getRange("B2").setFormula("=COUNTA(KONTEN!A2:A)");
-  dashboard.getRange("B3").setFormula('=COUNTIF(KONTEN!I2:I,"Published")');
-  dashboard.getRange("B4").setFormula('=COUNTIF(KONTEN!I2:I,"Ready to Publish")+COUNTIF(KONTEN!I2:I,"Planning")');
-  dashboard.getRange("B5").setFormula('=COUNTIF(KONTEN!I2:I,"Production")+COUNTIF(KONTEN!I2:I,"Editing")+COUNTIF(KONTEN!I2:I,"Review")');
+  refreshDashboardFromSheet_();
   dashboard.setFrozenRows(1);
-  dashboard.getRange("A1:B1").setFontWeight("bold");
-  dashboard.autoResizeColumns(1, 2);
   content.setFrozenRows(1);
   return "Struktur database Note AP siap: DASHBOARD, KONTEN, AKTIVITAS, TIM, SETTING.";
+}
+
+function refreshDashboard_(items) {
+  const sheet = spreadsheet_().getSheetByName(SHEETS.dashboard);
+  const list = Array.isArray(items) ? items : [];
+  const count = status => list.filter(item => item.status === status).length;
+  const published = count("Published");
+  const scheduled = list.filter(item => ["Planning", "Ready to Publish"].includes(item.status)).length;
+  const production = list.filter(item => ["Production", "Editing", "Review"].includes(item.status)).length;
+  const instagram = list.filter(item => item.platform === "Instagram").length;
+  const tiktok = list.filter(item => item.platform === "TikTok").length;
+  const now = new Date();
+  const upcoming = list.filter(item => item.date && item.status !== "Published" && new Date(item.date + "T00:00:00") >= new Date(now.getFullYear(), now.getMonth(), now.getDate()))
+    .sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || ""))).slice(0, 8);
+
+  const activities = [];
+  list.forEach(item => {
+    (item.history || []).forEach(entry => activities.push([entry.at || "", item.title || "", "Riwayat", entry.status || entry.title || "Pembaruan konten"]));
+    (item.approvals || []).forEach(entry => activities.push([entry.at || "", item.title || "", "Persetujuan", entry.action || "Pembaruan persetujuan"]));
+    (item.comments || []).forEach(entry => activities.push([entry.at || "", item.title || "", "Komentar", entry.text || entry.comment || "Komentar baru"]));
+  });
+  activities.sort((a, b) => String(b[0]).localeCompare(String(a[0])));
+
+  sheet.clearContents();
+  sheet.getRange("A1:D1").merge().setValue("NOTE AP · DASHBOARD DATABASE");
+  sheet.getRange("A2:B2").setValues([["RINGKASAN", "JUMLAH"]]);
+  sheet.getRange("A3:B7").setValues([
+    ["Total Konten", list.length],
+    ["Publish", published],
+    ["Terjadwal", scheduled],
+    ["Dalam Produksi", production],
+    ["Belum Dipublikasikan", list.length - published]
+  ]);
+  sheet.getRange("D2:E2").setValues([["PLATFORM", "JUMLAH"]]);
+  sheet.getRange("D3:E4").setValues([["Instagram", instagram], ["TikTok", tiktok]]);
+  sheet.getRange("G2:H2").setValues([["STATUS", "JUMLAH"]]);
+  sheet.getRange(3, 7, STATUSES_FOR_DASHBOARD.length, 2).setValues(STATUSES_FOR_DASHBOARD.map(status => [status, count(status)]));
+
+  sheet.getRange("A10:D10").merge().setValue("KONTEN AKAN DATANG");
+  sheet.getRange("A11:D11").setValues([["Tanggal", "Waktu", "Judul Konten", "Platform"]]);
+  if (upcoming.length) sheet.getRange(12, 1, upcoming.length, 4).setValues(upcoming.map(item => [item.date, item.time || "", item.title || "", item.platform || ""]));
+  else sheet.getRange("A12").setValue("Belum ada konten mendatang.");
+
+  sheet.getRange("F10:I10").merge().setValue("AKTIVITAS TERBARU");
+  sheet.getRange("F11:I11").setValues([["Waktu", "Judul Konten", "Jenis", "Detail"]]);
+  if (activities.length) sheet.getRange(12, 6, Math.min(activities.length, 10), 4).setValues(activities.slice(0, 10));
+  else sheet.getRange("F12").setValue("Belum ada aktivitas.");
+
+  sheet.getRange("A1:I1").setFontWeight("bold").setFontSize(14).setBackground("#00B3B3").setFontColor("#FFFFFF");
+  ["A2:B2", "D2:E2", "G2:H2", "A10:D10", "F10:I10", "A11:D11", "F11:I11"].forEach(range => sheet.getRange(range).setFontWeight("bold").setBackground("#E8F7F7"));
+  sheet.setFrozenRows(2);
+  sheet.autoResizeColumns(1, 9);
+}
+
+const STATUSES_FOR_DASHBOARD = ["Ideation", "Planning", "Production", "Editing", "Review", "Ready to Publish", "Published"];
+
+function refreshDashboardFromSheet_() {
+  const sheet = spreadsheet_().getSheetByName(SHEETS.content);
+  const last = sheet.getLastRow();
+  const rows = last > 1 ? sheet.getRange(2, 1, last - 1, CONTENT_HEADERS.length).getValues() : [];
+  const items = rows.map(row => { try { return JSON.parse(row[25]); } catch (err) { return null; } }).filter(Boolean);
+  refreshDashboard_(items);
 }
 
 function json_(value) {
@@ -177,6 +226,7 @@ function doPost(e) {
       const rows = body.items.map(item => contentRow_(item, now));
       if (rows.length) sheet.getRange(2, 1, rows.length, CONTENT_HEADERS.length).setValues(rows);
       rebuildActivities_(ss.getSheetByName(SHEETS.activity), body.items);
+      refreshDashboard_(body.items);
     } finally {
       lock.releaseLock();
     }

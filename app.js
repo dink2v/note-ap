@@ -4,13 +4,12 @@ const STATUSES = ["Ideation","Planning","Production","Editing","Review","Ready t
 const PLATFORMS = ["Instagram","TikTok"];
 const today = new Date();
 const iso = d => new Date(d).toISOString().slice(0,10);
-const shiftDate = (n) => { const d=new Date(); d.setDate(d.getDate()+n); return iso(d); };
-const seed = [
- {id:1,title:"YB KELAP-KELIP",platform:"Instagram",format:"Reels",duration:"30 detik",pillar:"Edukasi",funnel:"Awareness",objective:"Engagement",status:"Editing",date:shiftDate(1),time:"10:00",basket:"Kampanye Produk",reference:"",hook:"Kenali produk pilihan untuk kebutuhan harianmu.",visualHook:"Close up produk",body:"Tampilkan manfaat utama produk dengan visual singkat dan jelas.",visualBody:"Product showcase",cta:"Simpan konten ini dan kunjungi Apotek Prapatan.",visualCta:"Logo dan alamat apotek",caption:"Pilihan tepat untuk menemani kebutuhan kesehatan keluarga. 💚",hashtags:"#ApotekPrapatan #InfoKesehatan",notes:"Pastikan harga dan stok sudah dikonfirmasi.",comments:[],history:[]},
- {id:2,title:"Cinematic YB (Pringles)",platform:"TikTok",format:"Video",duration:"20 detik",pillar:"Hiburan",funnel:"Awareness",objective:"Reach",status:"Production",date:shiftDate(3),time:"13:00",basket:"Konten Kreatif",reference:"",hook:"Visual pembuka yang menarik perhatian.",visualHook:"Transisi produk",body:"Video cinematic dengan alur singkat.",visualBody:"Detail shot",cta:"Follow untuk konten berikutnya.",visualCta:"End frame",caption:"Ide konten kreatif minggu ini.",hashtags:"#ApotekPrapatan #ContentIdea",notes:"",comments:[],history:[]},
- {id:3,title:"TRANSISI TIANG",platform:"Instagram",format:"Reels",duration:"15 detik",pillar:"Hiburan",funnel:"Awareness",objective:"Reach",status:"Planning",date:shiftDate(5),time:"16:00",basket:"Trend",reference:"",hook:"Ikuti transisi yang sedang tren.",visualHook:"Transisi kamera",body:"Eksekusi transisi sesuai referensi.",visualBody:"Pengambilan video",cta:"Bagikan ke temanmu.",visualCta:"Text overlay",caption:"Konten ringan dari tim Apotek Prapatan.",hashtags:"#ApotekPrapatan",notes:"Cari referensi audio.",comments:[],history:[]},
- {id:4,title:"Scroll YB",platform:"Facebook",format:"Carousel",duration:"5 slide",pillar:"Edukasi",funnel:"Consideration",objective:"Traffic",status:"Review",date:shiftDate(7),time:"09:00",basket:"Edukasi",reference:"",hook:"Informasi singkat yang perlu kamu tahu.",visualHook:"Slide cover",body:"Jelaskan informasi dalam beberapa slide.",visualBody:"Infografis",cta:"Hubungi tim kami untuk informasi lebih lanjut.",visualCta:"Kontak apotek",caption:"Yuk, tambah wawasan kesehatan bersama kami.",hashtags:"#ApotekPrapatan #Sehat",notes:"Menunggu pemeriksaan akhir.",comments:[],history:[]}
-];
+// Reset preview content once so the workspace starts completely empty.
+if(localStorage.getItem("noteap_empty_reset_v1")!=="done"){
+ localStorage.removeItem("noteap_contents");
+ localStorage.removeItem("noteap_notifications");
+ localStorage.setItem("noteap_empty_reset_v1","done");
+}
 let contents = loadContents();
 let platformFilter = "Semua Platform";
 let formatFilter = "Semua Jenis";

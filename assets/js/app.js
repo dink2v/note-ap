@@ -53,24 +53,29 @@
   const calendarPage=document.getElementById('calendarPage');
   const contentPage=document.getElementById('contentPage');
   const kanbanPage=document.getElementById('kanbanPage');
+  const visitPage=document.getElementById('visitPage');
+  const settingsPage=document.getElementById('settingsPage');
   function showPage(page){
-    const isCalendar=page==='kalender',isContent=page==='konten',isKanban=page==='kanban';
-    dashboardPage.hidden=isCalendar||isContent||isKanban;
+    const isCalendar=page==='kalender',isContent=page==='konten',isKanban=page==='kanban',isVisit=page==='visit',isSettings=page==='setelan';
+    dashboardPage.hidden=isCalendar||isContent||isKanban||isVisit||isSettings;
     calendarPage.hidden=!isCalendar;
     contentPage.hidden=!isContent;
     kanbanPage.hidden=!isKanban;
+    visitPage.hidden=!isVisit;
+    settingsPage.hidden=!isSettings;
     document.querySelectorAll('.nav-link').forEach(item=>item.classList.toggle('active',item.dataset.page===page));
     document.getElementById('todayLabel').textContent=isCalendar?'CONTENT SCHEDULING':isContent?'CONTENT MANAGEMENT':'WORKSPACE OVERVIEW';
     document.getElementById('todayDate').textContent=isCalendar?'Kalender terhubung dengan Google Calendar · Asia/Jakarta':isContent?'Kelola dan pantau seluruh konten Instagram dan TikTok.':'Ringkasan aktivitas konten Apotek Prapatan';
     if(isContent)renderContentList();
     if(isKanban)renderKanban();
-    window.location.hash=isCalendar?'kalender':isContent?'konten':isKanban?'kanban':'dashboard';
+    if(isVisit||isSettings)renderVisitTables();
+    window.location.hash=isCalendar?'kalender':isContent?'konten':isKanban?'kanban':isVisit?'visit':isSettings?'setelan':'dashboard';
   }
   document.querySelectorAll('.nav-link').forEach(link=>link.addEventListener('click',event=>{
     event.preventDefault();
     const page=link.dataset.page;
     document.getElementById('sidebar').classList.remove('open');
-    if(page==='dashboard'||page==='kalender'||page==='konten'||page==='kanban'){showPage(page);return;}
+    if(page==='dashboard'||page==='kalender'||page==='konten'||page==='kanban'||page==='visit'||page==='setelan'){showPage(page);return;}
     showToast('Halaman '+link.textContent.trim()+' sedang dalam tahap pengembangan.');
   }));
   document.querySelectorAll('a[href="#kalender"]').forEach(link=>link.addEventListener('click',event=>{
@@ -80,6 +85,8 @@
   if(window.location.hash==='#kalender') showPage('kalender');
   if(window.location.hash==='#konten') showPage('konten');
   if(window.location.hash==='#kanban') showPage('kanban');
+  if(window.location.hash==='#visit') showPage('visit');
+  if(window.location.hash==='#setelan') showPage('setelan');
   document.getElementById('newContentListBtn').addEventListener('click',openContentModal);
   const contentSearch=document.getElementById('contentSearch'),contentPlatform=document.getElementById('contentPlatform'),contentStatus=document.getElementById('contentStatus'),contentDateFrom=document.getElementById('contentDateFrom'),contentDateTo=document.getElementById('contentDateTo');
   [contentSearch,contentPlatform,contentStatus,contentDateFrom,contentDateTo].forEach(input=>input.addEventListener('input',renderContentList));
@@ -111,7 +118,52 @@
     document.querySelector('.content-table').hidden=filtered.length===0;
   }
   function formatContentDate(value){if(!value)return'—';const date=new Date(value+'T00:00:00');return Number.isNaN(date.getTime())?value:new Intl.DateTimeFormat('id-ID',{day:'2-digit',month:'short',year:'numeric'}).format(date);}
-  window.addEventListener('storage',event=>{if(event.key==='noteAp.contents'){if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();}});
+
+  const visitKey='noteAp.visits';
+  const readVisits=()=>{try{const v=JSON.parse(localStorage.getItem(visitKey)||'[]');return Array.isArray(v)?v:[];}catch(e){return[];}};
+  const writeVisits=items=>localStorage.setItem(visitKey,JSON.stringify(items));
+  const visitDateLabel=value=>value?formatContentDate(value):'—';
+  function renderVisitTables(){
+    const visits=readVisits().sort((a,b)=>(a.visitDate||'').localeCompare(b.visitDate||''));
+    const draw=(bodyId,emptyId)=>{
+      const body=document.getElementById(bodyId);body.replaceChildren();
+      visits.forEach(v=>{
+        const tr=document.createElement('tr');
+        [visitDateLabel(v.visitDate),v.time||'—',v.location||'—',v.title||'—',visitDateLabel(v.publishDate),v.talent||'—',v.props||'—',v.status||'—',v.notes||'—'].forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.append(td);});
+        const action=document.createElement('td');action.className='visit-actions';
+        const edit=document.createElement('button');edit.type='button';edit.textContent='Edit';edit.addEventListener('click',()=>openVisitEditor(v.id));
+        const del=document.createElement('button');del.type='button';del.textContent='Hapus';del.addEventListener('click',()=>{if(!confirm('Hapus jadwal Visit ini?'))return;writeVisits(readVisits().filter(x=>x.id!==v.id));renderVisitTables();showToast('Jadwal Visit dihapus.');});
+        action.append(edit,del);tr.append(action);body.append(tr);
+      });
+      document.getElementById(emptyId).hidden=visits.length>0;
+    };
+    draw('visitTableBody','visitEmpty');draw('settingsVisitBody','settingsVisitEmpty');
+  }
+  const visitEditor=document.getElementById('visitEditor'),visitForm=document.getElementById('visitForm');
+  function openVisitEditor(id){
+    visitForm.reset();visitForm.dataset.editId=id||'';
+    const item=id?readVisits().find(v=>v.id===id):null;
+    document.getElementById('visitEditorTitle').textContent=item?'Edit Jadwal Visit':'Tambah Jadwal Visit';
+    if(item)Object.entries(item).forEach(([key,value])=>{if(visitForm.elements[key])visitForm.elements[key].value=value||'';});
+    const titles=[...new Set(readKanban().map(x=>x.title).filter(Boolean))];
+    const datalist=document.getElementById('visitContentTitles');datalist.replaceChildren();
+    titles.forEach(title=>{const option=document.createElement('option');option.value=title;datalist.append(option);});
+    visitEditor.hidden=false;visitEditor.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function closeVisitEditor(){visitEditor.hidden=true;visitForm.reset();visitForm.dataset.editId='';}
+  document.getElementById('addVisitBtn').addEventListener('click',()=>{showPage('setelan');openVisitEditor();});
+  document.getElementById('addSettingVisitBtn').addEventListener('click',()=>openVisitEditor());
+  document.getElementById('closeVisitEditor').addEventListener('click',closeVisitEditor);
+  document.getElementById('cancelVisitEdit').addEventListener('click',closeVisitEditor);
+  visitForm.addEventListener('submit',event=>{
+    event.preventDefault();if(!visitForm.reportValidity())return;
+    const data=Object.fromEntries(new FormData(visitForm).entries()),items=readVisits(),id=visitForm.dataset.editId;
+    if(id){const index=items.findIndex(v=>v.id===id);if(index>=0)items[index]={...items[index],...data,updatedAt:new Date().toISOString()};}
+    else items.push({id:'VIS-'+Date.now().toString(36).toUpperCase(),...data,createdAt:new Date().toISOString()});
+    writeVisits(items);closeVisitEditor();renderVisitTables();showToast('Jadwal Visit berhasil disimpan.');
+  });
+
+  window.addEventListener('storage',event=>{if(event.key==='noteAp.contents'){if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();}if(event.key==='noteAp.visits'){if(!visitPage.hidden||!settingsPage.hidden)renderVisitTables();}});
 
 
   const kanbanStages=['Ideation','Planning','Production','Editing','Review','Ready to Publish','Published'];

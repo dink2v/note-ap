@@ -36,6 +36,7 @@
     }catch(error){showToast('Form berhasil dimuat, tetapi kontrol popup terganggu.');}
   });
   document.getElementById('newContentBtn').addEventListener('click',openContentModal);
+  document.getElementById('newContentCalendarBtn').addEventListener('click',openContentModal);
   document.getElementById('contentModalClose').addEventListener('click',closeContentModal);
   contentModal.addEventListener('click',event=>{if(event.target===contentModal)closeContentModal();});
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&contentModal.classList.contains('open'))closeContentModal();});

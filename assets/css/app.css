@@ -168,3 +168,32 @@ body.modal-open{overflow:hidden;}
 .visit-form #visitTalentSelect{min-height:96px;padding:7px;border:1px solid #e4ebe6;border-radius:9px;background:#fff;color:var(--ink);font:11px "DM Sans"}
 .visit-form #visitTalentSelect option{padding:6px 8px;border-radius:5px}
 .visit-form #visitTalentSelect option:checked{background:#e8f5ed linear-gradient(0deg,#e8f5ed,#e8f5ed);color:#20734f}
+
+
+/* Layout refinement: Visit & Settings responsive table */
+.main-area{min-width:0}
+.visit-page,.settings-page{width:100%;min-width:0}
+.visit-heading{min-width:0;flex-wrap:wrap}
+.visit-heading>div{min-width:0}
+.visit-heading .muted{line-height:1.6;max-width:680px}
+.visit-table-panel,.settings-card,.visit-editor{min-width:0;max-width:100%}
+.visit-table-wrap{display:block;width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.visit-table{min-width:1080px}
+.settings-card{overflow:hidden}
+.settings-card>.muted{line-height:1.6}
+@media(max-width:900px){
+  .visit-page,.settings-page{padding:30px 22px}
+  .visit-heading{align-items:flex-start}
+}
+@media(max-width:700px){
+  .visit-page,.settings-page{padding:24px 14px;min-height:calc(100vh - 60px)}
+  .visit-heading{display:flex;flex-direction:column;gap:14px;margin-bottom:19px}
+  .visit-heading h1{font-size:22px}
+  .visit-heading .muted{font-size:11px}
+  .visit-heading>.primary-btn{align-self:flex-start}
+  .settings-card{padding:15px 12px}
+  .settings-card h2{font-size:14px}
+  .settings-card>.muted{font-size:10px}
+  .visit-table th{padding:12px 11px;font-size:8px}
+  .visit-table td{padding:11px;font-size:9px}
+}

@@ -241,3 +241,7 @@ body.modal-open{overflow:hidden;}
 .visit-today-inline{width:100%;min-width:0;border:1px solid #e7eee9;border-radius:7px;background:#fff;padding:7px;color:#53645a;font:10px "DM Sans"}
 .visit-today-inline:focus{outline:0;border-color:#82bea0;box-shadow:0 0 0 2px #16845d12}
 .visit-today-select{border:0;background:transparent;color:var(--green);font:700 9px "DM Sans";cursor:pointer;white-space:nowrap}
+
+/* Detail Visit sejajar tepat di bawah tabel Data Visit */
+.visit-detail-card{grid-column:2}
+@media(max-width:900px){.visit-detail-card{grid-column:1}}

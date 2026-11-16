@@ -61,7 +61,7 @@
     const page=link.dataset.nav;
     if(page==='Visit'){
       if(window.google && google.script && google.script.run){
-        google.script.run.withSuccessHandler(url=>window.open(url,'_blank')).getAppInfo();
+        google.script.run.withSuccessHandler(settings=>{const url=settings && settings.VISIT ? settings.VISIT.value : ''; if(url) window.open(url,'_blank'); else alert('URL Visit belum diatur pada sheet Setting.');}).getSettings();
       } else { alert('Link Visit akan disambungkan pada tahap integrasi.'); }
     } else if(page!=='Dashboard') {
       alert('Halaman '+page+' akan kita bangun pada tahap berikutnya.');

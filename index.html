@@ -112,6 +112,21 @@
       </div>
       <footer class="page-footer">Note AP <span>•</span> Content Planning & Management System <span class="demo-tag">MODE LOKAL</span></footer>
     </section>
+
+    <section class="visit-page" id="visitPage" hidden>
+      <div class="visit-heading"><div><div class="eyebrow">PRODUCTION SCHEDULE</div><h1>Visit</h1><p class="muted">Jadwal kunjungan dan kebutuhan produksi konten.</p></div><button class="primary-btn" id="addVisitBtn" type="button"><span>＋</span> Tambah Visit</button></div>
+      <div class="visit-table-panel"><div class="visit-table-wrap"><table class="visit-table"><thead><tr><th>TGL VISIT</th><th>JAM</th><th>LOKASI</th><th>JUDUL KONTEN</th><th>TGL PUBLISH</th><th>TALENT</th><th>PROPERTI / PRODUK</th><th>STATUS</th><th>KETERANGAN</th><th>AKSI</th></tr></thead><tbody id="visitTableBody"></tbody></table></div><div class="visit-empty" id="visitEmpty">Belum ada jadwal Visit. Tambahkan jadwal melalui Setelan.</div></div>
+    </section>
+    <section class="settings-page" id="settingsPage" hidden>
+      <div class="visit-heading"><div><div class="eyebrow">WORKSPACE PREFERENCES</div><h1>Setelan</h1><p class="muted">Kelola jadwal Visit yang terhubung dengan halaman Visit dan Kanban.</p></div><button class="primary-btn" id="addSettingVisitBtn" type="button"><span>＋</span> Tambah Jadwal Visit</button></div>
+      <div class="settings-card"><h2>Data Visit</h2><p class="muted">Data yang disimpan di sini akan otomatis ditampilkan pada halaman Visit.</p><div class="visit-table-wrap"><table class="visit-table"><thead><tr><th>TGL VISIT</th><th>JAM</th><th>LOKASI</th><th>JUDUL KONTEN</th><th>TGL PUBLISH</th><th>TALENT</th><th>PROPERTI / PRODUK</th><th>STATUS</th><th>KETERANGAN</th><th>AKSI</th></tr></thead><tbody id="settingsVisitBody"></tbody></table></div><div class="visit-empty" id="settingsVisitEmpty">Belum ada data Visit.</div></div>
+      <div class="visit-editor" id="visitEditor" hidden><div class="visit-editor-head"><div><h2 id="visitEditorTitle">Tambah Jadwal Visit</h2><p class="muted">Lengkapi informasi kunjungan produksi.</p></div><button type="button" class="filter-reset-btn" id="closeVisitEditor">Tutup</button></div>
+        <form id="visitForm" class="visit-form">
+          <label>TGL VISIT<input name="visitDate" type="date" required></label><label>JAM<input name="time" type="time" required></label><label>LOKASI<input name="location" placeholder="Lokasi kunjungan" required></label><label>JUDUL KONTEN<input name="title" list="visitContentTitles" placeholder="Pilih / tulis judul konten" required><datalist id="visitContentTitles"></datalist></label><label>TGL PUBLISH<input name="publishDate" type="date"></label><label>TALENT<input name="talent" placeholder="Nama talent"></label><label>PROPERTI / PRODUK<input name="props" placeholder="Properti atau produk"></label><label>STATUS<select name="status"><option>Direncanakan</option><option>Konfirmasi</option><option>Selesai</option><option>Dibatalkan</option></select></label><label class="visit-notes">KETERANGAN<textarea name="notes" rows="3" placeholder="Catatan tambahan"></textarea></label>
+          <div class="visit-form-actions"><button type="button" class="filter-reset-btn" id="cancelVisitEdit">Batal</button><button type="submit" class="primary-btn">Simpan Jadwal</button></div>
+        </form>
+      </div>
+    </section>
   </main>
 </div>
 <div class="content-modal" id="contentModal" aria-hidden="true"><section class="content-modal-dialog" role="dialog" aria-modal="true" aria-label="Tambah Konten"><button type="button" class="content-modal-close" id="contentModalClose" aria-label="Tutup popup">×</button><iframe id="contentModalFrame" title="Form Tambah Konten" src="about:blank"></iframe></section></div>

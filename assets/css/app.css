@@ -161,3 +161,10 @@ body.modal-open{overflow:hidden;}
 .visit-form-actions{grid-column:1/-1;display:flex;justify-content:flex-end;gap:9px}
 @media(max-width:1150px){.visit-page,.settings-page{padding:32px 25px}}
 @media(max-width:700px){.visit-page,.settings-page{padding:27px 15px}.visit-heading{align-items:flex-start}.visit-heading h1{font-size:21px}.visit-form{grid-template-columns:1fr 1fr}.visit-form .visit-notes{grid-column:1/-1}}
+
+/* Talent multi-select on Visit form */
+.visit-form .talent-field{min-width:0}
+.visit-form .field-hint{font-size:9px;font-weight:500;color:#94a198}
+.visit-form #visitTalentSelect{min-height:96px;padding:7px;border:1px solid #e4ebe6;border-radius:9px;background:#fff;color:var(--ink);font:11px "DM Sans"}
+.visit-form #visitTalentSelect option{padding:6px 8px;border-radius:5px}
+.visit-form #visitTalentSelect option:checked{background:#e8f5ed linear-gradient(0deg,#e8f5ed,#e8f5ed);color:#20734f}

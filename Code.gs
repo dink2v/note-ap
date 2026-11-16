@@ -845,7 +845,7 @@ function doPost(e) {
   var safe = JSON.stringify(result).replace(/</g, "\\u003c");
   var html = '<!doctype html><html><body><script>' +
     'parent.postMessage({source:"NOTE_AP_API",payload:' + safe + '},"*");' +
-    '<\\/script></body></html>';
+    '<' + '/script></body></html>';
   return HtmlService.createHtmlOutput(html)
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }

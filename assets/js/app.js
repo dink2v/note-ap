@@ -239,7 +239,7 @@
   document.getElementById('visitTodayList').addEventListener('change',event=>{const input=event.target.closest('[data-visit-id][data-visit-field]');if(input)updateVisitField(input.dataset.visitId,input.dataset.visitField,input.value);});
   document.getElementById('visitPrevPage').addEventListener('click',()=>{visitCurrentPage=Math.max(0,visitCurrentPage-1);visitSelectedId=null;renderVisitTables();});
   document.getElementById('visitNextPage').addEventListener('click',()=>{const max=Math.max(0,Math.ceil(sortedVisits().length/visitPageSize)-1);visitCurrentPage=Math.min(max,visitCurrentPage+1);visitSelectedId=null;renderVisitTables();});
-  document.getElementById('addVisitBtn').addEventListener('click',()=>{const items=readVisits();const item={id:'VIS-'+Date.now().toString(36).toUpperCase(),visitDate:new Date().toISOString().slice(0,10),time:'',location:'',title:'',publishDate:'',talent:'',props:'',status:'PLANNED',notes:'',createdAt:new Date().toISOString()};items.push(item);writeVisits(items);const sorted=sortedVisits(),index=sorted.findIndex(v=>v.id===item.id);visitCurrentPage=Math.floor(index/visitPageSize);visitSelectedId=item.id;renderVisitTables();document.querySelector('[data-visit-id="'+CSS.escape(item.id)+'"][data-visit-field="location"]')?.focus();showToast('Baris Visit baru ditambahkan. Isi langsung pada tabel detail.');});
+
   function renderVisitEditorLegacy(){renderVisitTables();}
   const visitEditor=document.getElementById('visitEditor'),visitForm=document.getElementById('visitForm');
   function openVisitEditor(){renderVisitTables();}

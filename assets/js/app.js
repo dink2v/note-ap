@@ -29,7 +29,7 @@
       if(!doc.getElementById('noteap-modal-style')){
         const style=doc.createElement('style');
         style.id='noteap-modal-style';
-        style.textContent='.sidebar,.mobile-top,.form-breadcrumb,.form-title-row .secondary-btn,.page-footer{display:none!important}.main-area{margin-left:0!important}.content-form-wrap{max-width:none!important;padding:34px 38px 24px!important}@media(max-width:700px){.content-form-wrap{padding:28px 15px 20px!important}}body{background:#f7faf8!important}';
+        style.textContent='.sidebar,.mobile-top,.form-breadcrumb,.form-title-row .secondary-btn,.page-footer{display:none!important}.main-area{margin-left:0!important}.content-form-wrap{max-width:none!important;padding:34px 38px 24px!important}@media(max-width:700px){.content-form-wrap{padding:28px 15px 20px!important}}html,body{background:transparent!important}.content-form-wrap{background:transparent!important}';
         doc.head.append(style);
       }
       child.addEventListener('keydown',event=>{if(event.key==='Escape')closeContentModal();});

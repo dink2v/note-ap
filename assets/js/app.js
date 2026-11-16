@@ -49,20 +49,23 @@
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&contentModal.classList.contains('open'))closeContentModal();});
   const dashboardPage=document.getElementById('dashboardPage');
   const calendarPage=document.getElementById('calendarPage');
+  const contentPage=document.getElementById('contentPage');
   function showPage(page){
-    const isCalendar=page==='kalender';
-    dashboardPage.hidden=isCalendar;
+    const isCalendar=page==='kalender',isContent=page==='konten';
+    dashboardPage.hidden=isCalendar||isContent;
     calendarPage.hidden=!isCalendar;
+    contentPage.hidden=!isContent;
     document.querySelectorAll('.nav-link').forEach(item=>item.classList.toggle('active',item.dataset.page===page));
-    document.getElementById('todayLabel').textContent=isCalendar?'CONTENT SCHEDULING':'WORKSPACE OVERVIEW';
-    document.getElementById('todayDate').textContent=isCalendar?'Kalender terhubung dengan Google Calendar · Asia/Jakarta':'Ringkasan aktivitas konten Apotek Prapatan';
-    window.location.hash=isCalendar?'kalender':'dashboard';
+    document.getElementById('todayLabel').textContent=isCalendar?'CONTENT SCHEDULING':isContent?'CONTENT MANAGEMENT':'WORKSPACE OVERVIEW';
+    document.getElementById('todayDate').textContent=isCalendar?'Kalender terhubung dengan Google Calendar · Asia/Jakarta':isContent?'Kelola dan pantau seluruh konten Instagram dan TikTok.':'Ringkasan aktivitas konten Apotek Prapatan';
+    if(isContent)renderContentList();
+    window.location.hash=isCalendar?'kalender':isContent?'konten':'dashboard';
   }
   document.querySelectorAll('.nav-link').forEach(link=>link.addEventListener('click',event=>{
     event.preventDefault();
     const page=link.dataset.page;
     document.getElementById('sidebar').classList.remove('open');
-    if(page==='dashboard'||page==='kalender'){showPage(page);return;}
+    if(page==='dashboard'||page==='kalender'||page==='konten'){showPage(page);return;}
     showToast('Halaman '+link.textContent.trim()+' sedang dalam tahap pengembangan.');
   }));
   document.querySelectorAll('a[href="#kalender"]').forEach(link=>link.addEventListener('click',event=>{
@@ -70,6 +73,39 @@
     showPage('kalender');
   }));
   if(window.location.hash==='#kalender') showPage('kalender');
+  if(window.location.hash==='#konten') showPage('konten');
+  document.getElementById('newContentListBtn').addEventListener('click',openContentModal);
+  const contentSearch=document.getElementById('contentSearch'),contentPlatform=document.getElementById('contentPlatform'),contentStatus=document.getElementById('contentStatus'),contentDateFrom=document.getElementById('contentDateFrom'),contentDateTo=document.getElementById('contentDateTo');
+  [contentSearch,contentPlatform,contentStatus,contentDateFrom,contentDateTo].forEach(input=>input.addEventListener('input',renderContentList));
+  document.getElementById('resetContentFilters').addEventListener('click',()=>{[contentSearch,contentPlatform,contentStatus,contentDateFrom,contentDateTo].forEach(input=>input.value='');renderContentList();});
+  function renderContentList(){
+    let items=[];try{const stored=JSON.parse(localStorage.getItem('noteAp.contents')||'[]');if(Array.isArray(stored))items=stored;}catch(error){}
+    const query=contentSearch.value.trim().toLocaleLowerCase('id');
+    const filtered=items.filter(item=>{
+      const date=String(item.postingDate||'');
+      return (!query||String(item.title||'').toLocaleLowerCase('id').includes(query))
+        &&(!contentPlatform.value||item.platform===contentPlatform.value)
+        &&(!contentStatus.value||item.status===contentStatus.value)
+        &&(!contentDateFrom.value||date>=contentDateFrom.value)
+        &&(!contentDateTo.value||date<=contentDateTo.value);
+    }).sort((a,b)=>String(a.postingDate||'').localeCompare(String(b.postingDate||'')));
+    const body=document.getElementById('contentTableBody');body.replaceChildren();
+    filtered.forEach(item=>{
+      const tr=document.createElement('tr');
+      [item.title||'Tanpa judul',item.platform||'—',formatContentDate(item.postingDate),item.postingTime||'—',item.status||'—',item.format||'—'].forEach((value,index)=>{
+        const td=document.createElement('td');td.textContent=value;
+        if(index===4){const badge=document.createElement('span');badge.className='status-chip';badge.textContent=value;td.replaceChildren(badge);}
+        if(index===1)td.className='platform-cell';
+        tr.append(td);
+      });
+      body.append(tr);
+    });
+    document.getElementById('contentResultCount').textContent=filtered.length+' konten';
+    document.getElementById('contentEmpty').hidden=filtered.length>0;
+    document.querySelector('.content-table').hidden=filtered.length===0;
+  }
+  function formatContentDate(value){if(!value)return'—';const date=new Date(value+'T00:00:00');return Number.isNaN(date.getTime())?value:new Intl.DateTimeFormat('id-ID',{day:'2-digit',month:'short',year:'numeric'}).format(date);}
+  window.addEventListener('storage',event=>{if(event.key==='noteAp.contents'&&!contentPage.hidden)renderContentList();});
   document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));
   document.addEventListener('click',event=>{
     const sidebar=document.getElementById('sidebar');

@@ -144,11 +144,36 @@
     visitForm.reset();visitForm.dataset.editId=id||'';
     const item=id?readVisits().find(v=>v.id===id):null;
     document.getElementById('visitEditorTitle').textContent=item?'Edit Jadwal Visit':'Tambah Jadwal Visit';
-    if(item)Object.entries(item).forEach(([key,value])=>{if(visitForm.elements[key])visitForm.elements[key].value=value||'';});
+    if(item)Object.entries(item).forEach(([key,value])=>{if(key!=='talent'&&visitForm.elements[key])visitForm.elements[key].value=value||'';});
+    populateVisitReferenceOptions(item);
     const titles=[...new Set(readKanban().map(x=>x.title).filter(Boolean))];
     const datalist=document.getElementById('visitContentTitles');datalist.replaceChildren();
     titles.forEach(title=>{const option=document.createElement('option');option.value=title;datalist.append(option);});
     visitEditor.hidden=false;visitEditor.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function splitTalentNames(value){
+    if(Array.isArray(value))return value.map(x=>String(x).trim()).filter(Boolean);
+    return String(value||'').split(/[,;\\n]/).map(x=>x.trim()).filter(Boolean);
+  }
+  function populateVisitReferenceOptions(currentItem){
+    const talentSelect=document.getElementById('visitTalentSelect');
+    const talentValue=document.getElementById('visitTalentValue');
+    const visits=readVisits();
+    const names=[...new Set(visits.flatMap(v=>splitTalentNames(v.talent)))].sort((a,b)=>a.localeCompare(b,'id'));
+    const selected=splitTalentNames(currentItem?.talent);
+    selected.forEach(name=>{if(!names.includes(name))names.push(name);});
+    talentSelect.replaceChildren();
+    names.forEach(name=>{const option=document.createElement('option');option.value=name;option.textContent=name;option.selected=selected.includes(name);talentSelect.append(option);});
+    talentValue.value=selected.join(', ');
+    talentSelect.addEventListener('change',()=>{talentValue.value=[...talentSelect.selectedOptions].map(option=>option.value).join(', ');},{once:true});
+    talentSelect.onchange=()=>{talentValue.value=[...talentSelect.selectedOptions].map(option=>option.value).join(', ');};
+    const statusSelect=visitForm.elements.status;
+    const savedStatuses=[...new Set(visits.map(v=>v.status).filter(Boolean))];
+    const standardStatuses=['Direncanakan','Konfirmasi','Selesai','Dibatalkan'];
+    const currentStatus=currentItem?.status||statusSelect.value||'Direncanakan';
+    const statuses=[...new Set([...standardStatuses,...savedStatuses,currentStatus])];
+    statusSelect.replaceChildren();
+    statuses.forEach(status=>{const option=document.createElement('option');option.value=status;option.textContent=status;option.selected=status===currentStatus;statusSelect.append(option);});
   }
   function closeVisitEditor(){visitEditor.hidden=true;visitForm.reset();visitForm.dataset.editId='';}
   document.getElementById('addVisitBtn').addEventListener('click',()=>{showPage('setelan');openVisitEditor();});
@@ -158,6 +183,7 @@
   visitForm.addEventListener('submit',event=>{
     event.preventDefault();if(!visitForm.reportValidity())return;
     const data=Object.fromEntries(new FormData(visitForm).entries()),items=readVisits(),id=visitForm.dataset.editId;
+    data.talent=document.getElementById('visitTalentValue').value;
     if(id){const index=items.findIndex(v=>v.id===id);if(index>=0)items[index]={...items[index],...data,updatedAt:new Date().toISOString()};}
     else items.push({id:'VIS-'+Date.now().toString(36).toUpperCase(),...data,createdAt:new Date().toISOString()});
     writeVisits(items);closeVisitEditor();renderVisitTables();showToast('Jadwal Visit berhasil disimpan.');

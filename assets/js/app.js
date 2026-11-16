@@ -171,7 +171,9 @@
     return '<input class="visit-inline-input" type="'+field.type+'" data-visit-id="'+escapeVisit(id)+'" data-visit-field="'+field.key+'" value="'+safe+'" placeholder="Isi '+field.label.toLowerCase()+'">';
   }
   function renderVisitTables(){
-    const visits=sortedVisits();
+    const allVisits=sortedVisits();
+    const monthKey=[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0')].join('-');
+    const visits=allVisits.filter(item=>!item.visitDate||item.visitDate.slice(0,7)===monthKey);
     const pageCount=Math.max(1,Math.ceil(visits.length/visitPageSize));
     visitCurrentPage=Math.min(visitCurrentPage,pageCount-1);
     const pageItems=visits.slice(visitCurrentPage*visitPageSize,(visitCurrentPage+1)*visitPageSize);
@@ -211,6 +213,8 @@
       body.append(tr);
     }
     document.getElementById('visitEmpty').hidden=visits.length>0;
+    document.getElementById('visitEmpty').textContent='Belum ada data Visit untuk bulan '+new Intl.DateTimeFormat('id-ID',{month:'long',year:'numeric'}).format(visitCalendarMonth)+'.';
+    renderVisitMonthNav();
     document.getElementById('visitPageInfo').textContent='Halaman '+(visitCurrentPage+1)+' dari '+pageCount;
     document.getElementById('visitPrevPage').disabled=visitCurrentPage===0;
     document.getElementById('visitNextPage').disabled=visitCurrentPage>=pageCount-1;
@@ -221,18 +225,16 @@
     const todayLabel=document.createElement('div');todayLabel.className='visit-today-label';todayLabel.textContent='Jadwal visit :';todayList.append(todayLabel);
     const todayEntries=todayVisits.length?todayVisits:[null];
     todayEntries.forEach(v=>{const item=document.createElement('div');item.className='visit-today-entry';[['Hari ini :',v?visitDateLabel(v.visitDate):'Tidak ada jadwal'],['Lokasi :',v?.location||'—'],['Jam :',v?.time||'—']].forEach(([label,value])=>{const row=document.createElement('div');row.className='visit-today-line';const key=document.createElement('b');key.textContent=label;const val=document.createElement('span');val.textContent=value;row.append(key,val);item.append(row);});todayList.append(item);});
-    renderVisitCalendar(visits);
-    renderSettingsVisitTable(visits);
+    renderVisitCalendar(allVisits);
+    renderSettingsVisitTable(allVisits);
   }
   function renderVisitCalendar(visits){
     const root=document.getElementById('visitCalendar');if(!root)return;
     root.replaceChildren();
     const year=visitCalendarMonth.getFullYear(),month=visitCalendarMonth.getMonth();
     const header=document.createElement('div');header.className='visit-calendar-header';
-    const prev=document.createElement('button');prev.type='button';prev.textContent='‹';prev.setAttribute('aria-label','Bulan sebelumnya');prev.dataset.calendarMove='-1';
     const title=document.createElement('b');title.textContent=new Intl.DateTimeFormat('id-ID',{month:'long',year:'numeric'}).format(visitCalendarMonth);
-    const next=document.createElement('button');next.type='button';next.textContent='›';next.setAttribute('aria-label','Bulan berikutnya');next.dataset.calendarMove='1';
-    header.append(prev,title,next);root.append(header);
+    header.append(title);root.append(header);
     const grid=document.createElement('div');grid.className='visit-calendar-grid';
     ['Min','Sen','Sel','Rab','Kam','Jum','Sab'].forEach(day=>{const cell=document.createElement('div');cell.className='visit-calendar-weekday';cell.textContent=day;grid.append(cell);});
     const first=new Date(year,month,1).getDay(),days=new Date(year,month+1,0).getDate();
@@ -254,9 +256,19 @@
     matches.forEach(v=>{const row=document.createElement('div');row.className='visit-calendar-event';const time=document.createElement('b');time.textContent=v.time||'—';const detail=document.createElement('span');detail.textContent=(v.location||'Lokasi belum diisi')+' · '+(v.title||'Tanpa judul');row.append(time,detail);selected.append(row);});
     root.append(selected);
   }
+  function renderVisitMonthNav(){
+    const label=document.getElementById('visitMonthLabel');
+    if(label)label.textContent=new Intl.DateTimeFormat('id-ID',{month:'long',year:'numeric'}).format(visitCalendarMonth);
+  }
+  function moveVisitMonth(offset){
+    visitCalendarMonth=new Date(visitCalendarMonth.getFullYear(),visitCalendarMonth.getMonth()+offset,1);
+    visitCalendarSelected=[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0'),'01'].join('-');
+    visitCurrentPage=0;
+    renderVisitTables();
+  }
+  document.getElementById('visitPrevMonth').addEventListener('click',()=>moveVisitMonth(-1));
+  document.getElementById('visitNextMonth').addEventListener('click',()=>moveVisitMonth(1));
   document.getElementById('visitCalendar').addEventListener('click',event=>{
-    const move=event.target.closest('[data-calendar-move]');
-    if(move){visitCalendarMonth=new Date(visitCalendarMonth.getFullYear(),visitCalendarMonth.getMonth()+Number(move.dataset.calendarMove),1);renderVisitCalendar(sortedVisits());return;}
     const day=event.target.closest('[data-calendar-date]');
     if(day){visitCalendarSelected=day.dataset.calendarDate;renderVisitCalendar(sortedVisits());}
   });

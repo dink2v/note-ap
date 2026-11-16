@@ -135,82 +135,91 @@
   const readVisits=()=>{try{const v=JSON.parse(localStorage.getItem(visitKey)||'[]');return Array.isArray(v)?v:[];}catch(e){return[];}};
   const writeVisits=items=>localStorage.setItem(visitKey,JSON.stringify(items));
   const visitDateLabel=value=>value?formatContentDate(value):'—';
+  let visitCurrentPage=0,visitSelectedId=null;
+  const visitPageSize=4;
+  const visitFields=[
+    {key:'visitDate',label:'TGL VISIT',type:'date'},
+    {key:'time',label:'JAM',type:'time'},
+    {key:'location',label:'LOKASI',type:'text'},
+    {key:'title',label:'JUDUL KONTEN',type:'text'},
+    {key:'publishDate',label:'TGL PUBLISH',type:'date'},
+    {key:'talent',label:'TALENT',type:'text'},
+    {key:'props',label:'PROPERTI / PRODUK',type:'text'},
+    {key:'status',label:'STATUS',type:'select'},
+    {key:'notes',label:'KETERANGAN',type:'textarea'}
+  ];
+  const escapeVisit=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  const visitStatusOptions=['PLANNED','ON PROGRESS','DONE','CANCELLED'];
+  function sortedVisits(){return readVisits().sort((a,b)=>(a.visitDate||'').localeCompare(b.visitDate||'')||(a.time||'').localeCompare(b.time||''));}
+  function makeVisitInput(field,value,id){
+    const safe=escapeVisit(value||'');
+    if(field.type==='select')return '<select class="visit-inline-input" data-visit-id="'+escapeVisit(id)+'" data-visit-field="'+field.key+'">'+visitStatusOptions.map(status=>'<option value="'+status+'" '+(value===status?'selected':'')+'>'+status+'</option>').join('')+'</select>';
+    if(field.type==='textarea')return '<textarea rows="2" class="visit-inline-input visit-inline-textarea" data-visit-id="'+escapeVisit(id)+'" data-visit-field="'+field.key+'" placeholder="Tambahkan keterangan">'+safe+'</textarea>';
+    return '<input class="visit-inline-input" type="'+field.type+'" data-visit-id="'+escapeVisit(id)+'" data-visit-field="'+field.key+'" value="'+safe+'" placeholder="Isi '+field.label.toLowerCase()+'">';
+  }
   function renderVisitTables(){
-    const visits=readVisits().sort((a,b)=>(a.visitDate||'').localeCompare(b.visitDate||''));
-    const draw=(bodyId,emptyId)=>{
-      const body=document.getElementById(bodyId);body.replaceChildren();
-      visits.forEach((v,index)=>{
-        const tr=document.createElement('tr');
-        [String(index+1),visitDateLabel(v.visitDate),v.time||'—',v.location||'—',v.title||'—',visitDateLabel(v.publishDate),splitTalentNames(v.talent).join(', ')||'—',v.props||'—',v.status||'PLANNED',v.notes||'—'].forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.append(td);});
-        const action=document.createElement('td');action.className='visit-actions';
-        const edit=document.createElement('button');edit.type='button';edit.textContent='Edit';edit.addEventListener('click',()=>openVisitEditor(v.id));
-        const del=document.createElement('button');del.type='button';del.textContent='Hapus';del.addEventListener('click',()=>{if(!confirm('Hapus jadwal Visit ini?'))return;writeVisits(readVisits().filter(x=>x.id!==v.id));renderVisitTables();showToast('Jadwal Visit dihapus.');});
-        action.append(edit,del);tr.append(action);body.append(tr);
-      });
-      document.getElementById(emptyId).hidden=visits.length>0;
-    };
-    draw('visitTableBody','visitEmpty');draw('settingsVisitBody','settingsVisitEmpty');
+    const visits=sortedVisits();
+    const pageCount=Math.max(1,Math.ceil(visits.length/visitPageSize));
+    visitCurrentPage=Math.min(visitCurrentPage,pageCount-1);
+    const pageItems=visits.slice(visitCurrentPage*visitPageSize,(visitCurrentPage+1)*visitPageSize);
+    if(!pageItems.some(item=>item.id===visitSelectedId))visitSelectedId=pageItems[0]?.id||null;
+    const body=document.getElementById('visitTableBody');body.replaceChildren();
+    pageItems.forEach((v,index)=>{
+      const tr=document.createElement('tr');tr.className='visit-select-row'+(v.id===visitSelectedId?' selected':'');tr.dataset.visitId=v.id;
+      const values=[String(visitCurrentPage*visitPageSize+index+1),visitDateLabel(v.visitDate),v.location||'—',v.title||'—',splitTalentNames(v.talent).join(', ')||'—',v.status||'PLANNED',v.notes||'—'];
+      values.forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.append(td);});
+      tr.addEventListener('click',()=>{visitSelectedId=v.id;renderVisitTables();});
+      body.append(tr);
+    });
+    document.getElementById('visitEmpty').hidden=visits.length>0;
+    document.getElementById('visitCount').textContent=visits.length+' Visit';
+    document.getElementById('visitPageInfo').textContent='Halaman '+(visitCurrentPage+1)+' dari '+pageCount;
+    document.getElementById('visitPrevPage').disabled=visitCurrentPage===0;
+    document.getElementById('visitNextPage').disabled=visitCurrentPage>=pageCount-1;
+    const today=new Date(),todayKey=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
+    document.getElementById('visitTodayDate').textContent=new Intl.DateTimeFormat('id-ID',{day:'numeric',month:'short',year:'numeric'}).format(today);
+    const todayVisits=visits.filter(v=>v.visitDate===todayKey);
+    const todayList=document.getElementById('visitTodayList');todayList.replaceChildren();
+    if(!todayVisits.length){const empty=document.createElement('div');empty.className='visit-today-empty';empty.textContent='Belum ada jadwal Visit hari ini.';todayList.append(empty);}
+    todayVisits.forEach(v=>{const item=document.createElement('button');item.type='button';item.className='visit-today-item';item.innerHTML='<span class="visit-today-time">'+escapeVisit(v.time||'—')+'</span><span class="visit-today-location">'+escapeVisit(v.location||'Lokasi belum diisi')+'</span><span class="visit-today-arrow">›</span>';item.addEventListener('click',()=>{const index=visits.findIndex(x=>x.id===v.id);visitCurrentPage=Math.floor(index/visitPageSize);visitSelectedId=v.id;renderVisitTables();});todayList.append(item);});
+    renderVisitDetail(visits.find(v=>v.id===visitSelectedId)||null);
+    renderSettingsVisitTable(visits);
   }
+  function renderVisitDetail(item){
+    const grid=document.getElementById('visitDetailGrid');grid.replaceChildren();
+    const subtitle=document.getElementById('visitDetailSubtitle'),indicator=document.getElementById('visitDetailIndicator');
+    if(!item){subtitle.textContent='Pilih salah satu jadwal untuk melihat detail lengkapnya.';indicator.textContent='Belum dipilih';const placeholder=document.createElement('div');placeholder.className='visit-detail-placeholder';placeholder.textContent='Belum ada Visit yang dipilih. Tambahkan Visit untuk mulai mengisi detail.';grid.append(placeholder);return;}
+    subtitle.textContent=(item.title||'Visit tanpa judul')+' · '+visitDateLabel(item.visitDate);indicator.textContent='Visit dipilih';
+    visitFields.forEach(field=>{const wrap=document.createElement('label');wrap.className='visit-detail-field';const caption=document.createElement('span');caption.textContent=field.label;wrap.append(caption);wrap.insertAdjacentHTML('beforeend',makeVisitInput(field,field.key==='talent'?splitTalentNames(item.talent).join(', '):item[field.key],item.id));grid.append(wrap);});
+  }
+  function renderSettingsVisitTable(visits){
+    const body=document.getElementById('settingsVisitBody');if(!body)return;body.replaceChildren();
+    visits.forEach((v,index)=>{const tr=document.createElement('tr');[String(index+1),visitDateLabel(v.visitDate),v.time||'—',v.location||'—',v.title||'—',visitDateLabel(v.publishDate),splitTalentNames(v.talent).join(', ')||'—',v.props||'—',v.status||'PLANNED',v.notes||'—'].forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.append(td);});const action=document.createElement('td');action.className='visit-actions';const del=document.createElement('button');del.type='button';del.textContent='Hapus';del.addEventListener('click',()=>{if(!confirm('Hapus jadwal Visit ini?'))return;writeVisits(readVisits().filter(x=>x.id!==v.id));renderVisitTables();showToast('Jadwal Visit dihapus.');});action.append(del);tr.append(action);body.append(tr);});
+    const empty=document.getElementById('settingsVisitEmpty');if(empty)empty.hidden=visits.length>0;
+  }
+  function splitTalentNames(value){if(Array.isArray(value))return value.map(x=>String(x).trim()).filter(Boolean);return String(value||'').split(/[,;\\n]/).map(x=>x.trim()).filter(Boolean);}
+  function updateVisitField(id,field,value){
+    const items=readVisits(),index=items.findIndex(item=>item.id===id);if(index<0)return;
+    items[index][field]=value;items[index].updatedAt=new Date().toISOString();writeVisits(items);
+    const focused=document.activeElement;renderVisitTables();
+    if(focused?.dataset?.visitId===id&&focused?.dataset?.visitField===field){const replacement=document.querySelector('[data-visit-id="'+CSS.escape(id)+'"][data-visit-field="'+field+'"]');if(replacement){replacement.focus();if(replacement.setSelectionRange&&replacement.type==='text'){const end=replacement.value.length;replacement.setSelectionRange(end,end);}}}
+    showToast('Perubahan Visit tersimpan.');
+  }
+  document.getElementById('visitTableBody').addEventListener('click',event=>{const row=event.target.closest('tr[data-visit-id]');if(row){visitSelectedId=row.dataset.visitId;renderVisitTables();}});
+  document.getElementById('visitDetailGrid').addEventListener('change',event=>{const input=event.target.closest('[data-visit-id][data-visit-field]');if(input)updateVisitField(input.dataset.visitId,input.dataset.visitField,input.value);});
+  document.getElementById('visitDetailGrid').addEventListener('keydown',event=>{if(event.key==='Enter'&&event.target.tagName!=='TEXTAREA'){event.preventDefault();event.target.blur();}});
+  document.getElementById('visitPrevPage').addEventListener('click',()=>{visitCurrentPage=Math.max(0,visitCurrentPage-1);visitSelectedId=null;renderVisitTables();});
+  document.getElementById('visitNextPage').addEventListener('click',()=>{const max=Math.max(0,Math.ceil(sortedVisits().length/visitPageSize)-1);visitCurrentPage=Math.min(max,visitCurrentPage+1);visitSelectedId=null;renderVisitTables();});
+  document.getElementById('addVisitBtn').addEventListener('click',()=>{const items=readVisits();const item={id:'VIS-'+Date.now().toString(36).toUpperCase(),visitDate:new Date().toISOString().slice(0,10),time:'',location:'',title:'',publishDate:'',talent:'',props:'',status:'PLANNED',notes:'',createdAt:new Date().toISOString()};items.push(item);writeVisits(items);const sorted=sortedVisits(),index=sorted.findIndex(v=>v.id===item.id);visitCurrentPage=Math.floor(index/visitPageSize);visitSelectedId=item.id;renderVisitTables();document.querySelector('[data-visit-id="'+CSS.escape(item.id)+'"][data-visit-field="location"]')?.focus();showToast('Baris Visit baru ditambahkan. Isi langsung pada tabel detail.');});
+  function renderVisitEditorLegacy(){renderVisitTables();}
   const visitEditor=document.getElementById('visitEditor'),visitForm=document.getElementById('visitForm');
-  function openVisitEditor(id){
-    // Pastikan editor selalu dibuka pada halaman Visit, termasuk saat dipanggil dari Setelan.
-    visitPage.hidden=false;
-    settingsPage.hidden=true;
-    document.querySelectorAll('.nav-link').forEach(item=>item.classList.toggle('active',item.dataset.page==='visit'));
-    window.location.hash='visit';
-
-    visitForm.reset();
-    visitForm.dataset.editId=id||'';
-    const item=id?readVisits().find(v=>v.id===id):null;
-    document.getElementById('visitEditorTitle').textContent=item?'Edit Jadwal Visit':'Tambah Jadwal Visit';
-    if(item)Object.entries(item).forEach(([key,value])=>{if(key!=='talent'&&visitForm.elements[key])visitForm.elements[key].value=value||'';});
-    populateVisitReferenceOptions(item);
-    const titles=[...new Set(readKanban().map(x=>x.title).filter(Boolean))];
-    const datalist=document.getElementById('visitContentTitles');
-    datalist.replaceChildren();
-    titles.forEach(title=>{const option=document.createElement('option');option.value=title;datalist.append(option);});
-
-    visitEditor.removeAttribute('hidden');
-    requestAnimationFrame(()=>visitEditor.scrollIntoView({behavior:'smooth',block:'start'}));
-  }
-  function splitTalentNames(value){
-    if(Array.isArray(value))return value.map(x=>String(x).trim()).filter(Boolean);
-    return String(value||'').split(/[,;\\n]/).map(x=>x.trim()).filter(Boolean);
-  }
-  function populateVisitReferenceOptions(currentItem){
-    const talentSelect=document.getElementById('visitTalentSelect');
-    const talentValue=document.getElementById('visitTalentValue');
-    const visits=readVisits();
-    const names=[...new Set(visits.flatMap(v=>splitTalentNames(v.talent)))].sort((a,b)=>a.localeCompare(b,'id'));
-    const selected=splitTalentNames(currentItem?.talent);
-    selected.forEach(name=>{if(!names.includes(name))names.push(name);});
-    talentSelect.replaceChildren();
-    names.forEach(name=>{const option=document.createElement('option');option.value=name;option.textContent=name;option.selected=selected.includes(name);talentSelect.append(option);});
-    talentValue.value=selected.join(', ');
-    talentSelect.addEventListener('change',()=>{talentValue.value=[...talentSelect.selectedOptions].map(option=>option.value).join(', ');},{once:true});
-    talentSelect.onchange=()=>{talentValue.value=[...talentSelect.selectedOptions].map(option=>option.value).join(', ');};
-    const statusSelect=visitForm.elements.status;
-    const savedStatuses=[...new Set(visits.map(v=>v.status).filter(Boolean))];
-    const standardStatuses=['PLANNED','ON PROGRESS','DONE','CANCELLED'];
-    const currentStatus=currentItem?.status||'PLANNED';
-    const statuses=[...new Set([...standardStatuses,...savedStatuses,currentStatus])];
-    statusSelect.replaceChildren();
-    statuses.forEach(status=>{const option=document.createElement('option');option.value=status;option.textContent=status;option.selected=status===currentStatus;statusSelect.append(option);});
-  }
-  function closeVisitEditor(){visitEditor.hidden=true;visitForm.reset();visitForm.dataset.editId='';}
-  document.getElementById('addVisitBtn').addEventListener('click',event=>{event.preventDefault();openVisitEditor();});
-  document.getElementById('addSettingVisitBtn').addEventListener('click',event=>{event.preventDefault();openVisitEditor();});
-  document.getElementById('closeVisitEditor').addEventListener('click',closeVisitEditor);
-  document.getElementById('cancelVisitEdit').addEventListener('click',closeVisitEditor);
-  visitForm.addEventListener('submit',event=>{
-    event.preventDefault();if(!visitForm.reportValidity())return;
-    const data=Object.fromEntries(new FormData(visitForm).entries()),items=readVisits(),id=visitForm.dataset.editId;
-    data.talent=document.getElementById('visitTalentValue').value;
-    if(id){const index=items.findIndex(v=>v.id===id);if(index>=0)items[index]={...items[index],...data,updatedAt:new Date().toISOString()};}
-    else items.push({id:'VIS-'+Date.now().toString(36).toUpperCase(),...data,createdAt:new Date().toISOString()});
-    writeVisits(items);closeVisitEditor();renderVisitTables();showToast('Jadwal Visit berhasil disimpan.');
-  });
-
+  function openVisitEditor(){renderVisitTables();}
+  function closeVisitEditor(){}
+  function populateVisitReferenceOptions(){}
+  if(visitEditor)visitEditor.hidden=true;
+  const addSettingVisitBtn=document.getElementById('addSettingVisitBtn');
+  if(addSettingVisitBtn)addSettingVisitBtn.addEventListener('click',()=>{showPage('visit');document.getElementById('addVisitBtn').click();});
+  renderVisitTables();
   window.addEventListener('storage',event=>{if(event.key==='noteAp.contents'){if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();}if(event.key==='noteAp.visits'){if(!visitPage.hidden||!settingsPage.hidden)renderVisitTables();}});
 
 

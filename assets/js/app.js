@@ -21,4 +21,38 @@
     const sidebar=document.getElementById('sidebar');
     if(window.innerWidth<=700 && sidebar.classList.contains('open') && !sidebar.contains(event.target) && !event.target.closest('#menuToggle')) sidebar.classList.remove('open');
   });
+
+  const notificationBtn=document.getElementById('notificationBtn');
+  const notificationPopover=document.getElementById('notificationPopover');
+  const notificationList=document.getElementById('notificationList');
+  const notificationDot=notificationBtn.querySelector('.notification-dot');
+  const emptyNotice=document.getElementById('notificationEmpty');
+  notificationBtn.addEventListener('click',event=>{
+    event.stopPropagation();
+    const isOpen=notificationBtn.getAttribute('aria-expanded')==='true';
+    notificationBtn.setAttribute('aria-expanded',String(!isOpen));
+    notificationPopover.hidden=isOpen;
+  });
+  document.addEventListener('click',event=>{
+    if(!event.target.closest('.notification-wrap')){
+      notificationPopover.hidden=true;
+      notificationBtn.setAttribute('aria-expanded','false');
+    }
+  });
+  document.getElementById('markAllRead').addEventListener('click',()=>{
+    notificationList.querySelectorAll('.notification-item').forEach(item=>{
+      item.classList.remove('unread');
+      const dot=item.querySelector('.unread-dot');
+      if(dot) dot.remove();
+    });
+    notificationDot.style.display='none';
+    emptyNotice.hidden=false;
+    showToast('Semua notifikasi ditandai sudah dibaca.');
+  });
+  document.getElementById('allNotifications').addEventListener('click',event=>{
+    event.preventDefault();
+    notificationPopover.hidden=true;
+    notificationBtn.setAttribute('aria-expanded','false');
+    showToast('Halaman Notifikasi akan dibuat pada tahap berikutnya.');
+  });
 })();

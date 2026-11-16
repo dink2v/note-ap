@@ -133,3 +133,31 @@ body.modal-open{overflow:hidden;}
 .kanban-page .page-footer{color:#a0aaa4}
 @media(max-width:1150px){.kanban-page{padding:32px 25px}}
 @media(max-width:700px){.kanban-page{padding:27px 17px;min-height:calc(100vh - 60px)}.kanban-heading{align-items:flex-start}.kanban-heading h1{font-size:20px}.kanban-heading .primary-btn{padding:10px 11px;font-size:10px}.kanban-column{flex-basis:220px;min-width:220px;max-height:calc(100vh - 170px)}}
+
+
+/* Visit & Settings */
+.visit-page,.settings-page{max-width:1500px;margin:0 auto;padding:42px 43px 28px;min-height:100vh}
+.visit-page[hidden],.settings-page[hidden],.visit-editor[hidden]{display:none!important}
+.visit-heading{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:25px}
+.visit-heading h1{font:800 25px "Plus Jakarta Sans";letter-spacing:-.7px;margin:0}
+.visit-table-panel,.settings-card,.visit-editor{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 3px 12px #1c4a3208;margin-bottom:18px}
+.visit-table-wrap{overflow:auto}
+.visit-table{width:100%;border-collapse:collapse;white-space:nowrap}
+.visit-table th{padding:13px 14px;text-align:left;background:#f7faf8;color:#839189;font-size:9px;letter-spacing:.5px}
+.visit-table td{padding:13px 14px;border-top:1px solid #eff3f0;color:#52645a;font-size:10px;max-width:220px;white-space:normal}
+.visit-actions{white-space:nowrap!important}
+.visit-actions button{border:1px solid var(--line);background:#f8fbf9;color:var(--green);padding:6px 9px;border-radius:7px;margin-right:5px;cursor:pointer;font-size:10px}
+.visit-empty{padding:25px;text-align:center;color:var(--muted);font-size:11px}
+.settings-card{padding:20px}
+.settings-card h2,.visit-editor h2{font:800 15px "Plus Jakarta Sans";margin:0}
+.settings-card>.muted{margin-bottom:16px}
+.visit-editor{padding:20px}
+.visit-editor-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+.visit-form{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.visit-form label{display:flex;flex-direction:column;gap:7px;color:#718078;font-size:10px;font-weight:700}
+.visit-form input,.visit-form select,.visit-form textarea{width:100%;border:1px solid #e4ebe6;border-radius:9px;padding:10px;background:#fff;color:var(--ink);font:11px "DM Sans";outline:none}
+.visit-form input:focus,.visit-form select:focus,.visit-form textarea:focus{border-color:#82bea0;box-shadow:0 0 0 3px #16845d12}
+.visit-form .visit-notes{grid-column:1/-1}
+.visit-form-actions{grid-column:1/-1;display:flex;justify-content:flex-end;gap:9px}
+@media(max-width:1150px){.visit-page,.settings-page{padding:32px 25px}}
+@media(max-width:700px){.visit-page,.settings-page{padding:27px 15px}.visit-heading{align-items:flex-start}.visit-heading h1{font-size:21px}.visit-form{grid-template-columns:1fr 1fr}.visit-form .visit-notes{grid-column:1/-1}}

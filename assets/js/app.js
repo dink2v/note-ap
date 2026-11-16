@@ -134,6 +134,8 @@
   const writeVisits=items=>localStorage.setItem(visitKey,JSON.stringify(items));
   const visitDateLabel=value=>value?formatContentDate(value):'—';
   let visitCurrentPage=0,visitSelectedId=null;
+  let visitCalendarMonth=new Date(new Date().getFullYear(),new Date().getMonth(),1);
+  let visitCalendarSelected=new Date().toISOString().slice(0,10);
   const visitPageSize=4;
   const visitFields=[
     {key:'visitDate',label:'TGL VISIT',type:'date'},
@@ -171,26 +173,55 @@
       body.append(tr);
     });
     document.getElementById('visitEmpty').hidden=visits.length>0;
-    document.getElementById('visitCount').textContent=visits.length+' Visit';
     document.getElementById('visitPageInfo').textContent='Halaman '+(visitCurrentPage+1)+' dari '+pageCount;
     document.getElementById('visitPrevPage').disabled=visitCurrentPage===0;
     document.getElementById('visitNextPage').disabled=visitCurrentPage>=pageCount-1;
     const today=new Date(),todayKey=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
-    document.getElementById('visitTodayDate').textContent=new Intl.DateTimeFormat('id-ID',{day:'numeric',month:'short',year:'numeric'}).format(today);
+    document.getElementById('visitTodayDate').textContent='Today · '+new Intl.DateTimeFormat('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(today);
     const todayVisits=visits.filter(v=>v.visitDate===todayKey);
     const todayList=document.getElementById('visitTodayList');todayList.replaceChildren();
-    if(!todayVisits.length){const empty=document.createElement('div');empty.className='visit-today-empty';empty.textContent='Belum ada jadwal Visit hari ini.';todayList.append(empty);}
-    todayVisits.forEach(v=>{const item=document.createElement('div');item.className='visit-today-item';const time=document.createElement('input');time.type='time';time.className='visit-today-inline';time.value=v.time||'';time.dataset.visitId=v.id;time.dataset.visitField='time';const location=document.createElement('input');location.type='text';location.className='visit-today-inline';location.placeholder='Lokasi';location.value=v.location||'';location.dataset.visitId=v.id;location.dataset.visitField='location';const select=document.createElement('button');select.type='button';select.className='visit-today-select';select.textContent='Detail ›';select.addEventListener('click',()=>{const index=visits.findIndex(x=>x.id===v.id);visitCurrentPage=Math.floor(index/visitPageSize);visitSelectedId=v.id;renderVisitTables();});item.append(time,location,select);todayList.append(item);});
-    renderVisitDetail(visits.find(v=>v.id===visitSelectedId)||null);
+    const todayLabel=document.createElement('div');todayLabel.className='visit-today-label';todayLabel.textContent='Jadwal visit :';todayList.append(todayLabel);
+    const todayEntries=todayVisits.length?todayVisits:[null];
+    todayEntries.forEach(v=>{const item=document.createElement('div');item.className='visit-today-entry';[['Hari ini :',v?visitDateLabel(v.visitDate):'Tidak ada jadwal'],['Lokasi :',v?.location||'—'],['Jam :',v?.time||'—']].forEach(([label,value])=>{const row=document.createElement('div');row.className='visit-today-line';const key=document.createElement('b');key.textContent=label;const val=document.createElement('span');val.textContent=value;row.append(key,val);item.append(row);});todayList.append(item);});
+    renderVisitCalendar(visits);
     renderSettingsVisitTable(visits);
   }
-  function renderVisitDetail(item){
-    const grid=document.getElementById('visitDetailGrid');grid.replaceChildren();
-    const subtitle=document.getElementById('visitDetailSubtitle'),indicator=document.getElementById('visitDetailIndicator');
-    if(!item){subtitle.textContent='Pilih salah satu jadwal untuk melihat detail lengkapnya.';indicator.textContent='Belum dipilih';const placeholder=document.createElement('div');placeholder.className='visit-detail-placeholder';placeholder.textContent='Belum ada Visit yang dipilih. Tambahkan Visit untuk mulai mengisi detail.';grid.append(placeholder);return;}
-    subtitle.textContent=(item.title||'Visit tanpa judul')+' · '+visitDateLabel(item.visitDate);indicator.textContent='Visit dipilih';
-    visitFields.forEach(field=>{const wrap=document.createElement('label');wrap.className='visit-detail-field';const caption=document.createElement('span');caption.textContent=field.label;wrap.append(caption);wrap.insertAdjacentHTML('beforeend',makeVisitInput(field,field.key==='talent'?splitTalentNames(item.talent).join(', '):item[field.key],item.id));grid.append(wrap);});
+  function renderVisitCalendar(visits){
+    const root=document.getElementById('visitCalendar');if(!root)return;
+    root.replaceChildren();
+    const year=visitCalendarMonth.getFullYear(),month=visitCalendarMonth.getMonth();
+    const header=document.createElement('div');header.className='visit-calendar-header';
+    const prev=document.createElement('button');prev.type='button';prev.textContent='‹';prev.setAttribute('aria-label','Bulan sebelumnya');prev.dataset.calendarMove='-1';
+    const title=document.createElement('b');title.textContent=new Intl.DateTimeFormat('id-ID',{month:'long',year:'numeric'}).format(visitCalendarMonth);
+    const next=document.createElement('button');next.type='button';next.textContent='›';next.setAttribute('aria-label','Bulan berikutnya');next.dataset.calendarMove='1';
+    header.append(prev,title,next);root.append(header);
+    const grid=document.createElement('div');grid.className='visit-calendar-grid';
+    ['Min','Sen','Sel','Rab','Kam','Jum','Sab'].forEach(day=>{const cell=document.createElement('div');cell.className='visit-calendar-weekday';cell.textContent=day;grid.append(cell);});
+    const first=new Date(year,month,1).getDay(),days=new Date(year,month+1,0).getDate();
+    const counts={};visits.forEach(v=>{if(v.visitDate)counts[v.visitDate]=(counts[v.visitDate]||0)+1;});
+    for(let i=0;i<first;i++){const blank=document.createElement('div');blank.className='visit-calendar-day is-blank';grid.append(blank);}
+    for(let day=1;day<=days;day++){
+      const key=[year,String(month+1).padStart(2,'0'),String(day).padStart(2,'0')].join('-');
+      const cell=document.createElement('button');cell.type='button';cell.className='visit-calendar-day'+(key===visitCalendarSelected?' is-selected':'')+(counts[key]?' has-visit':'');
+      const num=document.createElement('span');num.textContent=day;cell.append(num);
+      if(counts[key]){const marker=document.createElement('small');marker.textContent=counts[key]+' Visit';cell.append(marker);}
+      cell.dataset.calendarDate=key;grid.append(cell);
+    }
+    root.append(grid);
+    const selected=document.createElement('div');selected.className='visit-calendar-selected';
+    const selectedDate=new Date(visitCalendarSelected+'T00:00:00');
+    const heading=document.createElement('b');heading.textContent='Jadwal '+new Intl.DateTimeFormat('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(selectedDate);selected.append(heading);
+    const matches=visits.filter(v=>v.visitDate===visitCalendarSelected);
+    if(!matches.length){const empty=document.createElement('p');empty.textContent='Belum ada Visit pada tanggal ini.';selected.append(empty);}
+    matches.forEach(v=>{const row=document.createElement('div');row.className='visit-calendar-event';const time=document.createElement('b');time.textContent=v.time||'—';const detail=document.createElement('span');detail.textContent=(v.location||'Lokasi belum diisi')+' · '+(v.title||'Tanpa judul');row.append(time,detail);selected.append(row);});
+    root.append(selected);
   }
+  document.getElementById('visitCalendar').addEventListener('click',event=>{
+    const move=event.target.closest('[data-calendar-move]');
+    if(move){visitCalendarMonth=new Date(visitCalendarMonth.getFullYear(),visitCalendarMonth.getMonth()+Number(move.dataset.calendarMove),1);renderVisitCalendar(sortedVisits());return;}
+    const day=event.target.closest('[data-calendar-date]');
+    if(day){visitCalendarSelected=day.dataset.calendarDate;renderVisitCalendar(sortedVisits());}
+  });
   function renderSettingsVisitTable(visits){
     const body=document.getElementById('settingsVisitBody');if(!body)return;body.replaceChildren();
     visits.forEach((v,index)=>{const tr=document.createElement('tr');[String(index+1),visitDateLabel(v.visitDate),v.time||'—',v.location||'—',v.title||'—',visitDateLabel(v.publishDate),splitTalentNames(v.talent).join(', ')||'—',v.props||'—',v.status||'PLANNED',v.notes||'—'].forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.append(td);});const action=document.createElement('td');action.className='visit-actions';const del=document.createElement('button');del.type='button';del.textContent='Hapus';del.addEventListener('click',()=>{if(!confirm('Hapus jadwal Visit ini?'))return;writeVisits(readVisits().filter(x=>x.id!==v.id));renderVisitTables();showToast('Jadwal Visit dihapus.');});action.append(del);tr.append(action);body.append(tr);});
@@ -206,8 +237,6 @@
   }
   document.getElementById('visitTableBody').addEventListener('change',event=>{const input=event.target.closest('[data-visit-id][data-visit-field]');if(input)updateVisitField(input.dataset.visitId,input.dataset.visitField,input.value);});
   document.getElementById('visitTodayList').addEventListener('change',event=>{const input=event.target.closest('[data-visit-id][data-visit-field]');if(input)updateVisitField(input.dataset.visitId,input.dataset.visitField,input.value);});
-  document.getElementById('visitDetailGrid').addEventListener('change',event=>{const input=event.target.closest('[data-visit-id][data-visit-field]');if(input)updateVisitField(input.dataset.visitId,input.dataset.visitField,input.value);});
-  document.getElementById('visitDetailGrid').addEventListener('keydown',event=>{if(event.key==='Enter'&&event.target.tagName!=='TEXTAREA'){event.preventDefault();event.target.blur();}});
   document.getElementById('visitPrevPage').addEventListener('click',()=>{visitCurrentPage=Math.max(0,visitCurrentPage-1);visitSelectedId=null;renderVisitTables();});
   document.getElementById('visitNextPage').addEventListener('click',()=>{const max=Math.max(0,Math.ceil(sortedVisits().length/visitPageSize)-1);visitCurrentPage=Math.min(max,visitCurrentPage+1);visitSelectedId=null;renderVisitTables();});
   document.getElementById('addVisitBtn').addEventListener('click',()=>{const items=readVisits();const item={id:'VIS-'+Date.now().toString(36).toUpperCase(),visitDate:new Date().toISOString().slice(0,10),time:'',location:'',title:'',publishDate:'',talent:'',props:'',status:'PLANNED',notes:'',createdAt:new Date().toISOString()};items.push(item);writeVisits(items);const sorted=sortedVisits(),index=sorted.findIndex(v=>v.id===item.id);visitCurrentPage=Math.floor(index/visitPageSize);visitSelectedId=item.id;renderVisitTables();document.querySelector('[data-visit-id="'+CSS.escape(item.id)+'"][data-visit-field="location"]')?.focus();showToast('Baris Visit baru ditambahkan. Isi langsung pada tabel detail.');});

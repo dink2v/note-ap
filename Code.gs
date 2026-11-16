@@ -335,7 +335,18 @@ function saveContentItem(item) {
   if (!item || typeof item !== "object") {
     throw new Error("Data konten tidak valid.");
   }
-  if (!text_(item.title)) throw new Error("Judul konten wajib diisi.");
+  const requiredFields = [
+    ["title", "Judul"], ["platform", "Platform"], ["format", "Format Konten"],
+    ["duration", "Durasi / Slide"], ["pillar", "Pilar Konten"],
+    ["status", "Status"], ["postingDate", "Tanggal Posting"],
+    ["postingTime", "Waktu Posting"], ["reference", "Referensi Konten"]
+  ];
+  const missing = requiredFields.filter(function(field) {
+    return !text_(item[field[0]]);
+  }).map(function(field) { return field[1]; });
+  if (missing.length) {
+    throw new Error("Lengkapi Informasi Konten: " + missing.join(", ") + ".");
+  }
 
   const lock = LockService.getScriptLock();
   lock.waitLock(15000);
@@ -810,21 +821,33 @@ function jsonResponse_(payload) {
  * tokeninfo response and then check the existing Tim sheet.
  */
 function doPost(e) {
+  var result;
   try {
-    const body = e && e.postData && e.postData.contents
-      ? JSON.parse(e.postData.contents)
-      : {};
-    if (body.action !== "verifyGoogleLogin") {
-      return jsonResponse_({ success: false, message: "Aksi tidak dikenal." });
+    var raw = e && e.parameter && e.parameter.payload
+      ? e.parameter.payload
+      : (e && e.postData && e.postData.contents ? e.postData.contents : "{}");
+    var body = JSON.parse(raw);
+    if (body.action === "saveContentItem") {
+      result = saveContentItem(body.item || {});
+    } else if (body.action === "verifyGoogleLogin") {
+      result = { success: true, user: verifyGoogleLogin_(body.credential) };
+    } else {
+      throw new Error("Aksi tidak dikenal.");
     }
-    const user = verifyGoogleLogin_(body.credential);
-    return jsonResponse_({ success: true, user: user });
   } catch (error) {
-    return jsonResponse_({
+    result = {
       success: false,
-      message: error && error.message ? error.message : "Autentikasi gagal."
-    });
+      message: error && error.message ? error.message : "Permintaan gagal."
+    };
   }
+
+  // The frontend submits through a hidden iframe to avoid browser CORS preflight.
+  var safe = JSON.stringify(result).replace(/</g, "\\u003c");
+  var html = '<!doctype html><html><body><script>' +
+    'parent.postMessage({source:"NOTE_AP_API",payload:' + safe + '},"*");' +
+    '<\\/script></body></html>';
+  return HtmlService.createHtmlOutput(html)
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
 /**

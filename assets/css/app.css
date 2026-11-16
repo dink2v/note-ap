@@ -313,3 +313,15 @@ body.modal-open{overflow:hidden;}
 .visit-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
 .visit-month-nav-outside{margin:0 0 0 auto;padding:0;align-self:flex-start}
 @media(max-width:600px){.visit-heading{align-items:flex-start;flex-wrap:wrap}.visit-month-nav-outside{margin-left:auto}}
+
+/* List / Grid switch for Visit: calendar replaces the old separate Jadwal Visit card */
+.visit-main-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.visit-view-toggle{display:flex;align-items:center;gap:4px;padding:4px;background:#f3f6f4;border:1px solid #e5ece7;border-radius:9px;flex:none}
+.visit-view-toggle button{width:32px;height:30px;border:0;border-radius:6px;background:transparent;color:#829188;cursor:pointer;font-size:20px;display:grid;place-items:center}
+.visit-view-toggle button.active{background:#fff;color:#5145f5;box-shadow:0 1px 4px #183b2818}
+.visit-toggle-list,.visit-toggle-grid{line-height:1}
+.visit-grid-panel{padding:14px 16px 18px}
+.visit-grid-panel[hidden],#visitListPanel[hidden]{display:none!important}
+.visit-grid-panel .visit-calendar{margin:0}
+.visit-grid-panel .visit-calendar-header{justify-content:center}
+@media(max-width:600px){.visit-main-heading{align-items:flex-start;flex-wrap:wrap}.visit-view-toggle{margin-left:auto}}

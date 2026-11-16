@@ -212,8 +212,14 @@
     const selectedDate=new Date(visitCalendarSelected+'T00:00:00');
     const heading=document.createElement('b');heading.textContent='Jadwal '+new Intl.DateTimeFormat('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(selectedDate);selected.append(heading);
     const matches=visits.filter(v=>v.visitDate===visitCalendarSelected);
-    if(!matches.length){const empty=document.createElement('p');empty.textContent='Belum ada Visit pada tanggal ini.';selected.append(empty);}
-    matches.forEach(v=>{const row=document.createElement('div');row.className='visit-calendar-event';const time=document.createElement('b');time.textContent=v.time||'—';const detail=document.createElement('span');detail.textContent=(v.location||'Lokasi belum diisi')+' · '+(v.title||'Tanpa judul');row.append(time,detail);selected.append(row);});
+    for(let slot=0;slot<4;slot++){
+      const v=matches[slot];
+      const row=document.createElement('div');row.className='visit-calendar-event'+(v?'':' is-empty');
+      const time=document.createElement('b');time.textContent=v?(v.time||'—'):'—';
+      const detail=document.createElement('span');detail.textContent=v?((v.location||'Lokasi belum diisi')+' · '+(v.title||'Tanpa judul')):'Belum ada jadwal';
+      row.append(time,detail);selected.append(row);
+    }
+    if(matches.length>4){const more=document.createElement('p');more.className='visit-calendar-more';more.textContent='+'+(matches.length-4)+' jadwal lainnya pada tanggal ini';selected.append(more);}
     root.append(selected);
   }
   document.getElementById('visitCalendar').addEventListener('click',event=>{

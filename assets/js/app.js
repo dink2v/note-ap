@@ -216,8 +216,6 @@
     document.getElementById('visitEmpty').textContent='Belum ada data Visit untuk bulan '+new Intl.DateTimeFormat('id-ID',{month:'long',year:'numeric'}).format(visitCalendarMonth)+'.';
     renderVisitMonthNav();
     document.getElementById('visitPageInfo').textContent='Halaman '+(visitCurrentPage+1)+' dari '+pageCount;
-    document.getElementById('visitPrevPage').disabled=visitCurrentPage===0;
-    document.getElementById('visitNextPage').disabled=visitCurrentPage>=pageCount-1;
     const today=new Date(),todayKey=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
     document.getElementById('visitTodayDate').textContent='Today · '+new Intl.DateTimeFormat('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(today);
     const todayVisits=visits.filter(v=>v.visitDate===todayKey);

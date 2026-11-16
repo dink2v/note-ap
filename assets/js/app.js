@@ -97,8 +97,6 @@
   if(window.location.hash==='#kalender') showPage('kalender');
   if(window.location.hash==='#konten') showPage('konten');
   if(window.location.hash==='#kanban') showPage('kanban');
-  if(window.location.hash==='#visit') showPage('visit');
-  if(window.location.hash==='#setelan') showPage('setelan');
   document.getElementById('newContentListBtn').addEventListener('click',openContentModal);
   const contentSearch=document.getElementById('contentSearch'),contentPlatform=document.getElementById('contentPlatform'),contentStatus=document.getElementById('contentStatus'),contentDateFrom=document.getElementById('contentDateFrom'),contentDateTo=document.getElementById('contentDateTo');
   [contentSearch,contentPlatform,contentStatus,contentDateFrom,contentDateTo].forEach(input=>input.addEventListener('input',renderContentList));
@@ -222,6 +220,8 @@
   const addSettingVisitBtn=document.getElementById('addSettingVisitBtn');
   if(addSettingVisitBtn)addSettingVisitBtn.addEventListener('click',()=>{showPage('visit');document.getElementById('addVisitBtn').click();});
   renderVisitTables();
+  if(window.location.hash==='#visit')showPage('visit');
+  if(window.location.hash==='#setelan')showPage('setelan');
   window.addEventListener('storage',event=>{if(event.key==='noteAp.contents'){if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();}if(event.key==='noteAp.visits'){if(!visitPage.hidden||!settingsPage.hidden)renderVisitTables();}});
 
 

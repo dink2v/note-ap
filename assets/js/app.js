@@ -127,9 +127,9 @@
     const visits=readVisits().sort((a,b)=>(a.visitDate||'').localeCompare(b.visitDate||''));
     const draw=(bodyId,emptyId)=>{
       const body=document.getElementById(bodyId);body.replaceChildren();
-      visits.forEach(v=>{
+      visits.forEach((v,index)=>{
         const tr=document.createElement('tr');
-        [visitDateLabel(v.visitDate),v.time||'—',v.location||'—',v.title||'—',visitDateLabel(v.publishDate),v.talent||'—',v.props||'—',v.status||'—',v.notes||'—'].forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.append(td);});
+        [String(index+1),visitDateLabel(v.visitDate),v.time||'—',v.location||'—',v.title||'—',visitDateLabel(v.publishDate),splitTalentNames(v.talent).join(', ')||'—',v.props||'—',v.status||'PLANNED',v.notes||'—'].forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.append(td);});
         const action=document.createElement('td');action.className='visit-actions';
         const edit=document.createElement('button');edit.type='button';edit.textContent='Edit';edit.addEventListener('click',()=>openVisitEditor(v.id));
         const del=document.createElement('button');del.type='button';del.textContent='Hapus';del.addEventListener('click',()=>{if(!confirm('Hapus jadwal Visit ini?'))return;writeVisits(readVisits().filter(x=>x.id!==v.id));renderVisitTables();showToast('Jadwal Visit dihapus.');});
@@ -169,8 +169,8 @@
     talentSelect.onchange=()=>{talentValue.value=[...talentSelect.selectedOptions].map(option=>option.value).join(', ');};
     const statusSelect=visitForm.elements.status;
     const savedStatuses=[...new Set(visits.map(v=>v.status).filter(Boolean))];
-    const standardStatuses=['Direncanakan','Konfirmasi','Selesai','Dibatalkan'];
-    const currentStatus=currentItem?.status||statusSelect.value||'Direncanakan';
+    const standardStatuses=['PLANNED','ON PROGRESS','DONE','CANCELLED'];
+    const currentStatus=currentItem?.status||'PLANNED';
     const statuses=[...new Set([...standardStatuses,...savedStatuses,currentStatus])];
     statusSelect.replaceChildren();
     statuses.forEach(status=>{const option=document.createElement('option');option.value=status;option.textContent=status;option.selected=status===currentStatus;statusSelect.append(option);});

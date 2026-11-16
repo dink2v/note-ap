@@ -167,8 +167,7 @@
     pageItems.forEach((v,index)=>{
       const tr=document.createElement('tr');tr.className='visit-select-row'+(v.id===visitSelectedId?' selected':'');tr.dataset.visitId=v.id;
       const numberCell=document.createElement('td');numberCell.textContent=String(visitCurrentPage*visitPageSize+index+1);tr.append(numberCell);
-      const summaryFields=[{key:'visitDate',type:'date',label:'TGL VISIT'},{key:'location',type:'text',label:'LOKASI'},{key:'title',type:'text',label:'JUDUL KONTEN'}];
-      summaryFields.forEach(field=>{const td=document.createElement('td');td.append(makeVisitInput(field,field.key==='talent'?splitTalentNames(v.talent).join(', '):v[field.key],v.id));tr.append(td);});
+      visitFields.forEach(field=>{const td=document.createElement('td');td.append(makeVisitInput(field,field.key==='talent'?splitTalentNames(v.talent).join(', '):v[field.key],v.id));tr.append(td);});
       tr.addEventListener('click',event=>{if(event.target.closest('input,select,textarea'))return;visitSelectedId=v.id;renderVisitTables();});
       body.append(tr);
     });

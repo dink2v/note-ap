@@ -631,7 +631,7 @@ function getNoteApCalendar_() {
 function parsePostingDateTime_(dateText, timeText) {
   const date = text_(dateText);
   const time = text_(timeText) || "09:00";
-  if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(date) || !/^\\d{2}:\\d{2}$/.test(time)) {
+  if (date.length !== 10 || date.charAt(4) !== "-" || date.charAt(7) !== "-" || time.length !== 5 || time.charAt(2) !== ":") {
     throw new Error("Tanggal dan waktu posting harus diisi dengan format yang valid.");
   }
   const parts = date.split("-").map(Number);

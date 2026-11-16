@@ -702,88 +702,79 @@ function setupNoteApCalendarSync() {
  * New Calendar events can be imported by including #NOTEAP in their description.
  */
 function syncCalendarToSheets() {
-  const lock = LockService.getScriptLock();
-  if (!lock.tryLock(10000)) return { success: false, message: "Sinkronisasi lain sedang berjalan." };
+  const calendar = getNoteApCalendar_();
+  const now = new Date();
+  const from = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
+  const until = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000);
+  const events = calendar.getEvents(from, until);
+  const contents = getAllContents();
+  const byEventId = {};
+  contents.forEach(function(item) {
+    if (item.calendarEventId) byEventId[String(item.calendarEventId)] = item;
+  });
 
-  try {
-    const calendar = getNoteApCalendar_();
-    const now = new Date();
-    const from = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
-    const until = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000);
-    const events = calendar.getEvents(from, until);
-    const contents = getAllContents();
-    const byEventId = {};
-    contents.forEach(function(item) {
-      if (item.calendarEventId) byEventId[String(item.calendarEventId)] = item;
-    });
+  let imported = 0;
+  let updated = 0;
+  let removed = 0;
+  events.forEach(function(event) {
+    const eventId = String(event.getId());
+    const description = text_(event.getDescription());
+    const linked = byEventId[eventId];
+    if (!linked && description.indexOf("#NOTEAP") === -1) return;
 
-    let imported = 0;
-    let updated = 0;
-    events.forEach(function(event) {
-      const eventId = String(event.getId());
-      const description = text_(event.getDescription());
-      const linked = byEventId[eventId];
+    const start = event.getStartTime();
+    const postingDate = Utilities.formatDate(start, NOTE_AP.TIMEZONE, "yyyy-MM-dd");
+    const postingTime = Utilities.formatDate(start, NOTE_AP.TIMEZONE, "HH:mm");
 
-      if (!linked && description.indexOf("#NOTEAP") === -1) return;
+    if (!linked) {
+      saveContentItem({
+        id: id_("CAL"), title: event.getTitle(), platform: "", format: "",
+        status: "Planning", postingDate: postingDate, postingTime: postingTime,
+        notes: "Diimpor dari Google Calendar.", calendarEventId: eventId,
+        calendarLastSyncedAt: now.toISOString(),
+        history: [{ type: "Diimpor dari Google Calendar", at: now.toISOString() }]
+      });
+      imported++;
+      return;
+    }
 
-      const start = event.getStartTime();
-      const postingDate = Utilities.formatDate(start, NOTE_AP.TIMEZONE, "yyyy-MM-dd");
-      const postingTime = Utilities.formatDate(start, NOTE_AP.TIMEZONE, "HH:mm");
+    const lastSynced = linked.calendarLastSyncedAt
+      ? new Date(linked.calendarLastSyncedAt).getTime() : 0;
+    const eventUpdated = event.getLastUpdated ? event.getLastUpdated().getTime() : 0;
+    if (eventUpdated && lastSynced && eventUpdated <= lastSynced) return;
 
-      if (!linked) {
-        const newItem = {
-          id: id_("CAL"),
-          title: event.getTitle(),
-          platform: "",
-          format: "",
-          status: "Planning",
-          postingDate: postingDate,
-          postingTime: postingTime,
-          notes: "Diimpor dari Google Calendar.",
-          calendarEventId: eventId,
-          calendarLastSyncedAt: now.toISOString(),
-          history: [{
-            type: "Diimpor dari Google Calendar",
-            at: now.toISOString()
-          }]
-        };
-        saveContentItem(newItem);
-        imported++;
-        return;
-      }
+    const changed = linked.title !== event.getTitle() ||
+      linked.postingDate !== postingDate || linked.postingTime !== postingTime;
+    if (!changed) return;
 
-      const lastSynced = linked.calendarLastSyncedAt
-        ? new Date(linked.calendarLastSyncedAt).getTime() : 0;
-      const eventUpdated = event.getLastUpdated
-        ? event.getLastUpdated().getTime() : 0;
-      if (eventUpdated && lastSynced && eventUpdated <= lastSynced) return;
+    linked.title = event.getTitle();
+    linked.postingDate = postingDate;
+    linked.postingTime = postingTime;
+    linked.calendarEventId = eventId;
+    linked.calendarLastSyncedAt = now.toISOString();
+    linked.history = (linked.history || []).concat([{
+      type: "Jadwal diperbarui dari Google Calendar", at: now.toISOString()
+    }]);
+    saveContentItem(linked);
+    updated++;
+  });
 
-      const changed = linked.title !== event.getTitle() ||
-        linked.postingDate !== postingDate || linked.postingTime !== postingTime;
-      if (!changed) return;
+  // Deleting an event clears its schedule but keeps the content record.
+  contents.forEach(function(item) {
+    if (!item.calendarEventId) return;
+    if (calendar.getEventById(String(item.calendarEventId))) return;
+    item.calendarEventId = "";
+    item.postingDate = "";
+    item.postingTime = "";
+    item.calendarLastSyncedAt = now.toISOString();
+    item.history = (item.history || []).concat([{
+      type: "Jadwal dihapus dari Google Calendar", at: now.toISOString()
+    }]);
+    saveContentItem(item);
+    removed++;
+  });
 
-      linked.title = event.getTitle();
-      linked.postingDate = postingDate;
-      linked.postingTime = postingTime;
-      linked.calendarEventId = eventId;
-      linked.calendarLastSyncedAt = now.toISOString();
-      linked.history = (linked.history || []).concat([{
-        type: "Jadwal diperbarui dari Google Calendar",
-        at: now.toISOString()
-      }]);
-      saveContentItem(linked);
-      updated++;
-    });
-
-    return {
-      success: true,
-      imported: imported,
-      updated: updated,
-      checked: events.length
-    };
-  } finally {
-    lock.releaseLock();
-  }
+  return { success: true, imported: imported, updated: updated, removed: removed, checked: events.length };
 }
 
 /** Configure a specific calendar by ID; leave blank to use the primary calendar. */

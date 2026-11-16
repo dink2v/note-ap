@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7faf8"><meta name="description" content="Note AP — Content Planning & Management System Apotek Prapatan">
+  <title>Note AP — Apotek Prapatan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#dashboard"><span class="brand-mark">N</span><span><b>Note AP</b><small>Apotek Prapatan</small></span></a>
+    <div class="nav-label">WORKSPACE</div>
+    <nav class="nav-list">
+      <a class="nav-link active" href="#dashboard" data-page="dashboard"><span>▦</span>Dashboard</a>
+      <a class="nav-link" href="#kalender" data-page="kalender"><span>▦</span>Kalender</a>
+      <a class="nav-link" href="#konten" data-page="konten"><span>▤</span>Konten</a>
+      <a class="nav-link" href="#kanban" data-page="kanban"><span>▥</span>Kanban</a>
+      <a class="nav-link" href="#visit" data-page="visit"><span>↗</span>Visit</a>
+    </nav>
+    <div class="nav-spacer"></div><div class="nav-label">PREFERENSI</div>
+    <nav class="nav-list">
+      <a class="nav-link" href="#setelan" data-page="setelan"><span>⚙</span>Setelan</a>
+      <a class="nav-link" href="#bantuan" data-page="bantuan"><span>?</span>Bantuan</a>
+    </nav>
+    <div class="sidebar-footer"><span class="avatar">AP</span><span><b>Apotek Prapatan</b><small>Workspace internal</small></span><span class="more">•••</span></div>
+  </aside>
+  <main class="main-area">
+    <header class="mobile-top"><button id="menuToggle" aria-label="Buka menu">☰</button><b>Note AP</b><span class="avatar">AP</span></header>
+    <div class="page-wrap">
+      <section class="welcome-row">
+        <div><div class="eyebrow" id="todayLabel">WORKSPACE OVERVIEW</div><h1>Halo, Apotek Prapatan <span>👋</span></h1><p class="muted" id="todayDate">Kelola dan pantau seluruh aktivitas kontenmu.</p></div>
+        <button class="primary-btn" id="newContentBtn"><span>＋</span> Konten Baru</button>
+      </section>
+      <section class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span>Total Reels</span><span class="stat-icon lilac">▶</span></div><strong id="reelsCount">12</strong><small>Konten video pendek</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Total Feed</span><span class="stat-icon blue">▤</span></div><strong id="feedCount">8</strong><small>Single post & feed</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Total Carousel</span><span class="stat-icon orange">▧</span></div><strong id="carouselCount">6</strong><small>Konten multi-slide</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Publikasi</span><span class="stat-icon green">✓</span></div><strong id="publishedCount">14</strong><small>Konten telah dipublikasikan</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Terjadwal</span><span class="stat-icon teal">◷</span></div><strong id="scheduledCount">5</strong><small>Siap untuk dipublikasikan</small></article>
+      </section>
+      <section class="content-grid">
+        <article class="panel engagement-panel">
+          <div class="panel-heading"><div><h2>Engagement Rate Tren</h2><p class="muted">Performa interaksi konten dari waktu ke waktu</p></div><span class="period-pill">6 Bulan terakhir⌄</span></div>
+          <div class="chart-legend"><span><i class="dot instagram"></i>Instagram</span><span><i class="dot tiktok"></i>TikTok</span></div>
+          <div class="chart-wrap"><div class="chart-y"><span>8%</span><span>6%</span><span>4%</span><span>2%</span><span>0%</span></div><svg class="chart" viewBox="0 0 620 210" preserveAspectRatio="none" role="img" aria-label="Grafik tren engagement contoh"><defs><linearGradient id="fillA" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#279b70" stop-opacity=".18"/><stop offset="1" stop-color="#279b70" stop-opacity="0"/></linearGradient></defs><g class="grid-lines"><path d="M0 12H620M0 56H620M0 100H620M0 144H620M0 188H620"/></g><path class="area" d="M0 140 C50 132 60 95 120 110 S190 135 245 85 S330 102 370 65 S440 88 495 50 S560 62 620 25 L620 188 L0 188Z"/><path class="line line-a" d="M0 140 C50 132 60 95 120 110 S190 135 245 85 S330 102 370 65 S440 88 495 50 S560 62 620 25"/><path class="line line-b" d="M0 160 C60 150 75 130 120 145 S200 115 245 130 S320 120 370 105 S445 115 495 90 S565 105 620 78"/></svg></div>
+          <div class="chart-x"><span>Jun</span><span>Jul</span><span>Agu</span><span>Sep</span><span>Okt</span><span>Nov</span></div>
+          <p class="chart-note">* Grafik ini masih data ilustrasi. Integrasi metrik akan ditambahkan pada tahap berikutnya.</p>
+        </article>
+        <article class="panel upcoming-panel"><div class="panel-heading"><div><h2>Akan Datang</h2><p class="muted">Jadwal konten terdekat</p></div><a href="#kalender" class="text-link">Lihat semua →</a></div><div id="upcomingList" class="upcoming-list">
+          <div class="upcoming-item"><div class="date-box"><b>16</b><small>NOV</small></div><div class="upcoming-info"><b>Fungsi Paru-Paru</b><small>Instagram · Carousel</small></div><span class="time">09:00</span></div>
+          <div class="upcoming-item"><div class="date-box"><b>18</b><small>NOV</small></div><div class="upcoming-info"><b>Tips Menjaga Imun</b><small>TikTok · Reels</small></div><span class="time">13:00</span></div>
+          <div class="upcoming-item"><div class="date-box"><b>20</b><small>NOV</small></div><div class="upcoming-info"><b>Kenali Obat Bebas</b><small>Instagram · Feed</small></div><span class="time">10:00</span></div>
+        </div></article>
+      </section>
+      <footer class="page-footer">Note AP <span>•</span> Content Planning & Management System <span class="demo-tag">MODE PREVIEW</span></footer>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="assets/js/app.js"></script>
+</body></html>

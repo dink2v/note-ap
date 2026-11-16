@@ -7,34 +7,38 @@
   let toastTimer;
   function showToast(message){toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2600);}
   const contentModal=document.getElementById('contentModal');
-  const contentModalDialog=contentModal.querySelector('.content-modal-dialog');
-  let contentModalLoading=false;
-  window.noteApContentModalClose=()=>{
+  const contentModalFrame=document.getElementById('contentModalFrame');
+  const closeContentModal=()=>{
     contentModal.classList.remove('open');
     contentModal.setAttribute('aria-hidden','true');
     document.body.classList.remove('modal-open');
-    contentModalDialog.innerHTML='<div class="content-modal-loading">Menyiapkan form tambah konten...</div>';
+    contentModalFrame.src='about:blank';
   };
-  async function openContentModal(){
-    contentModal.classList.add('open');contentModal.setAttribute('aria-hidden','false');document.body.classList.add('modal-open');
-    if(contentModalLoading||contentModal.querySelector('#contentForm'))return;
-    contentModalLoading=true;
-    try{
-      const response=await fetch('tambah-konten.html');if(!response.ok)throw new Error('Form tidak dapat dimuat');
-      const markup=await response.text();const parsed=new DOMParser().parseFromString(markup,'text/html');
-      const page=parsed.querySelector('.page-wrap');if(!page)throw new Error('Struktur form tidak ditemukan');
-      contentModalDialog.innerHTML='<button type="button" class="content-modal-close" aria-label="Tutup popup">×</button>';
-      contentModalDialog.append(page);
-      const expand=parsed.querySelector('#expandOverlay');if(expand)contentModalDialog.append(expand);
-      contentModalDialog.querySelector('.content-modal-close').addEventListener('click',window.noteApContentModalClose);
-      const oldScript=document.getElementById('content-modal-script');if(oldScript)oldScript.remove();
-      const script=document.createElement('script');script.id='content-modal-script';script.src='assets/js/tambah-konten.js';document.body.append(script);
-    }catch(error){contentModalDialog.innerHTML='<button type="button" class="content-modal-close" aria-label="Tutup popup">×</button><div class="content-modal-loading">Form gagal dimuat. Silakan coba lagi.</div>';contentModalDialog.querySelector('.content-modal-close').addEventListener('click',window.noteApContentModalClose);showToast(error.message);}
-    finally{contentModalLoading=false;}
+  window.noteApContentModalClose=closeContentModal;
+  function openContentModal(){
+    contentModal.classList.add('open');
+    contentModal.setAttribute('aria-hidden','false');
+    document.body.classList.add('modal-open');
+    if(contentModalFrame.src==='about:blank') contentModalFrame.src=new URL('tambah-konten.html',window.location.href).href;
   }
+  contentModalFrame.addEventListener('load',()=>{
+    try{
+      const child=contentModalFrame.contentWindow;
+      child.noteApContentModalClose=closeContentModal;
+      const doc=child.document;
+      if(!doc.getElementById('noteap-modal-style')){
+        const style=doc.createElement('style');
+        style.id='noteap-modal-style';
+        style.textContent='.sidebar,.mobile-top,.form-breadcrumb,.form-title-row .secondary-btn,.page-footer{display:none!important}.main-area{margin-left:0!important}.content-form-wrap{max-width:none!important;padding:34px 38px 24px!important}@media(max-width:700px){.content-form-wrap{padding:28px 15px 20px!important}}body{background:#f7faf8!important}';
+        doc.head.append(style);
+      }
+      child.addEventListener('keydown',event=>{if(event.key==='Escape')closeContentModal();});
+    }catch(error){showToast('Form berhasil dimuat, tetapi kontrol popup terganggu.');}
+  });
   document.getElementById('newContentBtn').addEventListener('click',openContentModal);
-  contentModal.addEventListener('click',event=>{if(event.target===contentModal)window.noteApContentModalClose();});
-  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&contentModal.classList.contains('open'))window.noteApContentModalClose();});
+  document.getElementById('contentModalClose').addEventListener('click',closeContentModal);
+  contentModal.addEventListener('click',event=>{if(event.target===contentModal)closeContentModal();});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&contentModal.classList.contains('open'))closeContentModal();});
   document.querySelectorAll('.nav-link').forEach(link=>link.addEventListener('click',event=>{
     event.preventDefault();
     document.querySelectorAll('.nav-link').forEach(item=>item.classList.remove('active'));

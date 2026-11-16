@@ -134,6 +134,7 @@
   const writeVisits=items=>localStorage.setItem(visitKey,JSON.stringify(items));
   const visitDateLabel=value=>value?formatContentDate(value):'—';
   let visitCurrentPage=0,visitSelectedId=null;
+  let visitViewMode='list';
   let visitCalendarMonth=new Date(new Date().getFullYear(),new Date().getMonth(),1);
   let visitCalendarSelected=[new Date().getFullYear(),String(new Date().getMonth()+1).padStart(2,'0'),String(new Date().getDate()).padStart(2,'0')].join('-');
   const visitPageSize=4;
@@ -170,6 +171,20 @@
     if(field.type==='textarea')return '<textarea rows="2" class="visit-inline-input visit-inline-textarea" data-visit-id="'+escapeVisit(id)+'" data-visit-field="'+field.key+'" placeholder="Tambahkan keterangan">'+safe+'</textarea>';
     return '<input class="visit-inline-input" type="'+field.type+'" data-visit-id="'+escapeVisit(id)+'" data-visit-field="'+field.key+'" value="'+safe+'" placeholder="Isi '+field.label.toLowerCase()+'">';
   }
+  function setVisitViewMode(mode){
+    visitViewMode=mode;
+    const list=document.getElementById('visitListPanel'),grid=document.getElementById('visitGridPanel');
+    const pagination=document.querySelector('.visit-main-card .visit-pagination');
+    const listBtn=document.getElementById('visitListViewBtn'),gridBtn=document.getElementById('visitGridViewBtn');
+    if(list)list.hidden=mode!=='list';
+    if(grid)grid.hidden=mode!=='grid';
+    if(pagination)pagination.hidden=mode!=='list';
+    if(listBtn)listBtn.classList.toggle('active',mode==='list');
+    if(gridBtn)gridBtn.classList.toggle('active',mode==='grid');
+    if(mode==='grid')renderVisitCalendar(sortedVisits());
+  }
+  document.getElementById('visitListViewBtn').addEventListener('click',()=>setVisitViewMode('list'));
+  document.getElementById('visitGridViewBtn').addEventListener('click',()=>setVisitViewMode('grid'));
   function renderVisitTables(){
     const allVisits=sortedVisits();
     const monthKey=[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0')].join('-');
@@ -223,7 +238,7 @@
     const todayLabel=document.createElement('div');todayLabel.className='visit-today-label';todayLabel.textContent='Jadwal visit :';todayList.append(todayLabel);
     const todayEntries=todayVisits.length?todayVisits:[null];
     todayEntries.forEach(v=>{const item=document.createElement('div');item.className='visit-today-entry';[['Hari ini :',v?visitDateLabel(v.visitDate):'Tidak ada jadwal'],['Lokasi :',v?.location||'—'],['Jam :',v?.time||'—']].forEach(([label,value])=>{const row=document.createElement('div');row.className='visit-today-line';const key=document.createElement('b');key.textContent=label;const val=document.createElement('span');val.textContent=value;row.append(key,val);item.append(row);});todayList.append(item);});
-    renderVisitCalendar(allVisits);
+    if(visitViewMode==='grid')renderVisitCalendar(allVisits);
     renderSettingsVisitTable(allVisits);
   }
   function renderVisitCalendar(visits){

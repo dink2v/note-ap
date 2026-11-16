@@ -44,8 +44,13 @@
     document.querySelectorAll('.nav-link').forEach(item=>item.classList.remove('active'));
     link.classList.add('active');
     const page=link.dataset.page;
-    if(page!=='dashboard') showToast('Halaman '+link.textContent.trim()+' sedang dalam tahap pengembangan.');
     document.getElementById('sidebar').classList.remove('open');
+    if(page==='kalender'){
+      window.open('https://calendar.google.com/calendar/u/0/r','_blank','noopener');
+      showToast('Google Calendar dibuka di tab baru.');
+      return;
+    }
+    if(page!=='dashboard') showToast('Halaman '+link.textContent.trim()+' sedang dalam tahap pengembangan.');
     if(page==='dashboard') window.location.hash='dashboard';
   }));
   document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));

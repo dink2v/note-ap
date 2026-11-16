@@ -6,7 +6,7 @@
   const toast = document.getElementById('toast');
   let toastTimer;
   function showToast(message){toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2600);}
-  document.getElementById('newContentBtn').addEventListener('click',()=>showToast('Form Konten Baru akan dibuat pada tahap modul Konten.'));
+  document.getElementById('newContentBtn').addEventListener('click',()=>{window.location.href='tambah-konten.html';});
   document.querySelectorAll('.nav-link').forEach(link=>link.addEventListener('click',event=>{
     event.preventDefault();
     document.querySelectorAll('.nav-link').forEach(item=>item.classList.remove('active'));

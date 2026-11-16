@@ -245,3 +245,31 @@ body.modal-open{overflow:hidden;}
 /* Detail Visit sejajar tepat di bawah tabel Data Visit */
 .visit-detail-card{grid-column:2}
 @media(max-width:900px){.visit-detail-card{grid-column:1}}
+
+/* Visit page: compact today summary and monthly visit calendar */
+.visit-heading{margin-bottom:20px}
+.visit-count{display:none!important}
+.visit-today-summary{display:flex;flex-direction:column;gap:12px}
+.visit-today-label{font:800 12px "Plus Jakarta Sans";color:var(--ink);padding-bottom:9px;border-bottom:1px solid #edf2ee}
+.visit-today-entry{display:flex;flex-direction:column;gap:10px;padding:13px;border:1px solid #edf2ee;border-radius:10px;background:#fbfdfb}
+.visit-today-line{display:flex;flex-direction:column;gap:4px;font-size:10px;line-height:1.5}
+.visit-today-line b{color:#718078;font-size:9px}
+.visit-today-line span{color:var(--ink);font-weight:700;overflow-wrap:anywhere}
+.visit-calendar{min-width:0}
+.visit-calendar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.visit-calendar-header b{font:800 13px "Plus Jakarta Sans";text-transform:capitalize}
+.visit-calendar-header button{width:32px;height:32px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--green);font-size:21px;cursor:pointer}
+.visit-calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.visit-calendar-weekday{text-align:center;padding:7px 0;color:#89978f;font-size:9px;font-weight:800}
+.visit-calendar-day{min-width:0;min-height:62px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:5px;padding:8px 2px;border:1px solid #edf2ee;border-radius:8px;background:#fff;color:#52645a;font:600 11px "DM Sans";cursor:pointer}
+.visit-calendar-day small{font-size:8px;color:var(--green);font-weight:800}
+.visit-calendar-day.has-visit{background:#eff8f2;border-color:#cfe6d7}
+.visit-calendar-day.is-selected{outline:2px solid #29966a;border-color:#29966a;background:#e8f5ed}
+.visit-calendar-day.is-blank{border-color:transparent;background:transparent;cursor:default}
+.visit-calendar-selected{margin-top:16px;padding:13px;border:1px solid #edf2ee;border-radius:10px;background:#fbfdfb}
+.visit-calendar-selected>b{display:block;margin-bottom:10px;font:800 11px "Plus Jakarta Sans";text-transform:capitalize}
+.visit-calendar-selected p{margin:0;color:#89978f;font-size:10px}
+.visit-calendar-event{display:flex;gap:12px;padding:9px 0;border-top:1px solid #edf2ee;font-size:10px}
+.visit-calendar-event b{min-width:45px;color:var(--green)}
+.visit-calendar-event span{color:#53645a;overflow-wrap:anywhere}
+@media(max-width:900px){.visit-overview-grid{grid-template-columns:1fr}.visit-detail-card{grid-column:1}}

@@ -97,3 +97,37 @@ body.modal-open{overflow:hidden;}
 .content-empty p{font-size:10px;margin:7px 0 0}
 @media(max-width:1150px){.content-page{padding:32px 25px}.content-filter-panel{grid-template-columns:repeat(3,minmax(0,1fr))}.content-search{grid-column:span 2}}
 @media(max-width:700px){.content-page{padding:25px 15px}.content-page-heading{align-items:flex-start}.content-page-heading h1{font-size:21px}.content-page-heading .primary-btn{padding:10px 11px}.content-filter-panel{grid-template-columns:1fr 1fr;padding:13px;gap:11px}.content-search{grid-column:1/-1}.content-filter-panel .filter-reset-btn{grid-column:1/-1}.content-list-heading{padding:16px}.content-table th,.content-table td{padding:12px 13px}}
+
+
+/* Kanban board - dark workflow reference */
+.kanban-page{height:calc(100vh - 1px);min-height:650px;background:#090f20;color:#edf2ff;padding:27px 25px 18px;overflow:hidden}
+.kanban-page[hidden]{display:none!important}
+.kanban-heading{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:24px}
+.kanban-heading h1{font:800 23px "Plus Jakarta Sans";margin:0;color:#f4f6ff}
+.kanban-heading .muted{font-size:11px;color:#a1abc2;margin:5px 0 0}
+.kanban-page .eyebrow{color:#8090b2;font-size:9px;letter-spacing:1px}
+.kanban-page .primary-btn{background:#2865ef;color:#fff;border:0;box-shadow:0 5px 18px #245ce94a}
+.kanban-board{display:flex;gap:12px;height:calc(100% - 115px);overflow-x:auto;overflow-y:hidden;padding:0 2px 12px;align-items:flex-start;scrollbar-color:#263451 #0d1529;scrollbar-width:thin}
+.kanban-column{flex:0 0 225px;min-width:225px;max-height:100%;display:flex;flex-direction:column;gap:10px}
+.kanban-column>header{height:25px;display:flex;align-items:center;justify-content:space-between;padding:0 4px}
+.kanban-column>header h2{font:800 10px "DM Sans";letter-spacing:.7px;margin:0}
+.kanban-column>header>span{display:grid;place-items:center;min-width:19px;height:19px;border-radius:50%;background:#141e34;color:#aab5ca;font-size:9px}
+.stage-backlog{color:#e64d62}.stage-ideation{color:#8499ff}.stage-scripting{color:#f2b64c}.stage-take{color:#e77cb8}.stage-editing{color:#a98af5}
+.kanban-cards{display:flex;flex-direction:column;gap:9px;overflow-y:auto;min-height:65px;padding:0 1px 2px;scrollbar-width:thin;scrollbar-color:#263451 transparent}
+.kanban-card{background:#111a2d;border:1px solid #1d2940;border-radius:11px;padding:11px 10px 9px;box-shadow:0 3px 12px #02081735;cursor:grab}
+.kanban-card.dragging{opacity:.4}
+.kanban-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.kanban-card-top b{font:700 11px "DM Sans";color:#edf2ff;line-height:1.45;overflow-wrap:anywhere}
+.kanban-grip{color:#75829e;background:#1a263d;border-radius:6px;padding:2px 5px;font-size:13px;flex:none}
+.kanban-tags{display:flex;gap:6px;margin:8px 0 10px;flex-wrap:wrap}
+.kanban-tag{font-size:9px;font-weight:700;padding:4px 7px;border-radius:6px}
+.kanban-tag.instagram{background:#381b3c;color:#f07ac5}.kanban-tag.tiktok{background:#19343a;color:#73d5d0}.kanban-tag.pillar{background:#173a37;color:#65d4b2}
+.kanban-card-actions{display:flex;align-items:center;gap:6px;border-top:1px solid #1b2940;padding-top:8px}
+.kanban-card-actions button{border:0;border-radius:7px;background:#202b41;color:#e0e7f5;padding:6px 8px;font:700 9px "DM Sans";cursor:pointer}
+.kanban-card-actions button:hover{background:#2c3c59}
+.kanban-date{margin-left:auto;color:#91a0ba;font-size:8px;white-space:nowrap}
+.kanban-add-slot{width:100%;min-height:61px;border:1px dashed #293650;border-radius:12px;background:#0e172a;color:#8a98b2;font:500 9px "DM Sans";cursor:pointer}
+.kanban-add-slot:hover,.kanban-column.drop-target .kanban-add-slot{border-color:#5279db;background:#14213b;color:#d4def4}
+.kanban-column.drop-target{background:#111c31;border-radius:12px}
+.kanban-page .page-footer{color:#71809e;border-color:#1d2940}
+@media(max-width:700px){.kanban-page{padding:22px 14px;min-height:calc(100vh - 60px)}.kanban-heading h1{font-size:19px}.kanban-heading .primary-btn{padding:10px 12px;font-size:10px}.kanban-board{height:calc(100% - 105px)}.kanban-column{flex-basis:215px;min-width:215px}}

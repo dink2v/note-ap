@@ -291,3 +291,11 @@ body.modal-open{overflow:hidden;}
 .visit-multiselect-menu label{display:flex;align-items:center;gap:8px;padding:8px 7px;border-radius:7px;cursor:pointer;color:#52645a;font-size:10px;white-space:nowrap}
 .visit-multiselect-menu label:hover{background:#f0f8f3}
 .visit-multiselect-menu input{accent-color:var(--green);margin:0}
+
+
+/* Pagination Data Visit: tombol dibuat terpisah dan mudah dibaca */
+.visit-pagination{gap:14px;padding-top:16px}
+.visit-pagination>div{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.visit-page-btn{min-width:112px;min-height:36px;padding:8px 13px;font-size:10px;white-space:nowrap}
+.visit-page-btn:disabled{opacity:.45;background:#f7f9f7;color:#87958c}
+@media(max-width:600px){.visit-pagination{align-items:stretch;gap:10px}.visit-pagination>div{width:100%;display:grid;grid-template-columns:1fr 1fr}.visit-page-btn{min-width:0;width:100%}}

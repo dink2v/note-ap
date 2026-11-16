@@ -135,7 +135,7 @@
   const visitDateLabel=value=>value?formatContentDate(value):'—';
   let visitCurrentPage=0,visitSelectedId=null;
   let visitCalendarMonth=new Date(new Date().getFullYear(),new Date().getMonth(),1);
-  let visitCalendarSelected=new Date().toISOString().slice(0,10);
+  let visitCalendarSelected=[new Date().getFullYear(),String(new Date().getMonth()+1).padStart(2,'0'),String(new Date().getDate()).padStart(2,'0')].join('-');
   const visitPageSize=4;
   const visitFields=[
     {key:'visitDate',label:'TGL VISIT',type:'date'},

@@ -42,3 +42,18 @@ body.modal-open{overflow:hidden;}
 .calendar-help{font-size:10px;color:#89968f;margin:13px 2px 0;line-height:1.6}
 @media(max-width:1150px){.calendar-page{padding:32px 25px}}
 @media(max-width:700px){.calendar-page{padding:25px 13px}.calendar-page-heading{align-items:flex-start;flex-direction:column}.calendar-page-heading h1{font-size:21px}.calendar-page-actions{width:100%}.calendar-page-actions .secondary-btn{width:100%}.calendar-embed-top{padding:0 13px}.calendar-embed-card iframe{height:calc(100vh - 245px);min-height:560px}}
+
+
+/* Note AP format color system */
+:root{--format-reels:#ff6101;--format-carousel:#1899a3;--format-feed:#7cc8ca}
+.format-color-legend{display:flex;align-items:center;gap:18px;padding:12px 20px;border-bottom:1px solid var(--line);background:#fcfefd}
+.format-color-legend>span{display:inline-flex;align-items:center;gap:7px;color:#64746b;font-size:10px;font-weight:700}
+.format-dot{display:inline-block;width:9px;height:9px;border-radius:50%;flex:0 0 9px}
+.format-dot.reels{background:var(--format-reels)}
+.format-dot.carousel{background:var(--format-carousel)}
+.format-dot.feed{background:var(--format-feed)}
+.format-chip{display:inline-flex;align-items:center;gap:6px;border-radius:7px;padding:5px 8px;font-size:10px;font-weight:700}
+.format-chip.reels{background:color-mix(in srgb,var(--format-reels) 12%,white);color:var(--format-reels)}
+.format-chip.carousel{background:color-mix(in srgb,var(--format-carousel) 12%,white);color:var(--format-carousel)}
+.format-chip.feed{background:color-mix(in srgb,var(--format-feed) 20%,white);color:#287d80}
+@media(max-width:700px){.format-color-legend{gap:13px;padding:11px 13px;flex-wrap:wrap}.format-color-legend>span{font-size:9px}}

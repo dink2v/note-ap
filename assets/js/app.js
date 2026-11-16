@@ -109,59 +109,44 @@
     document.querySelector('.content-table').hidden=filtered.length===0;
   }
   function formatContentDate(value){if(!value)return'—';const date=new Date(value+'T00:00:00');return Number.isNaN(date.getTime())?value:new Intl.DateTimeFormat('id-ID',{day:'2-digit',month:'short',year:'numeric'}).format(date);}
-  window.addEventListener('storage',event=>{if(event.key==='noteAp.contents'&&!contentPage.hidden)renderContentList();if(event.key==='noteAp.kanban'&&!kanbanPage.hidden)renderKanban();});
+  window.addEventListener('storage',event=>{if(event.key==='noteAp.contents'){if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();}});
 
-  const kanbanStages=['Backlog Ide','Ideation','Scripting','Take Konten','Editing'];
-  const kanbanKey='noteAp.kanban';
-  function readKanban(){try{const value=JSON.parse(localStorage.getItem(kanbanKey)||'[]');return Array.isArray(value)?value:[];}catch(error){return[];}}
-  function writeKanban(items){localStorage.setItem(kanbanKey,JSON.stringify(items));}
+
+  const kanbanStages=['Ideation','Planning','Production','Editing','Review','Ready to Publish','Published'];
+  function readKanban(){try{const value=JSON.parse(localStorage.getItem('noteAp.contents')||'[]');return Array.isArray(value)?value:[];}catch(error){return[];}}
+  function writeKanban(items){localStorage.setItem('noteAp.contents',JSON.stringify(items));}
   function renderKanban(){
     const items=readKanban();
     document.querySelectorAll('.kanban-column').forEach(column=>{
       const stage=column.dataset.stage,cards=column.querySelector('.kanban-cards');
-      const rows=items.filter(item=>item.stage===stage);
+      const rows=items.filter(item=>item.status===stage);
       column.querySelector('.stage-count').textContent=rows.length;
       cards.replaceChildren();
       rows.forEach(item=>{
         const card=document.createElement('article');card.className='kanban-card';card.draggable=true;card.dataset.id=item.id;
         const top=document.createElement('div');top.className='kanban-card-top';
-        const title=document.createElement('b');title.textContent=item.title;top.append(title);
+        const title=document.createElement('b');title.textContent=item.title||'Tanpa judul';top.append(title);
         const grip=document.createElement('span');grip.className='kanban-grip';grip.textContent='⠿';grip.title='Seret untuk memindahkan';top.append(grip);card.append(top);
         const tags=document.createElement('div');tags.className='kanban-tags';
         const platform=document.createElement('span');platform.className='kanban-tag '+(item.platform==='TikTok'?'tiktok':'instagram');platform.textContent=item.platform==='TikTok'?'♪ TikTok':'◎ Instagram';tags.append(platform);
-        const pillar=document.createElement('span');pillar.className='kanban-tag pillar';pillar.textContent=item.pillar||'Ide';tags.append(pillar);card.append(tags);
+        const pillar=document.createElement('span');pillar.className='kanban-tag pillar';pillar.textContent=item.pillar||item.format||'Konten';tags.append(pillar);card.append(tags);
         const actions=document.createElement('div');actions.className='kanban-card-actions';
-        const duplicate=document.createElement('button');duplicate.type='button';duplicate.textContent='▢ Duplicate';duplicate.addEventListener('click',()=>{const all=readKanban();const original=all.find(x=>x.id===item.id);if(!original)return;all.push({...original,id:'KAN-'+Date.now(),title:original.title+' (Salinan)'});writeKanban(all);renderKanban();});
-        const edit=document.createElement('button');edit.type='button';edit.textContent='✎ Edit';edit.addEventListener('click',()=>editKanbanItem(item.id));
-        actions.append(duplicate,edit);card.append(actions);
-        const date=document.createElement('small');date.className='kanban-date';date.textContent=item.date?formatContentDate(item.date):'';actions.append(date);
+        const duplicate=document.createElement('button');duplicate.type='button';duplicate.textContent='▢ Duplicate';duplicate.addEventListener('click',()=>{const all=readKanban();const original=all.find(x=>x.id===item.id);if(!original)return;const copy={...original,id:'NAP-'+Date.now().toString(36).toUpperCase(),title:(original.title||'Konten')+' (Salinan)',createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};all.unshift(copy);writeKanban(all);renderKanban();if(!contentPage.hidden)renderContentList();showToast('Konten berhasil diduplikasi.');});
+        const edit=document.createElement('button');edit.type='button';edit.textContent='✎ Edit';edit.addEventListener('click',()=>{const next=prompt('Ubah judul konten:',item.title||'');if(next===null||!next.trim())return;const all=readKanban(),target=all.find(x=>x.id===item.id);if(!target)return;target.title=next.trim();target.updatedAt=new Date().toISOString();writeKanban(all);renderKanban();if(!contentPage.hidden)renderContentList();showToast('Judul konten diperbarui.');});
+        actions.append(duplicate,edit);
+        const date=document.createElement('small');date.className='kanban-date';date.textContent=item.postingDate?formatContentDate(item.postingDate):'';actions.append(date);card.append(actions);
         card.addEventListener('dragstart',event=>{event.dataTransfer.setData('text/plain',item.id);event.dataTransfer.effectAllowed='move';card.classList.add('dragging');});
         card.addEventListener('dragend',()=>card.classList.remove('dragging'));
         cards.append(card);
       });
     });
   }
-  function addKanbanIdea(stage='Backlog Ide'){
-    const title=prompt('Masukkan judul ide konten:');if(!title||!title.trim())return;
-    const platform=prompt('Platform: ketik Instagram atau TikTok','Instagram');if(!platform)return;
-    const normalized=platform.trim().toLowerCase();
-    if(!['instagram','tiktok'].includes(normalized)){showToast('Platform harus Instagram atau TikTok.');return;}
-    const items=readKanban();items.push({id:'KAN-'+Date.now(),title:title.trim(),platform:normalized==='tiktok'?'TikTok':'Instagram',pillar:'Ide',stage,date:''});
-    writeKanban(items);renderKanban();showToast('Ide ditambahkan ke '+stage+'.');
-  }
-  function editKanbanItem(id){
-    const items=readKanban(),item=items.find(x=>x.id===id);if(!item)return;
-    const title=prompt('Edit judul konten:',item.title);if(title===null||!title.trim())return;
-    const stage=prompt('Pindahkan ke tahap: '+kanbanStages.join(', '),item.stage);if(stage===null)return;
-    if(!kanbanStages.includes(stage.trim())){showToast('Tahapan tidak dikenali.');return;}
-    item.title=title.trim();item.stage=stage.trim();writeKanban(items);renderKanban();showToast('Kartu konten diperbarui.');
-  }
-  document.getElementById('addKanbanIdea').addEventListener('click',()=>addKanbanIdea());
-  document.querySelectorAll('.kanban-add-slot').forEach(button=>button.addEventListener('click',()=>addKanbanIdea(button.closest('.kanban-column').dataset.stage)));
+  document.getElementById('addKanbanIdea').addEventListener('click',openContentModal);
+  document.querySelectorAll('.kanban-add-slot').forEach(button=>button.addEventListener('click',openContentModal));
   document.querySelectorAll('.kanban-column').forEach(column=>{
     column.addEventListener('dragover',event=>{event.preventDefault();column.classList.add('drop-target');});
     column.addEventListener('dragleave',event=>{if(!column.contains(event.relatedTarget))column.classList.remove('drop-target');});
-    column.addEventListener('drop',event=>{event.preventDefault();column.classList.remove('drop-target');const id=event.dataTransfer.getData('text/plain'),items=readKanban(),item=items.find(x=>x.id===id);if(!item)return;item.stage=column.dataset.stage;writeKanban(items);renderKanban();showToast('Konten dipindahkan ke '+item.stage+'.');});
+    column.addEventListener('drop',event=>{event.preventDefault();column.classList.remove('drop-target');const id=event.dataTransfer.getData('text/plain'),items=readKanban(),item=items.find(x=>x.id===id);if(!item)return;item.status=column.dataset.stage;item.updatedAt=new Date().toISOString();writeKanban(items);renderKanban();if(!contentPage.hidden)renderContentList();showToast('Status konten dipindahkan ke '+item.status+'.');});
   });
 
   document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));

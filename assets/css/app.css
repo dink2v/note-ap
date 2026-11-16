@@ -275,5 +275,5 @@ body.modal-open{overflow:hidden;}
 @media(max-width:900px){.visit-overview-grid{grid-template-columns:1fr}.visit-detail-card{grid-column:1}}
 
 
-/* Visit: pertahankan tampilan tabel semula, pertegas garis pemisah antarbaris saja */
-.visit-main-table tbody tr + tr td{border-top:1px solid #dfe8e2}
+/* Garis grid yang jelas pada setiap sel Data Visit; ukuran dan susunan kolom tetap */
+.visit-main-table th,.visit-main-table td{border:1px solid #dfe8e2}

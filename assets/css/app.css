@@ -273,3 +273,15 @@ body.modal-open{overflow:hidden;}
 .visit-calendar-event b{min-width:45px;color:var(--green)}
 .visit-calendar-event span{color:#53645a;overflow-wrap:anywhere}
 @media(max-width:900px){.visit-overview-grid{grid-template-columns:1fr}.visit-detail-card{grid-column:1}}
+
+
+/* Full Visit data table: all nine editable fields plus automatic number */
+.visit-main-table{min-width:1510px;table-layout:auto}
+.visit-main-table th,.visit-main-table td{min-width:115px}
+.visit-main-table th:first-child,.visit-main-table td:first-child{min-width:48px;width:48px;text-align:center}
+.visit-main-table th:nth-child(4),.visit-main-table td:nth-child(4){min-width:145px}
+.visit-main-table th:nth-child(5),.visit-main-table td:nth-child(5){min-width:210px}
+.visit-main-table th:nth-child(8),.visit-main-table td:nth-child(8){min-width:190px}
+.visit-main-table .visit-inline-input{min-width:108px;min-height:36px;padding:7px 8px;font-size:10px}
+.visit-main-table td:nth-child(5) .visit-inline-input,.visit-main-table td:nth-child(8) .visit-inline-input{min-width:180px}
+@media(max-width:700px){.visit-main-table{min-width:1450px}.visit-main-table th,.visit-main-table td{padding:10px 9px}}

@@ -57,3 +57,7 @@ body.modal-open{overflow:hidden;}
 .format-chip.carousel{background:color-mix(in srgb,var(--format-carousel) 12%,white);color:var(--format-carousel)}
 .format-chip.feed{background:color-mix(in srgb,var(--format-feed) 20%,white);color:#287d80}
 @media(max-width:700px){.format-color-legend{gap:13px;padding:11px 13px;flex-wrap:wrap}.format-color-legend>span{font-size:9px}}
+
+
+/* Optional form section indicator */
+.optional-section-tag{display:inline-flex;vertical-align:middle;margin-left:8px;padding:4px 7px;border-radius:5px;background:#edf5f3;color:#668078;font:700 9px/1 'DM Sans',sans-serif;letter-spacing:.07em}

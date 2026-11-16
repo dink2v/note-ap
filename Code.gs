@@ -371,6 +371,16 @@ function saveContentItem(item) {
         ? item.history : (previous ? previous.history : [])
     });
 
+    // Keep the Sheet as the source of truth while maintaining its linked Calendar event.
+    try {
+      saved.calendarEventId = syncCalendarEvent_(saved, previous);
+      saved.calendarLastSyncedAt = now_().toISOString();
+      saved.calendarSyncError = "";
+    } catch (calendarError) {
+      saved.calendarSyncError = calendarError.message || String(calendarError);
+      Logger.log("Google Calendar sync warning: " + saved.calendarSyncError);
+    }
+
     const row = contentRow_(saved, previous);
 
     if (isNew) {
@@ -416,8 +426,18 @@ function deleteContentItem(id, expectedUpdatedAt) {
       throw new Error("CONFLICT: Konten sudah berubah. Muat ulang sebelum menghapus.");
     }
 
+    if (content.calendarEventId) {
+      try {
+        const calendar = getNoteApCalendar_();
+        const linkedEvent = calendar.getEventById(String(content.calendarEventId));
+        if (linkedEvent) linkedEvent.deleteEvent();
+      } catch (calendarError) {
+        Logger.log("Google Calendar delete warning: " + calendarError.message);
+      }
+    }
+
     sheet.deleteRow(rowNumber);
-    logActivity_(id, content.title, "Konten Dihapus", "Konten dihapus dari database.");
+    logActivity_(id, content.title, "Konten Dihapus", "Konten dan acara kalender terkait dihapus.");
 
     return { success: true, message: "Konten berhasil dihapus." };
   } finally {
@@ -591,4 +611,190 @@ function getAppInfo() {
     runtime: "Google Apps Script",
     database: "Google Sheets"
   };
+}
+
+
+// -----------------------------------------------------------------------------
+// Google Calendar — two-way synchronization for linked Note AP content
+// -----------------------------------------------------------------------------
+
+function getNoteApCalendar_() {
+  const calendarId = PropertiesService.getScriptProperties().getProperty("NOTE_AP_CALENDAR_ID");
+  if (calendarId) {
+    const calendar = CalendarApp.getCalendarById(calendarId);
+    if (!calendar) throw new Error("Kalender dengan ID tersebut tidak ditemukan atau belum dapat diakses.");
+    return calendar;
+  }
+  return CalendarApp.getDefaultCalendar();
+}
+
+function parsePostingDateTime_(dateText, timeText) {
+  const date = text_(dateText);
+  const time = text_(timeText) || "09:00";
+  if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(date) || !/^\\d{2}:\\d{2}$/.test(time)) {
+    throw new Error("Tanggal dan waktu posting harus diisi dengan format yang valid.");
+  }
+  const parts = date.split("-").map(Number);
+  const clock = time.split(":").map(Number);
+  const result = new Date(parts[0], parts[1] - 1, parts[2], clock[0], clock[1], 0);
+  if (isNaN(result.getTime())) throw new Error("Tanggal atau waktu posting tidak valid.");
+  return result;
+}
+
+function syncCalendarEvent_(item) {
+  if (!item.postingDate) return item.calendarEventId || "";
+  const calendar = getNoteApCalendar_();
+  const start = parsePostingDateTime_(item.postingDate, item.postingTime);
+  const end = new Date(start.getTime() + 60 * 60 * 1000);
+  const marker = "[NOTE_AP_CONTENT_ID:" + String(item.id) + "]";
+  const description = [
+    marker,
+    "Dikelola melalui Note AP — Apotek Prapatan",
+    "Platform: " + text_(item.platform),
+    "Format: " + text_(item.format),
+    "Status: " + text_(item.status),
+    "",
+    text_(item.notes)
+  ].join("\\n");
+
+  let event = item.calendarEventId
+    ? calendar.getEventById(String(item.calendarEventId))
+    : null;
+
+  if (!event) {
+    event = calendar.createEvent(
+      text_(item.title) || "Konten Note AP",
+      start,
+      end,
+      { description: description }
+    );
+  } else {
+    if (event.getTitle() !== text_(item.title)) event.setTitle(text_(item.title));
+    if (event.getStartTime().getTime() !== start.getTime() ||
+        event.getEndTime().getTime() !== end.getTime()) {
+      event.setTime(start, end);
+    }
+    if (event.getDescription() !== description) event.setDescription(description);
+  }
+
+  return event.getId();
+}
+
+/**
+ * Run once from the Apps Script editor to authorize Calendar access and install
+ * the 15-minute Calendar -> Sheets synchronization trigger.
+ */
+function setupNoteApCalendarSync() {
+  getNoteApCalendar_(); // Forces Calendar authorization.
+  const handler = "syncCalendarToSheets";
+  ScriptApp.getProjectTriggers().forEach(function(trigger) {
+    if (trigger.getHandlerFunction() === handler) ScriptApp.deleteTrigger(trigger);
+  });
+  ScriptApp.newTrigger(handler).timeBased().everyMinutes(15).create();
+  return {
+    success: true,
+    message: "Google Calendar terhubung. Sinkronisasi dua arah berjalan setiap 15 menit."
+  };
+}
+
+/**
+ * Imports edits made to linked events in Calendar into the existing content rows.
+ * New Calendar events can be imported by including #NOTEAP in their description.
+ */
+function syncCalendarToSheets() {
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(10000)) return { success: false, message: "Sinkronisasi lain sedang berjalan." };
+
+  try {
+    const calendar = getNoteApCalendar_();
+    const now = new Date();
+    const from = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
+    const until = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000);
+    const events = calendar.getEvents(from, until);
+    const contents = getAllContents();
+    const byEventId = {};
+    contents.forEach(function(item) {
+      if (item.calendarEventId) byEventId[String(item.calendarEventId)] = item;
+    });
+
+    let imported = 0;
+    let updated = 0;
+    events.forEach(function(event) {
+      const eventId = String(event.getId());
+      const description = text_(event.getDescription());
+      const linked = byEventId[eventId];
+
+      if (!linked && description.indexOf("#NOTEAP") === -1) return;
+
+      const start = event.getStartTime();
+      const postingDate = Utilities.formatDate(start, NOTE_AP.TIMEZONE, "yyyy-MM-dd");
+      const postingTime = Utilities.formatDate(start, NOTE_AP.TIMEZONE, "HH:mm");
+
+      if (!linked) {
+        const newItem = {
+          id: id_("CAL"),
+          title: event.getTitle(),
+          platform: "",
+          format: "",
+          status: "Planning",
+          postingDate: postingDate,
+          postingTime: postingTime,
+          notes: "Diimpor dari Google Calendar.",
+          calendarEventId: eventId,
+          calendarLastSyncedAt: now.toISOString(),
+          history: [{
+            type: "Diimpor dari Google Calendar",
+            at: now.toISOString()
+          }]
+        };
+        saveContentItem(newItem);
+        imported++;
+        return;
+      }
+
+      const lastSynced = linked.calendarLastSyncedAt
+        ? new Date(linked.calendarLastSyncedAt).getTime() : 0;
+      const eventUpdated = event.getLastUpdated
+        ? event.getLastUpdated().getTime() : 0;
+      if (eventUpdated && lastSynced && eventUpdated <= lastSynced) return;
+
+      const changed = linked.title !== event.getTitle() ||
+        linked.postingDate !== postingDate || linked.postingTime !== postingTime;
+      if (!changed) return;
+
+      linked.title = event.getTitle();
+      linked.postingDate = postingDate;
+      linked.postingTime = postingTime;
+      linked.calendarEventId = eventId;
+      linked.calendarLastSyncedAt = now.toISOString();
+      linked.history = (linked.history || []).concat([{
+        type: "Jadwal diperbarui dari Google Calendar",
+        at: now.toISOString()
+      }]);
+      saveContentItem(linked);
+      updated++;
+    });
+
+    return {
+      success: true,
+      imported: imported,
+      updated: updated,
+      checked: events.length
+    };
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+/** Configure a specific calendar by ID; leave blank to use the primary calendar. */
+function setNoteApCalendarId(calendarId) {
+  const value = text_(calendarId);
+  if (value) {
+    const calendar = CalendarApp.getCalendarById(value);
+    if (!calendar) throw new Error("Kalender tidak ditemukan atau tidak dapat diakses.");
+    PropertiesService.getScriptProperties().setProperty("NOTE_AP_CALENDAR_ID", value);
+  } else {
+    PropertiesService.getScriptProperties().deleteProperty("NOTE_AP_CALENDAR_ID");
+  }
+  return { success: true, message: "Pengaturan kalender berhasil diperbarui." };
 }

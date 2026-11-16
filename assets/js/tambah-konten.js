@@ -56,7 +56,8 @@ form.addEventListener('submit',async event=>{
   visualCTA:values.visualCta||'',caption:values.caption||'',notes:values.notes||'',
   approvals:[],comments:[],history:[{type:'Konten dibuat melalui Note AP',at:new Date().toISOString()}]
  };
- const submit=form.querySelector('[type="submit"]');submit.disabled=true;submit.textContent='Menyimpan…';
+ const submit=document.querySelector('button[type="submit"][form="contentForm"]')||form.querySelector('button[type="submit"]');
+ if(submit){submit.disabled=true;submit.textContent='Menyimpan…';}
  try{
   let result,storage;
   if(String(config.API_URL||'').trim()){
@@ -73,7 +74,7 @@ form.addEventListener('submit',async event=>{
   form.reset();
   if(window.parent&&window.parent!==window)window.parent.postMessage({type:'NOTE_AP_CONTENT_SAVED',id:result.id,storage},'*');
  }catch(error){showToast(error.message||'Konten gagal disimpan.');}
- finally{submit.disabled=false;submit.innerHTML='Simpan Konten <span>→</span>';}
+ finally{if(submit){submit.disabled=false;submit.innerHTML='Simpan Konten <span>→</span>';}}
 });
 document.getElementById('closeForm').addEventListener('click',()=>{if(confirm('Tutup popup tambah konten? Perubahan yang belum disimpan akan hilang.')){if(typeof window.noteApContentModalClose==='function')window.noteApContentModalClose();else window.location.href='index.html';}});
 document.getElementById('duplicateForm').addEventListener('click',()=>{const data=Object.fromEntries(new FormData(form).entries());form.reset();Object.entries(data).forEach(([key,value])=>{if(form.elements[key])form.elements[key].value=value;});showToast('Isi form berhasil diduplikasi.');window.scrollTo({top:0,behavior:'smooth'});});

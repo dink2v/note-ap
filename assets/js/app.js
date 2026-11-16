@@ -18,7 +18,9 @@
   window.addEventListener('message',event=>{
     if(event.source!==contentModalFrame.contentWindow||!event.data||event.data.type!=='NOTE_AP_CONTENT_SAVED')return;
     closeContentModal();
-    showToast('Konten tersimpan di database Note AP.');
+    showToast(event.data.storage==='local'
+      ? 'Konten tersimpan di browser ini (mode lokal).'
+      : 'Konten berhasil dikirim ke Note AP.');
   });
   function openContentModal(){
     contentModal.classList.add('open');

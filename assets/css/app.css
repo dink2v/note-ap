@@ -277,3 +277,8 @@ body.modal-open{overflow:hidden;}
 
 /* Garis grid yang jelas pada setiap sel Data Visit; ukuran dan susunan kolom tetap */
 .visit-main-table th,.visit-main-table td{border:1px solid #dfe8e2}
+
+/* Empat baris jadwal tetap terlihat di bawah kalender Visit */
+.visit-calendar-event{min-height:34px;align-items:center}
+.visit-calendar-event.is-empty{opacity:.55}
+.visit-calendar-more{margin-top:8px!important;font-weight:700}

@@ -197,3 +197,42 @@ body.modal-open{overflow:hidden;}
   .visit-table th{padding:12px 11px;font-size:8px}
   .visit-table td{padding:11px;font-size:9px}
 }
+
+/* Visit redesign: daily schedule, paginated list and inline detail editor */
+.visit-overview-grid{display:grid;grid-template-columns:minmax(245px,.78fr) minmax(0,2fr);gap:16px;align-items:stretch;margin-bottom:16px}
+.visit-card{min-width:0;background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:0 3px 12px #1c4a3208;overflow:hidden}
+.visit-today-card,.visit-main-card,.visit-detail-card{padding:19px}
+.visit-card-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:15px}
+.visit-card-heading h2{font:800 14px "Plus Jakarta Sans";margin:4px 0 0;color:var(--ink)}
+.visit-card-heading .muted{font-size:10px;margin:6px 0 0}
+.visit-kicker{font-size:8px;font-weight:800;letter-spacing:1.2px;color:var(--green)}
+.visit-today-date,.visit-count,.visit-detail-indicator{flex:none;padding:6px 9px;border-radius:8px;background:#edf6f0;color:#39795a;font-size:9px;font-weight:700}
+.visit-today-list{display:flex;flex-direction:column;gap:8px}
+.visit-today-item{display:grid;grid-template-columns:55px minmax(0,1fr) 14px;align-items:center;gap:9px;width:100%;padding:11px;border:1px solid #edf2ee;border-radius:10px;background:#fbfdfb;text-align:left;cursor:pointer}
+.visit-today-item:hover{border-color:#b9d9c7;background:#f4faf6}
+.visit-today-time{font-size:11px;font-weight:800;color:var(--green)}
+.visit-today-location{font-size:10px;color:#53645a;overflow-wrap:anywhere}
+.visit-today-arrow{font-size:18px;color:#9aaba0}
+.visit-today-empty,.visit-detail-placeholder{padding:25px 12px;text-align:center;color:#98a49c;font-size:10px}
+.visit-main-card{padding-bottom:12px}
+.visit-main-card .visit-table-wrap{margin:0 -19px}
+.visit-main-table{min-width:650px}
+.visit-main-table th{font-size:8px;padding:12px 11px}
+.visit-main-table td{font-size:10px;padding:13px 11px}
+.visit-select-row{cursor:pointer;transition:background .15s}
+.visit-select-row:hover{background:#f7fbf8}
+.visit-select-row.selected{background:#edf7f0;box-shadow:inset 3px 0 #27966a}
+.visit-pagination{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:13px;color:#8a9990;font-size:9px}
+.visit-pagination>div{display:flex;gap:7px}
+.visit-page-btn{border:1px solid var(--line);border-radius:8px;background:#fff;padding:7px 10px;color:#53665b;font:700 9px "DM Sans";cursor:pointer}
+.visit-page-btn:disabled{opacity:.4;cursor:not-allowed}
+.visit-detail-card{margin-bottom:18px}
+.visit-detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.visit-detail-field{display:flex;flex-direction:column;gap:6px;min-width:0;color:#75847b;font-size:9px;font-weight:800;letter-spacing:.35px}
+.visit-inline-input{width:100%;min-width:0;min-height:38px;border:1px solid #e5ece7;border-radius:8px;padding:9px 10px;background:#fff;color:var(--ink);font:11px "DM Sans";letter-spacing:0;outline:none}
+.visit-inline-input:focus{border-color:#7ebc99;box-shadow:0 0 0 3px #16845d12;background:#fcfffd}
+.visit-inline-textarea{min-height:68px;resize:vertical;line-height:1.5}
+.visit-detail-field:has([data-visit-field="notes"]){grid-column:1/-1}
+.visit-page .visit-empty{padding:24px 12px}
+@media(max-width:900px){.visit-overview-grid{grid-template-columns:1fr}.visit-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.visit-today-card,.visit-main-card,.visit-detail-card{padding:14px}.visit-main-card .visit-table-wrap{margin:0 -14px}.visit-detail-grid{grid-template-columns:1fr}.visit-card-heading{flex-wrap:wrap}.visit-pagination{align-items:flex-start;flex-direction:column}.visit-detail-field:has([data-visit-field="notes"]){grid-column:auto}}

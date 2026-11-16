@@ -141,15 +141,25 @@
   }
   const visitEditor=document.getElementById('visitEditor'),visitForm=document.getElementById('visitForm');
   function openVisitEditor(id){
-    visitForm.reset();visitForm.dataset.editId=id||'';
+    // Pastikan editor selalu dibuka pada halaman Visit, termasuk saat dipanggil dari Setelan.
+    visitPage.hidden=false;
+    settingsPage.hidden=true;
+    document.querySelectorAll('.nav-link').forEach(item=>item.classList.toggle('active',item.dataset.page==='visit'));
+    window.location.hash='visit';
+
+    visitForm.reset();
+    visitForm.dataset.editId=id||'';
     const item=id?readVisits().find(v=>v.id===id):null;
     document.getElementById('visitEditorTitle').textContent=item?'Edit Jadwal Visit':'Tambah Jadwal Visit';
     if(item)Object.entries(item).forEach(([key,value])=>{if(key!=='talent'&&visitForm.elements[key])visitForm.elements[key].value=value||'';});
     populateVisitReferenceOptions(item);
     const titles=[...new Set(readKanban().map(x=>x.title).filter(Boolean))];
-    const datalist=document.getElementById('visitContentTitles');datalist.replaceChildren();
+    const datalist=document.getElementById('visitContentTitles');
+    datalist.replaceChildren();
     titles.forEach(title=>{const option=document.createElement('option');option.value=title;datalist.append(option);});
-    visitEditor.hidden=false;visitEditor.scrollIntoView({behavior:'smooth',block:'start'});
+
+    visitEditor.removeAttribute('hidden');
+    requestAnimationFrame(()=>visitEditor.scrollIntoView({behavior:'smooth',block:'start'}));
   }
   function splitTalentNames(value){
     if(Array.isArray(value))return value.map(x=>String(x).trim()).filter(Boolean);
@@ -176,8 +186,8 @@
     statuses.forEach(status=>{const option=document.createElement('option');option.value=status;option.textContent=status;option.selected=status===currentStatus;statusSelect.append(option);});
   }
   function closeVisitEditor(){visitEditor.hidden=true;visitForm.reset();visitForm.dataset.editId='';}
-  document.getElementById('addVisitBtn').addEventListener('click',()=>openVisitEditor());
-  document.getElementById('addSettingVisitBtn').addEventListener('click',()=>{showPage('visit');openVisitEditor();});
+  document.getElementById('addVisitBtn').addEventListener('click',event=>{event.preventDefault();openVisitEditor();});
+  document.getElementById('addSettingVisitBtn').addEventListener('click',event=>{event.preventDefault();openVisitEditor();});
   document.getElementById('closeVisitEditor').addEventListener('click',closeVisitEditor);
   document.getElementById('cancelVisitEdit').addEventListener('click',closeVisitEditor);
   visitForm.addEventListener('submit',event=>{

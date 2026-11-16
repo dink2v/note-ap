@@ -12,6 +12,17 @@ function closeExpand(apply){if(apply&&expandedField)expandedField.value=expanded
 document.getElementById('closeExpand').addEventListener('click',()=>closeExpand(false));document.getElementById('applyExpand').addEventListener('click',()=>closeExpand(true));
 document.getElementById('approvePhase').addEventListener('click',()=>showToast('Approval akan tersedia setelah modul kolaborasi diaktifkan.'));
 document.getElementById('sendComment').addEventListener('click',()=>showToast('Komentar dapat ditambahkan setelah konten tersimpan.'));
+function saveContentLocally(item){
+ const key='noteAp.contents';
+ let items=[];
+ try{items=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(items))items=[];}catch(error){items=[];}
+ const now=new Date();
+ const id='NAP-'+now.getTime().toString(36).toUpperCase();
+ const saved={...item,id,createdAt:now.toISOString(),updatedAt:now.toISOString(),storage:'local'};
+ items.unshift(saved);
+ localStorage.setItem(key,JSON.stringify(items));
+ return {success:true,id,message:'Konten disimpan di browser ini.'};
+}
 function saveThroughAppsScript(payload){
  return new Promise((resolve,reject)=>{
   const endpoint=String(config.API_URL||'').trim();
@@ -47,11 +58,20 @@ form.addEventListener('submit',async event=>{
  };
  const submit=form.querySelector('[type="submit"]');submit.disabled=true;submit.textContent='Menyimpan…';
  try{
-  const result=await saveThroughAppsScript({action:'saveContentItem',item});
-  logActivity('Konten berhasil disimpan ke Google Sheets (ID: '+result.id+')');
-  showToast('Konten berhasil disimpan ke database Note AP.');
+  let result,storage;
+  if(String(config.API_URL||'').trim()){
+   result=await saveThroughAppsScript({action:'saveContentItem',item});
+   storage='api';
+   logActivity('Konten berhasil dikirim ke API Note AP (ID: '+result.id+')');
+   showToast('Konten berhasil dikirim ke Note AP.');
+  }else{
+   result=saveContentLocally(item);
+   storage='local';
+   logActivity('Konten disimpan secara lokal (ID: '+result.id+')');
+   showToast('Konten tersimpan di browser ini. Belum tersinkron ke Google Sheets.');
+  }
   form.reset();
-  if(window.parent&&window.parent!==window)window.parent.postMessage({type:'NOTE_AP_CONTENT_SAVED',id:result.id},'*');
+  if(window.parent&&window.parent!==window)window.parent.postMessage({type:'NOTE_AP_CONTENT_SAVED',id:result.id,storage},'*');
  }catch(error){showToast(error.message||'Konten gagal disimpan.');}
  finally{submit.disabled=false;submit.innerHTML='Simpan Konten <span>→</span>';}
 });

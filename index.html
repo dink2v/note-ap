@@ -121,15 +121,12 @@
           <div class="visit-today-summary" id="visitTodayList"><div class="visit-today-empty">Memuat jadwal hari ini...</div></div>
         </section>
         <section class="visit-card visit-main-card">
-          <div class="visit-card-heading visit-main-heading"><div><span class="visit-kicker">SCHEDULE</span><h2>Data Visit</h2><p class="muted">Edit data langsung pada setiap sel tabel.</p></div></div>
-          <div class="visit-pagination"><span id="visitPageInfo">Halaman 1</span></div>
+          <div class="visit-card-heading visit-main-heading"><div><span class="visit-kicker">SCHEDULE</span><h2>Data Visit</h2><p class="muted">Pilih tampilan daftar atau kalender jadwal.</p></div><div class="visit-view-toggle" role="group" aria-label="Tampilan Data Visit"><button type="button" id="visitListViewBtn" class="active" aria-label="Tampilan daftar" title="Tampilan daftar"><span class="visit-toggle-list">☷</span></button><button type="button" id="visitGridViewBtn" aria-label="Tampilan kalender" title="Tampilan kalender"><span class="visit-toggle-grid">▦</span></button></div></div>
+          <div class="visit-pagination"><span id="visitPageInfo">Halaman 1</span></div><div id="visitListPanel">
           <div class="visit-table-wrap"><table class="visit-table visit-main-table"><thead><tr><th>NO</th><th>TGL</th><th>LOKASI</th><th>JUDUL</th><th>TALEN</th><th>STATUS</th><th>KET</th></tr></thead><tbody id="visitTableBody"></tbody></table></div>
-          <div class="visit-empty" id="visitEmpty" hidden>Belum ada data Visit pada halaman ini.</div>
+          <div class="visit-empty" id="visitEmpty" hidden>Belum ada data Visit pada halaman ini.</div></div><div id="visitGridPanel" class="visit-grid-panel" hidden><div class="visit-calendar" id="visitCalendar"></div></div>
         </section>
-      <section class="visit-card visit-detail-card">
-        <div class="visit-card-heading"><div><span class="visit-kicker">MONTHLY SCHEDULE</span><h2>Jadwal Visit</h2><p class="muted">Kalender jadwal kunjungan dan tanggal yang memiliki Visit.</p></div></div>
-        <div class="visit-calendar" id="visitCalendar"></div>
-      </section>
+      
       </div>
     </section>
     <section class="settings-page" id="settingsPage" hidden>

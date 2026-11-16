@@ -99,6 +99,17 @@
       </div>
       <footer class="page-footer">Note AP <span>•</span> Content Planning & Management System <span class="demo-tag">MODE PREVIEW</span></footer>
     </section>
+    <section class="kanban-page" id="kanbanPage" hidden>
+      <div class="kanban-heading"><div><div class="eyebrow">CONTENT WORKFLOW</div><h1>Content Board</h1><p class="muted">Tampung ide & kelola status konten dengan kanban board</p></div><button class="primary-btn" id="addKanbanIdea" type="button"><span>＋</span> Tambah Ide</button></div>
+      <div class="kanban-board" id="kanbanBoard">
+        <section class="kanban-column" data-stage="Backlog Ide"><header><h2 class="stage-backlog">♧ BACKLOG IDE</h2><span class="stage-count">0</span></header><div class="kanban-cards"></div><button class="kanban-add-slot" type="button">＋ Tambah atau seret ide ke sini</button></section>
+        <section class="kanban-column" data-stage="Ideation"><header><h2 class="stage-ideation">ϟ IDEATION</h2><span class="stage-count">0</span></header><div class="kanban-cards"></div><button class="kanban-add-slot" type="button">＋ Tambah atau seret ide ke sini</button></section>
+        <section class="kanban-column" data-stage="Scripting"><header><h2 class="stage-scripting">✎ SCRIPTING</h2><span class="stage-count">0</span></header><div class="kanban-cards"></div><button class="kanban-add-slot" type="button">＋ Tambah atau seret ide ke sini</button></section>
+        <section class="kanban-column" data-stage="Take Konten"><header><h2 class="stage-take">▣ TAKE KONTEN</h2><span class="stage-count">0</span></header><div class="kanban-cards"></div><button class="kanban-add-slot" type="button">＋ Tambah atau seret ide ke sini</button></section>
+        <section class="kanban-column" data-stage="Editing"><header><h2 class="stage-editing">▤ EDITING</h2><span class="stage-count">0</span></header><div class="kanban-cards"></div><button class="kanban-add-slot" type="button">＋ Tambah atau seret ide ke sini</button></section>
+      </div>
+      <footer class="page-footer">Note AP <span>•</span> Content Planning & Management System <span class="demo-tag">MODE LOKAL</span></footer>
+    </section>
   </main>
 </div>
 <div class="content-modal" id="contentModal" aria-hidden="true"><section class="content-modal-dialog" role="dialog" aria-modal="true" aria-label="Tambah Konten"><button type="button" class="content-modal-close" id="contentModalClose" aria-label="Tutup popup">×</button><iframe id="contentModalFrame" title="Form Tambah Konten" src="about:blank"></iframe></section></div>

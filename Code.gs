@@ -789,3 +789,107 @@ function setNoteApCalendarId(calendarId) {
   }
   return { success: true, message: "Pengaturan kalender berhasil diperbarui." };
 }
+
+// -----------------------------------------------------------------------------
+// // NOTE AP GOOGLE ACCOUNT AUTHENTICATION
+// Google Identity Services ID-token verification + Tim allowlist.
+// Set Script Properties:
+//   NOTE_AP_GOOGLE_CLIENT_ID = OAuth 2.0 Web Client ID from Google Cloud.
+// -----------------------------------------------------------------------------
+
+function jsonResponse_(payload) {
+  return ContentService
+    .createTextOutput(JSON.stringify(payload))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+/**
+ * Public POST endpoint for the GitHub Pages frontend.
+ * Request body: { action: "verifyGoogleLogin", credential: "<Google ID token>" }
+ * Never trust email/name sent separately by the browser; derive them from Google's
+ * tokeninfo response and then check the existing Tim sheet.
+ */
+function doPost(e) {
+  try {
+    const body = e && e.postData && e.postData.contents
+      ? JSON.parse(e.postData.contents)
+      : {};
+    if (body.action !== "verifyGoogleLogin") {
+      return jsonResponse_({ success: false, message: "Aksi tidak dikenal." });
+    }
+    const user = verifyGoogleLogin_(body.credential);
+    return jsonResponse_({ success: true, user: user });
+  } catch (error) {
+    return jsonResponse_({
+      success: false,
+      message: error && error.message ? error.message : "Autentikasi gagal."
+    });
+  }
+}
+
+/**
+ * Verify Google's signed ID token server-side, then authorize only active
+ * email addresses already registered in the existing Tim tab.
+ */
+function verifyGoogleLogin_(credential) {
+  const token = text_(credential);
+  if (!token) throw new Error("Token Google tidak ditemukan.");
+
+  const clientId = PropertiesService.getScriptProperties()
+    .getProperty("NOTE_AP_GOOGLE_CLIENT_ID");
+  if (!clientId) {
+    throw new Error("Konfigurasi Google OAuth belum tersedia di Apps Script.");
+  }
+
+  const response = UrlFetchApp.fetch(
+    "https://oauth2.googleapis.com/tokeninfo?id_token=" + encodeURIComponent(token),
+    { muteHttpExceptions: true }
+  );
+  if (response.getResponseCode() !== 200) {
+    throw new Error("Token Google tidak valid atau sudah kedaluwarsa. Silakan masuk kembali.");
+  }
+
+  const claims = JSON.parse(response.getContentText());
+  if (claims.aud !== clientId) {
+    throw new Error("Token berasal dari aplikasi Google yang tidak dikenal.");
+  }
+  if (String(claims.email_verified) !== "true") {
+    throw new Error("Email Google belum terverifikasi.");
+  }
+
+  const email = text_(claims.email).toLowerCase();
+  if (!email) throw new Error("Google tidak memberikan alamat email.");
+
+  const member = getTeamMembers().find(function(item) {
+    return text_(item.email).toLowerCase() === email;
+  });
+  if (!member) {
+    throw new Error("Email ini belum didaftarkan oleh Admin Note AP.");
+  }
+
+  const status = text_(member.status).toLowerCase();
+  if (["aktif", "active"].indexOf(status) === -1) {
+    throw new Error("Akun Note AP belum aktif. Hubungi Admin.");
+  }
+
+  return {
+    id: text_(member.id),
+    name: text_(member.name) || text_(claims.name),
+    email: email,
+    role: text_(member.role),
+    picture: text_(claims.picture)
+  };
+}
+
+/** Read-only setup check; does not expose the OAuth Client ID. */
+function checkGoogleAuthSetup() {
+  const clientId = PropertiesService.getScriptProperties()
+    .getProperty("NOTE_AP_GOOGLE_CLIENT_ID");
+  return {
+    configured: Boolean(clientId),
+    teamSheetExists: Boolean(getSheet_("TIM")),
+    message: clientId
+      ? "Konfigurasi OAuth tersedia. Pastikan Web App sudah dideploy ulang."
+      : "Tambahkan NOTE_AP_GOOGLE_CLIENT_ID pada Script Properties."
+  };
+}

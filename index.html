@@ -114,21 +114,21 @@
     </section>
 
     <section class="visit-page" id="visitPage" hidden>
-      <div class="visit-heading"><div><div class="eyebrow">PRODUCTION SCHEDULE</div><h1>Visit</h1><p class="muted">Kelola jadwal dan detail kunjungan produksi langsung dari tabel.</p></div><button class="primary-btn" id="addVisitBtn" type="button"><span>＋</span> Tambah Visit</button></div>
+      <div class="visit-heading"><div><div class="eyebrow">PRODUCTION SCHEDULE</div><h1>Visit</h1><p class="muted">Pantau data dan kalender jadwal kunjungan produksi.</p></div></div>
       <div class="visit-overview-grid">
         <section class="visit-card visit-today-card">
-          <div class="visit-card-heading"><div><span class="visit-kicker">TODAY</span><h2>Jadwal Visit Hari Ini</h2></div><span class="visit-today-date" id="visitTodayDate"></span></div>
-          <div class="visit-today-list" id="visitTodayList"></div>
+          <div class="visit-card-heading"><div><span class="visit-kicker">TODAY</span><h2 id="visitTodayDate">Today</h2></div></div>
+          <div class="visit-today-summary" id="visitTodayList"><div class="visit-today-empty">Memuat jadwal hari ini...</div></div>
         </section>
         <section class="visit-card visit-main-card">
-          <div class="visit-card-heading"><div><span class="visit-kicker">SCHEDULE</span><h2>Data Visit</h2><p class="muted">Pilih baris untuk melihat detail di bawah.</p></div><span class="visit-count" id="visitCount">0 Visit</span></div>
+          <div class="visit-card-heading"><div><span class="visit-kicker">SCHEDULE</span><h2>Data Visit</h2><p class="muted">Edit data langsung pada setiap sel tabel.</p></div></div>
           <div class="visit-table-wrap"><table class="visit-table visit-main-table"><thead><tr><th>NO</th><th>TGL</th><th>LOKASI</th><th>JUDUL</th><th>TALENT</th><th>STATUS</th><th>KET</th></tr></thead><tbody id="visitTableBody"></tbody></table></div>
           <div class="visit-pagination"><span id="visitPageInfo">Halaman 1</span><div><button type="button" id="visitPrevPage" class="visit-page-btn" disabled>← Previous</button><button type="button" id="visitNextPage" class="visit-page-btn" disabled>Next →</button></div></div>
           <div class="visit-empty" id="visitEmpty" hidden>Belum ada jadwal Visit. Klik “Tambah Visit” untuk menambahkan data.</div>
         </section>
       <section class="visit-card visit-detail-card">
-        <div class="visit-card-heading"><div><span class="visit-kicker">VISIT INFORMATION</span><h2>Detail Visit</h2><p class="muted" id="visitDetailSubtitle">Pilih salah satu jadwal untuk melihat detail lengkapnya.</p></div><span class="visit-detail-indicator" id="visitDetailIndicator">Belum dipilih</span></div>
-        <div class="visit-detail-grid" id="visitDetailGrid"><div class="visit-detail-placeholder">Detail Visit akan tampil di sini.</div></div>
+        <div class="visit-card-heading"><div><span class="visit-kicker">MONTHLY SCHEDULE</span><h2>Jadwal Visit</h2><p class="muted">Kalender jadwal kunjungan dan tanggal yang memiliki Visit.</p></div></div>
+        <div class="visit-calendar" id="visitCalendar"></div>
       </section>
       </div>
     </section>

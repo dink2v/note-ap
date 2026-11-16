@@ -29,7 +29,7 @@
       if(!doc.getElementById('noteap-modal-style')){
         const style=doc.createElement('style');
         style.id='noteap-modal-style';
-        style.textContent='.sidebar,.mobile-top,.form-breadcrumb,.form-title-row .secondary-btn,.page-footer{display:none!important}.main-area{margin-left:0!important}.content-form-wrap{max-width:none!important;padding:34px 38px 24px!important}@media(max-width:700px){.content-form-wrap{padding:28px 15px 20px!important}}html,body{background:transparent!important}.content-form-wrap{background:transparent!important}';
+        style.textContent='.sidebar,.mobile-top,.form-breadcrumb,.form-title-row .secondary-btn,.page-footer{display:none!important}.main-area{margin-left:0!important}.content-form-wrap{max-width:none!important;padding:34px 38px 24px!important}@media(max-width:700px){.content-form-wrap{padding:28px 15px 20px!important}}html,body{background:transparent!important;background-color:transparent!important}.content-form-wrap{background:transparent!important;background-color:transparent!important}.form-panel{background:rgba(255,255,255,.52)!important;border-color:rgba(220,232,224,.65)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 28px rgba(20,55,36,.07)!important}';
         doc.head.append(style);
       }
       child.addEventListener('keydown',event=>{if(event.key==='Escape')closeContentModal();});

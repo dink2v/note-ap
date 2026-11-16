@@ -166,9 +166,10 @@
     const body=document.getElementById('visitTableBody');body.replaceChildren();
     pageItems.forEach((v,index)=>{
       const tr=document.createElement('tr');tr.className='visit-select-row'+(v.id===visitSelectedId?' selected':'');tr.dataset.visitId=v.id;
-      const values=[String(visitCurrentPage*visitPageSize+index+1),visitDateLabel(v.visitDate),v.location||'—',v.title||'—',splitTalentNames(v.talent).join(', ')||'—',v.status||'PLANNED',v.notes||'—'];
-      values.forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.append(td);});
-      tr.addEventListener('click',()=>{visitSelectedId=v.id;renderVisitTables();});
+      const numberCell=document.createElement('td');numberCell.textContent=String(visitCurrentPage*visitPageSize+index+1);tr.append(numberCell);
+      const summaryFields=[{key:'visitDate',type:'date'},{key:'location',type:'text'},{key:'title',type:'text'},{key:'talent',type:'text'},{key:'status',type:'select'},{key:'notes',type:'text'}];
+      summaryFields.forEach(field=>{const td=document.createElement('td');td.append(makeVisitInput(field,field.key==='talent'?splitTalentNames(v.talent).join(', '):v[field.key],v.id));tr.append(td);});
+      tr.addEventListener('click',event=>{if(event.target.closest('input,select,textarea'))return;visitSelectedId=v.id;renderVisitTables();});
       body.append(tr);
     });
     document.getElementById('visitEmpty').hidden=visits.length>0;
@@ -181,7 +182,7 @@
     const todayVisits=visits.filter(v=>v.visitDate===todayKey);
     const todayList=document.getElementById('visitTodayList');todayList.replaceChildren();
     if(!todayVisits.length){const empty=document.createElement('div');empty.className='visit-today-empty';empty.textContent='Belum ada jadwal Visit hari ini.';todayList.append(empty);}
-    todayVisits.forEach(v=>{const item=document.createElement('button');item.type='button';item.className='visit-today-item';item.innerHTML='<span class="visit-today-time">'+escapeVisit(v.time||'—')+'</span><span class="visit-today-location">'+escapeVisit(v.location||'Lokasi belum diisi')+'</span><span class="visit-today-arrow">›</span>';item.addEventListener('click',()=>{const index=visits.findIndex(x=>x.id===v.id);visitCurrentPage=Math.floor(index/visitPageSize);visitSelectedId=v.id;renderVisitTables();});todayList.append(item);});
+    todayVisits.forEach(v=>{const item=document.createElement('div');item.className='visit-today-item';const time=document.createElement('input');time.type='time';time.className='visit-today-inline';time.value=v.time||'';time.dataset.visitId=v.id;time.dataset.visitField='time';const location=document.createElement('input');location.type='text';location.className='visit-today-inline';location.placeholder='Lokasi';location.value=v.location||'';location.dataset.visitId=v.id;location.dataset.visitField='location';const select=document.createElement('button');select.type='button';select.className='visit-today-select';select.textContent='Detail ›';select.addEventListener('click',()=>{const index=visits.findIndex(x=>x.id===v.id);visitCurrentPage=Math.floor(index/visitPageSize);visitSelectedId=v.id;renderVisitTables();});item.append(time,location,select);todayList.append(item);});
     renderVisitDetail(visits.find(v=>v.id===visitSelectedId)||null);
     renderSettingsVisitTable(visits);
   }
@@ -205,7 +206,8 @@
     if(focused?.dataset?.visitId===id&&focused?.dataset?.visitField===field){const replacement=document.querySelector('[data-visit-id="'+CSS.escape(id)+'"][data-visit-field="'+field+'"]');if(replacement){replacement.focus();if(replacement.setSelectionRange&&replacement.type==='text'){const end=replacement.value.length;replacement.setSelectionRange(end,end);}}}
     showToast('Perubahan Visit tersimpan.');
   }
-  document.getElementById('visitTableBody').addEventListener('click',event=>{const row=event.target.closest('tr[data-visit-id]');if(row){visitSelectedId=row.dataset.visitId;renderVisitTables();}});
+  document.getElementById('visitTableBody').addEventListener('change',event=>{const input=event.target.closest('[data-visit-id][data-visit-field]');if(input)updateVisitField(input.dataset.visitId,input.dataset.visitField,input.value);});
+  document.getElementById('visitTodayList').addEventListener('change',event=>{const input=event.target.closest('[data-visit-id][data-visit-field]');if(input)updateVisitField(input.dataset.visitId,input.dataset.visitField,input.value);});
   document.getElementById('visitDetailGrid').addEventListener('change',event=>{const input=event.target.closest('[data-visit-id][data-visit-field]');if(input)updateVisitField(input.dataset.visitId,input.dataset.visitField,input.value);});
   document.getElementById('visitDetailGrid').addEventListener('keydown',event=>{if(event.key==='Enter'&&event.target.tagName!=='TEXTAREA'){event.preventDefault();event.target.blur();}});
   document.getElementById('visitPrevPage').addEventListener('click',()=>{visitCurrentPage=Math.max(0,visitCurrentPage-1);visitSelectedId=null;renderVisitTables();});

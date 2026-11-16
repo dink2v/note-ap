@@ -176,8 +176,8 @@
     statuses.forEach(status=>{const option=document.createElement('option');option.value=status;option.textContent=status;option.selected=status===currentStatus;statusSelect.append(option);});
   }
   function closeVisitEditor(){visitEditor.hidden=true;visitForm.reset();visitForm.dataset.editId='';}
-  document.getElementById('addVisitBtn').addEventListener('click',()=>{showPage('setelan');openVisitEditor();});
-  document.getElementById('addSettingVisitBtn').addEventListener('click',()=>openVisitEditor());
+  document.getElementById('addVisitBtn').addEventListener('click',()=>openVisitEditor());
+  document.getElementById('addSettingVisitBtn').addEventListener('click',()=>{showPage('visit');openVisitEditor();});
   document.getElementById('closeVisitEditor').addEventListener('click',closeVisitEditor);
   document.getElementById('cancelVisitEdit').addEventListener('click',closeVisitEditor);
   visitForm.addEventListener('submit',event=>{

@@ -247,7 +247,6 @@
   function populateVisitReferenceOptions(){}
   if(visitEditor)visitEditor.hidden=true;
   const addSettingVisitBtn=document.getElementById('addSettingVisitBtn');
-  if(addSettingVisitBtn)addSettingVisitBtn.addEventListener('click',()=>{showPage('visit');document.getElementById('addVisitBtn').click();});
   renderVisitTables();
   if(window.location.hash==='#visit')showPage('visit');
   if(window.location.hash==='#setelan')showPage('setelan');

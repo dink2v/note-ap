@@ -176,7 +176,20 @@
     for(let slot=pageItems.length;slot<visitPageSize;slot++){
       const tr=document.createElement('tr');tr.className='visit-select-row visit-placeholder-row';
       const number=document.createElement('td');number.textContent=String(visitCurrentPage*visitPageSize+slot+1);tr.append(number);
-      for(let col=0;col<6;col++){const td=document.createElement('td');td.textContent='—';tr.append(td);}
+      const fields=visitFields.filter(field=>['visitDate','location','title','talent','status','notes'].includes(field.key));
+      fields.forEach(field=>{
+        const td=document.createElement('td');
+        if(field.type==='select'){
+          const select=document.createElement('select');select.className='visit-inline-input';select.dataset.newVisitField=field.key;
+          const blank=document.createElement('option');blank.value='';blank.textContent='Pilih status';select.append(blank);
+          visitStatusOptions.forEach(status=>{const option=document.createElement('option');option.value=status;option.textContent=status;select.append(option);});
+          td.append(select);
+        }else{
+          const input=document.createElement('input');input.className='visit-inline-input';input.type=field.type;input.dataset.newVisitField=field.key;input.placeholder=field.label;
+          td.append(input);
+        }
+        tr.append(td);
+      });
       body.append(tr);
     }
     document.getElementById('visitEmpty').hidden=visits.length>0;
@@ -242,7 +255,19 @@
     if(focused?.dataset?.visitId===id&&focused?.dataset?.visitField===field){const replacement=document.querySelector('[data-visit-id="'+CSS.escape(id)+'"][data-visit-field="'+field+'"]');if(replacement){replacement.focus();if(replacement.setSelectionRange&&replacement.type==='text'){const end=replacement.value.length;replacement.setSelectionRange(end,end);}}}
     showToast('Perubahan Visit tersimpan.');
   }
-  document.getElementById('visitTableBody').addEventListener('change',event=>{const input=event.target.closest('[data-visit-id][data-visit-field]');if(input)updateVisitField(input.dataset.visitId,input.dataset.visitField,input.value);});
+  document.getElementById('visitTableBody').addEventListener('change',event=>{
+    const input=event.target.closest('[data-new-visit-field]');
+    if(input){
+      if(!input.value)return;
+      const record={id:'VIS-'+Date.now().toString(36).toUpperCase(),visitDate:'',time:'',location:'',title:'',publishDate:'',talent:'',props:'',status:'',notes:'',createdAt:new Date().toISOString()};
+      record[input.dataset.newVisitField]=input.value;
+      const all=readVisits();all.push(record);writeVisits(all);
+      visitCurrentPage=0;visitSelectedId=record.id;renderVisitTables();showToast('Data Visit baru tersimpan. Lanjutkan isi kolom lainnya.');
+      return;
+    }
+    const existing=event.target.closest('[data-visit-id][data-visit-field]');
+    if(existing)updateVisitField(existing.dataset.visitId,existing.dataset.visitField,existing.value);
+  });
   document.getElementById('visitTodayList').addEventListener('change',event=>{const input=event.target.closest('[data-visit-id][data-visit-field]');if(input)updateVisitField(input.dataset.visitId,input.dataset.visitField,input.value);});
   document.getElementById('visitPrevPage').addEventListener('click',()=>{visitCurrentPage=Math.max(0,visitCurrentPage-1);visitSelectedId=null;renderVisitTables();});
   document.getElementById('visitNextPage').addEventListener('click',()=>{const max=Math.max(0,Math.ceil(sortedVisits().length/visitPageSize)-1);visitCurrentPage=Math.min(max,visitCurrentPage+1);visitSelectedId=null;renderVisitTables();});

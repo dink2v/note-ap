@@ -299,3 +299,12 @@ body.modal-open{overflow:hidden;}
 .visit-page-btn{min-width:112px;min-height:36px;padding:8px 13px;font-size:10px;white-space:nowrap}
 .visit-page-btn:disabled{opacity:.45;background:#f7f9f7;color:#87958c}
 @media(max-width:600px){.visit-pagination{align-items:stretch;gap:10px}.visit-pagination>div{width:100%;display:grid;grid-template-columns:1fr 1fr}.visit-page-btn{min-width:0;width:100%}}
+
+/* Navigasi bulan terpadu untuk Data Visit dan Jadwal Visit */
+.visit-main-heading{align-items:center}
+.visit-month-nav{display:flex;align-items:center;gap:10px;flex:none;margin-left:auto}
+.visit-month-nav span{min-width:125px;text-align:center;color:var(--ink);font:800 11px "Plus Jakarta Sans";text-transform:capitalize}
+.visit-month-nav button{width:36px;height:36px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--green);font-size:22px;line-height:1;cursor:pointer}
+.visit-month-nav button:hover{border-color:#a9d2b8;background:#f2faf5}
+.visit-calendar-header{justify-content:center}
+@media(max-width:600px){.visit-main-heading{align-items:flex-start;flex-wrap:wrap}.visit-month-nav{width:100%;justify-content:flex-end;margin:2px 0 0}.visit-month-nav span{min-width:130px}}

@@ -308,3 +308,8 @@ body.modal-open{overflow:hidden;}
 .visit-month-nav button:hover{border-color:#a9d2b8;background:#f2faf5}
 .visit-calendar-header{justify-content:center}
 @media(max-width:600px){.visit-main-heading{align-items:flex-start;flex-wrap:wrap}.visit-month-nav{width:100%;justify-content:flex-end;margin:2px 0 0}.visit-month-nav span{min-width:130px}}
+
+/* Navigasi bulan ditempatkan di luar kartu Data Visit */
+.visit-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.visit-month-nav-outside{margin:0 0 0 auto;padding:0;align-self:flex-start}
+@media(max-width:600px){.visit-heading{align-items:flex-start;flex-wrap:wrap}.visit-month-nav-outside{margin-left:auto}}

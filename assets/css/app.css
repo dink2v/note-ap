@@ -280,3 +280,14 @@ body.modal-open{overflow:hidden;}
 
 /* Baris kosong menjaga Data Visit tetap menampilkan empat baris */
 .visit-main-table .visit-placeholder-row td{height:48px;color:#aab6ae;background:#fcfdfc}
+
+/* Dropdown multi-select Talent pada tabel Visit */
+.visit-multiselect{position:relative;min-width:145px;font:10px "DM Sans";color:var(--ink)}
+.visit-multiselect>summary{list-style:none;min-height:36px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 9px;border:1px solid #e5ece7;border-radius:8px;background:#fff;cursor:pointer;line-height:1.4;overflow-wrap:anywhere}
+.visit-multiselect>summary::-webkit-details-marker{display:none}
+.visit-multiselect>summary:after{content:"⌄";color:var(--green);font-size:13px;flex:none}
+.visit-multiselect[open]>summary{border-color:#82bea0;box-shadow:0 0 0 3px #16845d12}
+.visit-multiselect-menu{position:absolute;top:calc(100% + 5px);left:0;z-index:12;min-width:190px;max-height:210px;overflow:auto;padding:7px;background:#fff;border:1px solid #dfe9e2;border-radius:10px;box-shadow:0 12px 30px #173b2920}
+.visit-multiselect-menu label{display:flex;align-items:center;gap:8px;padding:8px 7px;border-radius:7px;cursor:pointer;color:#52645a;font-size:10px;white-space:nowrap}
+.visit-multiselect-menu label:hover{background:#f0f8f3}
+.visit-multiselect-menu input{accent-color:var(--green);margin:0}

@@ -572,10 +572,10 @@ function getInitialData() {
 // -----------------------------------------------------------------------------
 
 function doGet() {
-  return HtmlService.createHtmlOutput(
-    "<h1>Note AP</h1><p>Backend is connected. Frontend is under development.</p>"
-  ).setTitle(NOTE_AP.APP_NAME)
-   .addMetaTag("viewport", "width=device-width, initial-scale=1");
+  const template = HtmlService.createTemplateFromFile("Dashboard");
+  return template.evaluate()
+    .setTitle(NOTE_AP.APP_NAME + " — Dashboard")
+    .addMetaTag("viewport", "width=device-width, initial-scale=1");
 }
 
 function include(filename) {

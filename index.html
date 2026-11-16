@@ -83,6 +83,22 @@
       </div>
       <p class="calendar-help">Jika kalender tidak muncul, pastikan kamu sudah login ke Google dengan akun yang memiliki akses ke kalender yang disambungkan ke Note AP.</p>
     </section>
+    <section class="content-page" id="contentPage" hidden>
+      <div class="content-page-heading"><div><div class="eyebrow">CONTENT MANAGEMENT</div><h1>Konten</h1><p class="muted">Kelola seluruh ide, proses, dan publikasi konten Apotek Prapatan.</p></div><button class="primary-btn" id="newContentListBtn" type="button"><span>＋</span> Konten Baru</button></div>
+      <div class="content-filter-panel">
+        <label class="content-search"><span>⌕</span><input id="contentSearch" type="search" placeholder="Cari Judul..." aria-label="Cari judul konten"></label>
+        <label class="content-filter"><span>Platform</span><select id="contentPlatform"><option value="">Semua Platform</option><option value="Instagram">Instagram</option><option value="TikTok">TikTok</option></select></label>
+        <label class="content-filter"><span>Editing</span><select id="contentStatus"><option value="">Semua Tahapan</option><option>Ideation</option><option>Planning</option><option>Production</option><option>Editing</option><option>Review</option><option>Ready to Publish</option><option>Published</option></select></label>
+        <label class="content-filter"><span>Dari Tanggal</span><input id="contentDateFrom" type="date"></label>
+        <label class="content-filter"><span>Sampai Tanggal</span><input id="contentDateTo" type="date"></label>
+        <button class="filter-reset-btn" id="resetContentFilters" type="button">Reset</button>
+      </div>
+      <div class="content-list-panel"><div class="content-list-heading"><div><h2>Daftar Konten</h2><p class="muted" id="contentResultCount">0 konten</p></div></div>
+        <div class="content-table-wrap"><table class="content-table" hidden><thead><tr><th>Judul Konten</th><th>Platform</th><th>Tanggal Posting</th><th>Jam</th><th>Tahapan</th><th>Format</th></tr></thead><tbody id="contentTableBody"></tbody></table>
+        <div class="content-empty" id="contentEmpty"><span>▤</span><b>Belum ada konten</b><p>Konten yang tersedia akan muncul di sini.</p></div></div>
+      </div>
+      <footer class="page-footer">Note AP <span>•</span> Content Planning & Management System <span class="demo-tag">MODE PREVIEW</span></footer>
+    </section>
   </main>
 </div>
 <div class="content-modal" id="contentModal" aria-hidden="true"><section class="content-modal-dialog" role="dialog" aria-modal="true" aria-label="Tambah Konten"><button type="button" class="content-modal-close" id="contentModalClose" aria-label="Tutup popup">×</button><iframe id="contentModalFrame" title="Form Tambah Konten" src="about:blank"></iframe></section></div>

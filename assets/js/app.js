@@ -167,7 +167,7 @@
     pageItems.forEach((v,index)=>{
       const tr=document.createElement('tr');tr.className='visit-select-row'+(v.id===visitSelectedId?' selected':'');tr.dataset.visitId=v.id;
       const numberCell=document.createElement('td');numberCell.textContent=String(visitCurrentPage*visitPageSize+index+1);tr.append(numberCell);
-      const summaryFields=[{key:'visitDate',type:'date'},{key:'location',type:'text'},{key:'title',type:'text'},{key:'talent',type:'text'},{key:'status',type:'select'},{key:'notes',type:'text'}];
+      const summaryFields=[{key:'visitDate',type:'date',label:'TGL VISIT'},{key:'time',type:'time',label:'JAM'},{key:'location',type:'text',label:'LOKASI'},{key:'title',type:'text',label:'JUDUL KONTEN'},{key:'publishDate',type:'date',label:'TGL PUBLISH'},{key:'talent',type:'text',label:'TALENT'},{key:'props',type:'text',label:'PROPERTI / PRODUK'},{key:'status',type:'select',label:'STATUS'},{key:'notes',type:'text',label:'KETERANGAN'}];
       summaryFields.forEach(field=>{const td=document.createElement('td');td.append(makeVisitInput(field,field.key==='talent'?splitTalentNames(v.talent).join(', '):v[field.key],v.id));tr.append(td);});
       tr.addEventListener('click',event=>{if(event.target.closest('input,select,textarea'))return;visitSelectedId=v.id;renderVisitTables();});
       body.append(tr);

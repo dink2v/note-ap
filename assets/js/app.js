@@ -39,20 +39,29 @@
   document.getElementById('contentModalClose').addEventListener('click',closeContentModal);
   contentModal.addEventListener('click',event=>{if(event.target===contentModal)closeContentModal();});
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&contentModal.classList.contains('open'))closeContentModal();});
+  const dashboardPage=document.getElementById('dashboardPage');
+  const calendarPage=document.getElementById('calendarPage');
+  function showPage(page){
+    const isCalendar=page==='kalender';
+    dashboardPage.hidden=isCalendar;
+    calendarPage.hidden=!isCalendar;
+    document.querySelectorAll('.nav-link').forEach(item=>item.classList.toggle('active',item.dataset.page===page));
+    document.getElementById('todayLabel').textContent=isCalendar?'CONTENT SCHEDULING':'WORKSPACE OVERVIEW';
+    document.getElementById('todayDate').textContent=isCalendar?'Kalender terhubung dengan Google Calendar · Asia/Jakarta':'Ringkasan aktivitas konten Apotek Prapatan';
+    window.location.hash=isCalendar?'kalender':'dashboard';
+  }
   document.querySelectorAll('.nav-link').forEach(link=>link.addEventListener('click',event=>{
     event.preventDefault();
-    document.querySelectorAll('.nav-link').forEach(item=>item.classList.remove('active'));
-    link.classList.add('active');
     const page=link.dataset.page;
     document.getElementById('sidebar').classList.remove('open');
-    if(page==='kalender'){
-      window.open('https://calendar.google.com/calendar/u/0/r','_blank','noopener');
-      showToast('Google Calendar dibuka di tab baru.');
-      return;
-    }
-    if(page!=='dashboard') showToast('Halaman '+link.textContent.trim()+' sedang dalam tahap pengembangan.');
-    if(page==='dashboard') window.location.hash='dashboard';
+    if(page==='dashboard'||page==='kalender'){showPage(page);return;}
+    showToast('Halaman '+link.textContent.trim()+' sedang dalam tahap pengembangan.');
   }));
+  document.querySelectorAll('a[href="#kalender"]').forEach(link=>link.addEventListener('click',event=>{
+    event.preventDefault();
+    showPage('kalender');
+  }));
+  if(window.location.hash==='#kalender') showPage('kalender');
   document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));
   document.addEventListener('click',event=>{
     const sidebar=document.getElementById('sidebar');

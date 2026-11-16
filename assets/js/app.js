@@ -6,7 +6,35 @@
   const toast = document.getElementById('toast');
   let toastTimer;
   function showToast(message){toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2600);}
-  document.getElementById('newContentBtn').addEventListener('click',()=>{window.location.href='tambah-konten.html';});
+  const contentModal=document.getElementById('contentModal');
+  const contentModalDialog=contentModal.querySelector('.content-modal-dialog');
+  let contentModalLoading=false;
+  window.noteApContentModalClose=()=>{
+    contentModal.classList.remove('open');
+    contentModal.setAttribute('aria-hidden','true');
+    document.body.classList.remove('modal-open');
+    contentModalDialog.innerHTML='<div class="content-modal-loading">Menyiapkan form tambah konten...</div>';
+  };
+  async function openContentModal(){
+    contentModal.classList.add('open');contentModal.setAttribute('aria-hidden','false');document.body.classList.add('modal-open');
+    if(contentModalLoading||contentModal.querySelector('#contentForm'))return;
+    contentModalLoading=true;
+    try{
+      const response=await fetch('tambah-konten.html');if(!response.ok)throw new Error('Form tidak dapat dimuat');
+      const markup=await response.text();const parsed=new DOMParser().parseFromString(markup,'text/html');
+      const page=parsed.querySelector('.page-wrap');if(!page)throw new Error('Struktur form tidak ditemukan');
+      contentModalDialog.innerHTML='<button type="button" class="content-modal-close" aria-label="Tutup popup">×</button>';
+      contentModalDialog.append(page);
+      const expand=parsed.querySelector('#expandOverlay');if(expand)contentModalDialog.append(expand);
+      contentModalDialog.querySelector('.content-modal-close').addEventListener('click',window.noteApContentModalClose);
+      const oldScript=document.getElementById('content-modal-script');if(oldScript)oldScript.remove();
+      const script=document.createElement('script');script.id='content-modal-script';script.src='assets/js/tambah-konten.js';document.body.append(script);
+    }catch(error){contentModalDialog.innerHTML='<button type="button" class="content-modal-close" aria-label="Tutup popup">×</button><div class="content-modal-loading">Form gagal dimuat. Silakan coba lagi.</div>';contentModalDialog.querySelector('.content-modal-close').addEventListener('click',window.noteApContentModalClose);showToast(error.message);}
+    finally{contentModalLoading=false;}
+  }
+  document.getElementById('newContentBtn').addEventListener('click',openContentModal);
+  contentModal.addEventListener('click',event=>{if(event.target===contentModal)window.noteApContentModalClose();});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&contentModal.classList.contains('open'))window.noteApContentModalClose();});
   document.querySelectorAll('.nav-link').forEach(link=>link.addEventListener('click',event=>{
     event.preventDefault();
     document.querySelectorAll('.nav-link').forEach(item=>item.classList.remove('active'));

@@ -32,7 +32,21 @@
     <div class="page-wrap">
       <section class="welcome-row">
         <div><div class="eyebrow" id="todayLabel">WORKSPACE OVERVIEW</div><h1>Halo, Apotek Prapatan <span>👋</span></h1><p class="muted" id="todayDate">Kelola dan pantau seluruh aktivitas kontenmu.</p></div>
-        <button class="primary-btn" id="newContentBtn"><span>＋</span> Konten Baru</button>
+        <div class="header-actions">
+          <button class="primary-btn" id="newContentBtn"><span>＋</span> Konten Baru</button>
+          <div class="notification-wrap">
+            <button class="notification-btn" id="notificationBtn" aria-label="Buka notifikasi" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><i class="notification-dot"></i></button>
+            <section class="notification-popover" id="notificationPopover" hidden>
+              <div class="notification-heading"><div><b>Notifikasi</b><small>Informasi terbaru workspace</small></div><button id="markAllRead">Tandai dibaca</button></div>
+              <div class="notification-list" id="notificationList">
+                <article class="notification-item unread"><span class="notification-icon green">✓</span><div><b>Dashboard siap digunakan</b><p>Tampilan awal Note AP berhasil dibuat.</p><small>Baru saja</small></div><span class="unread-dot"></span></article>
+                <article class="notification-item unread"><span class="notification-icon amber">◷</span><div><b>Konten akan datang</b><p>Fungsi Paru-Paru dijadwalkan pada 16 November.</p><small>Preview</small></div><span class="unread-dot"></span></article>
+                <article class="notification-empty" id="notificationEmpty" hidden>Tidak ada notifikasi baru.</article>
+              </div>
+              <a class="all-notifications" href="#notifikasi" id="allNotifications">Lihat semua notifikasi →</a>
+            </section>
+          </div>
+        </div>
       </section>
       <section class="stats-grid">
         <article class="stat-card"><div class="stat-top"><span>Total Reels</span><span class="stat-icon lilac">▶</span></div><strong id="reelsCount">12</strong><small>Konten video pendek</small></article>

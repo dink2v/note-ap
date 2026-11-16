@@ -236,3 +236,8 @@ body.modal-open{overflow:hidden;}
 .visit-page .visit-empty{padding:24px 12px}
 @media(max-width:900px){.visit-overview-grid{grid-template-columns:1fr}.visit-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.visit-today-card,.visit-main-card,.visit-detail-card{padding:14px}.visit-main-card .visit-table-wrap{margin:0 -14px}.visit-detail-grid{grid-template-columns:1fr}.visit-card-heading{flex-wrap:wrap}.visit-pagination{align-items:flex-start;flex-direction:column}.visit-detail-field:has([data-visit-field="notes"]){grid-column:auto}}
+
+.visit-today-item{grid-template-columns:76px minmax(0,1fr) auto}
+.visit-today-inline{width:100%;min-width:0;border:1px solid #e7eee9;border-radius:7px;background:#fff;padding:7px;color:#53645a;font:10px "DM Sans"}
+.visit-today-inline:focus{outline:0;border-color:#82bea0;box-shadow:0 0 0 2px #16845d12}
+.visit-today-select{border:0;background:transparent;color:var(--green);font:700 9px "DM Sans";cursor:pointer;white-space:nowrap}

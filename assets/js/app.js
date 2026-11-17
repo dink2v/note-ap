@@ -338,6 +338,56 @@
   window.addEventListener('storage',event=>{if(event.key==='noteAp.contents'){if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();}if(event.key==='noteAp.visits'){if(!visitPage.hidden||!settingsPage.hidden)renderVisitTables();}});
 
 
+  // Settings navigation and local preferences
+  const settingsTabs=[...document.querySelectorAll('[data-settings-tab]')];
+  function openSettingsTab(name){
+    settingsTabs.forEach(button=>button.classList.toggle('active',button.dataset.settingsTab===name));
+    document.querySelectorAll('[data-settings-panel]').forEach(panel=>{
+      const active=panel.dataset.settingsPanel===name;panel.hidden=!active;panel.classList.toggle('active',active);
+    });
+  }
+  settingsTabs.forEach(button=>button.addEventListener('click',()=>openSettingsTab(button.dataset.settingsTab)));
+  const readSettings=()=>{try{return JSON.parse(localStorage.getItem('noteAp.settings')||'{}')}catch{return{}}};
+  const savedSettings=readSettings();
+  ['AppName','OrgName','Description','Timezone'].forEach(key=>{
+    const el=document.getElementById('setting'+key);if(el&&savedSettings[key[0].toLowerCase()+key.slice(1)])el.value=savedSettings[key[0].toLowerCase()+key.slice(1)];
+  });
+  const themeSelect=document.getElementById('settingTheme'),languageSelect=document.getElementById('settingLanguage');
+  if(themeSelect&&savedSettings.theme)themeSelect.value=savedSettings.theme;
+  if(languageSelect&&savedSettings.language)languageSelect.value=savedSettings.language;
+  document.getElementById('saveGeneralSettings')?.addEventListener('click',()=>{
+    const value={...readSettings(),appName:document.getElementById('settingAppName').value.trim(),orgName:document.getElementById('settingOrgName').value.trim(),description:document.getElementById('settingDescription').value.trim(),timezone:document.getElementById('settingTimezone').value};
+    localStorage.setItem('noteAp.settings',JSON.stringify(value));showToast('Pengaturan umum tersimpan di browser ini.');
+  });
+  document.getElementById('saveAppearanceSettings')?.addEventListener('click',()=>{
+    const value={...readSettings(),theme:themeSelect.value,language:languageSelect.value};
+    localStorage.setItem('noteAp.settings',JSON.stringify(value));
+    document.documentElement.dataset.theme=themeSelect.value==='dark'?'dark':'light';
+    showToast('Preferensi tersimpan. Bahasa aktif mengikuti terjemahan yang tersedia.');
+  });
+  document.getElementById('exportNoteApData')?.addEventListener('click',()=>{
+    const keys=['noteAp.contents','noteAp.visits','noteAp.talents','noteAp.settings'];
+    const payload={app:'Note AP',schemaVersion:1,exportedAt:new Date().toISOString(),data:{}};
+    keys.forEach(key=>{const raw=localStorage.getItem(key);if(raw!==null){try{payload.data[key]=JSON.parse(raw)}catch{payload.data[key]=raw}}});
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='note-ap-backup-'+new Date().toISOString().slice(0,10)+'.json';link.click();URL.revokeObjectURL(url);
+    showToast('Backup lokal berhasil disiapkan.');
+  });
+  document.getElementById('importNoteApData')?.addEventListener('change',async event=>{
+    const file=event.target.files?.[0];if(!file)return;
+    try{
+      const payload=JSON.parse(await file.text());
+      if(payload.app!=='Note AP'||!payload.data||typeof payload.data!=='object')throw new Error('Format backup tidak sesuai.');
+      if(!confirm('Pulihkan backup? Data lokal Note AP yang ada akan ditimpa untuk bagian yang tercantum di backup.'))return;
+      ['noteAp.contents','noteAp.visits','noteAp.talents','noteAp.settings'].forEach(key=>{
+        if(Object.prototype.hasOwnProperty.call(payload.data,key))localStorage.setItem(key,JSON.stringify(payload.data[key]));
+      });
+      showToast('Backup berhasil dipulihkan. Halaman akan dimuat ulang.');
+      setTimeout(()=>location.reload(),700);
+    }catch(error){showToast(error.message||'File backup tidak dapat dibaca.');}
+    finally{event.target.value='';}
+  });
+
   const kanbanStages=['Ideation','Planning','Production','Editing','Review','Ready to Publish','Published'];
   function readKanban(){try{const value=JSON.parse(localStorage.getItem('noteAp.contents')||'[]');return Array.isArray(value)?value:[];}catch(error){return[];}}
   function writeKanban(items){localStorage.setItem('noteAp.contents',JSON.stringify(items));}

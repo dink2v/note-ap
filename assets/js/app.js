@@ -298,6 +298,7 @@
   let visitCalendarSelected=[new Date().getFullYear(),String(new Date().getMonth()+1).padStart(2,'0'),String(new Date().getDate()).padStart(2,'0')].join('-');
   const visitPageSize=4;
   let visitExtraRows=0;
+  const visitHiddenEmptyRowsByMonth=new Map();
   const visitFields=[
     {key:'visitDate',label:'TGL VISIT',type:'date'},
     {key:'time',label:'JAM',type:'time'},
@@ -432,7 +433,7 @@
         const remaining=before.filter((item,index)=>index!==targetIndex);
         if(!writeVisits(remaining))return;
         const after=readVisits();
-        if(after.length!==before.length-1){showToast('Penghapusan belum terverifikasi.');return;}
+        if(JSON.stringify(after)!==JSON.stringify(remaining)){showToast('Penghapusan belum terverifikasi.');return;}
         visitSelectedIds.delete(v.id);
         if(visitSelectedId===v.id)visitSelectedId=null;
         renderVisitTables();
@@ -448,11 +449,19 @@
     // Batasi jumlah baris yang tampil menjadi tepat empat per halaman.
     // Baris kosong mengisi sisa slot setelah data tersimpan.
     const baseEmptySlots=Math.max(0,visitPageSize-pageItems.length);
-    const emptySlots=baseEmptySlots+visitExtraRows;
+    const hiddenEmptyRows=visitHiddenEmptyRowsByMonth.get(monthKey)||0;
+    const emptySlots=Math.max(0,baseEmptySlots+visitExtraRows-hiddenEmptyRows);
     for(let slot=0;slot<emptySlots;slot++){
       const tr=document.createElement('tr');tr.className='visit-select-row visit-placeholder-row';
       if(slot>=baseEmptySlots)tr.dataset.extraVisitRow='true';
-      const number=document.createElement('td');number.textContent=String(visitCurrentPage*visitPageSize+pageItems.length+slot+1);tr.append(number);
+      const number=document.createElement('td');
+      const numberLabel=document.createElement('span');numberLabel.textContent=String(visitCurrentPage*visitPageSize+pageItems.length+slot+1);number.append(numberLabel);
+      const deleteEmptyBtn=document.createElement('button');deleteEmptyBtn.type='button';deleteEmptyBtn.className='visit-row-delete';deleteEmptyBtn.textContent='Hapus';deleteEmptyBtn.setAttribute('aria-label','Hapus baris kosong Visit');deleteEmptyBtn.addEventListener('click',event=>{
+        event.preventDefault();event.stopPropagation();
+        visitHiddenEmptyRowsByMonth.set(monthKey,(visitHiddenEmptyRowsByMonth.get(monthKey)||0)+1);
+        renderVisitTables();
+      });
+      number.append(deleteEmptyBtn);tr.append(number);
       const fields=visitFields;
       fields.forEach(field=>{
         const td=document.createElement('td');

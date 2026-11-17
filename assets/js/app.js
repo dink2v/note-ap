@@ -407,16 +407,49 @@
   });
   renderReferences();
   const themeSelect=document.getElementById('settingTheme');
-  if(themeSelect&&savedSettings.theme)themeSelect.value=savedSettings.theme;
+  const languageSelect=document.getElementById('settingLanguage');
+  const applyTheme=theme=>{
+    const selected=theme==='system'?'system':theme==='dark'?'dark':'light';
+    document.documentElement.dataset.theme=selected;
+    const meta=document.querySelector('meta[name="theme-color"]');
+    if(meta)meta.setAttribute('content',selected==='dark'?'#111a15':'#f7faf8');
+  };
+  const applyLanguage=language=>{
+    const lang=language==='en'?'en':'id';
+    document.documentElement.lang=lang;
+    const translations={
+      id:{dashboard:'Dashboard',calendar:'Kalender',content:'Konten',kanban:'Kanban',visit:'Visit',settings:'Setelan',help:'Bantuan',workspace:'WORKSPACE',preferences:'PREFERENSI',welcome:'Halo, Apotek Prapatan 👋',overview:'WORKSPACE OVERVIEW',calendarTitle:'Kalender Konten',contentTitle:'Konten',settingsTitle:'Setelan',appearanceTitle:'Tampilan & Bahasa',appearanceDesc:'Atur kenyamanan tampilan workspace.',theme:'Tema aplikasi',language:'Bahasa aplikasi',save:'Simpan Preferensi'},
+      en:{dashboard:'Dashboard',calendar:'Calendar',content:'Content',kanban:'Kanban',visit:'Visits',settings:'Settings',help:'Help',workspace:'WORKSPACE',preferences:'PREFERENCES',welcome:'Hello, Apotek Prapatan 👋',overview:'WORKSPACE OVERVIEW',calendarTitle:'Content Calendar',contentTitle:'Content',settingsTitle:'Settings',appearanceTitle:'Appearance & Language',appearanceDesc:'Customize your workspace experience.',theme:'App theme',language:'App language',save:'Save Preferences'}
+    };
+    const t=translations[lang];
+    const navMap={'dashboard':'dashboard','kalender':'calendar','konten':'content','kanban':'kanban','visit':'visit','setelan':'settings','bantuan':'help'};
+    document.querySelectorAll('.nav-link').forEach(link=>{
+      const key=navMap[link.dataset.page];if(!key)return;
+      const icon=link.querySelector('span');const label=t[key];
+      link.childNodes.forEach(node=>{if(node.nodeType===Node.TEXT_NODE&&node.textContent.trim()){node.textContent=label; }});
+      if(!link.querySelector('.nav-label-text')){const textNode=[...link.childNodes].find(node=>node.nodeType===Node.TEXT_NODE);if(textNode)textNode.textContent=label;}
+    });
+    const navLabels=document.querySelectorAll('.nav-label');if(navLabels[0])navLabels[0].textContent=t.workspace;if(navLabels[1])navLabels[1].textContent=t.preferences;
+    const welcome=document.querySelector('.welcome-row h1');if(welcome)welcome.textContent=t.welcome;
+    const titleMap={dashboard:'',kalender:t.calendarTitle,konten:t.contentTitle,setelan:t.settingsTitle};
+    const settingsHeading=document.querySelector('.settings-heading h1');if(settingsHeading)settingsHeading.textContent=t.settingsTitle;
+    const appearanceHeading=document.querySelector('[data-settings-panel="appearance"] .settings-panel-head h2');if(appearanceHeading)appearanceHeading.textContent=t.appearanceTitle;
+    const appearanceDesc=document.querySelector('[data-settings-panel="appearance"] .settings-panel-head p');if(appearanceDesc)appearanceDesc.textContent=t.appearanceDesc;
+    const prefLabels=document.querySelectorAll('[data-settings-panel="appearance"] .settings-preference-row b');if(prefLabels[0])prefLabels[0].textContent=t.theme;if(prefLabels[1])prefLabels[1].textContent=t.language;
+    const save=document.getElementById('saveAppearanceSettings');if(save)save.textContent=t.save;
+    document.querySelectorAll('.settings-nav-item').forEach(button=>{const key=button.dataset.settingsTab;if(key==='appearance'){const b=button.querySelector('b');if(b)b.textContent=lang==='en'?'Appearance & Language':'Tampilan & Bahasa';}});
+  };
+  if(themeSelect){themeSelect.value=savedSettings.theme||'light';applyTheme(themeSelect.value);}
+  if(languageSelect){languageSelect.value=savedSettings.language||'id';applyLanguage(languageSelect.value);}
   document.getElementById('saveGeneralSettings')?.addEventListener('click',()=>{
     const value={...readSettings(),appName:document.getElementById('settingAppName').value.trim(),orgName:document.getElementById('settingOrgName').value.trim(),description:document.getElementById('settingDescription').value.trim(),timezone:document.getElementById('settingTimezone').value};
     localStorage.setItem('noteAp.settings',JSON.stringify(value));showToast('Pengaturan umum tersimpan di browser ini.');
   });
   document.getElementById('saveAppearanceSettings')?.addEventListener('click',()=>{
-    const value={...readSettings(),theme:themeSelect.value};
+    const value={...readSettings(),theme:themeSelect?.value||'light',language:languageSelect?.value||'id'};
     localStorage.setItem('noteAp.settings',JSON.stringify(value));
-    document.documentElement.dataset.theme=themeSelect.value==='dark'?'dark':'light';
-    showToast('Preferensi tampilan tersimpan di browser ini.');
+    applyTheme(value.theme);applyLanguage(value.language);
+    showToast(value.language==='en'?'Preferences saved in this browser.':'Preferensi tampilan dan bahasa tersimpan di browser ini.');
   });
   document.getElementById('exportNoteApData')?.addEventListener('click',()=>{
     const keys=['noteAp.contents','noteAp.visits','noteAp.talents','noteAp.settings','noteAp.references'];

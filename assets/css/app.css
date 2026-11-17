@@ -1156,3 +1156,15 @@ body.calendar-item-open{overflow:hidden}
   min-width: 52px !important;
   max-width: 52px !important;
 }
+
+
+/* Samakan lebar kolom NO dengan ruang kosong yang terlihat di sisi kanan. */
+.visit-main-table col.visit-no-col {
+  width: 80px !important;
+}
+.visit-main-table thead th:first-child,
+#visitTableBody > tr > td:first-child {
+  width: 80px !important;
+  min-width: 80px !important;
+  max-width: 80px !important;
+}

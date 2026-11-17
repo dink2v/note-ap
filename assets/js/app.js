@@ -339,7 +339,7 @@
     if(mode==='grid')renderVisitCalendar(sortedVisits());
   }
   document.getElementById('visitListViewBtn')?.addEventListener('click',()=>setVisitViewMode('list'));
-  document.getElementById('visitAddScheduleBtn')?.addEventListener('click',()=>{const record={id:'VIS-'+Date.now().toString(36).toUpperCase(),visitDate:'',time:'',location:'',title:'',publishDate:'',talent:[],props:'',status:'PLANNED',notes:'',createdAt:new Date().toISOString()};const all=readVisits();all.push(record);writeVisits(all);visitViewMode='list';visitCurrentPage=Math.max(0,Math.ceil(all.filter(item=>!item.visitDate||String(item.visitDate).slice(0,7)===[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0')].join('-')).length/visitPageSize)-1);visitSelectedId=record.id;setVisitViewMode('list');renderVisitTables();const input=document.querySelector('[data-visit-id="'+CSS.escape(record.id)+'"][data-visit-field="visitDate"]');input?.focus();showToast('Jadwal baru ditambahkan. Silakan lengkapi datanya.');});
+  document.getElementById('visitAddScheduleBtn')?.addEventListener('click',()=>{setVisitViewMode('list');const firstEmpty=document.querySelector('#visitTableBody [data-new-visit-field="visitDate"]');if(firstEmpty){firstEmpty.focus();firstEmpty.scrollIntoView({behavior:'smooth',block:'nearest'});showToast('Silakan isi baris kosong untuk menambahkan jadwal Visit.');return;}showToast('Isi jadwal melalui baris kosong pada daftar Visit.');});
   document.getElementById('visitGridViewBtn')?.addEventListener('click',()=>setVisitViewMode('grid'));
   function renderVisitTables(){
     const body=document.getElementById('visitTableBody');

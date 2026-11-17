@@ -405,7 +405,9 @@
     root.replaceChildren();
     const year=visitCalendarMonth.getFullYear(),month=visitCalendarMonth.getMonth();
     const grid=document.createElement('div');grid.className='visit-calendar-grid';
-    ['Sen','Sel','Rab','Kam','Jum','Sab','Min'].forEach(day=>{const label=document.createElement('div');label.className='visit-calendar-weekday';label.textContent=day;grid.append(label);});
+    const weekdayRow=document.createElement('div');weekdayRow.className='visit-calendar-week-row visit-calendar-weekday-row';
+    ['Sen','Sel','Rab','Kam','Jum','Sab','Min'].forEach(day=>{const label=document.createElement('div');label.className='visit-calendar-weekday';label.textContent=day;weekdayRow.append(label);});
+    grid.append(weekdayRow);
     const first=new Date(year,month,1),offset=(first.getDay()+6)%7;
     const startDate=new Date(year,month,1-offset);
     const visitsByDate={};

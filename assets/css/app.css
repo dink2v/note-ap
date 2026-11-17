@@ -208,7 +208,7 @@ body.modal-open{overflow:hidden;}
 .visit-today-empty,.visit-detail-placeholder{padding:25px 12px;text-align:center;color:#98a49c;font-size:10px}
 .visit-main-card{padding-bottom:12px}
 .visit-main-card .visit-table-wrap{margin:0 -19px}
-.visit-main-table{min-width:650px}
+.visit-main-table{min-width:1420px}
 .visit-main-table th{font-size:8px;padding:12px 11px}
 .visit-main-table td{font-size:10px;padding:13px 11px}
 .visit-select-row{cursor:pointer;transition:background .15s}

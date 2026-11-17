@@ -1168,3 +1168,28 @@ body.calendar-item-open{overflow:hidden}
   min-width: 80px !important;
   max-width: 80px !important;
 }
+
+
+/* VISIT TABLE — equal outer gutters on both sides of the scroll area.
+   Remove the old negative margins that made the left border touch the card edge. */
+.visit-main-card .visit-table-wrap {
+  margin: 0 !important;
+  padding: 0 18px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+.visit-main-table {
+  table-layout: auto !important;
+}
+.visit-main-table thead th:first-child,
+#visitTableBody > tr > td:first-child {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+@media(max-width:760px) {
+  .visit-main-card .visit-table-wrap {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+}

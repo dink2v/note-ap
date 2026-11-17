@@ -1243,3 +1243,6 @@ body.calendar-item-open{overflow:hidden}
 .visit-row-number{display:inline-block;min-width:14px;margin-left:4px}
 #visitTableBody tr.is-visit-checked>td{background:#f0fbf8}
 @media(max-width:760px){.visit-month-nav{flex-wrap:wrap;justify-content:flex-start}.visit-select-all-control{font-size:9px}}
+
+.visit-row-delete{display:inline-flex;align-items:center;justify-content:center;margin-left:6px;padding:3px 7px;border:1px solid #efcaca;border-radius:6px;background:#fff7f7;color:#b42318;font-size:11px;font-weight:600;cursor:pointer}
+.visit-row-delete:hover{background:#feecec;border-color:#e7a4a4}

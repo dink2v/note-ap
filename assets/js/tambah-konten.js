@@ -79,4 +79,16 @@ form.addEventListener('submit',async event=>{
 document.getElementById('closeForm').addEventListener('click',()=>{if(confirm('Tutup popup tambah konten? Perubahan yang belum disimpan akan hilang.')){if(typeof window.noteApContentModalClose==='function')window.noteApContentModalClose();else window.location.href='index.html';}});
 document.getElementById('duplicateForm').addEventListener('click',()=>{const data=Object.fromEntries(new FormData(form).entries());form.reset();Object.entries(data).forEach(([key,value])=>{if(form.elements[key])form.elements[key].value=value;});showToast('Isi form berhasil diduplikasi.');window.scrollTo({top:0,behavior:'smooth'});});
 document.getElementById('editForm').addEventListener('click',()=>{form.querySelector('input,select,textarea').focus();showToast('Silakan edit informasi konten.');});
+const pageParams=new URLSearchParams(window.location.search);
+if(pageParams.get('mode')==='detail'){
+ const title=document.querySelector('.form-title-row h1');
+ const titleRow=document.querySelector('.form-title-row');
+ const editButton=document.getElementById('editForm');
+ if(title)title.textContent='Detail Konten';
+ if(titleRow&&editButton){
+  editButton.textContent='Edit';
+  editButton.classList.add('detail-edit-top');
+  titleRow.insertBefore(editButton,titleRow.querySelector(':scope > a.secondary-btn'));
+ }
+}
 })();

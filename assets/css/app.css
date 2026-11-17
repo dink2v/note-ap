@@ -1097,3 +1097,36 @@ body.calendar-item-open{overflow:hidden}
 #visitTableBody > tr > td:nth-child(6) > .visit-multiselect {
   width: calc(100% - 16px) !important;
 }
+
+
+/* VISIT — pusatkan kontrol di dalam sel, bukan dilebarkan sampai tepi sel.
+   Beri gutter konsisten agar kontrol punya rongga kiri dan kanan yang jelas. */
+#visitTableBody > tr > td:nth-child(2) > input,
+#visitTableBody > tr > td:nth-child(3) > input,
+#visitTableBody > tr > td:nth-child(4) > input,
+#visitTableBody > tr > td:nth-child(5) > textarea,
+#visitTableBody > tr > td:nth-child(6) > input,
+#visitTableBody > tr > td:nth-child(6) > details {
+  display: block !important;
+  width: 86% !important;
+  max-width: 260px !important;
+  min-width: 0 !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+#visitTableBody > tr > td:nth-child(2) > input,
+#visitTableBody > tr > td:nth-child(3) > input,
+#visitTableBody > tr > td:nth-child(4) > input,
+#visitTableBody > tr > td:nth-child(6) > input {
+  text-align: center !important;
+  text-align-last: center !important;
+}
+#visitTableBody > tr > td:nth-child(5) > textarea {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  text-align: center !important;
+}
+#visitTableBody > tr > td:nth-child(6) > details > summary {
+  justify-content: center !important;
+  text-align: center !important;
+}

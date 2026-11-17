@@ -67,27 +67,29 @@
   const kanbanPage=document.getElementById('kanbanPage');
   const visitPage=document.getElementById('visitPage');
   const settingsPage=document.getElementById('settingsPage');
+  const helpPage=document.getElementById('helpPage');
   function showPage(page){
-    const isCalendar=page==='kalender',isContent=page==='konten',isKanban=page==='kanban',isVisit=page==='visit',isSettings=page==='setelan';
-    dashboardPage.hidden=isCalendar||isContent||isKanban||isVisit||isSettings;
+    const isCalendar=page==='kalender',isContent=page==='konten',isKanban=page==='kanban',isVisit=page==='visit',isSettings=page==='setelan',isHelp=page==='bantuan';
+    dashboardPage.hidden=isCalendar||isContent||isKanban||isVisit||isSettings||isHelp;
     calendarPage.hidden=!isCalendar;
     contentPage.hidden=!isContent;
     kanbanPage.hidden=!isKanban;
     visitPage.hidden=!isVisit;
     settingsPage.hidden=!isSettings;
+    helpPage.hidden=!isHelp;
     document.querySelectorAll('.nav-link').forEach(item=>item.classList.toggle('active',item.dataset.page===page));
     document.getElementById('todayLabel').textContent=isCalendar?'CONTENT SCHEDULING':isContent?'CONTENT MANAGEMENT':'WORKSPACE OVERVIEW';
     document.getElementById('todayDate').textContent=isCalendar?'Kalender terhubung dengan Google Calendar · Asia/Jakarta':isContent?'Kelola dan pantau seluruh konten Instagram dan TikTok.':'Ringkasan aktivitas konten Apotek Prapatan';
     if(isContent)renderContentList();
     if(isKanban)renderKanban();
     if(isVisit||isSettings)renderVisitTables();
-    window.location.hash=isCalendar?'kalender':isContent?'konten':isKanban?'kanban':isVisit?'visit':isSettings?'setelan':'dashboard';
+    window.location.hash=isCalendar?'kalender':isContent?'konten':isKanban?'kanban':isVisit?'visit':isSettings?'setelan':isHelp?'bantuan':'dashboard';
   }
   document.querySelectorAll('.nav-link').forEach(link=>link.addEventListener('click',event=>{
     event.preventDefault();
     const page=link.dataset.page;
     document.getElementById('sidebar').classList.remove('open');
-    if(page==='dashboard'||page==='kalender'||page==='konten'||page==='kanban'||page==='visit'||page==='setelan'){showPage(page);return;}
+    if(page==='dashboard'||page==='kalender'||page==='konten'||page==='kanban'||page==='visit'||page==='setelan'||page==='bantuan'){showPage(page);return;}
     showToast('Halaman '+link.textContent.trim()+' sedang dalam tahap pengembangan.');
   }));
   document.querySelectorAll('a[href="#kalender"]').forEach(link=>link.addEventListener('click',event=>{
@@ -97,6 +99,9 @@
   if(window.location.hash==='#kalender') showPage('kalender');
   if(window.location.hash==='#konten') showPage('konten');
   if(window.location.hash==='#kanban') showPage('kanban');
+  if(window.location.hash==='#visit') showPage('visit');
+  if(window.location.hash==='#setelan') showPage('setelan');
+  if(window.location.hash==='#bantuan') showPage('bantuan');
   document.getElementById('newContentListBtn').addEventListener('click',openContentModal);
   const contentSearch=document.getElementById('contentSearch'),contentPlatform=document.getElementById('contentPlatform'),contentStatus=document.getElementById('contentStatus'),contentDateFrom=document.getElementById('contentDateFrom'),contentDateTo=document.getElementById('contentDateTo');
   [contentSearch,contentPlatform,contentStatus,contentDateFrom,contentDateTo].forEach(input=>input.addEventListener('input',renderContentList));

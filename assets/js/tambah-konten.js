@@ -36,9 +36,17 @@ function saveThroughAppsScript(payload){
  });
 }
 function setFormLocked(locked){
- // Kunci/buka seluruh field pada ketiga panel form, bukan hanya Informasi Konten.
- [...form.elements].forEach(element=>{if(element.tagName==='BUTTON')return;element.disabled=locked;});
- document.querySelectorAll('[data-expand]').forEach(button=>button.disabled=locked);
+ // Atur status setiap kontrol secara langsung agar seluruh panel, termasuk
+ // Informasi Konten, benar-benar terbuka saat tombol Edit ditekan.
+ form.querySelectorAll('input,select,textarea').forEach(element=>{
+  element.disabled=locked;
+  element.removeAttribute('disabled');
+  if(locked)element.setAttribute('disabled','');
+  if(element.tagName==='INPUT'||element.tagName==='TEXTAREA')element.readOnly=false;
+  element.setAttribute('aria-disabled',String(locked));
+ });
+ form.querySelectorAll('fieldset').forEach(element=>{element.disabled=locked;});
+ document.querySelectorAll('[data-expand]').forEach(button=>{button.disabled=locked;});
  const save=document.querySelector('button[type="submit"][form="contentForm"]');
  if(save)save.disabled=locked;
  form.dataset.editable=String(!locked);

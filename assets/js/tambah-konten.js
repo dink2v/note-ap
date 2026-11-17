@@ -50,7 +50,7 @@ form.addEventListener('submit',async event=>{
  const values=Object.fromEntries(new FormData(form).entries());
  const item={
   title:values.title,platform:values.platform,format:values.format,duration:values.duration,
-  pillar:values.pillar,status:values.status,postingDate:values.postDate,postingTime:values.postTime,
+  pillar:values.pillar,status:values.status,postingDate:(values.postDateTime||'').split('T')[0],postingTime:(values.postDateTime||'').split('T')[1]||'',
   reference:values.reference,hook:values.hook||'',visualHook:values.visualHook||'',
   body:values.body||'',visualBody:values.visualBody||'',cta:values.cta||'',
   visualCTA:values.visualCta||'',caption:values.caption||'',notes:values.notes||'',

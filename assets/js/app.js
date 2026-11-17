@@ -354,7 +354,7 @@
     pageItems.forEach((v,index)=>{
       const tr=document.createElement('tr');tr.className='visit-select-row'+(v.id===visitSelectedId?' selected':'');tr.dataset.visitId=v.id;
       const numberCell=document.createElement('td');numberCell.textContent=String(visitCurrentPage*visitPageSize+index+1);tr.append(numberCell);
-      const visitTableFields=visitFields.filter(field=>['visitDate','location','title','talent','status','notes'].includes(field.key));
+      const visitTableFields=visitFields.filter(field=>['visitDate','time','location','title','publishDate','talent','props','status','notes'].includes(field.key));
       visitTableFields.forEach(field=>{const td=document.createElement('td');td.innerHTML=makeVisitInput(field,v[field.key],v.id);tr.append(td);});
       tr.addEventListener('click',event=>{if(event.target.closest('input,select,textarea'))return;visitSelectedId=v.id;renderVisitTables();});
       body.append(tr);
@@ -363,7 +363,7 @@
     for(let slot=pageItems.length;slot<visitPageSize;slot++){
       const tr=document.createElement('tr');tr.className='visit-select-row visit-placeholder-row';
       const number=document.createElement('td');number.textContent=String(visitCurrentPage*visitPageSize+slot+1);tr.append(number);
-      const fields=visitFields.filter(field=>['visitDate','location','title','talent','status','notes'].includes(field.key));
+      const fields=visitFields.filter(field=>['visitDate','time','location','title','publishDate','talent','props','status','notes'].includes(field.key));
       fields.forEach(field=>{
         const td=document.createElement('td');
         if(field.key==='talent'){

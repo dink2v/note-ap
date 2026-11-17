@@ -386,7 +386,7 @@
       return;
     }
     if(emptyKeys.length){
-      visitHiddenEmptyRowsByMonth.set(monthKey,(visitHiddenEmptyRowsByMonth.get(monthKey)||0)+emptyKeys.length);
+      visitHiddenEmptyRowsByMonth.set(monthKey,(visitHiddenEmptyRowsByMonth.get(monthKey)||0)+total);
     }
     const removed=targets.length+emptyKeys.length;
     visitSelectedIds.clear();visitSelectMode=false;visitSelectedId=null;
@@ -505,7 +505,7 @@
       const hiddenForSelection=visitHiddenEmptyRowsByMonth.get(monthKey)||0;
       const visibleEmptyForSelection=Math.max(0,baseEmptyForSelection+visitExtraRows-hiddenForSelection);
       const visibleEmptyIds=Array.from({length:visibleEmptyForSelection},(_,slot)=>'VISIT_EMPTY|'+monthKey+'|'+visitCurrentPage+'|'+slot);
-      const visibleRowIds=[...visits.map(item=>item.id),...visibleEmptyIds];
+      const visibleRowIds=[...pageItemsForSelection.map(item=>item.id),...visibleEmptyIds];
       const selectedCount=visibleRowIds.filter(id=>visitSelectedIds.has(id)).length;
       selectAll.checked=visibleRowIds.length>0&&selectedCount===visibleRowIds.length;
       selectAll.indeterminate=selectedCount>0&&selectedCount<visibleRowIds.length;

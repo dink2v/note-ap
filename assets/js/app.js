@@ -104,7 +104,7 @@
   }));
   document.addEventListener('click',event=>{
     const link=event.target.closest('a[href^="#"]');
-    if(!link)return;
+    if(!link||link.matches('.nav-link[data-page]'))return;
     const page=link.getAttribute('href').slice(1);
     if(Object.prototype.hasOwnProperty.call(pageElements,page)){
       event.preventDefault();

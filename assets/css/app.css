@@ -985,3 +985,7 @@ body.calendar-item-open{overflow:hidden}
 .visit-calendar-weekday-row .visit-calendar-weekday{display:block!important;padding:10px 4px;text-align:center;color:#728b87;font-size:9px;font-weight:800;border-right:1px solid #eaf0f1}
 .visit-calendar-weekday-row .visit-calendar-weekday:last-child{border-right:0}
 .visit-calendar-week-row:not(.visit-calendar-weekday-row):last-child{border-radius:0 0 10px 10px;overflow:hidden}
+
+
+/* Kolom Judul Konten memakai textarea seperti Keterangan, dengan scroll vertikal */
+.visit-main-table .visit-inline-textarea{height:68px;min-height:68px;max-height:68px;overflow-y:auto;overflow-x:hidden;resize:none;white-space:pre-wrap;}

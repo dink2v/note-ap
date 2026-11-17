@@ -374,15 +374,16 @@
     }
     if(!confirm('Hapus '+targets.length+' jadwal Visit yang dipilih? Tindakan ini tidak dapat dibatalkan.'))return;
 
-    const targetIds=new Set(targets.map(item=>item.id));
-    const remaining=before.filter(item=>!targetIds.has(item.id));
+    // Gunakan referensi record dari snapshot ini, bukan ID saja, agar record
+    // lain tidak ikut terhapus bila ada ID lama yang ternyata duplikat.
+    const targetRecords=new Set(targets);
+    const remaining=before.filter(item=>!targetRecords.has(item));
     if(!writeVisits(remaining))return;
 
-    // Verifikasi hasil tulis sebelum UI menyatakan penghapusan berhasil.
+    // Pastikan isi yang tersimpan sama persis dengan hasil yang diharapkan.
     const after=readVisits();
-    const stillExists=after.some(item=>targetIds.has(item.id));
-    if(stillExists){
-      showToast('Sebagian jadwal belum berhasil dihapus. Data pilihan tetap dipertahankan agar bisa dicoba lagi.');
+    if(JSON.stringify(after)!==JSON.stringify(remaining)){
+      showToast('Penghapusan belum terverifikasi. Data pilihan tetap dipertahankan agar bisa dicoba lagi.');
       return;
     }
 

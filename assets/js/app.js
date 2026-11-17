@@ -352,6 +352,60 @@
   ['AppName','OrgName','Description','Timezone'].forEach(key=>{
     const el=document.getElementById('setting'+key);if(el&&savedSettings[key[0].toLowerCase()+key.slice(1)])el.value=savedSettings[key[0].toLowerCase()+key.slice(1)];
   });
+  // Content references: local-first CRUD, ready for later Sheets sync.
+  const referenceKey='noteAp.references';
+  const referenceDefaults={
+    pillars:['Edukasi Kesehatan','Promosi','Informasi Produk','Awareness'],
+    platforms:['Instagram','TikTok'],
+    formats:['Feed','Carousel','Reels'],
+    stages:['Ideation','Planning','Production','Editing','Review','Ready to Publish','Published']
+  };
+  const referenceLabels={pillars:'Pilar Konten',platforms:'Platform',formats:'Format Konten',stages:'Tahapan Workflow'};
+  function readReferences(){
+    try{
+      const saved=JSON.parse(localStorage.getItem(referenceKey)||'null');
+      if(saved&&typeof saved==='object')return Object.fromEntries(Object.keys(referenceDefaults).map(key=>[key,Array.isArray(saved[key])?saved[key]:referenceDefaults[key].map(name=>({id:key+'-'+name.toLowerCase().replace(/[^a-z0-9]+/g,'-'),name,active:true}))]));
+    }catch{}
+    return Object.fromEntries(Object.entries(referenceDefaults).map(([key,names])=>[key,names.map((name,index)=>({id:key+'-'+index+'-'+name.toLowerCase().replace(/[^a-z0-9]+/g,'-'),name,active:true}))]));
+  }
+  let references=readReferences();
+  function saveReferences(){localStorage.setItem(referenceKey,JSON.stringify(references));}
+  function renderReferences(){
+    const host=document.getElementById('referenceCategoryGrid');if(!host)return;
+    host.innerHTML=Object.entries(referenceLabels).map(([key,label])=>{
+      const items=references[key]||[];
+      return '<section class="reference-category-card"><header><div><b>'+label+'</b><small>'+items.filter(item=>item.active!==false).length+' aktif · '+items.length+' total</small></div></header>'+
+        (items.length?'<div class="reference-item-list">'+items.map(item=>'<div class="reference-item '+(item.active===false?'is-inactive':'')+'"><span>'+escapeHtml(item.name)+'</span><div class="reference-item-actions"><button type="button" data-reference-action="toggle" data-category="'+key+'" data-id="'+item.id+'">'+(item.active===false?'Aktifkan':'Nonaktifkan')+'</button><button type="button" data-reference-action="edit" data-category="'+key+'" data-id="'+item.id+'">Edit</button><button type="button" class="danger" data-reference-action="delete" data-category="'+key+'" data-id="'+item.id+'">Hapus</button></div></div>').join(''):'<p class="reference-empty">Belum ada referensi.</p>')+'</section>';
+    }).join('');
+  }
+  function escapeHtml(value){return String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));}
+  document.getElementById('referenceAddForm')?.addEventListener('submit',event=>{
+    event.preventDefault();
+    const category=document.getElementById('referenceCategory').value;
+    const input=document.getElementById('referenceName');
+    const name=input.value.trim();
+    if(!name)return;
+    if((references[category]||[]).some(item=>item.name.toLowerCase()===name.toLowerCase())){showToast('Referensi tersebut sudah ada.');return;}
+    references[category].push({id:'ref-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7),name,active:true});
+    saveReferences();renderReferences();input.value='';showToast('Referensi berhasil ditambahkan.');
+  });
+  document.getElementById('referenceCategoryGrid')?.addEventListener('click',event=>{
+    const button=event.target.closest('[data-reference-action]');if(!button)return;
+    const {referenceAction:action,category,id}=button.dataset;
+    const item=(references[category]||[]).find(entry=>entry.id===id);if(!item)return;
+    if(action==='toggle'){item.active=item.active===false;saveReferences();renderReferences();showToast(item.active?'Referensi diaktifkan.':'Referensi dinonaktifkan.');}
+    if(action==='edit'){
+      const next=prompt('Ubah nama referensi:',item.name);if(next===null)return;
+      const name=next.trim();if(!name){showToast('Nama referensi tidak boleh kosong.');return;}
+      if(references[category].some(entry=>entry.id!==id&&entry.name.toLowerCase()===name.toLowerCase())){showToast('Nama referensi sudah digunakan.');return;}
+      item.name=name;saveReferences();renderReferences();showToast('Referensi berhasil diperbarui.');
+    }
+    if(action==='delete'){
+      if(!confirm('Hapus referensi "'+item.name+'"?'))return;
+      references[category]=references[category].filter(entry=>entry.id!==id);saveReferences();renderReferences();showToast('Referensi berhasil dihapus.');
+    }
+  });
+  renderReferences();
   const themeSelect=document.getElementById('settingTheme');
   if(themeSelect&&savedSettings.theme)themeSelect.value=savedSettings.theme;
   document.getElementById('saveGeneralSettings')?.addEventListener('click',()=>{
@@ -365,7 +419,7 @@
     showToast('Preferensi tampilan tersimpan di browser ini.');
   });
   document.getElementById('exportNoteApData')?.addEventListener('click',()=>{
-    const keys=['noteAp.contents','noteAp.visits','noteAp.talents','noteAp.settings'];
+    const keys=['noteAp.contents','noteAp.visits','noteAp.talents','noteAp.settings','noteAp.references'];
     const payload={app:'Note AP',schemaVersion:1,exportedAt:new Date().toISOString(),data:{}};
     keys.forEach(key=>{const raw=localStorage.getItem(key);if(raw!==null){try{payload.data[key]=JSON.parse(raw)}catch{payload.data[key]=raw}}});
     const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
@@ -378,7 +432,7 @@
       const payload=JSON.parse(await file.text());
       if(payload.app!=='Note AP'||!payload.data||typeof payload.data!=='object')throw new Error('Format backup tidak sesuai.');
       if(!confirm('Pulihkan backup? Data lokal Note AP yang ada akan ditimpa untuk bagian yang tercantum di backup.'))return;
-      ['noteAp.contents','noteAp.visits','noteAp.talents','noteAp.settings'].forEach(key=>{
+      ['noteAp.contents','noteAp.visits','noteAp.talents','noteAp.settings','noteAp.references'].forEach(key=>{
         if(Object.prototype.hasOwnProperty.call(payload.data,key))localStorage.setItem(key,JSON.stringify(payload.data[key]));
       });
       showToast('Backup berhasil dipulihkan. Halaman akan dimuat ulang.');

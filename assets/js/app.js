@@ -357,45 +357,44 @@
   document.getElementById('visitSelectAll')?.addEventListener('change',event=>{
     const monthKey=[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0')].join('-');
     const monthVisits=sortedVisits().filter(item=>!item.visitDate||item.visitDate.slice(0,7)===monthKey);
-    if(event.target.checked)monthVisits.forEach(item=>visitSelectedIds.add(item.id));
-    else monthVisits.forEach(item=>visitSelectedIds.delete(item.id));
+    const pageCount=Math.max(1,Math.ceil(monthVisits.length/visitPageSize));
+    const pageItems=monthVisits.slice(visitCurrentPage*visitPageSize,(visitCurrentPage+1)*visitPageSize);
+    const baseEmptySlots=Math.max(0,visitPageSize-pageItems.length);
+    const hiddenEmptyRows=visitHiddenEmptyRowsByMonth.get(monthKey)||0;
+    const emptySlots=Math.max(0,baseEmptySlots+visitExtraRows-hiddenEmptyRows);
+    if(event.target.checked){
+      monthVisits.forEach(item=>visitSelectedIds.add(item.id));
+      for(let slot=0;slot<emptySlots;slot++)visitSelectedIds.add('VISIT_EMPTY|'+monthKey+'|'+slot);
+    }else{
+      monthVisits.forEach(item=>visitSelectedIds.delete(item.id));
+      for(let slot=0;slot<visitPageSize+visitExtraRows;slot++)visitSelectedIds.delete('VISIT_EMPTY|'+monthKey+'|'+slot);
+    }
     renderVisitTables();
   });
   document.getElementById('visitDeleteSelectedBtn')?.addEventListener('click',()=>{
-    // Hanya hapus pilihan yang benar-benar masih berada pada bulan yang sedang dibuka.
     const monthKey=[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0')].join('-');
-    const selectedIds=new Set(visitSelectedIds);
     const before=readVisits();
-    const targets=before.filter(item=>selectedIds.has(item.id)&&(!item.visitDate||item.visitDate.slice(0,7)===monthKey));
-    if(!targets.length){
-      visitSelectedIds.clear();
-      renderVisitTables();
-      showToast('Tidak ada jadwal terpilih yang masih tersedia pada bulan ini.');
-      return;
-    }
-    if(!confirm('Hapus '+targets.length+' jadwal Visit yang dipilih? Tindakan ini tidak dapat dibatalkan.'))return;
-
-    // Gunakan referensi record dari snapshot ini, bukan ID saja, agar record
-    // lain tidak ikut terhapus bila ada ID lama yang ternyata duplikat.
+    const targets=before.filter(item=>visitSelectedIds.has(item.id)&&(!item.visitDate||item.visitDate.slice(0,7)===monthKey));
+    const emptyKeys=[...visitSelectedIds].filter(id=>id.startsWith('VISIT_EMPTY|'+monthKey+'|'));
+    const total=targets.length+emptyKeys.length;
+    if(!total){visitSelectedIds.clear();renderVisitTables();return;}
+    if(!confirm('Hapus '+total+' baris yang dipilih? Tindakan ini tidak dapat dibatalkan.'))return;
     const targetRecords=new Set(targets);
     const remaining=before.filter(item=>!targetRecords.has(item));
     if(!writeVisits(remaining))return;
-
-    // Pastikan isi yang tersimpan sama persis dengan hasil yang diharapkan.
     const after=readVisits();
     if(JSON.stringify(after)!==JSON.stringify(remaining)){
       showToast('Penghapusan belum terverifikasi. Data pilihan tetap dipertahankan agar bisa dicoba lagi.');
       return;
     }
-
-    const removed=before.length-after.length;
-    visitSelectedIds.clear();
-    visitSelectMode=false;
-    visitSelectedId=null;
+    if(emptyKeys.length){
+      visitHiddenEmptyRowsByMonth.set(monthKey,(visitHiddenEmptyRowsByMonth.get(monthKey)||0)+emptyKeys.length);
+    }
+    const removed=targets.length+emptyKeys.length;
+    visitSelectedIds.clear();visitSelectMode=false;visitSelectedId=null;
     visitCurrentPage=0;
-    renderVisitTables();
-    renderVisitCalendar(sortedVisits());
-    showToast(removed+' jadwal Visit berhasil dihapus.');
+    renderVisitTables();renderVisitCalendar(sortedVisits());
+    showToast(removed+' baris Visit berhasil dihapus.');
   });
   document.getElementById('visitTableBody')?.addEventListener('change',event=>{
     const checkbox=event.target.closest('[data-visit-select-id]');
@@ -408,8 +407,6 @@
     const body=document.getElementById('visitTableBody');
     if(!body)return;
     const allVisits=sortedVisits();
-    const existingIds=new Set(allVisits.map(item=>item.id));
-    for(const id of visitSelectedIds){if(!existingIds.has(id))visitSelectedIds.delete(id);}
     const monthKey=[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0')].join('-');
     const visits=allVisits.filter(item=>!item.visitDate||item.visitDate.slice(0,7)===monthKey);
     const pageCount=Math.max(1,Math.ceil(visits.length/visitPageSize));
@@ -428,7 +425,7 @@
         event.stopPropagation();
         if(!confirm('Hapus jadwal Visit ini? Tindakan ini tidak dapat dibatalkan.'))return;
         const before=readVisits();
-        const targetIndex=before.findIndex(item=>item.id===v.id);
+        const targetIndex=before.findIndex(item=>item===v||item.id===v.id);
         if(targetIndex<0){showToast('Jadwal Visit tidak ditemukan.');return;}
         const remaining=before.filter((item,index)=>index!==targetIndex);
         if(!writeVisits(remaining))return;
@@ -455,7 +452,12 @@
       const tr=document.createElement('tr');tr.className='visit-select-row visit-placeholder-row';
       if(slot>=baseEmptySlots)tr.dataset.extraVisitRow='true';
       const number=document.createElement('td');
-      const numberLabel=document.createElement('span');numberLabel.textContent=String(visitCurrentPage*visitPageSize+pageItems.length+slot+1);number.append(numberLabel);
+      const emptySelectId='VISIT_EMPTY|'+monthKey+'|'+slot;
+      if(visitSelectMode){
+        const check=document.createElement('input');check.type='checkbox';check.className='visit-row-select';check.dataset.visitSelectId=emptySelectId;check.checked=visitSelectedIds.has(emptySelectId);check.setAttribute('aria-label','Pilih baris kosong nomor '+(visitCurrentPage*visitPageSize+pageItems.length+slot+1));number.append(check);
+      }
+      const numberLabel=document.createElement('span');numberLabel.className='visit-row-number';numberLabel.textContent=String(visitCurrentPage*visitPageSize+pageItems.length+slot+1);number.append(numberLabel);
+      tr.classList.toggle('is-visit-checked',visitSelectedIds.has(emptySelectId));
       const deleteEmptyBtn=document.createElement('button');deleteEmptyBtn.type='button';deleteEmptyBtn.className='visit-row-delete';deleteEmptyBtn.textContent='Hapus';deleteEmptyBtn.setAttribute('aria-label','Hapus baris kosong Visit');deleteEmptyBtn.addEventListener('click',event=>{
         event.preventDefault();event.stopPropagation();
         visitHiddenEmptyRowsByMonth.set(monthKey,(visitHiddenEmptyRowsByMonth.get(monthKey)||0)+1);

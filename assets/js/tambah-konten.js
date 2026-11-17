@@ -119,43 +119,55 @@ document.getElementById('duplicateForm').addEventListener('click',()=>{
 const editButton=document.getElementById('editForm');
 if(pageParams.get('mode')==='detail'){
  detailMode=true;
- const title=document.querySelector('.form-title-row h1'),titleRow=document.querySelector('.form-title-row');
+ const title=document.querySelector('.form-title-row h1');
+ const titleRow=document.querySelector('.form-title-row');
  if(title)title.textContent='Detail Konten';
- const id=pageParams.get('id');detailItem=readItems().find(item=>String(item.id)===String(id));
+ const id=pageParams.get('id');
+ detailItem=readItems().find(item=>String(item.id)===String(id));
  if(detailItem){
   fillForm(detailItem);
   setFormLocked(true);
-  // Buat tombol Edit khusus di header agar tidak bergantung pada pemindahan
-  // tombol dari area footer yang dapat bermasalah pada tampilan iframe.
+  // Tombol dibuat langsung pada header; gunakan handler properti agar
+  // tidak bergantung pada tombol footer yang sebelumnya dipindahkan.
   const topEdit=document.createElement('button');
   topEdit.type='button';
   topEdit.id='detailEditTop';
   topEdit.className='secondary-btn detail-edit-top';
   topEdit.textContent='Edit';
   topEdit.setAttribute('aria-label','Edit seluruh informasi konten');
-  if(titleRow)titleRow.appendChild(topEdit);
+  titleRow?.appendChild(topEdit);
   editButton?.remove();
-  topEdit.addEventListener('click',event=>{
+
+  topEdit.onclick=function(event){
    event.preventDefault();
    event.stopPropagation();
-   if(editMode)return;
+   if(!detailMode||!detailItem||editMode)return false;
    editMode=true;
-   setFormLocked(false);
-   // Buka setiap kontrol form, termasuk seluruh field pada panel 01.
-   Array.from(form.elements).forEach(field=>{
-    if(!field.matches||!field.matches('input,select,textarea,button'))return;
-    field.disabled=false;
-    field.removeAttribute('disabled');
-    field.readOnly=false;
-    field.removeAttribute('aria-disabled');
+   // Lepaskan atribut disabled dari seluruh kontrol di dalam form,
+   // termasuk field pada panel Informasi Konten.
+   form.querySelectorAll('input, select, textarea, button').forEach(control=>{
+    control.disabled=false;
+    control.removeAttribute('disabled');
+    control.readOnly=false;
+    control.removeAttribute('readonly');
+    control.removeAttribute('aria-disabled');
    });
-   form.querySelectorAll('button[data-expand]').forEach(button=>{button.disabled=false;});
+   form.querySelectorAll('fieldset').forEach(group=>{
+    group.disabled=false;
+    group.removeAttribute('disabled');
+   });
+   form.dataset.editable='true';
    const save=document.querySelector('button[type="submit"][form="contentForm"]');
    if(save){save.disabled=false;save.removeAttribute('disabled');}
+   topEdit.textContent='Sedang Mengedit';
+   topEdit.disabled=true;
+   topEdit.setAttribute('aria-disabled','true');
+   topEdit.classList.add('is-editing');
    const firstField=form.elements.namedItem('title');
-   if(firstField){firstField.focus();}
-   showToast('Mode edit aktif. Semua kolom Informasi Konten, Materi, Arahan Visual, Caption, dan Catatan bisa diubah.');
-  });
+   if(firstField){firstField.focus();firstField.select?.();}
+   showToast('Mode edit aktif. Semua kolom Informasi Konten, Materi, Arahan Visual, Caption, dan Catatan sudah terbuka.');
+   return false;
+  };
  }else{
   setFormLocked(true);
   if(editButton)editButton.disabled=true;

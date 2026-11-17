@@ -47,26 +47,9 @@ function setFormLocked(locked){
  });
  form.querySelectorAll('fieldset').forEach(element=>{element.disabled=locked;});
  document.querySelectorAll('[data-expand]').forEach(button=>{button.disabled=locked;});
- const dateConfirm=document.getElementById('confirmPostDateTime');
- if(dateConfirm)dateConfirm.disabled=locked;
  const save=document.querySelector('button[type="submit"][form="contentForm"]');
  if(save)save.disabled=locked;
  form.dataset.editable=String(!locked);
-}
-const postDateTimeInput=document.getElementById('postDateTime');
-const confirmPostDateTime=document.getElementById('confirmPostDateTime');
-const postDateTimeConfirmation=document.getElementById('postDateTimeConfirmation');
-if(postDateTimeInput&&confirmPostDateTime&&postDateTimeConfirmation){
- confirmPostDateTime.addEventListener('click',()=>{
-  if(!postDateTimeInput.reportValidity())return;
-  const selected=new Date(postDateTimeInput.value);
-  if(Number.isNaN(selected.getTime())){showToast('Pilih tanggal dan waktu posting terlebih dahulu.');return;}
-  const formatted=new Intl.DateTimeFormat('id-ID',{dateStyle:'long',timeStyle:'short'}).format(selected);
-  postDateTimeConfirmation.textContent='Jadwal posting dipilih: '+formatted;
-  postDateTimeConfirmation.hidden=false;
-  showToast('Tanggal dan waktu posting berhasil dikonfirmasi.');
- });
- postDateTimeInput.addEventListener('input',()=>{postDateTimeConfirmation.hidden=true;});
 }
 function fillForm(item){
  const legacyDateTime=String(item.postDateTime||'');

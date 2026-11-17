@@ -357,25 +357,23 @@
   document.getElementById('visitSelectAll')?.addEventListener('change',event=>{
     const monthKey=[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0')].join('-');
     const monthVisits=sortedVisits().filter(item=>!item.visitDate||item.visitDate.slice(0,7)===monthKey);
-    const pageCount=Math.max(1,Math.ceil(monthVisits.length/visitPageSize));
     const pageItems=monthVisits.slice(visitCurrentPage*visitPageSize,(visitCurrentPage+1)*visitPageSize);
     const baseEmptySlots=Math.max(0,visitPageSize-pageItems.length);
     const hiddenEmptyRows=visitHiddenEmptyRowsByMonth.get(monthKey)||0;
     const emptySlots=Math.max(0,baseEmptySlots+visitExtraRows-hiddenEmptyRows);
-    if(event.target.checked){
-      monthVisits.forEach(item=>visitSelectedIds.add(item.id));
-      for(let slot=0;slot<emptySlots;slot++)visitSelectedIds.add('VISIT_EMPTY|'+monthKey+'|'+visitCurrentPage+'|'+slot);
-    }else{
-      monthVisits.forEach(item=>visitSelectedIds.delete(item.id));
-      for(let slot=0;slot<visitPageSize+visitExtraRows;slot++)visitSelectedIds.delete('VISIT_EMPTY|'+monthKey+'|'+visitCurrentPage+'|'+slot);
-    }
+    const visibleIds=[...pageItems.map(item=>item.id),...Array.from({length:emptySlots},(_,slot)=>'VISIT_EMPTY|'+monthKey+'|'+visitCurrentPage+'|'+slot)];
+    visibleIds.forEach(id=>event.target.checked?visitSelectedIds.add(id):visitSelectedIds.delete(id));
     renderVisitTables();
   });
   document.getElementById('visitDeleteSelectedBtn')?.addEventListener('click',()=>{
     const monthKey=[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0')].join('-');
     const before=readVisits();
-    const targets=before.filter(item=>visitSelectedIds.has(item.id)&&(!item.visitDate||item.visitDate.slice(0,7)===monthKey));
-    const emptyKeys=[...visitSelectedIds].filter(id=>id.startsWith('VISIT_EMPTY|'+monthKey+'|'));
+    const monthVisits=sortedVisits().filter(item=>!item.visitDate||item.visitDate.slice(0,7)===monthKey);
+    const pageItems=monthVisits.slice(visitCurrentPage*visitPageSize,(visitCurrentPage+1)*visitPageSize);
+    const pageIds=new Set(pageItems.map(item=>item.id));
+    const targets=before.filter(item=>pageIds.has(item.id)&&visitSelectedIds.has(item.id));
+    const emptyPrefix='VISIT_EMPTY|'+monthKey+'|'+visitCurrentPage+'|';
+    const emptyKeys=[...visitSelectedIds].filter(id=>id.startsWith(emptyPrefix));
     const total=targets.length+emptyKeys.length;
     if(!total){visitSelectedIds.clear();renderVisitTables();return;}
     if(!confirm('Hapus '+total+' baris yang dipilih? Tindakan ini tidak dapat dibatalkan.'))return;
@@ -450,6 +448,8 @@
     const baseEmptySlots=Math.max(0,visitPageSize-pageItems.length);
     const hiddenEmptyRows=visitHiddenEmptyRowsByMonth.get(monthKey)||0;
     const emptySlots=Math.max(0,baseEmptySlots+visitExtraRows-hiddenEmptyRows);
+    const visibleSelectionIds=new Set([...pageItems.map(item=>item.id),...Array.from({length:emptySlots},(_,slot)=>'VISIT_EMPTY|'+monthKey+'|'+visitCurrentPage+'|'+slot)]);
+    for(const id of [...visitSelectedIds]){if(!visibleSelectionIds.has(id))visitSelectedIds.delete(id);}
     for(let slot=0;slot<emptySlots;slot++){
       const tr=document.createElement('tr');tr.className='visit-select-row visit-placeholder-row';
       if(slot>=baseEmptySlots)tr.dataset.extraVisitRow='true';

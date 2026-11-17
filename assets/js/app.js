@@ -93,7 +93,7 @@
     if(page==='konten')renderContentList();
     if(page==='kanban')renderKanban();
     if(page==='visit'||page==='setelan')renderVisitTables();
-    if(page==='help')renderChat();
+    if(page==='bantuan')renderChat();
     const nextHash='#'+page;
     if(window.location.hash!==nextHash)window.location.hash=page;
     document.getElementById('sidebar')?.classList.remove('open');

@@ -21,6 +21,7 @@
     closeContentModal();
     if(!contentPage.hidden)renderContentList();
     if(!kanbanPage.hidden)renderKanban();
+    renderCalendarPlanner();
     showToast(event.data.storage==='local'
       ? 'Konten tersimpan di browser ini (mode lokal).'
       : 'Konten berhasil dikirim ke Note AP.');
@@ -151,6 +152,81 @@
     document.querySelector('.content-table').hidden=filtered.length===0;
   }
   function formatContentDate(value){if(!value)return'—';const date=new Date(value+'T00:00:00');return Number.isNaN(date.getTime())?value:new Intl.DateTimeFormat('id-ID',{day:'2-digit',month:'short',year:'numeric'}).format(date);}
+
+
+  // NOTE AP CALENDAR PLANNER — shared noteAp.contents storage
+  const calendarGrid=document.getElementById('noteApCalendarGrid');
+  const calendarMonthLabel=document.getElementById('noteApCalendarMonth');
+  const calendarItemModal=document.getElementById('calendarItemModal');
+  const calendarItemForm=document.getElementById('calendarItemForm');
+  let calendarCursor=new Date();calendarCursor.setDate(1);
+  const calendarDateKey=date=>[date.getFullYear(),String(date.getMonth()+1).padStart(2,'0'),String(date.getDate()).padStart(2,'0')].join('-');
+  const calendarReadItems=()=>{try{const rows=JSON.parse(localStorage.getItem('noteAp.contents')||'[]');return Array.isArray(rows)?rows.filter(item=>item&&typeof item==='object'):[];}catch(error){return[];}};
+  const calendarFormatClass=format=>{const value=String(format||'').toLowerCase();return value==='reels'?'reels':value==='carousel'?'carousel':value==='feed'?'feed':'other';};
+  function renderCalendarPlanner(){
+    if(!calendarGrid||!calendarMonthLabel)return;
+    const year=calendarCursor.getFullYear(),month=calendarCursor.getMonth();
+    calendarMonthLabel.textContent=new Intl.DateTimeFormat('id-ID',{month:'long',year:'numeric'}).format(calendarCursor);
+    calendarGrid.replaceChildren();
+    ['Sen','Sel','Rab','Kam','Jum','Sab','Min'].forEach(day=>{const label=document.createElement('div');label.className='calendar-weekday';label.textContent=day;calendarGrid.append(label);});
+    const first=new Date(year,month,1),offset=(first.getDay()+6)%7;
+    const start=new Date(year,month,1-offset);
+    const items=calendarReadItems();
+    for(let index=0;index<42;index++){
+      const date=new Date(start.getFullYear(),start.getMonth(),start.getDate()+index),key=calendarDateKey(date);
+      const cell=document.createElement('section');cell.className='calendar-day-cell'+(date.getMonth()!==month?' outside-month':'');
+      if(key===calendarDateKey(new Date()))cell.classList.add('is-today');
+      const head=document.createElement('div');head.className='calendar-day-head';
+      const number=document.createElement('span');number.className='calendar-day-number';number.textContent=String(date.getDate());head.append(number);
+      const add=document.createElement('button');add.type='button';add.className='calendar-day-add';add.textContent='+';add.title='Tambah jadwal pada '+key;add.setAttribute('aria-label','Tambah jadwal '+key);add.addEventListener('click',()=>openCalendarItemModal(null,key));head.append(add);cell.append(head);
+      items.filter(item=>String(item.postingDate||'')===key).sort((a,b)=>String(a.postingTime||'').localeCompare(String(b.postingTime||''))).forEach(item=>{
+        const event=document.createElement('button');event.type='button';event.className='calendar-event-chip '+calendarFormatClass(item.format);event.title='Klik untuk mengedit: '+(item.title||'Tanpa judul');
+        const title=document.createElement('b');title.textContent=item.title||'Tanpa judul';
+        const meta=document.createElement('small');meta.textContent=[item.postingTime||'',item.format||item.platform||''].filter(Boolean).join(' · ');
+        event.append(title,meta);event.addEventListener('click',()=>openCalendarItemModal(item));cell.append(event);
+      });
+      cell.addEventListener('dblclick',event=>{if(event.target===cell||event.target===head||event.target===number)openCalendarItemModal(null,key);});
+      calendarGrid.append(cell);
+    }
+  }
+  function openCalendarItemModal(item,dateValue){
+    if(!calendarItemModal||!calendarItemForm)return;
+    calendarItemForm.reset();
+    const data=item||{};
+    calendarItemForm.elements.itemId.value=String(data.id||'');
+    calendarItemForm.elements.title.value=String(data.title||'');
+    calendarItemForm.elements.platform.value=String(data.platform||'');
+    calendarItemForm.elements.format.value=String(data.format||'');
+    calendarItemForm.elements.pillar.value=String(data.pillar||'');
+    calendarItemForm.elements.status.value=String(data.status||'Ideation');
+    calendarItemForm.elements.postingDate.value=String(data.postingDate||dateValue||calendarDateKey(new Date()));
+    calendarItemForm.elements.postingTime.value=String(data.postingTime||'');
+    document.getElementById('calendarItemTitle').textContent=item?'Edit Jadwal Konten':'Tambah Jadwal Konten';
+    document.getElementById('calendarItemSave').textContent=item?'Simpan Perubahan':'Simpan Jadwal';
+    calendarItemModal.hidden=false;calendarItemModal.classList.add('open');calendarItemModal.setAttribute('aria-hidden','false');
+    document.body.classList.add('calendar-item-open');calendarItemForm.elements.title.focus();
+  }
+  function closeCalendarItemModal(){
+    if(!calendarItemModal)return;
+    calendarItemModal.classList.remove('open');calendarItemModal.setAttribute('aria-hidden','true');calendarItemModal.hidden=true;document.body.classList.remove('calendar-item-open');
+  }
+  document.getElementById('calendarItemClose')?.addEventListener('click',closeCalendarItemModal);
+  document.getElementById('calendarItemCancel')?.addEventListener('click',closeCalendarItemModal);
+  calendarItemModal?.addEventListener('click',event=>{if(event.target===calendarItemModal)closeCalendarItemModal();});
+  calendarItemForm?.addEventListener('submit',event=>{
+    event.preventDefault();if(!calendarItemForm.reportValidity())return;
+    const values=Object.fromEntries(new FormData(calendarItemForm).entries()),items=calendarReadItems(),existingIndex=items.findIndex(item=>String(item.id||'')===String(values.itemId||''));
+    const now=new Date().toISOString();
+    const updated={...(existingIndex>=0?items[existingIndex]:{}),title:values.title.trim(),platform:values.platform,format:values.format,pillar:values.pillar.trim(),status:values.status,postingDate:values.postingDate,postingTime:values.postingTime,updatedAt:now};
+    if(existingIndex>=0)items[existingIndex]=updated;
+    else{updated.id='NAP-'+Date.now().toString(36).toUpperCase();updated.createdAt=now;updated.duration='';updated.reference='';updated.hook='';updated.visualHook='';updated.body='';updated.visualBody='';updated.cta='';updated.visualCTA='';updated.caption='';updated.notes='';updated.approvals=[];updated.comments=[];updated.history=[{type:'Jadwal konten dibuat dari Kalender Note AP',at:now}];updated.storage='local';items.unshift(updated);}
+    try{localStorage.setItem('noteAp.contents',JSON.stringify(items));closeCalendarItemModal();renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();showToast(existingIndex>=0?'Jadwal konten berhasil diperbarui.':'Jadwal konten berhasil ditambahkan.');}
+    catch(error){showToast('Jadwal gagal disimpan. Penyimpanan browser mungkin penuh.');}
+  });
+  document.getElementById('noteApCalendarPrev')?.addEventListener('click',()=>{calendarCursor.setMonth(calendarCursor.getMonth()-1);renderCalendarPlanner();});
+  document.getElementById('noteApCalendarNext')?.addEventListener('click',()=>{calendarCursor.setMonth(calendarCursor.getMonth()+1);renderCalendarPlanner();});
+  document.getElementById('noteApCalendarToday')?.addEventListener('click',()=>{calendarCursor=new Date();calendarCursor.setDate(1);renderCalendarPlanner();});
+  renderCalendarPlanner();
 
 
   const visitKey='noteAp.visits';

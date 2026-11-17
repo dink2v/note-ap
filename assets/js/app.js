@@ -67,6 +67,8 @@
   const contentPage=document.getElementById('contentPage');
   const kanbanPage=document.getElementById('kanbanPage');
   const visitPage=document.getElementById('visitPage');
+  // Hindari render Visit sebelum konstanta dan data Visit selesai diinisialisasi.
+  let visitDataReady=false;
   const settingsPage=document.getElementById('settingsPage');
   const helpPage=document.getElementById('helpPage');
   const pageElements={
@@ -93,7 +95,7 @@
       :'Ringkasan aktivitas konten Apotek Prapatan';
     if(page==='konten')renderContentList();
     if(page==='kanban')renderKanban();
-    if(page==='visit'||page==='setelan')renderVisitTables();
+    if((page==='visit'||page==='setelan')&&visitDataReady)renderVisitTables();
     if(page==='bantuan')renderChat();
     const nextHash='#'+page;
     if(window.location.hash!==nextHash)window.location.hash=page;
@@ -563,6 +565,7 @@
   function populateVisitReferenceOptions(){}
   if(visitEditor)visitEditor.hidden=true;
   const addSettingVisitBtn=document.getElementById('addSettingVisitBtn');
+  visitDataReady=true;
   renderVisitTables();
   setVisitViewMode('list');
   if(window.location.hash==='#visit')showPage('visit');

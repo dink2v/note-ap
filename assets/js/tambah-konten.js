@@ -146,8 +146,8 @@ if(pageParams.get('mode')==='detail'){
   const topEdit=document.createElement('button');
   topEdit.type='button';
   topEdit.id='detailEditTop';
-  topEdit.className='secondary-btn detail-edit-top';
-  topEdit.textContent='Edit';
+  topEdit.className='secondary-btn detail-edit-top is-editing';
+  topEdit.textContent='Sedang Mengedit';
   topEdit.setAttribute('aria-label','Fokus ke kolom edit konten');
   titleRow?.appendChild(topEdit);
   editButton?.remove();

@@ -987,5 +987,5 @@ body.calendar-item-open{overflow:hidden}
 .visit-calendar-week-row:not(.visit-calendar-weekday-row):last-child{border-radius:0 0 10px 10px;overflow:hidden}
 
 
-/* Kolom Judul Konten memakai textarea seperti Keterangan, dengan scroll vertikal */
-.visit-main-table .visit-inline-textarea{height:68px;min-height:68px;max-height:68px;overflow-y:auto;overflow-x:hidden;resize:none;white-space:pre-wrap;}
+/* Textarea Judul Konten dan Keterangan bisa diubah ukurannya lewat sudut kanan bawah */
+.visit-main-table .visit-inline-textarea{height:auto;min-height:68px;max-height:240px;overflow-y:auto;overflow-x:hidden;resize:vertical;white-space:pre-wrap;}

@@ -1229,3 +1229,17 @@ body.calendar-item-open{overflow:hidden}
   padding-right: 8px !important;
   vertical-align: middle !important;
 }
+
+
+/* Visit — pemilihan banyak jadwal pada tampilan Daftar */
+.visit-month-nav #visitSelectBtn,
+.visit-month-nav #visitDeleteSelectedBtn,
+.visit-month-nav #visitCancelSelectBtn{width:auto;height:28px;padding:0 11px;border:1px solid #dce8e5;border-radius:8px;background:#fff;color:#279e9a;font:700 10px 'DM Sans';cursor:pointer;white-space:nowrap}
+.visit-month-nav #visitSelectBtn[aria-pressed="true"]{background:#e8f7f4;border-color:#279e9a}
+.visit-month-nav #visitDeleteSelectedBtn{color:#c65353;border-color:#f0cccc}
+.visit-month-nav #visitDeleteSelectedBtn:disabled{opacity:.45;cursor:not-allowed}
+.visit-select-all-control{display:inline-flex;align-items:center;gap:5px;color:#52645e;font:700 10px 'DM Sans';white-space:nowrap}
+.visit-select-all-control input,.visit-row-select{width:15px;height:15px;accent-color:#279e9a;cursor:pointer;vertical-align:middle}
+.visit-row-number{display:inline-block;min-width:14px;margin-left:4px}
+#visitTableBody tr.is-visit-checked>td{background:#f0fbf8}
+@media(max-width:760px){.visit-month-nav{flex-wrap:wrap;justify-content:flex-start}.visit-select-all-control{font-size:9px}}

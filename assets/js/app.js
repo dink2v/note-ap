@@ -31,8 +31,18 @@
     contentModal.classList.add('open');
     contentModal.setAttribute('aria-hidden','false');
     document.body.classList.add('modal-open');
-    // Iframe sudah dimuat sejak halaman utama dibuka; tombol hanya menampilkan modal.
-    if(!contentModalFrame.getAttribute('src'))contentModalFrame.src=new URL('./tambah-konten.html',document.baseURI).href;
+    const createUrl=new URL('./tambah-konten.html',document.baseURI).href;
+    if(!contentModalFrame.getAttribute('src')||contentModalFrame.src!==createUrl)contentModalFrame.src=createUrl;
+  }
+  function openContentDetail(item){
+    if(!item)return;
+    contentModal.classList.add('open');
+    contentModal.setAttribute('aria-hidden','false');
+    document.body.classList.add('modal-open');
+    const detailUrl=new URL('./tambah-konten.html',document.baseURI);
+    detailUrl.searchParams.set('mode','detail');
+    detailUrl.searchParams.set('id',String(item.id||''));
+    contentModalFrame.src=detailUrl.href;
   }
   contentModalFrame.addEventListener('load',()=>{
     try{
@@ -141,6 +151,15 @@
     const body=document.getElementById('contentTableBody');body.replaceChildren();
     filtered.forEach(item=>{
       const tr=document.createElement('tr');
+      tr.classList.add('content-row-clickable');
+      tr.tabIndex=0;
+      tr.setAttribute('role','button');
+      tr.setAttribute('aria-label','Buka detail konten: '+(item.title||'Tanpa judul'));
+      tr.title='Klik untuk melihat dan mengedit detail konten';
+      tr.addEventListener('click',()=>openContentDetail(item));
+      tr.addEventListener('keydown',event=>{
+        if(event.key==='Enter'||event.key===' '){event.preventDefault();openContentDetail(item);}
+      });
       [item.title||'Tanpa judul',item.platform||'—',formatContentDate(item.postingDate),item.postingTime||'—',item.status||'—',item.format||'—'].forEach((value,index)=>{
         const td=document.createElement('td');td.textContent=value;
         if(index===4){const badge=document.createElement('span');badge.className='status-chip';badge.textContent=value;td.replaceChildren(badge);}

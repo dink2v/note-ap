@@ -6,7 +6,7 @@
   <title>Note AP — Apotek Prapatan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/app.css?v=20261117-notegcalremoved">
+  <link rel="stylesheet" href="assets/css/app.css?v=20261117-gcaldemo1">
 <style>
 .calendar-content-detail-body{display:grid;gap:18px;max-height:min(62vh,680px);overflow:auto;padding:4px 2px 12px}.calendar-detail-section{padding:16px;border:1px solid var(--line,#e5ebe7);border-radius:14px;background:rgba(255,255,255,.55)}.calendar-detail-section h3{margin:0 0 12px;font-size:14px}.calendar-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.calendar-detail-field{min-width:0}.calendar-detail-field b{display:block;font-size:11px;color:var(--muted,#718078);margin-bottom:5px}.calendar-detail-field p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.55}.calendar-detail-field:has(p){grid-column:auto}@media(max-width:600px){.calendar-detail-grid{grid-template-columns:1fr}.calendar-content-detail-body{max-height:65vh}}
 </style></head>
@@ -241,6 +241,43 @@
             <div class="settings-integration-card"><div class="settings-google-mark">▦</div><div><b>Google Sheets</b><p>Spreadsheet referensi dan data kerja Apotek Prapatan.</p><small>Spreadsheet ID: 132FD2WyRTDOaZbOq_ABlyR1SWtesRh5i0XWkE_7p54w</small></div></div>
             <div class="settings-info-note">Koneksi otomatis belum aktif. Note AP masih menyimpan data di browser (localStorage). URL Google Apps Script Web App atau endpoint API belum dipasang, jadi status sinkronisasi belum dapat dinyatakan aktif.</div>
             <label class="settings-field">URL Apps Script Web App<input id="settingSheetsUrl" type="url" placeholder="https://script.google.com/macros/s/.../exec" disabled><small>Kolom ini akan diaktifkan setelah endpoint integrasi tersedia.</small></label>
+
+            <section class="calendar-demo" id="calendarIntegrationDemo" aria-labelledby="calendarDemoTitle">
+              <div class="calendar-demo-heading">
+                <div><span class="calendar-demo-kicker">SANDBOX · TANPA AKUN ASLI</span><h3 id="calendarDemoTitle">Demo Sinkronisasi Google Calendar</h3><p>Uji alur dua arah menggunakan data simulasi yang terpisah dari konten Note AP dan Google Sheets produksi.</p></div>
+                <span class="calendar-demo-badge">MODE DEMO</span>
+              </div>
+              <div class="calendar-demo-account">
+                <label class="settings-field">Akun Google tim (simulasi)<input id="calendarDemoAccount" type="email" placeholder="apotekprapatan@gmail.com" autocomplete="off"></label>
+                <label class="settings-field">Calendar ID (simulasi)<input id="calendarDemoCalendarId" type="text" placeholder="primary atau ID kalender demo" autocomplete="off"></label>
+                <button class="secondary-btn" id="calendarDemoSaveConfig" type="button">Simpan Konfigurasi Demo</button>
+              </div>
+              <div class="calendar-demo-notice"><b>Perlu diketahui:</b> belum ada login Google, akses API, atau sinkronisasi sungguhan. Semua perubahan hanya disimpan di browser ini dengan kunci data khusus demo.</div>
+              <div class="calendar-demo-create-grid">
+                <form class="calendar-demo-form" id="calendarDemoNoteForm">
+                  <h4>＋ Tambah jadwal dari Note AP (demo)</h4>
+                  <label>Judul konten<input name="title" maxlength="120" required placeholder="Contoh: Tips Menjaga Imun"></label>
+                  <div class="calendar-demo-form-row"><label>Tanggal<input name="date" type="date" required></label><label>Jam<input name="time" type="time" value="09:00" required></label></div>
+                  <button class="primary-btn" type="submit">Tambah ke Note AP Demo</button>
+                </form>
+                <form class="calendar-demo-form" id="calendarDemoGoogleForm">
+                  <h4>＋ Tambah jadwal dari Google Calendar (demo)</h4>
+                  <label>Judul acara<input name="title" maxlength="120" required placeholder="Contoh: Rapat Tim Konten"></label>
+                  <div class="calendar-demo-form-row"><label>Tanggal<input name="date" type="date" required></label><label>Jam<input name="time" type="time" value="10:00" required></label></div>
+                  <button class="secondary-btn" type="submit">Tambah ke Google Calendar Demo</button>
+                </form>
+              </div>
+              <div class="calendar-demo-sync-actions">
+                <button class="primary-btn" id="calendarDemoPush" type="button">Note AP → Google Calendar <span>↗</span></button>
+                <button class="secondary-btn" id="calendarDemoPull" type="button">Google Calendar → Note AP <span>↙</span></button>
+                <button class="calendar-demo-reset" id="calendarDemoReset" type="button">Reset Data Demo</button>
+              </div>
+              <div class="calendar-demo-columns">
+                <section class="calendar-demo-list-panel"><header><div><b>Note AP</b><small id="calendarDemoNoteCount">0 jadwal</small></div><span class="calendar-demo-source note">NOTE AP DEMO</span></header><div id="calendarDemoNoteList" class="calendar-demo-event-list"></div></section>
+                <section class="calendar-demo-list-panel"><header><div><b>Google Calendar</b><small id="calendarDemoGoogleCount">0 acara</small></div><span class="calendar-demo-source google">GOOGLE DEMO</span></header><div id="calendarDemoGoogleList" class="calendar-demo-event-list"></div></section>
+              </div>
+              <div class="calendar-demo-history"><b>Riwayat simulasi</b><ol id="calendarDemoHistory"><li>Demo siap digunakan. Belum ada sinkronisasi.</li></ol></div>
+            </section>
           </section>
           <section class="settings-panel" data-settings-panel="data" hidden>
             <div class="settings-panel-head"><div><h2>Manajemen Data</h2><p>Cadangkan data yang tersimpan pada browser ini.</p></div></div>
@@ -300,5 +337,5 @@
 </section>
 <button class="command-launcher" id="commandLauncher" type="button" aria-label="Buka Command Center"><span>✳</span><span class="launcher-label">Command Center</span><kbd>Ctrl K</kbd></button>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261117-notegcalremoved"></script>
+<script src="assets/js/app.js?v=20261117-gcaldemo1"></script>
 </body></html>

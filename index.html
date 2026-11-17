@@ -6,7 +6,7 @@
   <title>Note AP — Apotek Prapatan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/app.css?v=20261116-viewtoggle1">
+  <link rel="stylesheet" href="assets/css/app.css?v=20261117-settings1">
 </head>
 <body>
 <div class="app-shell">
@@ -130,12 +130,67 @@
       </div>
     </section>
     <section class="settings-page" id="settingsPage" hidden>
-      <div class="visit-heading"><div><div class="eyebrow">WORKSPACE PREFERENCES</div><h1>Setelan</h1><p class="muted">Kelola jadwal Visit yang terhubung dengan halaman Visit dan Kanban.</p></div></div>
-      <div class="settings-card"><h2>Data Visit</h2><p class="muted">Data yang disimpan di sini akan otomatis ditampilkan pada halaman Visit.</p><div class="visit-table-wrap"><table class="visit-table"><thead><tr><th>NO</th><th>TGL VISIT</th><th>JAM</th><th>LOKASI</th><th>JUDUL KONTEN</th><th>TGL PUBLISH</th><th>TALENT</th><th>PROPERTI / PRODUK</th><th>STATUS</th><th>KETERANGAN</th><th>AKSI</th></tr></thead><tbody id="settingsVisitBody"></tbody></table></div><div class="visit-empty" id="settingsVisitEmpty">Belum ada data Visit.</div></div>
-   </section>
+      <div class="settings-heading"><div><div class="eyebrow">WORKSPACE PREFERENCES</div><h1>Setelan</h1><p class="muted">Atur preferensi, referensi kerja, anggota tim, dan pengelolaan data Note AP.</p></div><span class="settings-version">NOTE AP · WORKSPACE</span></div>
+      <div class="settings-layout">
+        <nav class="settings-nav" aria-label="Navigasi Setelan">
+          <button class="settings-nav-item active" data-settings-tab="general"><span>⚙</span><span><b>Umum</b><small>Identitas workspace</small></span></button>
+          <button class="settings-nav-item" data-settings-tab="references"><span>▤</span><span><b>Referensi</b><small>Standar konten</small></span></button>
+          <button class="settings-nav-item" data-settings-tab="team"><span>♙</span><span><b>Tim</b><small>Anggota dan peran</small></span></button>
+          <button class="settings-nav-item" data-settings-tab="integration"><span>↔</span><span><b>Integrasi</b><small>Google Sheets</small></span></button>
+          <button class="settings-nav-item" data-settings-tab="data"><span>▣</span><span><b>Manajemen Data</b><small>Backup dan pemulihan</small></span></button>
+          <button class="settings-nav-item" data-settings-tab="appearance"><span>◐</span><span><b>Tampilan & Bahasa</b><small>Tema dan bahasa</small></span></button>
+        </nav>
+        <div class="settings-content">
+          <section class="settings-panel active" data-settings-panel="general">
+            <div class="settings-panel-head"><div><h2>Pengaturan Umum</h2><p>Informasi dasar workspace Note AP.</p></div><span class="settings-status">Workspace aktif</span></div>
+            <div class="settings-form-grid">
+              <label class="settings-field">Nama aplikasi<input id="settingAppName" value="Note AP"></label>
+              <label class="settings-field">Nama organisasi<input id="settingOrgName" value="Apotek Prapatan"></label>
+              <label class="settings-field">Deskripsi workspace<textarea id="settingDescription" rows="3">Content Planning & Management System — Apotek Prapatan</textarea></label>
+              <label class="settings-field">Zona waktu<select id="settingTimezone"><option value="Asia/Jakarta">WIB — Asia/Jakarta</option><option value="Asia/Makassar">WITA — Asia/Makassar</option><option value="Asia/Jayapura">WIT — Asia/Jayapura</option></select></label>
+            </div><div class="settings-actions"><button class="primary-btn" id="saveGeneralSettings" type="button">Simpan Pengaturan</button></div>
+          </section>
+          <section class="settings-panel" data-settings-panel="references" hidden>
+            <div class="settings-panel-head"><div><h2>Referensi Konten</h2><p>Daftar acuan untuk menjaga konsistensi perencanaan konten.</p></div></div>
+            <div class="settings-info-note">Pengelolaan referensi ini merupakan area pengaturan workspace. Daftar yang sudah digunakan di form Konten akan disambungkan pada tahap integrasi berikutnya.</div>
+            <div class="settings-reference-grid">
+              <article class="settings-mini-card"><b>Pilar Konten</b><p>Edukasi Kesehatan · Promosi · Informasi Produk · Awareness</p><span>Referensi</span></article>
+              <article class="settings-mini-card"><b>Platform</b><p>Instagram · TikTok</p><span>Referensi</span></article>
+              <article class="settings-mini-card"><b>Format Konten</b><p>Feed · Carousel · Reels</p><span>Referensi</span></article>
+              <article class="settings-mini-card"><b>Tahapan Workflow</b><p>Ideation · Planning · Production · Editing · Review · Ready to Publish · Published</p><span>Workflow</span></article>
+            </div>
+          </section>
+          <section class="settings-panel" data-settings-panel="team" hidden>
+            <div class="settings-panel-head"><div><h2>Tim</h2><p>Ringkasan pengelolaan anggota yang terlibat dalam produksi konten.</p></div></div>
+            <div class="settings-info-note">Data anggota dan pembagian peran belum terhubung ke sumber data bersama. Bagian ini disiapkan sebagai pusat pengaturan tim.</div>
+            <div class="settings-team-placeholder"><span>♙</span><b>Pengelolaan anggota tim</b><p>Daftar anggota, jabatan, dan tanggung jawab akan ditampilkan di sini setelah struktur data Tim dikonfirmasi.</p></div>
+            <p class="settings-footnote">Talent untuk jadwal Visit tetap dikelola melalui referensi Google Sheets, bukan dari halaman Setelan ini.</p>
+          </section>
+          <section class="settings-panel" data-settings-panel="integration" hidden>
+            <div class="settings-panel-head"><div><h2>Integrasi Google Sheets</h2><p>Status koneksi sumber data Note AP.</p></div><span class="settings-status pending">Belum terhubung</span></div>
+            <div class="settings-integration-card"><div class="settings-google-mark">▦</div><div><b>Google Sheets</b><p>Spreadsheet referensi dan data kerja Apotek Prapatan.</p><small>Spreadsheet ID: 132FD2WyRTDOaZbOq_ABlyR1SWtesRh5i0XWkE_7p54w</small></div></div>
+            <div class="settings-info-note">Koneksi otomatis belum aktif. Note AP masih menyimpan data di browser (localStorage). URL Google Apps Script Web App atau endpoint API belum dipasang, jadi status sinkronisasi belum dapat dinyatakan aktif.</div>
+            <label class="settings-field">URL Apps Script Web App<input id="settingSheetsUrl" type="url" placeholder="https://script.google.com/macros/s/.../exec" disabled><small>Kolom ini akan diaktifkan setelah endpoint integrasi tersedia.</small></label>
+          </section>
+          <section class="settings-panel" data-settings-panel="data" hidden>
+            <div class="settings-panel-head"><div><h2>Manajemen Data</h2><p>Cadangkan data yang tersimpan pada browser ini.</p></div></div>
+            <div class="settings-info-note">Backup ini mencakup data lokal Note AP pada browser/perangkat saat ini. Ini belum merupakan backup Google Sheets atau sinkronisasi lintas perangkat.</div>
+            <div class="settings-data-actions"><article><span>↓</span><div><b>Ekspor Backup</b><p>Unduh salinan data konten, Visit, dan preferensi lokal.</p><button class="secondary-btn" id="exportNoteApData" type="button">Unduh Backup JSON</button></div></article><article><span>↑</span><div><b>Impor / Pulihkan Backup</b><p>Pulihkan data dari file backup JSON Note AP.</p><label class="secondary-btn settings-file-btn" for="importNoteApData">Pilih File Backup</label><input id="importNoteApData" type="file" accept="application/json,.json" hidden></div></article></div>
+          </section>
+          <section class="settings-panel" data-settings-panel="appearance" hidden>
+            <div class="settings-panel-head"><div><h2>Tampilan & Bahasa</h2><p>Atur kenyamanan tampilan workspace.</p></div></div>
+            <div class="settings-preference-row"><div><b>Tema aplikasi</b><p>Pilih tampilan yang nyaman digunakan.</p></div><select id="settingTheme"><option value="light">Terang</option><option value="dark">Gelap (persiapan)</option><option value="system">Ikuti sistem (persiapan)</option></select></div>
+            <div class="settings-preference-row"><div><b>Bahasa aplikasi</b><p>Pilihan bahasa akan diperluas. Bahasa antarmuka baru aktif setelah terjemahannya tersedia.</p></div><select id="settingLanguage"><option value="id">Bahasa Indonesia</option><option value="en">English</option></select></div>
+            <p class="settings-footnote">Daftar bahasa lengkap dan terjemahan antarmuka akan disiapkan bertahap agar pilihan bahasa tidak hanya berubah pada label pengaturan.</p>
+            <div class="settings-actions"><button class="primary-btn" id="saveAppearanceSettings" type="button">Simpan Preferensi</button></div>
+          </section>
+        </div>
+      </div>
+      <footer class="page-footer">Note AP <span>•</span> Workspace Preferences</footer>
+    </section>
   </main>
 </div>
 <div class="content-modal" id="contentModal" aria-hidden="true"><section class="content-modal-dialog" role="dialog" aria-modal="true" aria-label="Tambah Konten"><button type="button" class="content-modal-close" id="contentModalClose" aria-label="Tutup popup">×</button><iframe id="contentModalFrame" title="Form Tambah Konten" src="tambah-konten.html?v=20261116-2" loading="eager"></iframe></section></div>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261116-viewtoggle1"></script>
+<script src="assets/js/app.js?v=20261117-settings1"></script>
 </body></html>

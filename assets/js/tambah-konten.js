@@ -125,7 +125,7 @@ form.addEventListener('submit',async event=>{
  if(submit){submit.disabled=true;submit.textContent='Menyimpan…';}
  try{
   let result,storage;
-  if(String(config.API_URL||'').trim()){
+  if(String(config.API_URL||'').trim()&&!detailMode){
    result=await saveThroughAppsScript({action:'saveContentItem',item});
    storage='api';
    logActivity('Konten berhasil dikirim ke API Note AP (ID: '+result.id+')');

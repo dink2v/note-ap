@@ -989,3 +989,11 @@ body.calendar-item-open{overflow:hidden}
 
 /* Textarea Judul Konten dan Keterangan bisa diubah ukurannya lewat sudut kanan bawah */
 .visit-main-table .visit-inline-textarea{height:auto;min-height:68px;max-height:240px;overflow-y:auto;overflow-x:hidden;resize:vertical;white-space:pre-wrap;}
+
+
+/* Rata tengah seluruh isi kolom pada Daftar Visit, selaras dengan tampilan Kalender */
+.visit-main-table th,.visit-main-table td{text-align:center;vertical-align:middle}
+.visit-main-table .visit-inline-input{text-align:center;width:100%;box-sizing:border-box}
+.visit-main-table .visit-inline-textarea{text-align:center}
+.visit-main-table .visit-multiselect{text-align:center;margin-inline:auto}
+.visit-main-table .visit-multiselect summary{justify-content:center}

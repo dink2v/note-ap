@@ -87,6 +87,7 @@ if(pageParams.get('mode')==='detail'){
  if(title)title.textContent='Detail Konten';
  if(titleRow&&editButton){
   editButton.textContent='Edit';
+  editButton.id='detailEditTop';
   editButton.classList.add('detail-edit-top');
   titleRow.insertBefore(editButton,titleRow.querySelector(':scope > a.secondary-btn'));
  }

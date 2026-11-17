@@ -865,3 +865,44 @@ body.calendar-item-open{overflow:hidden}
 }
 @media(hover:none){.calendar-day-add{opacity:1}}
 @media(max-width:420px){.calendar-day-cell{min-height:76px;padding:3px}.calendar-weekday{font-size:8px;padding:8px 2px}.calendar-event-chip b{font-size:7px}.calendar-event-chip small{font-size:6px}.calendar-item-fields{gap:10px}}
+
+
+/* GOOGLE CALENDAR INTEGRATION DEMO — isolated sandbox, no production data writes */
+.calendar-demo{margin-top:22px;padding:18px;border:1px solid #dceeea;border-radius:15px;background:linear-gradient(145deg,#fbfefd,#fffaf5)}
+.calendar-demo-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}
+.calendar-demo-kicker{color:#159d91;font-size:8px;font-weight:800;letter-spacing:1px}
+.calendar-demo-heading h3{margin:5px 0;color:#263548;font:800 15px "Plus Jakarta Sans"}
+.calendar-demo-heading p{max-width:620px;margin:0;color:#8492a6;font-size:10px;line-height:1.6}
+.calendar-demo-badge,.calendar-demo-source{padding:6px 9px;border-radius:20px;background:#fff1e5;color:#c8752d;font-size:8px;font-weight:800;white-space:nowrap}
+.calendar-demo-account{display:grid;grid-template-columns:1fr 1fr auto;align-items:end;gap:10px;margin-bottom:12px}
+.calendar-demo-account .secondary-btn{height:37px;white-space:nowrap}
+.calendar-demo-notice{padding:10px 12px;border:1px solid #f2e4cc;border-radius:9px;background:#fffaf1;color:#8d744f;font-size:9px;line-height:1.65}
+.calendar-demo-create-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.calendar-demo-form{display:grid;gap:9px;padding:13px;border:1px solid #e8efeb;border-radius:11px;background:#fff}
+.calendar-demo-form h4{margin:0 0 2px;color:#405467;font-size:10px}
+.calendar-demo-form label{display:grid;gap:5px;color:#718297;font-size:9px;font-weight:700}
+.calendar-demo-form input{width:100%;min-width:0;height:35px;padding:0 9px;border:1px solid #e3ebeb;border-radius:8px;background:#fff;color:#34485a;font:10px "DM Sans"}
+.calendar-demo-form-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.calendar-demo-form .primary-btn,.calendar-demo-form .secondary-btn{justify-self:start;padding:9px 12px;font-size:9px}
+.calendar-demo-sync-actions{display:flex;flex-wrap:wrap;gap:8px;margin:13px 0}
+.calendar-demo-sync-actions button{padding:10px 13px;font-size:9px}
+.calendar-demo-sync-actions .calendar-demo-reset{border:0;background:transparent;color:#a36b62;font:700 9px "DM Sans";cursor:pointer}
+.calendar-demo-columns{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.calendar-demo-list-panel{min-width:0;padding:13px;border:1px solid #e7efeb;border-radius:11px;background:#fff}
+.calendar-demo-list-panel>header{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+.calendar-demo-list-panel>header b{display:block;color:#405467;font-size:11px}
+.calendar-demo-list-panel>header small{display:block;margin-top:3px;color:#96a4af;font-size:8px}
+.calendar-demo-source{background:#e8f7f4;color:#168c81;font-size:7px}
+.calendar-demo-source.google{background:#fff2e7;color:#c8752d}
+.calendar-demo-event-list{display:grid;gap:7px}
+.calendar-demo-event{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px;border:1px solid #edf1f0;border-radius:8px}
+.calendar-demo-event-copy{min-width:0}
+.calendar-demo-event-copy b{display:block;overflow-wrap:anywhere;color:#435467;font-size:9px}
+.calendar-demo-event-copy small{display:block;margin-top:4px;color:#8b9ba8;font-size:8px}
+.calendar-demo-event-actions{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.calendar-demo-event-actions button{padding:5px 7px;border:1px solid #e5ecea;border-radius:6px;background:#fff;color:#718297;font:700 8px "DM Sans";cursor:pointer}
+.calendar-demo-empty{padding:17px 8px;text-align:center;color:#9aa8b1;font-size:9px}
+.calendar-demo-history{margin-top:12px;padding:11px 13px;border:1px solid #e8efeb;border-radius:9px;background:#fff}
+.calendar-demo-history>b{color:#526477;font-size:9px}
+.calendar-demo-history ol{display:grid;gap:5px;margin:8px 0 0;padding-left:18px;color:#8b9ba8;font-size:8px;line-height:1.5}
+@media(max-width:760px){.calendar-demo{padding:13px}.calendar-demo-account,.calendar-demo-create-grid,.calendar-demo-columns{grid-template-columns:1fr}.calendar-demo-account .secondary-btn{justify-self:start}.calendar-demo-heading{flex-direction:column}.calendar-demo-sync-actions{display:grid;grid-template-columns:1fr}.calendar-demo-sync-actions button{text-align:center}}

@@ -797,3 +797,11 @@ body{background:var(--bg);color:var(--ink)}
 .command-footer span{display:flex;align-items:center;gap:5px}
 body.command-open{overflow:hidden}
 @media(max-width:700px){.command-launcher{right:13px;bottom:14px;padding:8px 10px;border-radius:12px}.launcher-label{display:none}.command-overlay{padding:12vh 10px 15px}.command-dialog{border-radius:15px}.command-top{padding:14px}.command-footer{font-size:8px}.command-hint{padding-left:15px;padding-right:15px}}
+
+
+/* VISIBILITY SAFEGUARD — keep inactive workspace pages hidden */
+.calendar-page[hidden],.content-page[hidden],.kanban-page[hidden],.visit-page[hidden],.settings-page[hidden],.help-page[hidden]{display:none!important}
+.calendar-connection-note{display:flex;flex-direction:column;gap:5px;padding:12px 20px;border-bottom:1px solid var(--line);background:#f4fbf9;color:#57716d;font-size:10px;line-height:1.6}
+.calendar-connection-note b{color:#168f83;font-size:10px}
+.visit-main-heading .muted,.visit-today-card .muted{font-size:10px;line-height:1.6;max-width:680px}
+@media(max-width:700px){.calendar-connection-note{padding:11px 13px}.visit-main-heading .muted,.visit-today-card .muted{font-size:9px}}

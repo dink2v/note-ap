@@ -987,8 +987,8 @@
     document.getElementById('calendarDemoReset').addEventListener('click',()=>{
       if(!confirm('Reset seluruh data demo Google Calendar? Data konten utama Note AP tidak akan disentuh.'))return;
       Object.values(keys).forEach(key=>localStorage.removeItem(key));
-      noteEvents=[{id:'demo-note-1',title:'Edukasi Kesehatan: Jaga Imunitas',date:plusDays(1),time:'09:00',googleEventId:null}];
-      googleEvents=[{id:'demo-google-1',title:'Briefing Tim Konten',date:plusDays(2),time:'10:00',sourceNoteId:null}];
+      noteEvents=[{id:'demo-note-1',title:'Edukasi Kesehatan: Jaga Imunitas',date:plusDays(1),time:'09:00',googleEventId:null,updatedAt:nowIso()}];
+      googleEvents=[{id:'demo-google-1',title:'Briefing Tim Konten',date:plusDays(2),time:'10:00',sourceNoteId:null,updatedAt:nowIso()}];
       history=[];account.value='';calendarId.value='';save();write(keys.config,{});render();log('Sandbox demo direset ke data contoh awal.');
     });
     const noteDate=document.querySelector('#calendarDemoNoteForm [name="date"]');

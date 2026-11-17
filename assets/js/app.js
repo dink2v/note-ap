@@ -874,4 +874,112 @@
     if(event.key==='Escape'&&!commandOverlay.hidden)closeCommandCenter();
   });
 
+
+
+  // GOOGLE CALENDAR DEMO — sandbox storage only; never touches noteAp.contents or Sheets.
+  (function initCalendarIntegrationDemo(){
+    const root=document.getElementById('calendarIntegrationDemo');
+    if(!root)return;
+    const keys={note:'noteAp.calendarDemo.noteEvents',google:'noteAp.calendarDemo.googleEvents',config:'noteAp.calendarDemo.config',history:'noteAp.calendarDemo.history'};
+    const read=(key,fallback)=>{try{const value=JSON.parse(localStorage.getItem(key)||'null');return value===null?fallback:value;}catch(error){return fallback;}};
+    const write=(key,value)=>localStorage.setItem(key,JSON.stringify(value));
+    const today=new Date();
+    const dateKey=date=>[date.getFullYear(),String(date.getMonth()+1).padStart(2,'0'),String(date.getDate()).padStart(2,'0')].join('-');
+    const plusDays=(days)=>{const date=new Date();date.setDate(date.getDate()+days);return dateKey(date);};
+    let noteEvents=read(keys.note,null),googleEvents=read(keys.google,null),history=read(keys.history,null);
+    if(!Array.isArray(noteEvents))noteEvents=[{id:'demo-note-1',title:'Edukasi Kesehatan: Jaga Imunitas',date:plusDays(1),time:'09:00',googleEventId:null}];
+    if(!Array.isArray(googleEvents))googleEvents=[{id:'demo-google-1',title:'Briefing Tim Konten',date:plusDays(2),time:'10:00',sourceNoteId:null}];
+    if(!Array.isArray(history))history=[];
+    const account=document.getElementById('calendarDemoAccount');
+    const calendarId=document.getElementById('calendarDemoCalendarId');
+    const noteList=document.getElementById('calendarDemoNoteList');
+    const googleList=document.getElementById('calendarDemoGoogleList');
+    const dateLabel=value=>{if(!value)return'Tanggal belum diatur';const d=new Date(value+'T00:00:00');return Number.isNaN(d.getTime())?value:new Intl.DateTimeFormat('id-ID',{day:'2-digit',month:'short',year:'numeric'}).format(d);};
+    const save=()=>{write(keys.note,noteEvents);write(keys.google,googleEvents);write(keys.history,history.slice(0,12));};
+    const log=message=>{history.unshift(new Intl.DateTimeFormat('id-ID',{hour:'2-digit',minute:'2-digit'}).format(new Date())+' · '+message);history=history.slice(0,12);save();renderHistory();};
+    const makeId=prefix=>prefix+'-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7);
+    function renderList(host,items,source){
+      host.replaceChildren();
+      if(!items.length){const empty=document.createElement('div');empty.className='calendar-demo-empty';empty.textContent='Belum ada jadwal demo.';host.append(empty);return;}
+      items.slice().sort((a,b)=>(a.date+' '+a.time).localeCompare(b.date+' '+b.time)).forEach(item=>{
+        const row=document.createElement('article');row.className='calendar-demo-event';
+        const copy=document.createElement('div');copy.className='calendar-demo-event-copy';
+        const title=document.createElement('b');title.textContent=item.title||'Tanpa judul';
+        const meta=document.createElement('small');meta.textContent=dateLabel(item.date)+' · '+(item.time||'—');
+        copy.append(title,meta);
+        const actions=document.createElement('div');actions.className='calendar-demo-event-actions';
+        const edit=document.createElement('button');edit.type='button';edit.textContent='Edit';edit.addEventListener('click',()=>{
+          const nextTitle=prompt('Judul acara:',item.title||'');if(nextTitle===null)return;
+          const nextDate=prompt('Tanggal (YYYY-MM-DD):',item.date||'');if(nextDate===null)return;
+          const nextTime=prompt('Jam (HH:MM):',item.time||'09:00');if(nextTime===null)return;
+          if(!nextTitle.trim()||!/^\\d{4}-\\d{2}-\\d{2}$/.test(nextDate)||!/^\\d{2}:\\d{2}$/.test(nextTime)){alert('Judul, tanggal, atau jam tidak valid.');return;}
+          item.title=nextTitle.trim();item.date=nextDate;item.time=nextTime;save();render();log('Jadwal '+(source==='note'?'Note AP':'Google Calendar')+' diperbarui di sandbox.');
+        });
+        const remove=document.createElement('button');remove.type='button';remove.textContent='Hapus';remove.addEventListener('click',()=>{
+          if(!confirm('Hapus jadwal demo ini?'))return;
+          if(source==='note')noteEvents=noteEvents.filter(row=>row.id!==item.id);else googleEvents=googleEvents.filter(row=>row.id!==item.id);
+          save();render();log('Satu jadwal demo dihapus dari '+(source==='note'?'Note AP':'Google Calendar')+'.');
+        });
+        actions.append(edit,remove);row.append(copy,actions);host.append(row);
+      });
+    }
+    function renderHistory(){
+      const list=document.getElementById('calendarDemoHistory');list.replaceChildren();
+      (history.length?history:['Demo siap digunakan. Belum ada sinkronisasi.']).forEach(message=>{const li=document.createElement('li');li.textContent=message;list.append(li);});
+    }
+    function render(){
+      renderList(noteList,noteEvents,'note');renderList(googleList,googleEvents,'google');
+      document.getElementById('calendarDemoNoteCount').textContent=noteEvents.length+' jadwal';
+      document.getElementById('calendarDemoGoogleCount').textContent=googleEvents.length+' acara';
+      renderHistory();
+    }
+    const config=read(keys.config,{});
+    account.value=config.account||'';calendarId.value=config.calendarId||'';
+    document.getElementById('calendarDemoSaveConfig').addEventListener('click',()=>{
+      write(keys.config,{account:account.value.trim(),calendarId:calendarId.value.trim()});
+      log('Konfigurasi akun dan Calendar ID demo disimpan di browser ini.');
+    });
+    function addFromForm(form,target){
+      form.addEventListener('submit',event=>{
+        event.preventDefault();const data=new FormData(form);
+        const item={id:makeId(target),title:String(data.get('title')||'').trim(),date:String(data.get('date')||''),time:String(data.get('time')||'09:00')};
+        if(!item.title||!item.date||!item.time)return;
+        if(target==='note'){item.googleEventId=null;noteEvents.push(item);}else{item.sourceNoteId=null;googleEvents.push(item);}
+        save();form.reset();const time=form.querySelector('[name="time"]');if(time)time.value=target==='note'?'09:00':'10:00';render();log('Jadwal baru ditambahkan ke '+(target==='note'?'Note AP':'Google Calendar')+' demo.');
+      });
+    }
+    addFromForm(document.getElementById('calendarDemoNoteForm'),'note');
+    addFromForm(document.getElementById('calendarDemoGoogleForm'),'google');
+    document.getElementById('calendarDemoPush').addEventListener('click',()=>{
+      let changed=0;
+      noteEvents.forEach(item=>{
+        let event=googleEvents.find(row=>row.sourceNoteId===item.id||row.id===item.googleEventId);
+        if(event){event.title=item.title;event.date=item.date;event.time=item.time;}
+        else{event={id:makeId('gcal'),title:item.title,date:item.date,time:item.time,sourceNoteId:item.id};googleEvents.push(event);}
+        item.googleEventId=event.id;changed++;
+      });
+      save();render();log('Simulasi Note AP → Google Calendar selesai: '+changed+' jadwal diproses.');
+    });
+    document.getElementById('calendarDemoPull').addEventListener('click',()=>{
+      let added=0,updated=0;
+      googleEvents.forEach(event=>{
+        let item=noteEvents.find(row=>row.id===event.sourceNoteId||row.googleEventId===event.id);
+        if(item){item.title=event.title;item.date=event.date;item.time=event.time;updated++;}
+        else{noteEvents.push({id:makeId('note'),title:event.title,date:event.date,time:event.time,googleEventId:event.id});event.sourceNoteId=noteEvents[noteEvents.length-1].id;added++;}
+      });
+      save();render();log('Simulasi Google Calendar → Note AP selesai: '+added+' jadwal ditambahkan, '+updated+' jadwal diperbarui.');
+    });
+    document.getElementById('calendarDemoReset').addEventListener('click',()=>{
+      if(!confirm('Reset seluruh data demo Google Calendar? Data konten utama Note AP tidak akan disentuh.'))return;
+      Object.values(keys).forEach(key=>localStorage.removeItem(key));
+      noteEvents=[{id:'demo-note-1',title:'Edukasi Kesehatan: Jaga Imunitas',date:plusDays(1),time:'09:00',googleEventId:null}];
+      googleEvents=[{id:'demo-google-1',title:'Briefing Tim Konten',date:plusDays(2),time:'10:00',sourceNoteId:null}];
+      history=[];account.value='';calendarId.value='';save();write(keys.config,{});render();log('Sandbox demo direset ke data contoh awal.');
+    });
+    const noteDate=document.querySelector('#calendarDemoNoteForm [name="date"]');
+    const googleDate=document.querySelector('#calendarDemoGoogleForm [name="date"]');
+    if(noteDate)noteDate.value=plusDays(3);if(googleDate)googleDate.value=plusDays(4);
+    save();render();
+  })();
+
 })();

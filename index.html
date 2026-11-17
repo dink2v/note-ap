@@ -6,7 +6,7 @@
   <title>Note AP — Apotek Prapatan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/app.css?v=20261117-chathelp3">
+  <link rel="stylesheet" href="assets/css/app.css?v=20261117-chatdropdown1">
 </head>
 <body>
 <div class="app-shell">
@@ -135,7 +135,12 @@
       </div>
       <div class="help-welcome-card"><div class="help-welcome-icon">?</div><div><span class="help-kicker">NOTE AP GUIDE</span><h2>Butuh bantuan menggunakan Note AP?</h2><p>Temukan fungsi setiap menu, cara mengelola konten, dan informasi penting tentang penyimpanan data.</p></div></div>
       <section class="help-chat-block" id="chatHelpSection">
-        <div class="help-section-heading"><div><div class="eyebrow">CONTACT ADMIN</div><h2>Chat Admin & Tim</h2><p class="muted">Hubungi admin secara pribadi atau berdiskusi bersama tim.</p></div></div>
+        <details class="help-chat-dropdown">
+          <summary class="help-chat-summary">
+            <span class="help-chat-summary-copy"><span class="eyebrow">CONTACT ADMIN</span><strong>Chat Admin & Tim</strong><span class="muted">Hubungi admin secara pribadi atau berdiskusi bersama tim.</span></span>
+            <span class="help-chat-chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="help-chat-content">
         <div class="chat-page">
           <div class="chat-workspace">
             <aside class="chat-sidebar">
@@ -151,6 +156,8 @@
             </section>
           </div>
         </div>
+          </div>
+        </details>
       </section>
       <div class="help-topic-grid">
         <article class="help-topic-card"><span>▦</span><b>Dashboard</b><p>Lihat ringkasan aktivitas dan gambaran jadwal konten workspace.</p></article>
@@ -239,5 +246,5 @@
 </div>
 <div class="content-modal" id="contentModal" aria-hidden="true"><section class="content-modal-dialog" role="dialog" aria-modal="true" aria-label="Tambah Konten"><button type="button" class="content-modal-close" id="contentModalClose" aria-label="Tutup popup">×</button><iframe id="contentModalFrame" title="Form Tambah Konten" src="tambah-konten.html?v=20261116-2" loading="eager"></iframe></section></div>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261117-chathelp3"></script>
+<script src="assets/js/app.js?v=20261117-chatdropdown1"></script>
 </body></html>

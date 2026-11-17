@@ -421,24 +421,7 @@
         const check=document.createElement('input');check.type='checkbox';check.className='visit-row-select';check.dataset.visitSelectId=v.id;check.checked=visitSelectedIds.has(v.id);check.setAttribute('aria-label','Pilih jadwal nomor '+(visitCurrentPage*visitPageSize+index+1));numberCell.append(check);
       }
       const numberLabel=document.createElement('span');numberLabel.className='visit-row-number';numberLabel.textContent=String(visitCurrentPage*visitPageSize+index+1);numberCell.append(numberLabel);
-      if(!visitSelectMode){
-        const deleteRowBtn=document.createElement('button');deleteRowBtn.type='button';deleteRowBtn.className='visit-row-delete';deleteRowBtn.textContent='Hapus';deleteRowBtn.setAttribute('aria-label','Hapus jadwal Visit nomor '+(visitCurrentPage*visitPageSize+index+1));deleteRowBtn.addEventListener('click',event=>{
-          event.stopPropagation();
-          if(!confirm('Hapus jadwal Visit ini? Tindakan ini tidak dapat dibatalkan.'))return;
-          const before=readVisits();
-          const targetIndex=before.findIndex(item=>item===v||item.id===v.id);
-          if(targetIndex<0){showToast('Jadwal Visit tidak ditemukan.');return;}
-          const remaining=before.filter((item,index)=>index!==targetIndex);
-          if(!writeVisits(remaining))return;
-          const after=readVisits();
-          if(JSON.stringify(after)!==JSON.stringify(remaining)){showToast('Penghapusan belum terverifikasi.');return;}
-          visitSelectedIds.delete(v.id);
-          if(visitSelectedId===v.id)visitSelectedId=null;
-          renderVisitTables();
-          showToast('Jadwal Visit berhasil dihapus.');
-        });
-        numberCell.append(deleteRowBtn);
-      }tr.append(numberCell);
+tr.append(numberCell);
       tr.classList.toggle('is-visit-checked',visitSelectedIds.has(v.id));
       const visitTableFields=visitFields;
       visitTableFields.forEach(field=>{const td=document.createElement('td');td.innerHTML=makeVisitInput(field,v[field.key],v.id);tr.append(td);});
@@ -462,14 +445,7 @@
       }
       const numberLabel=document.createElement('span');numberLabel.className='visit-row-number';numberLabel.textContent=String(visitCurrentPage*visitPageSize+pageItems.length+slot+1);number.append(numberLabel);
       tr.classList.toggle('is-visit-checked',visitSelectedIds.has(emptySelectId));
-      if(!visitSelectMode){
-        const deleteEmptyBtn=document.createElement('button');deleteEmptyBtn.type='button';deleteEmptyBtn.className='visit-row-delete';deleteEmptyBtn.textContent='Hapus';deleteEmptyBtn.setAttribute('aria-label','Hapus baris kosong Visit');deleteEmptyBtn.addEventListener('click',event=>{
-          event.preventDefault();event.stopPropagation();
-          visitHiddenEmptyRowsByMonth.set(monthKey,(visitHiddenEmptyRowsByMonth.get(monthKey)||0)+1);
-          renderVisitTables();
-        });
-        number.append(deleteEmptyBtn);
-      }tr.append(number);
+tr.append(number);
       const fields=visitFields;
       fields.forEach(field=>{
         const td=document.createElement('td');

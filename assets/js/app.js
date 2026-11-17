@@ -322,8 +322,8 @@
     }
   });
   document.getElementById('visitTodayList').addEventListener('change',event=>{const input=event.target.closest('[data-visit-id][data-visit-field]');if(input)updateVisitField(input.dataset.visitId,input.dataset.visitField,input.value);});
-  document.getElementById('visitPrevPage').addEventListener('click',()=>{visitCurrentPage=Math.max(0,visitCurrentPage-1);visitSelectedId=null;renderVisitTables();});
-  document.getElementById('visitNextPage').addEventListener('click',()=>{const max=Math.max(0,Math.ceil(sortedVisits().length/visitPageSize)-1);visitCurrentPage=Math.min(max,visitCurrentPage+1);visitSelectedId=null;renderVisitTables();});
+  document.getElementById('visitPrevPage')?.addEventListener('click',()=>{visitCurrentPage=Math.max(0,visitCurrentPage-1);visitSelectedId=null;renderVisitTables();});
+  document.getElementById('visitNextPage')?.addEventListener('click',()=>{const max=Math.max(0,Math.ceil(sortedVisits().length/visitPageSize)-1);visitCurrentPage=Math.min(max,visitCurrentPage+1);visitSelectedId=null;renderVisitTables();});
 
   function renderVisitEditorLegacy(){renderVisitTables();}
   const visitEditor=document.getElementById('visitEditor'),visitForm=document.getElementById('visitForm');

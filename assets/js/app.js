@@ -299,7 +299,7 @@
     {key:'visitDate',label:'TGL VISIT',type:'date'},
     {key:'time',label:'JAM',type:'time'},
     {key:'location',label:'LOKASI',type:'text'},
-    {key:'title',label:'JUDUL KONTEN',type:'text'},
+    {key:'title',label:'JUDUL KONTEN',type:'textarea'},
     {key:'publishDate',label:'TGL PUBLISH',type:'date'},
     {key:'talent',label:'TALENT',type:'text'},
     {key:'props',label:'PROPERTI / PRODUK',type:'text'},
@@ -325,7 +325,7 @@
     const safe=escapeVisit(value||'');
     if(field.key==='talent')return makeTalentSelect(value,id,false);
     if(field.type==='select')return '<select class="visit-inline-input" data-visit-id="'+escapeVisit(id)+'" data-visit-field="'+field.key+'">'+visitStatusOptions.map(status=>'<option value="'+status+'" '+(value===status?'selected':'')+'>'+status+'</option>').join('')+'</select>';
-    if(field.type==='textarea')return '<textarea rows="2" class="visit-inline-input visit-inline-textarea" data-visit-id="'+escapeVisit(id)+'" data-visit-field="'+field.key+'" placeholder="Tambahkan keterangan">'+safe+'</textarea>';
+    if(field.type==='textarea')return '<textarea rows="2" class="visit-inline-input visit-inline-textarea" data-visit-id="'+escapeVisit(id)+'" data-visit-field="'+field.key+'" placeholder="Isi '+field.label.toLowerCase()+'">'+safe+'</textarea>';
     return '<input class="visit-inline-input" type="'+field.type+'" data-visit-id="'+escapeVisit(id)+'" data-visit-field="'+field.key+'" value="'+safe+'" placeholder="Isi '+field.label.toLowerCase()+'">';
   }
   function setVisitViewMode(mode){

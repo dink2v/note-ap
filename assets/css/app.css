@@ -434,3 +434,49 @@ body.modal-open{overflow:hidden;}
   :root[data-theme="system"] .notification-popover,:root[data-theme="system"] .content-modal-dialog{background:#18231c;border-color:#34463a;color:#e6eee8}
   :root[data-theme="system"] .notification-item,:root[data-theme="system"] .upcoming-item{border-color:#34463a}
 }
+
+
+/* HELP CENTER */
+.help-page{padding:34px 38px 28px;max-width:1440px;margin:0 auto}
+.help-heading{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px}
+.help-heading h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:30px;margin:7px 0 8px;color:var(--ink,#20352a)}
+.help-heading .muted{max-width:680px;line-height:1.65}
+.help-welcome-card{display:flex;align-items:center;gap:22px;padding:28px 30px;border:1px solid #dce9df;border-radius:18px;background:linear-gradient(120deg,#edf7ef,#f8fbf8);margin-bottom:22px}
+.help-welcome-icon{width:58px;height:58px;flex:0 0 58px;border-radius:17px;display:grid;place-items:center;background:#d9eddd;color:#287342;font-size:30px;font-weight:800}
+.help-kicker{font-size:10px;font-weight:800;letter-spacing:1.5px;color:#4b8b5e}
+.help-welcome-card h2{font:700 20px 'Plus Jakarta Sans',sans-serif;margin:5px 0 6px;color:#203b2b}
+.help-welcome-card p{margin:0;color:#637468;font-size:13px;line-height:1.65}
+.help-topic-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:30px}
+.help-topic-card{padding:20px;border:1px solid var(--line,#e4ebe5);border-radius:15px;background:var(--panel,#fff);min-height:142px}
+.help-topic-card>span{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:#edf6ef;color:#39794c;font-size:18px;margin-bottom:12px}
+.help-topic-card b{display:block;font-size:14px;color:var(--ink,#20352a);margin-bottom:6px}
+.help-topic-card p{font-size:12px;line-height:1.65;color:var(--muted,#77857a);margin:0}
+.help-faq-section{margin-bottom:22px}
+.help-section-heading{margin-bottom:14px}
+.help-section-heading h2{font:700 20px 'Plus Jakarta Sans',sans-serif;color:var(--ink,#20352a);margin:5px 0}
+.help-faq-list{display:grid;gap:10px}
+.help-faq-item{border:1px solid var(--line,#e4ebe5);border-radius:13px;background:var(--panel,#fff);overflow:hidden}
+.help-faq-item summary{cursor:pointer;list-style:none;padding:17px 19px;font-size:13px;font-weight:700;color:var(--ink,#20352a);display:flex;align-items:center;justify-content:space-between;gap:14px}
+.help-faq-item summary::-webkit-details-marker{display:none}
+.help-faq-item summary:after{content:'＋';font-size:18px;color:#579169;font-weight:500}
+.help-faq-item[open] summary:after{content:'−'}
+.help-faq-item p{padding:0 19px 17px;margin:0;color:var(--muted,#77857a);font-size:12px;line-height:1.75}
+.help-note{padding:18px 20px;border:1px solid #e7dfc7;border-radius:13px;background:#fffaf0;margin:22px 0}
+.help-note b{font-size:13px;color:#735d2e}
+.help-note p{font-size:12px;line-height:1.7;color:#786d53;margin:5px 0 0}
+:root[data-theme="dark"] .help-heading h1,:root[data-theme="dark"] .help-topic-card b,:root[data-theme="dark"] .help-section-heading h2,:root[data-theme="dark"] .help-faq-item summary{color:#e6eee8}
+:root[data-theme="dark"] .help-welcome-card{background:#1d2b22;border-color:#34463a}
+:root[data-theme="dark"] .help-welcome-card h2{color:#e6eee8}
+:root[data-theme="dark"] .help-welcome-card p,:root[data-theme="dark"] .help-topic-card p,:root[data-theme="dark"] .help-faq-item p{color:#a4b3a8}
+:root[data-theme="dark"] .help-note{background:#2b291e;border-color:#51482e}
+:root[data-theme="dark"] .help-note b,:root[data-theme="dark"] .help-note p{color:#e3d6ad}
+@media(prefers-color-scheme:dark){
+  :root[data-theme="system"] .help-heading h1,:root[data-theme="system"] .help-topic-card b,:root[data-theme="system"] .help-section-heading h2,:root[data-theme="system"] .help-faq-item summary{color:#e6eee8}
+  :root[data-theme="system"] .help-welcome-card{background:#1d2b22;border-color:#34463a}
+  :root[data-theme="system"] .help-welcome-card h2{color:#e6eee8}
+  :root[data-theme="system"] .help-welcome-card p,:root[data-theme="system"] .help-topic-card p,:root[data-theme="system"] .help-faq-item p{color:#a4b3a8}
+  :root[data-theme="system"] .help-note{background:#2b291e;border-color:#51482e}
+  :root[data-theme="system"] .help-note b,:root[data-theme="system"] .help-note p{color:#e3d6ad}
+}
+@media(max-width:900px){.help-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.help-page{padding:24px 16px}.help-heading h1{font-size:25px}.help-welcome-card{padding:20px;align-items:flex-start;gap:14px}.help-welcome-icon{width:46px;height:46px;flex-basis:46px}.help-welcome-card h2{font-size:17px}.help-topic-grid{grid-template-columns:1fr;gap:10px}.help-topic-card{min-height:0;padding:17px}.help-faq-item summary{padding:15px}.help-faq-item p{padding:0 15px 15px}}

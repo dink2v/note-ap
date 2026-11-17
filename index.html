@@ -6,7 +6,7 @@
   <title>Note AP — Apotek Prapatan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/app.css?v=20261117-appearance1">
+  <link rel="stylesheet" href="assets/css/app.css?v=20261117-help1">
 </head>
 <body>
 <div class="app-shell">
@@ -129,6 +129,35 @@
       
       </div>
     </section>
+    <section class="help-page" id="helpPage" hidden>
+      <div class="help-heading">
+        <div><div class="eyebrow">HELP CENTER</div><h1>Pusat Bantuan</h1><p class="muted">Panduan singkat menggunakan Note AP untuk mengelola perencanaan dan produksi konten Apotek Prapatan.</p></div>
+      </div>
+      <div class="help-welcome-card"><div class="help-welcome-icon">?</div><div><span class="help-kicker">NOTE AP GUIDE</span><h2>Butuh bantuan menggunakan Note AP?</h2><p>Temukan fungsi setiap menu, cara mengelola konten, dan informasi penting tentang penyimpanan data.</p></div></div>
+      <div class="help-topic-grid">
+        <article class="help-topic-card"><span>▦</span><b>Dashboard</b><p>Lihat ringkasan aktivitas dan gambaran jadwal konten workspace.</p></article>
+        <article class="help-topic-card"><span>▤</span><b>Konten</b><p>Buat dan pantau daftar konten, termasuk platform, tanggal posting, dan tahapan.</p></article>
+        <article class="help-topic-card"><span>▥</span><b>Kanban</b><p>Pantau alur kerja dari Ideation hingga Published. Pindahkan atau perbarui tahap sesuai progres.</p></article>
+        <article class="help-topic-card"><span>↗</span><b>Visit</b><p>Catat jadwal kunjungan produksi, lokasi, judul konten, talent, status, dan keterangan.</p></article>
+        <article class="help-topic-card"><span>⚙</span><b>Setelan</b><p>Kelola referensi konten, preferensi tema dan bahasa, serta backup data lokal.</p></article>
+        <article class="help-topic-card"><span>▦</span><b>Kalender</b><p>Lihat kalender Google yang disematkan. Pastikan akun Google memiliki akses.</p></article>
+      </div>
+      <section class="help-faq-section">
+        <div class="help-section-heading"><div><div class="eyebrow">FAQ</div><h2>Pertanyaan yang sering diajukan</h2></div></div>
+        <div class="help-faq-list">
+          <details class="help-faq-item"><summary>Bagaimana cara membuat konten baru?</summary><p>Buka menu Konten atau Kanban, lalu pilih tombol <b>Konten Baru</b> atau <b>Tambah Konten</b>. Isi informasi konten pada formulir dan simpan.</p></details>
+          <details class="help-faq-item"><summary>Apa fungsi tahapan di Kanban?</summary><p>Tahapan menunjukkan progres produksi: Ideation, Planning, Production, Editing, Review, Ready to Publish, dan Published. Perbarui tahap ketika pekerjaan berpindah proses.</p></details>
+          <details class="help-faq-item"><summary>Bagaimana mengubah referensi konten?</summary><p>Buka Setelan → Referensi. Pilih kategori, tambahkan referensi, lalu gunakan aksi edit, aktif/nonaktif, atau hapus pada item yang tersedia.</p></details>
+          <details class="help-faq-item"><summary>Apakah data Note AP sudah tersimpan online dan tersinkron ke Google Sheets?</summary><p>Belum. Saat ini data konten, Visit, referensi, dan preferensi tertentu disimpan di localStorage browser/perangkat yang digunakan. Integrasi Google Sheets belum aktif karena endpoint koneksi belum dipasang.</p></details>
+          <details class="help-faq-item"><summary>Apakah data bisa dibuka dari perangkat lain?</summary><p>Data yang tersimpan lokal tidak otomatis berpindah ke perangkat atau browser lain. Gunakan fitur Ekspor Backup dan Impor/Pulihkan Backup di Setelan → Manajemen Data untuk memindahkan salinan data secara manual.</p></details>
+          <details class="help-faq-item"><summary>Bagaimana cara mencadangkan data?</summary><p>Buka Setelan → Manajemen Data → Unduh Backup JSON. Simpan file di tempat yang aman. Untuk memulihkan, pilih file backup melalui menu Pilih File Backup.</p></details>
+          <details class="help-faq-item"><summary>Mengapa kalender Google tidak muncul?</summary><p>Pastikan koneksi internet aktif dan kamu sudah login ke akun Google yang memiliki akses ke kalender terkait. Kamu juga dapat membuka Google Calendar melalui tombol di halaman Kalender.</p></details>
+          <details class="help-faq-item"><summary>Bagaimana jika tampilan atau data terlihat belum berubah?</summary><p>Coba muat ulang halaman dengan Ctrl + Shift + R. Perlu diingat, data lokal pada browser yang berbeda tidak otomatis sama.</p></details>
+        </div>
+      </section>
+      <div class="help-note"><b>Catatan penting</b><p>Note AP masih dalam tahap pengembangan. Beberapa bagian menggunakan data lokal atau tampilan preview, sehingga belum semua fitur terhubung ke sumber data bersama.</p></div>
+      <footer class="page-footer">Note AP <span>•</span> Help Center</footer>
+    </section>
     <section class="settings-page" id="settingsPage" hidden>
       <div class="settings-heading"><div><div class="eyebrow">WORKSPACE PREFERENCES</div><h1>Setelan</h1><p class="muted">Atur preferensi, referensi kerja, anggota tim, dan pengelolaan data Note AP.</p></div><span class="settings-version">NOTE AP · WORKSPACE</span></div>
       <div class="settings-layout">
@@ -192,5 +221,5 @@
 </div>
 <div class="content-modal" id="contentModal" aria-hidden="true"><section class="content-modal-dialog" role="dialog" aria-modal="true" aria-label="Tambah Konten"><button type="button" class="content-modal-close" id="contentModalClose" aria-label="Tutup popup">×</button><iframe id="contentModalFrame" title="Form Tambah Konten" src="tambah-konten.html?v=20261116-2" loading="eager"></iframe></section></div>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261117-instant1"></script>
+<script src="assets/js/app.js?v=20261117-help1"></script>
 </body></html>

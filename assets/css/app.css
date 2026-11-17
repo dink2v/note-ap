@@ -12,7 +12,7 @@
 body.modal-open{overflow:hidden;}
 .content-modal-dialog{position:relative;width:min(1120px,100%);max-height:calc(100vh - 48px);overflow:auto;background:transparent;border-radius:18px;box-shadow:0 24px 80px #081b1240;}
 .content-modal-dialog>.content-form-wrap{max-width:none;padding:34px 38px 24px;}
-.content-modal-dialog .form-breadcrumb,.content-modal-dialog .form-title-row .secondary-btn{display:none;}
+.content-modal-dialog .form-breadcrumb,.content-modal-dialog .form-title-row #formBackLink{display:none;}
 .content-modal-dialog .form-title-row{padding-right:44px;margin-bottom:20px;}
 .content-modal-close{position:sticky;top:14px;float:right;z-index:4;margin:14px 14px -48px 0;width:36px;height:36px;border:1px solid var(--line);border-radius:10px;background:#fff;color:#52645a;font-size:23px;line-height:1;cursor:pointer;box-shadow:0 3px 12px #1c4a3210;}
 .content-modal-loading{padding:70px 24px;text-align:center;color:var(--muted);font-size:13px;}
@@ -1317,3 +1317,6 @@ body.calendar-item-open{overflow:hidden}
 
 /* Pastikan atribut hidden tetap dihormati untuk tombol form */
 #detailEditTop[hidden],#saveContentButton[hidden],#duplicateForm[hidden]{display:none!important;}
+
+/* Tombol Edit detail harus tetap terlihat di bagian atas modal */
+.content-modal-dialog .form-title-row #detailEditTop:not([hidden]){display:inline-flex!important;align-items:center;justify-content:center;}

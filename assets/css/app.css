@@ -387,3 +387,50 @@ body.modal-open{overflow:hidden;}
 .settings-page .page-footer{margin-top:18px}
 @media(max-width:900px){.settings-page{padding:30px 22px}.settings-layout{grid-template-columns:190px minmax(0,1fr)}.settings-content{padding:18px}}
 @media(max-width:700px){.settings-page{padding:24px 14px}.settings-heading{align-items:flex-start;flex-direction:column}.settings-heading h1{font-size:22px}.settings-layout{grid-template-columns:1fr;gap:11px}.settings-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.settings-nav-item{padding:9px 7px;gap:7px}.settings-nav-item>span:first-child{width:27px;height:27px}.settings-nav-item b{font-size:10px}.settings-nav-item small{font-size:8px}.settings-content{padding:16px 13px;min-height:0}.settings-form-grid,.settings-reference-grid,.settings-data-actions,.reference-category-grid{grid-template-columns:1fr}.reference-add-form{grid-template-columns:1fr}.reference-item{align-items:flex-start;flex-direction:column}.reference-item-actions{justify-content:flex-start}.settings-panel-head{flex-direction:column}.settings-preference-row{align-items:flex-start;flex-direction:column;gap:10px}.settings-preference-row select{max-width:none}.settings-version{display:none}}
+
+/* Note AP appearance preferences: complete dark theme */
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ink:#e6eee8;--line:#2b3a31;--green:#65c18c;
+  background:#111a15;color:#e6eee8;
+}
+:root[data-theme="dark"] body{background:#111a15;color:#e6eee8}
+:root[data-theme="dark"] .app-shell,:root[data-theme="dark"] .main-area,:root[data-theme="dark"] .page-wrap{background:#111a15;color:#e6eee8}
+:root[data-theme="dark"] .sidebar,:root[data-theme="dark"] .mobile-top,:root[data-theme="dark"] .panel,:root[data-theme="dark"] .stat-card,:root[data-theme="dark"] .settings-nav,:root[data-theme="dark"] .settings-content,:root[data-theme="dark"] .settings-mini-card,:root[data-theme="dark"] .reference-category-card,:root[data-theme="dark"] .visit-card,:root[data-theme="dark"] .content-list-panel,:root[data-theme="dark"] .calendar-embed-card{background:#18231c;border-color:#2b3a31;color:#e6eee8}
+:root[data-theme="dark"] h1,:root[data-theme="dark"] h2,:root[data-theme="dark"] h3,:root[data-theme="dark"] b,:root[data-theme="dark"] strong,:root[data-theme="dark"] .settings-nav-item b,:root[data-theme="dark"] .settings-field{color:#e6eee8}
+:root[data-theme="dark"] p,:root[data-theme="dark"] small,:root[data-theme="dark"] .muted,:root[data-theme="dark"] .settings-footnote{color:#a4b3a8}
+:root[data-theme="dark"] input,:root[data-theme="dark"] textarea,:root[data-theme="dark"] select,:root[data-theme="dark"] .settings-field input,:root[data-theme="dark"] .settings-field textarea,:root[data-theme="dark"] .settings-field select,:root[data-theme="dark"] .settings-preference-row select{background:#111a15;border-color:#34463a;color:#e6eee8}
+:root[data-theme="dark"] .settings-nav-item,:root[data-theme="dark"] .reference-item,:root[data-theme="dark"] .settings-info-note,:root[data-theme="dark"] .settings-team-placeholder,:root[data-theme="dark"] .visit-today-entry,:root[data-theme="dark"] .visit-calendar-selected{background:#1d2b22;border-color:#34463a;color:#dce8df}
+:root[data-theme="dark"] .settings-nav-item.active{background:#244331}
+:root[data-theme="dark"] .settings-nav-item>span:first-child{background:#26372c;color:#b7d9c1}
+:root[data-theme="dark"] .reference-item>span,:root[data-theme="dark"] .reference-category-card>header b,:root[data-theme="dark"] .settings-mini-card b{color:#dce8df}
+:root[data-theme="dark"] .reference-item-actions button,:root[data-theme="dark"] .visit-page-btn,:root[data-theme="dark"] .visit-month-nav button,:root[data-theme="dark"] .visit-calendar-header button{background:#202e25;border-color:#3a4c40;color:#c7e3ce}
+:root[data-theme="dark"] .visit-main-table th,:root[data-theme="dark"] .visit-main-table td,:root[data-theme="dark"] .content-table th,:root[data-theme="dark"] .content-table td{border-color:#34463a;color:#dce8df}
+:root[data-theme="dark"] .visit-main-table th,:root[data-theme="dark"] .content-table th{background:#202e25}
+:root[data-theme="dark"] .visit-calendar-day{background:#18231c;border-color:#34463a;color:#dce8df}
+:root[data-theme="dark"] .visit-calendar-day.has-visit,:root[data-theme="dark"] .visit-calendar-day.is-selected{background:#244331;border-color:#4c8c62}
+:root[data-theme="dark"] .visit-calendar-weekday,:root[data-theme="dark"] .visit-today-line b{color:#a4b3a8}
+:root[data-theme="dark"] .visit-today-line span{color:#e6eee8}
+:root[data-theme="dark"] .notification-popover,:root[data-theme="dark"] .content-modal-dialog{background:#18231c;border-color:#34463a;color:#e6eee8}
+:root[data-theme="dark"] .notification-item,:root[data-theme="dark"] .upcoming-item{border-color:#34463a}
+:root[data-theme="dark"] .settings-status{background:#244331;color:#a9d8b7}
+@media(prefers-color-scheme:dark){
+  :root[data-theme="system"]{color-scheme:dark;--ink:#e6eee8;--line:#2b3a31;--green:#65c18c;background:#111a15;color:#e6eee8}
+  :root[data-theme="system"] body,:root[data-theme="system"] .app-shell,:root[data-theme="system"] .main-area,:root[data-theme="system"] .page-wrap{background:#111a15;color:#e6eee8}
+  :root[data-theme="system"] .sidebar,:root[data-theme="system"] .mobile-top,:root[data-theme="system"] .panel,:root[data-theme="system"] .stat-card,:root[data-theme="system"] .settings-nav,:root[data-theme="system"] .settings-content,:root[data-theme="system"] .settings-mini-card,:root[data-theme="system"] .reference-category-card,:root[data-theme="system"] .visit-card,:root[data-theme="system"] .content-list-panel,:root[data-theme="system"] .calendar-embed-card{background:#18231c;border-color:#2b3a31;color:#e6eee8}
+  :root[data-theme="system"] h1,:root[data-theme="system"] h2,:root[data-theme="system"] h3,:root[data-theme="system"] b,:root[data-theme="system"] strong,:root[data-theme="system"] .settings-nav-item b{color:#e6eee8}
+  :root[data-theme="system"] p,:root[data-theme="system"] small,:root[data-theme="system"] .muted{color:#a4b3a8}
+  :root[data-theme="system"] input,:root[data-theme="system"] textarea,:root[data-theme="system"] select,:root[data-theme="system"] .settings-field input,:root[data-theme="system"] .settings-field textarea,:root[data-theme="system"] .settings-field select,:root[data-theme="system"] .settings-preference-row select{background:#111a15;border-color:#34463a;color:#e6eee8}
+  :root[data-theme="system"] .settings-nav-item,:root[data-theme="system"] .reference-item,:root[data-theme="system"] .settings-info-note,:root[data-theme="system"] .settings-team-placeholder,:root[data-theme="system"] .visit-today-entry,:root[data-theme="system"] .visit-calendar-selected{background:#1d2b22;border-color:#34463a;color:#dce8df}
+  :root[data-theme="system"] .settings-nav-item.active{background:#244331}
+  :root[data-theme="system"] .reference-item>span,:root[data-theme="system"] .reference-category-card>header b{color:#dce8df}
+  :root[data-theme="system"] .reference-item-actions button,:root[data-theme="system"] .visit-page-btn,:root[data-theme="system"] .visit-month-nav button,:root[data-theme="system"] .visit-calendar-header button{background:#202e25;border-color:#3a4c40;color:#c7e3ce}
+  :root[data-theme="system"] .visit-main-table th,:root[data-theme="system"] .visit-main-table td,:root[data-theme="system"] .content-table th,:root[data-theme="system"] .content-table td{border-color:#34463a;color:#dce8df}
+  :root[data-theme="system"] .visit-main-table th,:root[data-theme="system"] .content-table th{background:#202e25}
+  :root[data-theme="system"] .visit-calendar-day{background:#18231c;border-color:#34463a;color:#dce8df}
+  :root[data-theme="system"] .visit-calendar-day.has-visit,:root[data-theme="system"] .visit-calendar-day.is-selected{background:#244331;border-color:#4c8c62}
+  :root[data-theme="system"] .visit-calendar-weekday,:root[data-theme="system"] .visit-today-line b{color:#a4b3a8}
+  :root[data-theme="system"] .visit-today-line span{color:#e6eee8}
+  :root[data-theme="system"] .notification-popover,:root[data-theme="system"] .content-modal-dialog{background:#18231c;border-color:#34463a;color:#e6eee8}
+  :root[data-theme="system"] .notification-item,:root[data-theme="system"] .upcoming-item{border-color:#34463a}
+}

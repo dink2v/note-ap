@@ -121,28 +121,51 @@ if(pageParams.get('mode')==='detail'){
  detailMode=true;
  const title=document.querySelector('.form-title-row h1'),titleRow=document.querySelector('.form-title-row');
  if(title)title.textContent='Detail Konten';
- if(titleRow&&editButton){editButton.textContent='Edit';editButton.id='detailEditTop';editButton.classList.add('detail-edit-top');titleRow.insertBefore(editButton,titleRow.querySelector(':scope > a.secondary-btn'));}
  const id=pageParams.get('id');detailItem=readItems().find(item=>String(item.id)===String(id));
  if(detailItem){
-  fillForm(detailItem);setFormLocked(true);
-  if(editButton)editButton.addEventListener('click',event=>{
+  fillForm(detailItem);
+  setFormLocked(true);
+  // Buat tombol Edit khusus di header agar tidak bergantung pada pemindahan
+  // tombol dari area footer yang dapat bermasalah pada tampilan iframe.
+  const topEdit=document.createElement('button');
+  topEdit.type='button';
+  topEdit.id='detailEditTop';
+  topEdit.className='secondary-btn detail-edit-top';
+  topEdit.textContent='Edit';
+  topEdit.setAttribute('aria-label','Edit seluruh informasi konten');
+  if(titleRow)titleRow.appendChild(topEdit);
+  editButton?.remove();
+  topEdit.addEventListener('click',event=>{
    event.preventDefault();
    event.stopPropagation();
    if(editMode)return;
    editMode=true;
    setFormLocked(false);
-   // Pastikan tidak ada kontrol di panel Informasi yang tertinggal terkunci.
-   form.querySelectorAll('input,select,textarea').forEach(field=>{
+   // Buka setiap kontrol form, termasuk seluruh field pada panel 01.
+   Array.from(form.elements).forEach(field=>{
+    if(!field.matches||!field.matches('input,select,textarea,button'))return;
     field.disabled=false;
     field.removeAttribute('disabled');
     field.readOnly=false;
-    field.setAttribute('aria-disabled','false');
+    field.removeAttribute('aria-disabled');
    });
+   form.querySelectorAll('button[data-expand]').forEach(button=>{button.disabled=false;});
+   const save=document.querySelector('button[type="submit"][form="contentForm"]');
+   if(save){save.disabled=false;save.removeAttribute('disabled');}
    const firstField=form.elements.namedItem('title');
-   if(firstField)firstField.focus();
+   if(firstField){firstField.focus();}
    showToast('Mode edit aktif. Semua kolom Informasi Konten, Materi, Arahan Visual, Caption, dan Catatan bisa diubah.');
   });
+ }else{
+  setFormLocked(true);
+  if(editButton)editButton.disabled=true;
+  showToast('Data konten tidak ditemukan di browser ini.');
+  const message=document.createElement('p');
+  message.className='muted';
+  message.textContent='Data konten ini tidak ditemukan pada penyimpanan browser yang sedang digunakan.';
+  form.prepend(message);
  }
- else{setFormLocked(true);if(editButton)editButton.disabled=true;showToast('Data konten tidak ditemukan di browser ini.');const message=document.createElement('p');message.className='muted';message.textContent='Data konten ini tidak ditemukan pada penyimpanan browser yang sedang digunakan.';form.prepend(message);}
-}else if(editButton){editButton.addEventListener('click',()=>{form.querySelector('input,select,textarea').focus();showToast('Silakan edit informasi konten.');});}
+}else if(editButton){
+ editButton.addEventListener('click',()=>{form.querySelector('input,select,textarea').focus();showToast('Silakan edit informasi konten.');});
+}
 })();

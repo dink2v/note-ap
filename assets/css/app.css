@@ -654,3 +654,50 @@ body.modal-open{overflow:hidden;}
 #dashboardPage .time{color:#7f8ca3}
 #dashboardPage .page-footer{color:#a0aabd}
 @media(max-width:700px){#dashboardPage .welcome-row{padding:17px 15px;border-radius:15px;margin-bottom:15px}#dashboardPage .welcome-row h1{font-size:19px;line-height:1.4}#dashboardPage .welcome-row .muted{font-size:11px}#dashboardPage .stats-grid{gap:9px}#dashboardPage .stat-card{min-height:116px;padding:13px 12px}#dashboardPage .stat-card strong{font-size:25px;margin-top:11px}#dashboardPage .panel{padding:16px 13px;border-radius:14px}}
+
+
+/* NOTE AP DASHBOARD — ORANGE & TOSKA */
+#dashboardPage{--green:#f28c38;--green-dark:#dc7627;--ink:#263548;--muted:#8492a6;--line:#e9eef3;--bg:#f7f9fc}
+#dashboardPage .welcome-row{background:linear-gradient(115deg,#fff2e7 0%,#fff8f1 48%,#e8f8f5 100%);border-color:#f5e8dc}
+#dashboardPage .eyebrow{color:#d9782b}
+#dashboardPage .welcome-row h1{color:#263548}
+#dashboardPage .primary-btn{background:#f28c38;box-shadow:0 6px 16px #f28c3830}
+#dashboardPage .primary-btn:hover{background:#dc7627}
+#dashboardPage .stat-card:nth-child(1){--stat-accent:#f28c38}
+#dashboardPage .stat-card:nth-child(2){--stat-accent:#20b6a6}
+#dashboardPage .stat-card:nth-child(3){--stat-accent:#f5b64b}
+#dashboardPage .stat-card:nth-child(4){--stat-accent:#35b98a}
+#dashboardPage .stat-card:nth-child(5){--stat-accent:#20b6a6}
+#dashboardPage .stat-icon.lilac{background:#fff0e3;color:#e58432}
+#dashboardPage .stat-icon.blue{background:#e5f7f4;color:#169d91}
+#dashboardPage .stat-icon.orange{background:#fff5df;color:#d9952f}
+#dashboardPage .stat-icon.green{background:#e6f7ef;color:#299b70}
+#dashboardPage .stat-icon.teal{background:#e3f7f5;color:#159d91}
+#dashboardPage .text-link{color:#159d91}
+#dashboardPage .dot.instagram{background:#f28c38}
+#dashboardPage .dot.tiktok{background:#20b6a6}
+#dashboardPage .line-a{stroke:#f28c38}
+#dashboardPage .line-b{stroke:#20b6a6}
+#dashboardPage .date-box{background:#fff1e5;color:#e27c2b}
+#dashboardPage .upcoming-item:nth-child(2) .date-box{background:#e4f7f4;color:#159d91}
+#dashboardPage .upcoming-item:nth-child(3) .date-box{background:#fff5df;color:#d9952f}
+#dashboardPage .dashboard-quick-actions{margin:0 0 17px;padding:17px 19px;background:#fff;border:1px solid #e9eef3;border-radius:16px;box-shadow:0 5px 18px #34466b0a}
+#dashboardPage .quick-actions-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+#dashboardPage .quick-actions-heading b{display:block;color:#29364e;font:800 13px "Plus Jakarta Sans"}
+#dashboardPage .quick-actions-heading small{display:block;color:#929db0;font-size:10px;margin-top:4px}
+#dashboardPage .quick-actions-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+#dashboardPage .quick-action{min-width:0;display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #edf0f5;border-radius:12px;text-decoration:none;background:#fff;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+#dashboardPage .quick-action:hover{transform:translateY(-2px);border-color:#d9e9e6;box-shadow:0 6px 15px #34466b0d}
+#dashboardPage .quick-action-icon{width:34px;height:34px;flex:0 0 34px;display:grid;place-items:center;border-radius:10px;font-size:16px}
+#dashboardPage .quick-action>span:nth-child(2){min-width:0;flex:1}
+#dashboardPage .quick-action b{display:block;color:#354158;font-size:10px}
+#dashboardPage .quick-action small{display:block;color:#929db0;font-size:9px;margin-top:4px;line-height:1.35}
+#dashboardPage .quick-action i{font-style:normal;color:#9aa6b7;font-size:13px}
+#dashboardPage .quick-orange .quick-action-icon{background:#fff0e3;color:#e58432}
+#dashboardPage .quick-teal .quick-action-icon{background:#e4f7f4;color:#159d91}
+#dashboardPage .quick-purple .quick-action-icon{background:#f1edff;color:#8a6cdb}
+#dashboardPage .quick-blue .quick-action-icon{background:#eaf2ff;color:#4f88e4}
+#dashboardPage .quick-orange:hover{border-color:#f5d7bd}
+#dashboardPage .quick-teal:hover{border-color:#bce9e2}
+@media(max-width:1000px){#dashboardPage .quick-actions-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){#dashboardPage .dashboard-quick-actions{padding:14px 12px;border-radius:14px}#dashboardPage .quick-actions-grid{gap:8px}#dashboardPage .quick-action{padding:10px 8px;gap:8px}#dashboardPage .quick-action-icon{width:30px;height:30px;flex-basis:30px}#dashboardPage .quick-action b{font-size:9px}#dashboardPage .quick-action small{font-size:8px}}

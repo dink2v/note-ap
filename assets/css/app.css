@@ -26,22 +26,14 @@ body.modal-open{overflow:hidden;}
 @media(max-width:700px){.content-modal-dialog{height:100vh;max-height:100vh}.content-modal-dialog iframe{border-radius:0;}}
 
 
-/* Embedded Google Calendar page */
+/* Note AP internal content calendar */
 .calendar-page{max-width:1500px;margin:0 auto;padding:42px 43px 28px;min-height:100vh}
 .calendar-page[hidden]{display:none!important}
 .calendar-page-heading{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:24px}
 .calendar-page-heading h1{font:800 25px "Plus Jakarta Sans";letter-spacing:-.7px;margin:0}
 .calendar-page-actions{display:flex;gap:9px;align-items:center}
-.calendar-embed-card{background:#fff;border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:0 3px 12px #1c4a3208}
-.calendar-embed-top{height:58px;padding:0 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}
-.calendar-embed-top b{font:800 12px "Plus Jakarta Sans"}
-.calendar-embed-top small{color:var(--muted);font-size:10px;margin-left:2px}
-.calendar-live-dot{width:8px;height:8px;border-radius:50%;background:#269b69;box-shadow:0 0 0 4px #e8f5ed}
-.calendar-timezone{margin-left:auto;color:var(--muted);font-size:10px}
-.calendar-embed-card iframe{display:block;width:100%;height:calc(100vh - 230px);min-height:620px;border:0;background:#fff}
-.calendar-help{font-size:10px;color:#89968f;margin:13px 2px 0;line-height:1.6}
 @media(max-width:1150px){.calendar-page{padding:32px 25px}}
-@media(max-width:700px){.calendar-page{padding:25px 13px}.calendar-page-heading{align-items:flex-start;flex-direction:column}.calendar-page-heading h1{font-size:21px}.calendar-page-actions{width:100%}.calendar-page-actions .secondary-btn{width:100%}.calendar-embed-top{padding:0 13px}.calendar-embed-card iframe{height:calc(100vh - 245px);min-height:560px}}
+@media(max-width:700px){.calendar-page{padding:25px 13px}.calendar-page-heading{align-items:flex-start;flex-direction:column}.calendar-page-heading h1{font-size:21px}.calendar-page-actions{width:100%}}
 
 
 /* Note AP format color system */
@@ -801,10 +793,8 @@ body.command-open{overflow:hidden}
 
 /* VISIBILITY SAFEGUARD — keep inactive workspace pages hidden */
 .calendar-page[hidden],.content-page[hidden],.kanban-page[hidden],.visit-page[hidden],.settings-page[hidden],.help-page[hidden]{display:none!important}
-.calendar-connection-note{display:flex;flex-direction:column;gap:5px;padding:12px 20px;border-bottom:1px solid var(--line);background:#f4fbf9;color:#57716d;font-size:10px;line-height:1.6}
-.calendar-connection-note b{color:#168f83;font-size:10px}
 .visit-main-heading .muted,.visit-today-card .muted{font-size:10px;line-height:1.6;max-width:680px}
-@media(max-width:700px){.calendar-connection-note{padding:11px 13px}.visit-main-heading .muted,.visit-today-card .muted{font-size:9px}}
+@media(max-width:700px){.visit-main-heading .muted,.visit-today-card .muted{font-size:9px}}
 
 
 /* NOTE AP CALENDAR PLANNER — additive month grid and inline schedule editor */

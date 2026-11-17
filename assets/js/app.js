@@ -683,4 +683,66 @@
     notificationBtn.setAttribute('aria-expanded','false');
     showToast('Halaman Notifikasi akan dibuat pada tahap berikutnya.');
   });
+
+  // NOTE AP COMMAND CENTER — pencarian dan aksi lintas halaman
+  const commandOverlay=document.getElementById('commandOverlay');
+  const commandInput=document.getElementById('commandInput');
+  const commandResults=document.getElementById('commandResults');
+  const commandLauncher=document.getElementById('commandLauncher');
+  let commandItems=[],commandActive=0;
+  const commandPages=[
+    {title:'Dashboard',detail:'Ringkasan workspace',icon:'▦',run:()=>showPage('dashboard')},
+    {title:'Kalender',detail:'Jadwal publikasi konten',icon:'▦',run:()=>showPage('kalender')},
+    {title:'Konten',detail:'Cari dan kelola semua konten',icon:'▤',run:()=>showPage('konten')},
+    {title:'Kanban',detail:'Pantau tahapan workflow',icon:'▥',run:()=>showPage('kanban')},
+    {title:'Visit',detail:'Data kunjungan dan aktivitas',icon:'↗',run:()=>showPage('visit')},
+    {title:'Setelan',detail:'Preferensi dan referensi',icon:'⚙',run:()=>showPage('setelan')},
+    {title:'Bantuan',detail:'Panduan dan chat tim',icon:'?',run:()=>showPage('bantuan')}
+  ];
+  function getCommandItems(query=''){
+    let contents=[];try{const data=JSON.parse(localStorage.getItem('noteAp.contents')||'[]');if(Array.isArray(data))contents=data;}catch(error){}
+    const q=query.trim().toLocaleLowerCase('id');
+    const actions=[
+      {title:'Buat konten baru',detail:'Mulai ide atau jadwal konten',icon:'＋',group:'Tindakan',run:()=>openContentModal()},
+      {title:'Lihat konten yang perlu dikerjakan',detail:'Buka daftar konten',icon:'◷',group:'Tindakan',run:()=>showPage('konten')},
+      {title:'Buka Content Board',detail:'Pindahkan konten antar tahapan',icon:'⇄',group:'Tindakan',run:()=>showPage('kanban')}
+    ];
+    const pages=commandPages.map(item=>({...item,group:'Halaman'}));
+    const found=contents.filter(item=>String(item.title||'').toLocaleLowerCase('id').includes(q)).slice(0,6).map(item=>({
+      title:item.title||'Konten tanpa judul',detail:[item.platform,item.status,item.postingDate].filter(Boolean).join(' · '),icon:'▤',group:'Konten',
+      run:()=>{showPage('konten');const search=document.getElementById('contentSearch');if(search){search.value=item.title||'';search.dispatchEvent(new Event('input',{bubbles:true}));}}
+    }));
+    const all=[...actions,...pages,...found];
+    return q?all.filter(item=>(item.title+' '+(item.detail||'')).toLocaleLowerCase('id').includes(q)):all;
+  }
+  function renderCommandResults(){
+    commandItems=getCommandItems(commandInput.value);commandActive=0;commandResults.replaceChildren();
+    if(!commandItems.length){const empty=document.createElement('div');empty.className='command-empty';empty.textContent='Tidak ada hasil. Coba kata kunci lain.';commandResults.append(empty);return;}
+    let previous='';
+    commandItems.forEach((item,index)=>{
+      if(item.group!==previous){const group=document.createElement('div');group.className='command-group-label';group.textContent=item.group;commandResults.append(group);previous=item.group;}
+      const button=document.createElement('button');button.type='button';button.className='command-result';button.setAttribute('role','option');button.setAttribute('aria-selected',String(index===commandActive));
+      const icon=document.createElement('span');icon.className='command-result-icon';icon.textContent=item.icon;
+      const copy=document.createElement('span');copy.className='command-result-copy';
+      const title=document.createElement('b');title.textContent=item.title;
+      const detail=document.createElement('small');detail.textContent=item.detail||'';
+      copy.append(title,detail);const arrow=document.createElement('span');arrow.className='command-result-arrow';arrow.textContent='↵';
+      button.append(icon,copy,arrow);button.addEventListener('click',()=>runCommand(index));commandResults.append(button);
+    });
+  }
+  function runCommand(index){const item=commandItems[index];if(!item)return;closeCommandCenter();item.run();showToast(item.group==='Konten'?'Konten ditemukan di daftar.':item.title+' dibuka.');}
+  function closeCommandCenter(){commandOverlay.hidden=true;commandOverlay.setAttribute('aria-hidden','true');document.body.classList.remove('command-open');}
+  function openCommandCenter(){commandOverlay.hidden=false;commandOverlay.setAttribute('aria-hidden','false');document.body.classList.add('command-open');commandInput.value='';renderCommandResults();setTimeout(()=>commandInput.focus(),30);}
+  commandLauncher.addEventListener('click',openCommandCenter);
+  commandOverlay.addEventListener('click',event=>{if(event.target===commandOverlay)closeCommandCenter();});
+  commandInput.addEventListener('input',renderCommandResults);
+  commandInput.addEventListener('keydown',event=>{
+    if(event.key==='ArrowDown'||event.key==='ArrowUp'){event.preventDefault();if(!commandItems.length)return;commandActive=(commandActive+(event.key==='ArrowDown'?1:-1)+commandItems.length)%commandItems.length;commandResults.querySelectorAll('.command-result').forEach((button,index)=>button.setAttribute('aria-selected',String(index===commandActive)));commandResults.querySelectorAll('.command-result')[commandActive]?.scrollIntoView({block:'nearest'});}
+    if(event.key==='Enter'){event.preventDefault();runCommand(commandActive);}
+  });
+  document.addEventListener('keydown',event=>{
+    if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){event.preventDefault();commandOverlay.hidden?openCommandCenter():closeCommandCenter();}
+    if(event.key==='Escape'&&!commandOverlay.hidden)closeCommandCenter();
+  });
+
 })();

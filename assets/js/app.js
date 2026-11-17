@@ -68,41 +68,58 @@
   const visitPage=document.getElementById('visitPage');
   const settingsPage=document.getElementById('settingsPage');
   const helpPage=document.getElementById('helpPage');
+  const pageElements={
+    dashboard:dashboardPage,kalender:calendarPage,konten:contentPage,
+    kanban:kanbanPage,visit:visitPage,setelan:settingsPage,bantuan:helpPage
+  };
   function showPage(page){
-    const isCalendar=page==='kalender',isContent=page==='konten',isKanban=page==='kanban',isVisit=page==='visit',isSettings=page==='setelan',isHelp=page==='bantuan';
-    dashboardPage.hidden=isCalendar||isContent||isKanban||isVisit||isSettings||isHelp;
-    calendarPage.hidden=!isCalendar;
-    contentPage.hidden=!isContent;
-    kanbanPage.hidden=!isKanban;
-    visitPage.hidden=!isVisit;
-    settingsPage.hidden=!isSettings;
-    helpPage.hidden=!isHelp;
-    document.querySelectorAll('.nav-link').forEach(item=>item.classList.toggle('active',item.dataset.page===page));
-    document.getElementById('todayLabel').textContent=isCalendar?'CONTENT SCHEDULING':isContent?'CONTENT MANAGEMENT':'WORKSPACE OVERVIEW';
-    document.getElementById('todayDate').textContent=isCalendar?'Kalender terhubung dengan Google Calendar · Asia/Jakarta':isContent?'Kelola dan pantau seluruh konten Instagram dan TikTok.':'Ringkasan aktivitas konten Apotek Prapatan';
-    if(isContent)renderContentList();
-    if(isKanban)renderKanban();
-    if(isVisit||isSettings)renderVisitTables();
-    if(isHelp)renderChat();
-    window.location.hash=isCalendar?'kalender':isContent?'konten':isKanban?'kanban':isVisit?'visit':isSettings?'setelan':isHelp?'bantuan':'dashboard';
+    if(!Object.prototype.hasOwnProperty.call(pageElements,page))page='dashboard';
+    Object.entries(pageElements).forEach(([key,element])=>{
+      if(element)element.hidden=key!==page;
+    });
+    document.querySelectorAll('.nav-link').forEach(item=>{
+      const active=item.dataset.page===page;
+      item.classList.toggle('active',active);
+      item.setAttribute('aria-current',active?'page':'false');
+    });
+    const todayLabel=document.getElementById('todayLabel');
+    const todayDate=document.getElementById('todayDate');
+    if(todayLabel)todayLabel.textContent=page==='kalender'?'CONTENT SCHEDULING':page==='visit'?'PRODUCTION VISIT':page==='konten'?'CONTENT MANAGEMENT':'WORKSPACE OVERVIEW';
+    if(todayDate)todayDate.textContent=page==='kalender'
+      ?'Lihat kalender Google untuk memeriksa jadwal. Data Konten Note AP belum tersinkron otomatis ke Google Calendar.'
+      :page==='visit'?'Catat dan pantau jadwal kunjungan produksi, lokasi, talent, serta status pengerjaan.'
+      :page==='konten'?'Kelola seluruh ide, proses, dan publikasi konten Instagram dan TikTok.'
+      :'Ringkasan aktivitas konten Apotek Prapatan';
+    if(page==='konten')renderContentList();
+    if(page==='kanban')renderKanban();
+    if(page==='visit'||page==='setelan')renderVisitTables();
+    if(page==='help')renderChat();
+    const nextHash='#'+page;
+    if(window.location.hash!==nextHash)window.location.hash=page;
+    document.getElementById('sidebar')?.classList.remove('open');
   }
-  document.querySelectorAll('.nav-link').forEach(link=>link.addEventListener('click',event=>{
+  document.querySelectorAll('.nav-link[data-page]').forEach(link=>link.addEventListener('click',event=>{
     event.preventDefault();
-    const page=link.dataset.page;
-    document.getElementById('sidebar').classList.remove('open');
-    if(page==='dashboard'||page==='kalender'||page==='konten'||page==='kanban'||page==='visit'||page==='setelan'||page==='bantuan'){showPage(page);return;}
-    showToast('Halaman '+link.textContent.trim()+' sedang dalam tahap pengembangan.');
+    showPage(link.dataset.page);
   }));
-  document.querySelectorAll('a[href="#kalender"]').forEach(link=>link.addEventListener('click',event=>{
-    event.preventDefault();
-    showPage('kalender');
-  }));
-  if(window.location.hash==='#kalender') showPage('kalender');
-  if(window.location.hash==='#konten') showPage('konten');
-  if(window.location.hash==='#kanban') showPage('kanban');
-  if(window.location.hash==='#visit') showPage('visit');
-  if(window.location.hash==='#setelan') showPage('setelan');
-  if(window.location.hash==='#bantuan') showPage('bantuan');
+  document.addEventListener('click',event=>{
+    const link=event.target.closest('a[href^="#"]');
+    if(!link)return;
+    const page=link.getAttribute('href').slice(1);
+    if(Object.prototype.hasOwnProperty.call(pageElements,page)){
+      event.preventDefault();
+      showPage(page);
+    }
+  });
+  window.addEventListener('hashchange',()=>{
+    const page=window.location.hash.replace(/^#/,'')||'dashboard';
+    if(Object.prototype.hasOwnProperty.call(pageElements,page)){
+      const active=Object.entries(pageElements).find(([key,element])=>key===page&&element&&!element.hidden);
+      if(!active)showPage(page);
+    }
+  });
+  const initialPage=window.location.hash.replace(/^#/,'')||'dashboard';
+  showPage(Object.prototype.hasOwnProperty.call(pageElements,initialPage)?initialPage:'dashboard');
   document.getElementById('newContentListBtn').addEventListener('click',openContentModal);
   const contentSearch=document.getElementById('contentSearch'),contentPlatform=document.getElementById('contentPlatform'),contentStatus=document.getElementById('contentStatus'),contentDateFrom=document.getElementById('contentDateFrom'),contentDateTo=document.getElementById('contentDateTo');
   [contentSearch,contentPlatform,contentStatus,contentDateFrom,contentDateTo].forEach(input=>input.addEventListener('input',renderContentList));

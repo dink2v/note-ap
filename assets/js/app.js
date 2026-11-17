@@ -381,6 +381,8 @@
     const body=document.getElementById('visitTableBody');
     if(!body)return;
     const allVisits=sortedVisits();
+    const existingIds=new Set(allVisits.map(item=>item.id));
+    for(const id of visitSelectedIds){if(!existingIds.has(id))visitSelectedIds.delete(id);}
     const monthKey=[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0')].join('-');
     const visits=allVisits.filter(item=>!item.visitDate||item.visitDate.slice(0,7)===monthKey);
     const pageCount=Math.max(1,Math.ceil(visits.length/visitPageSize));
@@ -559,11 +561,12 @@
     visitCalendarMonth=new Date(visitCalendarMonth.getFullYear(),visitCalendarMonth.getMonth()+offset,1);
     visitCalendarSelected=[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0'),'01'].join('-');
     visitCurrentPage=0;
+    visitSelectedIds.clear();
     renderVisitTables();
   }
   document.getElementById('visitTodayMonth')?.addEventListener('click',()=>{
     const today=new Date();visitCalendarMonth=new Date(today.getFullYear(),today.getMonth(),1);
-    visitCalendarSelected=calendarDateKey(today);visitCurrentPage=0;renderVisitTables();
+    visitCalendarSelected=calendarDateKey(today);visitCurrentPage=0;visitSelectedIds.clear();renderVisitTables();
   });
   document.getElementById('visitPrevMonth')?.addEventListener('click',()=>moveVisitMonth(-1));
   document.getElementById('visitNextMonth')?.addEventListener('click',()=>moveVisitMonth(1));

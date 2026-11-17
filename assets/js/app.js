@@ -69,12 +69,13 @@
   const settingsPage=document.getElementById('settingsPage');
   const helpPage=document.getElementById('helpPage');
   function showPage(page){
-    const isCalendar=page==='kalender',isContent=page==='konten',isKanban=page==='kanban',isVisit=page==='visit',isSettings=page==='setelan',isHelp=page==='bantuan';
-    dashboardPage.hidden=isCalendar||isContent||isKanban||isVisit||isSettings||isHelp;
+    const isCalendar=page==='kalender',isContent=page==='konten',isKanban=page==='kanban',isVisit=page==='visit',isChat=page==='chat',isSettings=page==='setelan',isHelp=page==='bantuan';
+    dashboardPage.hidden=isCalendar||isContent||isKanban||isVisit||isChat||isSettings||isHelp;
     calendarPage.hidden=!isCalendar;
     contentPage.hidden=!isContent;
     kanbanPage.hidden=!isKanban;
     visitPage.hidden=!isVisit;
+    document.getElementById('chatPage').hidden=!isChat;
     settingsPage.hidden=!isSettings;
     helpPage.hidden=!isHelp;
     document.querySelectorAll('.nav-link').forEach(item=>item.classList.toggle('active',item.dataset.page===page));
@@ -83,13 +84,14 @@
     if(isContent)renderContentList();
     if(isKanban)renderKanban();
     if(isVisit||isSettings)renderVisitTables();
-    window.location.hash=isCalendar?'kalender':isContent?'konten':isKanban?'kanban':isVisit?'visit':isSettings?'setelan':isHelp?'bantuan':'dashboard';
+    if(isChat)renderChat();
+    window.location.hash=isCalendar?'kalender':isContent?'konten':isKanban?'kanban':isVisit?'visit':isChat?'chat':isSettings?'setelan':isHelp?'bantuan':'dashboard';
   }
   document.querySelectorAll('.nav-link').forEach(link=>link.addEventListener('click',event=>{
     event.preventDefault();
     const page=link.dataset.page;
     document.getElementById('sidebar').classList.remove('open');
-    if(page==='dashboard'||page==='kalender'||page==='konten'||page==='kanban'||page==='visit'||page==='setelan'||page==='bantuan'){showPage(page);return;}
+    if(page==='dashboard'||page==='kalender'||page==='konten'||page==='kanban'||page==='visit'||page==='chat'||page==='setelan'||page==='bantuan'){showPage(page);return;}
     showToast('Halaman '+link.textContent.trim()+' sedang dalam tahap pengembangan.');
   }));
   document.querySelectorAll('a[href="#kalender"]').forEach(link=>link.addEventListener('click',event=>{
@@ -100,6 +102,7 @@
   if(window.location.hash==='#konten') showPage('konten');
   if(window.location.hash==='#kanban') showPage('kanban');
   if(window.location.hash==='#visit') showPage('visit');
+  if(window.location.hash==='#chat') showPage('chat');
   if(window.location.hash==='#setelan') showPage('setelan');
   if(window.location.hash==='#bantuan') showPage('bantuan');
   document.getElementById('newContentListBtn').addEventListener('click',openContentModal);
@@ -546,6 +549,74 @@
     column.addEventListener('drop',event=>{event.preventDefault();column.classList.remove('drop-target');const id=event.dataTransfer.getData('text/plain'),items=readKanban(),item=items.find(x=>x.id===id);if(!item)return;item.status=column.dataset.stage;item.updatedAt=new Date().toISOString();writeKanban(items);renderKanban();if(!contentPage.hidden)renderContentList();showToast('Status konten dipindahkan ke '+item.status+'.');});
   });
 
+
+  // Chat preview: messages are stored locally until a shared backend is connected.
+  const chatStorageKey='noteAp.chats';
+  const chatSeed=[
+    {id:'admin',type:'private',name:'Admin Note AP',subtitle:'Chat pribadi · Admin',avatar:'A',messages:[{id:'welcome-admin',sender:'other',name:'Admin Note AP',text:'Halo! Selamat datang di ruang bantuan Note AP. Tulis pertanyaan atau kendala yang ingin disampaikan di sini.',at:new Date().toISOString()}]},
+    {id:'team',type:'group',name:'Grup Tim Note AP',subtitle:'Grup · Seluruh anggota tim',avatar:'T',messages:[{id:'welcome-team',sender:'other',name:'Admin Note AP',text:'Selamat datang di grup tim. Gunakan ruang ini untuk koordinasi ide, jadwal, dan produksi konten.',at:new Date().toISOString()}]}
+  ];
+  let chatRooms;
+  try{chatRooms=JSON.parse(localStorage.getItem(chatStorageKey)||'null');}catch(error){chatRooms=null;}
+  if(!Array.isArray(chatRooms)||!chatRooms.length)chatRooms=chatSeed;
+  let activeChatId='admin',chatFilter='all';
+  const chatList=document.getElementById('chatConversationList');
+  const chatMessages=document.getElementById('chatMessages');
+  const chatTime=value=>new Intl.DateTimeFormat('id-ID',{hour:'2-digit',minute:'2-digit'}).format(new Date(value));
+  const persistChats=()=>{try{localStorage.setItem(chatStorageKey,JSON.stringify(chatRooms));}catch(error){showToast('Pesan tidak dapat disimpan pada browser ini.');}};
+  function renderChatList(){
+    chatList.replaceChildren();
+    const visible=chatRooms.filter(room=>chatFilter==='all'||room.type===chatFilter);
+    document.getElementById('chatConversationCount').textContent=chatRooms.length+' ruang';
+    visible.forEach(room=>{
+      const last=room.messages[room.messages.length-1];
+      const button=document.createElement('button');button.type='button';button.className='chat-conversation'+(room.id===activeChatId?' active':'');
+      const avatar=document.createElement('span');avatar.className='chat-list-avatar';avatar.textContent=room.avatar;
+      const body=document.createElement('span');body.className='chat-list-body';
+      const title=document.createElement('b');title.textContent=room.name;
+      const preview=document.createElement('small');preview.textContent=last?(last.sender==='me'?'Kamu: ':'')+last.text:'Belum ada pesan';
+      const meta=document.createElement('span');meta.className='chat-list-meta';meta.textContent=last?chatTime(last.at):'';
+      body.append(title,preview);button.append(avatar,body,meta);
+      button.addEventListener('click',()=>{activeChatId=room.id;renderChat();});
+      chatList.append(button);
+    });
+  }
+  function renderChat(){
+    const room=chatRooms.find(item=>item.id===activeChatId)||chatRooms[0];
+    if(!room)return;
+    activeChatId=room.id;
+    document.getElementById('chatThreadAvatar').textContent=room.avatar;
+    document.getElementById('chatThreadName').textContent=room.name;
+    document.getElementById('chatThreadSubtitle').textContent=room.subtitle;
+    chatMessages.replaceChildren();
+    room.messages.forEach(message=>{
+      const wrap=document.createElement('article');wrap.className='chat-message '+(message.sender==='me'?'mine':'theirs');
+      if(message.sender!=='me'){const sender=document.createElement('b');sender.className='chat-message-sender';sender.textContent=message.name||'Anggota';wrap.append(sender);}
+      const bubble=document.createElement('p');bubble.textContent=message.text;
+      const time=document.createElement('small');time.textContent=chatTime(message.at);
+      wrap.append(bubble,time);chatMessages.append(wrap);
+    });
+    if(!room.messages.length){const empty=document.createElement('p');empty.className='chat-empty';empty.textContent='Belum ada pesan. Mulai percakapan di sini.';chatMessages.append(empty);}
+    chatMessages.scrollTop=chatMessages.scrollHeight;
+    renderChatList();
+  }
+  document.querySelectorAll('[data-chat-filter]').forEach(button=>button.addEventListener('click',()=>{
+    chatFilter=button.dataset.chatFilter;
+    document.querySelectorAll('[data-chat-filter]').forEach(item=>item.classList.toggle('active',item===button));
+    const first=chatRooms.find(room=>chatFilter==='all'||room.type===chatFilter);
+    if(first)activeChatId=first.id;
+    renderChat();
+  }));
+  document.getElementById('chatComposer').addEventListener('submit',event=>{
+    event.preventDefault();
+    const input=document.getElementById('chatMessageInput'),value=input.value.trim();
+    if(!value)return;
+    const room=chatRooms.find(item=>item.id===activeChatId);
+    if(!room)return;
+    room.messages.push({id:'msg-'+Date.now(),sender:'me',name:'Kamu',text:value,at:new Date().toISOString()});
+    persistChats();input.value='';renderChat();
+  });
+  renderChat();
   document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));
   document.addEventListener('click',event=>{
     const sidebar=document.getElementById('sidebar');

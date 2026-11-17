@@ -87,7 +87,7 @@
     const todayDate=document.getElementById('todayDate');
     if(todayLabel)todayLabel.textContent=page==='kalender'?'CONTENT SCHEDULING':page==='visit'?'PRODUCTION VISIT':page==='konten'?'CONTENT MANAGEMENT':'WORKSPACE OVERVIEW';
     if(todayDate)todayDate.textContent=page==='kalender'
-      ?'Lihat kalender Google untuk memeriksa jadwal. Data Konten Note AP belum tersinkron otomatis ke Google Calendar.'
+      ?'Lihat dan atur jadwal dari data konten yang sama dengan menu Konten dan Kanban.'
       :page==='visit'?'Catat dan pantau jadwal kunjungan produksi, lokasi, talent, serta status pengerjaan.'
       :page==='konten'?'Kelola seluruh ide, proses, dan publikasi konten Instagram dan TikTok.'
       :'Ringkasan aktivitas konten Apotek Prapatan';

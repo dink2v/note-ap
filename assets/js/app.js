@@ -890,6 +890,9 @@
     if(!Array.isArray(noteEvents))noteEvents=[{id:'demo-note-1',title:'Edukasi Kesehatan: Jaga Imunitas',date:plusDays(1),time:'09:00',googleEventId:null}];
     if(!Array.isArray(googleEvents))googleEvents=[{id:'demo-google-1',title:'Briefing Tim Konten',date:plusDays(2),time:'10:00',sourceNoteId:null}];
     if(!Array.isArray(history))history=[];
+    const nowIso=()=>new Date().toISOString();
+    const getUpdatedAt=item=>{const value=Date.parse(item.updatedAt||item.createdAt||'');return Number.isFinite(value)?value:0;};
+    [...noteEvents,...googleEvents].forEach(item=>{if(!item.updatedAt)item.updatedAt=item.createdAt||nowIso();});
     const account=document.getElementById('calendarDemoAccount');
     const calendarId=document.getElementById('calendarDemoCalendarId');
     const noteList=document.getElementById('calendarDemoNoteList');
@@ -913,7 +916,7 @@
           const nextDate=prompt('Tanggal (YYYY-MM-DD):',item.date||'');if(nextDate===null)return;
           const nextTime=prompt('Jam (HH:MM):',item.time||'09:00');if(nextTime===null)return;
           if(!nextTitle.trim()||!/^\d{4}-\d{2}-\d{2}$/.test(nextDate)||!/^\d{2}:\d{2}$/.test(nextTime)){alert('Judul, tanggal, atau jam tidak valid.');return;}
-          item.title=nextTitle.trim();item.date=nextDate;item.time=nextTime;save();render();log('Jadwal '+(source==='note'?'Note AP':'Google Calendar')+' diperbarui di sandbox.');
+          item.title=nextTitle.trim();item.date=nextDate;item.time=nextTime;item.updatedAt=nowIso();save();render();log('Jadwal '+(source==='note'?'Note AP':'Google Calendar')+' diperbarui di sandbox.');
         });
         const remove=document.createElement('button');remove.type='button';remove.textContent='Hapus';remove.addEventListener('click',()=>{
           if(!confirm('Hapus jadwal demo ini?'))return;
@@ -942,7 +945,7 @@
     function addFromForm(form,target){
       form.addEventListener('submit',event=>{
         event.preventDefault();const data=new FormData(form);
-        const item={id:makeId(target),title:String(data.get('title')||'').trim(),date:String(data.get('date')||''),time:String(data.get('time')||'09:00')};
+        const item={id:makeId(target),title:String(data.get('title')||'').trim(),date:String(data.get('date')||''),time:String(data.get('time')||'09:00'),updatedAt:nowIso()};
         if(!item.title||!item.date||!item.time)return;
         if(target==='note'){item.googleEventId=null;noteEvents.push(item);}else{item.sourceNoteId=null;googleEvents.push(item);}
         save();form.reset();const time=form.querySelector('[name="time"]');if(time)time.value=target==='note'?'09:00':'10:00';render();log('Jadwal baru ditambahkan ke '+(target==='note'?'Note AP':'Google Calendar')+' demo.');
@@ -951,23 +954,35 @@
     addFromForm(document.getElementById('calendarDemoNoteForm'),'note');
     addFromForm(document.getElementById('calendarDemoGoogleForm'),'google');
     document.getElementById('calendarDemoPush').addEventListener('click',()=>{
-      let changed=0;
+      let changed=0,noteWins=0,googleWins=0;
       noteEvents.forEach(item=>{
         let event=googleEvents.find(row=>row.sourceNoteId===item.id||row.id===item.googleEventId);
-        if(event){event.title=item.title;event.date=item.date;event.time=item.time;}
-        else{event={id:makeId('gcal'),title:item.title,date:item.date,time:item.time,sourceNoteId:item.id};googleEvents.push(event);}
-        item.googleEventId=event.id;changed++;
+        if(event){
+          if(getUpdatedAt(event)>getUpdatedAt(item)){
+            item.title=event.title;item.date=event.date;item.time=event.time;item.updatedAt=event.updatedAt||nowIso();googleWins++;
+          }else{
+            event.title=item.title;event.date=item.date;event.time=item.time;event.updatedAt=item.updatedAt||nowIso();noteWins++;
+          }
+        }else{
+          event={id:makeId('gcal'),title:item.title,date:item.date,time:item.time,sourceNoteId:item.id,updatedAt:item.updatedAt||nowIso()};googleEvents.push(event);
+        }
+        item.googleEventId=event.id;event.sourceNoteId=item.id;changed++;
       });
-      save();render();log('Simulasi Note AP → Google Calendar selesai: '+changed+' jadwal diproses.');
+      save();render();log('Sinkronisasi selesai: '+changed+' jadwal diproses · Note AP menang '+noteWins+' · Google Calendar menang '+googleWins+' (berdasarkan perubahan terakhir).');
     });
     document.getElementById('calendarDemoPull').addEventListener('click',()=>{
-      let added=0,updated=0;
+      let added=0,updated=0,noteWins=0;
       googleEvents.forEach(event=>{
         let item=noteEvents.find(row=>row.id===event.sourceNoteId||row.googleEventId===event.id);
-        if(item){item.title=event.title;item.date=event.date;item.time=event.time;updated++;}
-        else{noteEvents.push({id:makeId('note'),title:event.title,date:event.date,time:event.time,googleEventId:event.id});event.sourceNoteId=noteEvents[noteEvents.length-1].id;added++;}
+        if(item){
+          if(getUpdatedAt(event)>getUpdatedAt(item)){item.title=event.title;item.date=event.date;item.time=event.time;item.updatedAt=event.updatedAt||nowIso();updated++;}
+          else{event.title=item.title;event.date=item.date;event.time=item.time;event.updatedAt=item.updatedAt||nowIso();noteWins++;}
+        }else{
+          item={id:makeId('note'),title:event.title,date:event.date,time:event.time,googleEventId:event.id,updatedAt:event.updatedAt||nowIso()};
+          noteEvents.push(item);event.sourceNoteId=item.id;added++;
+        }
       });
-      save();render();log('Simulasi Google Calendar → Note AP selesai: '+added+' jadwal ditambahkan, '+updated+' jadwal diperbarui.');
+      save();render();log('Sinkronisasi selesai: '+added+' jadwal ditambahkan · '+updated+' jadwal mengikuti Google Calendar · '+noteWins+' jadwal mengikuti Note AP (berdasarkan perubahan terakhir).');
     });
     document.getElementById('calendarDemoReset').addEventListener('click',()=>{
       if(!confirm('Reset seluruh data demo Google Calendar? Data konten utama Note AP tidak akan disentuh.'))return;

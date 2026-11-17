@@ -6,7 +6,7 @@
   <title>Note AP — Apotek Prapatan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/app.css?v=20261117-globalorange-teal1">
+  <link rel="stylesheet" href="assets/css/app.css?v=20261117-commandcenter1">
 </head>
 <body>
 <div class="app-shell">
@@ -254,6 +254,16 @@
   </main>
 </div>
 <div class="content-modal" id="contentModal" aria-hidden="true"><section class="content-modal-dialog" role="dialog" aria-modal="true" aria-label="Tambah Konten"><button type="button" class="content-modal-close" id="contentModalClose" aria-label="Tutup popup">×</button><iframe id="contentModalFrame" title="Form Tambah Konten" src="tambah-konten.html?v=20261116-2" loading="eager"></iframe></section></div>
+
+<section class="command-overlay" id="commandOverlay" aria-hidden="true" hidden>
+ <div class="command-dialog" role="dialog" aria-modal="true" aria-labelledby="commandTitle">
+  <div class="command-top"><span class="command-mark">✳</span><div class="command-input-wrap"><label id="commandTitle" for="commandInput">Apa yang ingin kamu lakukan?</label><input id="commandInput" type="search" placeholder="Cari halaman, konten, atau tindakan..." autocomplete="off"></div><kbd>ESC</kbd></div>
+  <div class="command-hint"><span>QUICK COMMANDS</span><span>Gunakan ↑ ↓ lalu Enter</span></div>
+  <div class="command-results" id="commandResults" role="listbox" aria-label="Hasil perintah"></div>
+  <footer class="command-footer"><span><kbd>↵</kbd> Pilih</span><span><kbd>Ctrl</kbd> + <kbd>K</kbd> Buka kapan saja</span></footer>
+ </div>
+</section>
+<button class="command-launcher" id="commandLauncher" type="button" aria-label="Buka Command Center"><span>✳</span><span class="launcher-label">Command Center</span><kbd>Ctrl K</kbd></button>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261117-visitfix1"></script>
+<script src="assets/js/app.js?v=20261117-commandcenter1"></script>
 </body></html>

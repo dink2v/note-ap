@@ -404,29 +404,88 @@
     const root=document.getElementById('visitCalendar');if(!root)return;
     root.replaceChildren();
     const year=visitCalendarMonth.getFullYear(),month=visitCalendarMonth.getMonth();
-    const header=document.createElement('div');header.className='visit-calendar-header';
-    const title=document.createElement('b');title.textContent=new Intl.DateTimeFormat('id-ID',{month:'long',year:'numeric'}).format(visitCalendarMonth);
-    header.append(title);root.append(header);
     const grid=document.createElement('div');grid.className='visit-calendar-grid';
-    ['Min','Sen','Sel','Rab','Kam','Jum','Sab'].forEach(day=>{const cell=document.createElement('div');cell.className='visit-calendar-weekday';cell.textContent=day;grid.append(cell);});
-    const first=new Date(year,month,1).getDay(),days=new Date(year,month+1,0).getDate();
-    const counts={};visits.forEach(v=>{if(v.visitDate)counts[v.visitDate]=(counts[v.visitDate]||0)+1;});
-    for(let i=0;i<first;i++){const blank=document.createElement('div');blank.className='visit-calendar-day is-blank';grid.append(blank);}
-    for(let day=1;day<=days;day++){
-      const key=[year,String(month+1).padStart(2,'0'),String(day).padStart(2,'0')].join('-');
-      const cell=document.createElement('button');cell.type='button';cell.className='visit-calendar-day'+(key===visitCalendarSelected?' is-selected':'')+(counts[key]?' has-visit':'');
-      const num=document.createElement('span');num.textContent=day;cell.append(num);
-      if(counts[key]){const marker=document.createElement('small');marker.textContent=counts[key]+' Visit';cell.append(marker);}
-      cell.dataset.calendarDate=key;grid.append(cell);
+    ['Sen','Sel','Rab','Kam','Jum','Sab','Min'].forEach(day=>{const label=document.createElement('div');label.className='visit-calendar-weekday';label.textContent=day;grid.append(label);});
+    const first=new Date(year,month,1),offset=(first.getDay()+6)%7;
+    const startDate=new Date(year,month,1-offset);
+    const visitsByDate={};
+    visits.filter(item=>item.visitDate).forEach(item=>{(visitsByDate[item.visitDate]||(visitsByDate[item.visitDate]=[])).push(item);});
+    const statusClass=value=>{
+      const status=String(value||'').toUpperCase();
+      return status==='PLANNED'?'planned':status==='ON PROGRESS'?'progress':status==='DONE'?'done':status==='CANCELLED'?'cancelled':'other';
+    };
+    const openVisitFromCalendar=item=>{
+      const monthItems=sortedVisits().filter(entry=>!entry.visitDate||entry.visitDate.slice(0,7)===[item.visitDate.slice(0,4),item.visitDate.slice(5,7)].join('-'));
+      const itemIndex=monthItems.findIndex(entry=>entry.id===item.id);
+      visitCalendarMonth=new Date(Number(item.visitDate.slice(0,4)),Number(item.visitDate.slice(5,7))-1,1);
+      visitCalendarSelected=item.visitDate;
+      visitCurrentPage=Math.max(0,Math.floor(itemIndex/visitPageSize));
+      visitSelectedId=item.id;
+      setVisitViewMode('list');
+      renderVisitTables();
+    };
+    for(let index=0;index<42;index++){
+      const date=new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate()+index);
+      const key=[date.getFullYear(),String(date.getMonth()+1).padStart(2,'0'),String(date.getDate()).padStart(2,'0')].join('-');
+      const dayVisits=(visitsByDate[key]||[]).slice().sort((a,b)=>String(a.time||'').localeCompare(String(b.time||'')));
+      const cell=document.createElement('section');
+      cell.className='visit-calendar-day-cell'+(date.getMonth()!==month?' outside-month':'');
+      if(key===visitCalendarSelected)cell.classList.add('is-selected');
+      if(key===calendarDateKey(new Date()))cell.classList.add('is-today');
+      const head=document.createElement('div');head.className='visit-calendar-day-head';
+      const number=document.createElement('span');number.className='visit-calendar-day-number';number.textContent=String(date.getDate());head.append(number);
+      const add=document.createElement('button');add.type='button';add.className='visit-calendar-day-add';add.textContent='+';add.title='Tambah Visit pada '+key;add.setAttribute('aria-label','Tambah Visit '+key);
+      add.addEventListener('click',event=>{event.stopPropagation();addVisitFromCalendar(key);});
+      head.append(add);cell.append(head);
+      dayVisits.slice(0,3).forEach(item=>{
+        const event=document.createElement('button');event.type='button';event.className='visit-calendar-event-chip '+statusClass(item.status);
+        event.title='Buka jadwal: '+(item.title||'Tanpa judul');
+        const title=document.createElement('b');title.textContent=item.title||'Tanpa judul';
+        const meta=document.createElement('small');meta.textContent=[item.time||'',item.location||'',item.status||''].filter(Boolean).join(' · ');
+        event.append(title,meta);event.addEventListener('click',click=>{click.stopPropagation();openVisitFromCalendar(item);});cell.append(event);
+      });
+      if(dayVisits.length>3){const more=document.createElement('small');more.className='visit-calendar-more';more.textContent='+'+(dayVisits.length-3)+' Visit lainnya';cell.append(more);}
+      cell.addEventListener('click',()=>{
+        if(date.getMonth()!==month||date.getFullYear()!==year){
+          visitCalendarMonth=new Date(date.getFullYear(),date.getMonth(),1);
+          visitCalendarSelected=key;renderVisitTables();return;
+        }
+        visitCalendarSelected=key;renderVisitCalendar(visits);
+      });
+      grid.append(cell);
     }
     root.append(grid);
     const selected=document.createElement('div');selected.className='visit-calendar-selected';
     const selectedDate=new Date(visitCalendarSelected+'T00:00:00');
     const heading=document.createElement('b');heading.textContent='Jadwal '+new Intl.DateTimeFormat('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(selectedDate);selected.append(heading);
-    const matches=visits.filter(v=>v.visitDate===visitCalendarSelected);
-    if(!matches.length){const empty=document.createElement('p');empty.textContent='Belum ada Visit pada tanggal ini.';selected.append(empty);}
-    matches.forEach(v=>{const row=document.createElement('div');row.className='visit-calendar-event';const time=document.createElement('b');time.textContent=v.time||'—';const detail=document.createElement('span');detail.textContent=(v.location||'Lokasi belum diisi')+' · '+(v.title||'Tanpa judul');row.append(time,detail);selected.append(row);});
+    const matches=(visitsByDate[visitCalendarSelected]||[]).slice().sort((a,b)=>String(a.time||'').localeCompare(String(b.time||'')));
+    if(!matches.length){
+      const empty=document.createElement('p');empty.textContent='Belum ada jadwal Visit pada tanggal ini.';selected.append(empty);
+      const addSelected=document.createElement('button');addSelected.type='button';addSelected.className='visit-calendar-add-selected';addSelected.textContent='＋ Tambah Jadwal Visiting';
+      addSelected.addEventListener('click',()=>addVisitFromCalendar(visitCalendarSelected));selected.append(addSelected);
+    }
+    matches.forEach(item=>{
+      const row=document.createElement('button');row.type='button';row.className='visit-calendar-selected-event '+statusClass(item.status);
+      const time=document.createElement('b');time.textContent=item.time||'—';
+      const detail=document.createElement('span');detail.textContent=[item.title||'Tanpa judul',item.location||'Lokasi belum diisi',item.status||'Status belum diisi'].join(' · ');
+      row.append(time,detail);row.addEventListener('click',()=>openVisitFromCalendar(item));selected.append(row);
+    });
     root.append(selected);
+  }
+  function addVisitFromCalendar(dateKey){
+    const date=new Date(dateKey+'T00:00:00');
+    visitCalendarMonth=new Date(date.getFullYear(),date.getMonth(),1);
+    visitCalendarSelected=dateKey;visitCurrentPage=0;visitSelectedId=null;
+    setVisitViewMode('list');renderVisitTables();
+    const dateInput=document.querySelector('#visitTableBody [data-new-visit-field="visitDate"]');
+    if(!dateInput){showToast('Tidak menemukan baris kosong untuk jadwal Visit.');return;}
+    dateInput.value=dateKey;
+    dateInput.dispatchEvent(new Event('change',{bubbles:true}));
+    const created=readVisits().slice(-1)[0];
+    if(created?.id){
+      const timeInput=document.querySelector('[data-visit-id="'+CSS.escape(created.id)+'"][data-visit-field="time"]');
+      timeInput?.focus();
+    }
   }
   function renderVisitMonthNav(){
     const label=document.getElementById('visitMonthLabel');
@@ -438,6 +497,10 @@
     visitCurrentPage=0;
     renderVisitTables();
   }
+  document.getElementById('visitTodayMonth')?.addEventListener('click',()=>{
+    const today=new Date();visitCalendarMonth=new Date(today.getFullYear(),today.getMonth(),1);
+    visitCalendarSelected=calendarDateKey(today);visitCurrentPage=0;renderVisitTables();
+  });
   document.getElementById('visitPrevMonth')?.addEventListener('click',()=>moveVisitMonth(-1));
   document.getElementById('visitNextMonth')?.addEventListener('click',()=>moveVisitMonth(1));
   document.getElementById('visitCalendar')?.addEventListener('click',event=>{

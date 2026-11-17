@@ -1246,3 +1246,9 @@ body.calendar-item-open{overflow:hidden}
 
 .visit-row-delete{display:inline-flex;align-items:center;justify-content:center;margin-left:6px;padding:3px 7px;border:1px solid #efcaca;border-radius:6px;background:#fff7f7;color:#b42318;font-size:11px;font-weight:600;cursor:pointer}
 .visit-row-delete:hover{background:#feecec;border-color:#e7a4a4}
+
+/* Visit Daftar: make row controls visible inside the NO column */
+.visit-main-table th:first-child,.visit-main-table td:first-child{width:82px;min-width:82px;white-space:nowrap}
+.visit-main-table td:first-child .visit-row-delete{margin-left:3px;padding:3px 5px;font-size:10px;line-height:1.2}
+.visit-main-table td:first-child .visit-row-number{min-width:12px;margin-left:2px}
+.visit-main-table td:first-child .visit-row-select{margin:0 2px 0 0}

@@ -362,9 +362,10 @@
       tr.addEventListener('click',event=>{if(event.target.closest('input,select,textarea'))return;visitSelectedId=v.id;renderVisitTables();});
       body.append(tr);
     });
-    // Selalu sediakan empat baris input kosong di bawah data yang tersimpan.
-    // Baris kosong tetap tersedia meskipun halaman sudah memiliki data Visit.
-    for(let slot=0;slot<visitPageSize;slot++){
+    // Batasi jumlah baris yang tampil menjadi tepat empat per halaman.
+    // Baris kosong mengisi sisa slot setelah data tersimpan.
+    const emptySlots=Math.max(0,visitPageSize-pageItems.length);
+    for(let slot=0;slot<emptySlots;slot++){
       const tr=document.createElement('tr');tr.className='visit-select-row visit-placeholder-row';
       const number=document.createElement('td');number.textContent=String(visitCurrentPage*visitPageSize+pageItems.length+slot+1);tr.append(number);
       const fields=visitFields;

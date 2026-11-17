@@ -19,7 +19,6 @@
       <a class="nav-link" href="#konten" data-page="konten"><span>▤</span>Konten</a>
       <a class="nav-link" href="#kanban" data-page="kanban"><span>▥</span>Kanban</a>
       <a class="nav-link" href="#visit" data-page="visit"><span>↗</span>Visit</a>
-      <a class="nav-link" href="#chat" data-page="chat"><span>☏</span>Chat</a>
     </nav>
     <div class="nav-spacer"></div><div class="nav-label">PREFERENSI</div>
     <nav class="nav-list">
@@ -130,8 +129,17 @@
       
       </div>
     </section>
-    <section class="chat-page" id="chatPage" hidden>
-      <div class="chat-heading"><div><div class="eyebrow">TEAM COMMUNICATION</div><h1>Chat</h1><p class="muted">Ruang komunikasi anggota tim dan admin Note AP.</p></div><span class="chat-mode-tag">MODE PREVIEW LOKAL</span></div>
+      </div>
+      <footer class="page-footer">Note AP <span>•</span> Team Communication <span class="demo-tag">MODE PREVIEW</span></footer>
+    </section>
+    <section class="help-page" id="helpPage" hidden>
+      <div class="help-heading">
+        <div><div class="eyebrow">HELP CENTER</div><h1>Pusat Bantuan</h1><p class="muted">Panduan singkat menggunakan Note AP untuk mengelola perencanaan dan produksi konten Apotek Prapatan.</p></div>
+      </div>
+      <div class="help-welcome-card"><div class="help-welcome-icon">?</div><div><span class="help-kicker">NOTE AP GUIDE</span><h2>Butuh bantuan menggunakan Note AP?</h2><p>Temukan fungsi setiap menu, cara mengelola konten, dan informasi penting tentang penyimpanan data.</p></div></div>
+      <section class="help-chat-block">
+        <div class="help-section-heading"><div><div class="eyebrow">CONTACT ADMIN</div><h2>Chat Admin & Tim</h2><p class="muted">Hubungi admin secara pribadi atau berdiskusi bersama tim.</p></div></div>
+        <div class="chat-page">      <div class="chat-heading"><div><div class="eyebrow">TEAM COMMUNICATION</div><h1>Chat</h1><p class="muted">Ruang komunikasi anggota tim dan admin Note AP.</p></div><span class="chat-mode-tag">MODE PREVIEW LOKAL</span></div>
       <div class="chat-workspace">
         <aside class="chat-sidebar">
           <div class="chat-sidebar-head"><b>Percakapan</b><span id="chatConversationCount">2 ruang</span></div>
@@ -143,15 +151,8 @@
           <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
           <form class="chat-composer" id="chatComposer"><textarea id="chatMessageInput" rows="1" maxlength="2000" placeholder="Tulis pesan..." aria-label="Tulis pesan" required></textarea><button type="submit" aria-label="Kirim pesan">➤</button></form>
           <div class="chat-local-note" id="chatLocalNote">Pesan hanya tersimpan di browser ini. Belum terkirim ke admin atau anggota tim lain.</div>
-        </section>
-      </div>
-      <footer class="page-footer">Note AP <span>•</span> Team Communication <span class="demo-tag">MODE PREVIEW</span></footer>
-    </section>
-    <section class="help-page" id="helpPage" hidden>
-      <div class="help-heading">
-        <div><div class="eyebrow">HELP CENTER</div><h1>Pusat Bantuan</h1><p class="muted">Panduan singkat menggunakan Note AP untuk mengelola perencanaan dan produksi konten Apotek Prapatan.</p></div>
-      </div>
-      <div class="help-welcome-card"><div class="help-welcome-icon">?</div><div><span class="help-kicker">NOTE AP GUIDE</span><h2>Butuh bantuan menggunakan Note AP?</h2><p>Temukan fungsi setiap menu, cara mengelola konten, dan informasi penting tentang penyimpanan data.</p></div></div>
+    </div>
+      </section>
       <div class="help-topic-grid">
         <article class="help-topic-card"><span>▦</span><b>Dashboard</b><p>Lihat ringkasan aktivitas dan gambaran jadwal konten workspace.</p></article>
         <article class="help-topic-card"><span>▤</span><b>Konten</b><p>Buat dan pantau daftar konten, termasuk platform, tanggal posting, dan tahapan.</p></article>

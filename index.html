@@ -180,8 +180,8 @@
           <section class="settings-panel" data-settings-panel="appearance" hidden>
             <div class="settings-panel-head"><div><h2>Tampilan & Bahasa</h2><p>Atur kenyamanan tampilan workspace.</p></div></div>
             <div class="settings-preference-row"><div><b>Tema aplikasi</b><p>Pilih tampilan yang nyaman digunakan.</p></div><select id="settingTheme"><option value="light">Terang</option><option value="dark">Gelap (persiapan)</option><option value="system">Ikuti sistem (persiapan)</option></select></div>
-            <div class="settings-preference-row"><div><b>Bahasa aplikasi</b><p>Pilihan bahasa akan diperluas. Bahasa antarmuka baru aktif setelah terjemahannya tersedia.</p></div><select id="settingLanguage"><option value="id">Bahasa Indonesia</option><option value="en">English</option></select></div>
-            <p class="settings-footnote">Daftar bahasa lengkap dan terjemahan antarmuka akan disiapkan bertahap agar pilihan bahasa tidak hanya berubah pada label pengaturan.</p>
+            <div class="settings-preference-row"><div><b>Bahasa aplikasi</b><p>Pilihan bahasa akan diperluas. Bahasa antarmuka baru aktif setelah terjemahannya tersedia.</p></div><input id="settingLanguage" type="text" value="Katalog semua bahasa" disabled aria-describedby="settingLanguageNote"></div>
+            <p class="settings-footnote" id="settingLanguageNote">Sesuai rencana, pilihan bahasa akan mencakup katalog bahasa yang luas. Pemilihan bahasa baru akan diaktifkan setelah terjemahan antarmuka tersedia.</p>
             <div class="settings-actions"><button class="primary-btn" id="saveAppearanceSettings" type="button">Simpan Preferensi</button></div>
           </section>
         </div>

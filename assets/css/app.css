@@ -1252,3 +1252,16 @@ body.calendar-item-open{overflow:hidden}
 .visit-main-table td:first-child .visit-row-delete{margin-left:3px;padding:3px 5px;font-size:10px;line-height:1.2}
 .visit-main-table td:first-child .visit-row-number{min-width:12px;margin-left:2px}
 .visit-main-table td:first-child .visit-row-select{margin:0 2px 0 0}
+
+/* Visit: letakkan kontrol Select tepat di bawah judul Jadwal Visiting */
+.visit-main-heading{align-items:flex-start}
+.visit-main-heading .visit-heading-title{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0}
+.visit-selection-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:3px}
+.visit-selection-controls #visitSelectBtn,
+.visit-selection-controls #visitDeleteSelectedBtn,
+.visit-selection-controls #visitCancelSelectBtn{width:auto;min-height:28px;padding:0 11px;border:1px solid #dce8e5;border-radius:8px;background:#fff;color:#279e9a;font:700 10px 'DM Sans';cursor:pointer;white-space:nowrap}
+.visit-selection-controls #visitSelectBtn[aria-pressed="true"]{background:#e8f7f4;border-color:#279e9a}
+.visit-selection-controls #visitDeleteSelectedBtn{color:#c65353;border-color:#f0cccc}
+.visit-selection-controls #visitDeleteSelectedBtn:disabled{opacity:.45;cursor:not-allowed}
+.visit-selection-controls .visit-select-all-control{min-height:28px;padding:0 9px;border:1px solid #dce8e5;border-radius:8px;background:#fff}
+@media(max-width:760px){.visit-selection-controls{gap:6px}.visit-selection-controls .visit-select-all-control{font-size:9px}}

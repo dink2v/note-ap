@@ -352,18 +352,17 @@
   ['AppName','OrgName','Description','Timezone'].forEach(key=>{
     const el=document.getElementById('setting'+key);if(el&&savedSettings[key[0].toLowerCase()+key.slice(1)])el.value=savedSettings[key[0].toLowerCase()+key.slice(1)];
   });
-  const themeSelect=document.getElementById('settingTheme'),languageSelect=document.getElementById('settingLanguage');
+  const themeSelect=document.getElementById('settingTheme');
   if(themeSelect&&savedSettings.theme)themeSelect.value=savedSettings.theme;
-  if(languageSelect&&savedSettings.language)languageSelect.value=savedSettings.language;
   document.getElementById('saveGeneralSettings')?.addEventListener('click',()=>{
     const value={...readSettings(),appName:document.getElementById('settingAppName').value.trim(),orgName:document.getElementById('settingOrgName').value.trim(),description:document.getElementById('settingDescription').value.trim(),timezone:document.getElementById('settingTimezone').value};
     localStorage.setItem('noteAp.settings',JSON.stringify(value));showToast('Pengaturan umum tersimpan di browser ini.');
   });
   document.getElementById('saveAppearanceSettings')?.addEventListener('click',()=>{
-    const value={...readSettings(),theme:themeSelect.value,language:languageSelect.value};
+    const value={...readSettings(),theme:themeSelect.value};
     localStorage.setItem('noteAp.settings',JSON.stringify(value));
     document.documentElement.dataset.theme=themeSelect.value==='dark'?'dark':'light';
-    showToast('Preferensi tersimpan. Bahasa aktif mengikuti terjemahan yang tersedia.');
+    showToast('Preferensi tampilan tersimpan di browser ini.');
   });
   document.getElementById('exportNoteApData')?.addEventListener('click',()=>{
     const keys=['noteAp.contents','noteAp.visits','noteAp.talents','noteAp.settings'];

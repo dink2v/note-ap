@@ -958,3 +958,25 @@ body.calendar-item-open{overflow:hidden}
 .visit-status-dot.done{background:#27966a}
 .visit-status-dot.cancelled{background:#d66b6b}
 @media(max-width:600px){.visit-calendar-day-add{opacity:1}.visit-calendar-legend{gap:10px;padding:9px}.visit-calendar-legend>span{font-size:8px}}
+
+
+/* FIX VISIT: paksa empat baris input tabel selalu terlihat */
+#visitTableBody{display:table-row-group!important}
+#visitTableBody>tr{display:table-row!important;visibility:visible!important}
+#visitTableBody>tr>td{display:table-cell!important;visibility:visible!important}
+#visitTableBody>.visit-placeholder-row{height:54px!important}
+#visitTableBody>.visit-placeholder-row>td{height:54px!important;min-height:54px!important;background:#fff!important;border:1px solid #aeb8b5!important}
+#visitTableBody>.visit-placeholder-row>td:empty::after{content:"";display:block;min-height:24px}
+.visit-main-table{border-collapse:collapse!important}
+.visit-main-table thead{display:table-header-group!important}
+.visit-main-table tbody{display:table-row-group!important}
+
+/* Kalender Visit memakai enam baris minggu yang eksplisit */
+.visit-calendar-grid{display:block!important;width:100%;min-width:680px!important;overflow:visible!important}
+.visit-calendar-week-row{display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr));width:100%;min-width:680px}
+.visit-calendar-week-row>.visit-calendar-day-cell{display:block!important;min-height:112px!important;border-top:0!important;border-left:0!important}
+.visit-calendar-grid>.visit-calendar-weekday{display:none!important}
+.visit-calendar-grid>.visit-calendar-week-row:first-of-type{border-top:1px solid #eaf0f1}
+.visit-calendar-week-row>.visit-calendar-day-cell{border-top:1px solid #eaf0f1;border-right:1px solid #eaf0f1}
+.visit-calendar-week-row>.visit-calendar-day-cell:first-child{border-left:1px solid #eaf0f1}
+@media(max-width:600px){.visit-calendar-week-row>.visit-calendar-day-cell{min-height:96px!important}}

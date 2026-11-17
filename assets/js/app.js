@@ -600,27 +600,51 @@ tr.append(number);
     showToast('Perubahan Visit tersimpan.');
   }
   document.getElementById('visitTableBody')?.addEventListener('change',event=>{
+    const talentInput=event.target.closest('.visit-multiselect input[type="checkbox"]');
+    if(talentInput){
+      const wrapper=talentInput.closest('.visit-multiselect');
+      const row=talentInput.closest('tr');
+      const selected=[...wrapper.querySelectorAll('input[type="checkbox"]:checked')].map(item=>item.value);
+      let visitId=talentInput.dataset.visitId;
+      if(!visitId){
+        const record={id:'VIS-'+Date.now().toString(36).toUpperCase(),visitDate:'',time:'',location:'',title:'',publishDate:'',talent:selected,props:'',status:'',notes:'',createdAt:new Date().toISOString()};
+        const all=readVisits();all.push(record);writeVisits(all);
+        visitId=record.id;
+        if(row?.dataset.extraVisitRow==='true')visitExtraRows=Math.max(0,visitExtraRows-1);
+        if(row)row.dataset.visitId=visitId;
+        row?.querySelectorAll('[data-new-visit-field]').forEach(control=>{
+          const field=control.dataset.newVisitField;
+          control.dataset.visitId=visitId;
+          control.dataset.visitField=field;
+          delete control.dataset.newVisitField;
+        });
+        visitSelectedId=visitId;
+      }else{
+        const all=readVisits(),record=all.find(item=>item.id===visitId);
+        if(record){record.talent=selected;record.updatedAt=new Date().toISOString();writeVisits(all);}
+      }
+      const summary=wrapper.querySelector('summary');
+      if(summary)summary.textContent=selected.length?selected.join(', '):'Pilih Talent';
+      showToast('Pilihan talent tersimpan.');
+      return;
+    }
     const input=event.target.closest('[data-new-visit-field]');
     if(input){
       const field=input.dataset.newVisitField;
-      const value=field==='talent'
-        ? [...input.closest('.visit-multiselect').querySelectorAll('input[type="checkbox"]:checked')].map(item=>item.value)
-        : input.value;
-      if(!value||(Array.isArray(value)&&!value.length))return;
-      const record={id:'VIS-'+Date.now().toString(36).toUpperCase(),visitDate:'',time:'',location:'',title:'',publishDate:'',talent:[],props:'',status:'',notes:'',createdAt:new Date().toISOString()};
+      const value=input.value;
+      if(!value)return;
+      const row=input.closest('tr');
+      const talent=[...(row?.querySelectorAll('.visit-multiselect input[type="checkbox"]:checked')||[])].map(item=>item.value);
+      const record={id:'VIS-'+Date.now().toString(36).toUpperCase(),visitDate:'',time:'',location:'',title:'',publishDate:'',talent,props:'',status:'',notes:'',createdAt:new Date().toISOString()};
       record[field]=value;
       const all=readVisits();all.push(record);writeVisits(all);
-      if(input.closest('tr')?.dataset.extraVisitRow==='true')visitExtraRows=Math.max(0,visitExtraRows-1);
+      if(row?.dataset.extraVisitRow==='true')visitExtraRows=Math.max(0,visitExtraRows-1);
       visitCurrentPage=0;visitSelectedId=record.id;renderVisitTables();showToast('Data Visit baru tersimpan. Lanjutkan isi kolom lainnya.');
       return;
     }
     const existing=event.target.closest('[data-visit-id][data-visit-field]');
     if(existing){
-      const field=existing.dataset.visitField;
-      const value=field==='talent'
-        ? [...existing.closest('.visit-multiselect').querySelectorAll('input[type="checkbox"]:checked')].map(item=>item.value)
-        : existing.value;
-      updateVisitField(existing.dataset.visitId,field,value);
+      updateVisitField(existing.dataset.visitId,existing.dataset.visitField,existing.value);
     }
   });
   document.getElementById('visitTodayList')?.addEventListener('change',event=>{const input=event.target.closest('[data-visit-id][data-visit-field]');if(input)updateVisitField(input.dataset.visitId,input.dataset.visitField,input.value);});

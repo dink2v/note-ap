@@ -451,17 +451,35 @@
     const save=document.getElementById('saveAppearanceSettings');if(save)save.textContent=t.save;
     document.querySelectorAll('.settings-nav-item').forEach(button=>{const key=button.dataset.settingsTab;if(key==='appearance'){const b=button.querySelector('b');if(b)b.textContent=lang==='en'?'Appearance & Language':'Tampilan & Bahasa';}});
   };
-  if(themeSelect){themeSelect.value=savedSettings.theme||'light';applyTheme(themeSelect.value);}
-  if(languageSelect){languageSelect.value=savedSettings.language||'id';applyLanguage(languageSelect.value);}
+  const saveAppearancePreference=(theme,language)=>{
+    const value={...readSettings(),theme,language};
+    localStorage.setItem('noteAp.settings',JSON.stringify(value));
+  };
+  if(themeSelect){
+    themeSelect.value=savedSettings.theme||'light';
+    applyTheme(themeSelect.value);
+    themeSelect.addEventListener('change',()=>{
+      applyTheme(themeSelect.value);
+      saveAppearancePreference(themeSelect.value,languageSelect?.value||'id');
+      showToast('Tema langsung diterapkan dan tersimpan di browser ini.');
+    });
+  }
+  if(languageSelect){
+    languageSelect.value=savedSettings.language||'id';
+    applyLanguage(languageSelect.value);
+    languageSelect.addEventListener('change',()=>{
+      applyLanguage(languageSelect.value);
+      saveAppearancePreference(themeSelect?.value||'light',languageSelect.value);
+      showToast(languageSelect.value==='en'
+        ? 'Language changed and saved in this browser.'
+        : (languageSelect.value==='id'
+          ? 'Bahasa diubah dan tersimpan di browser ini.'
+          : 'Pilihan bahasa tersimpan. Terjemahan bahasa ini belum tersedia; antarmuka tetap Bahasa Indonesia.'));
+    });
+  }
   document.getElementById('saveGeneralSettings')?.addEventListener('click',()=>{
     const value={...readSettings(),appName:document.getElementById('settingAppName').value.trim(),orgName:document.getElementById('settingOrgName').value.trim(),description:document.getElementById('settingDescription').value.trim(),timezone:document.getElementById('settingTimezone').value};
     localStorage.setItem('noteAp.settings',JSON.stringify(value));showToast('Pengaturan umum tersimpan di browser ini.');
-  });
-  document.getElementById('saveAppearanceSettings')?.addEventListener('click',()=>{
-    const value={...readSettings(),theme:themeSelect?.value||'light',language:languageSelect?.value||'id'};
-    localStorage.setItem('noteAp.settings',JSON.stringify(value));
-    applyTheme(value.theme);applyLanguage(value.language);
-    showToast(value.language==='en'?'Preferences saved in this browser.':(value.language!=='id'?'Language catalog saved; this language is not translated yet, so Indonesian is shown.':'Preferensi tampilan dan bahasa tersimpan di browser ini.'));
   });
   document.getElementById('exportNoteApData')?.addEventListener('click',()=>{
     const keys=['noteAp.contents','noteAp.visits','noteAp.talents','noteAp.settings','noteAp.references'];

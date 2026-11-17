@@ -997,3 +997,38 @@ body.calendar-item-open{overflow:hidden}
 .visit-main-table .visit-inline-textarea{text-align:center}
 .visit-main-table .visit-multiselect{text-align:center;margin-inline:auto}
 .visit-main-table .visit-multiselect summary{justify-content:center}
+
+
+/* Rapikan posisi isi lima kolom utama Daftar Visit */
+#visitTableBody > tr > td:nth-child(n+2):nth-child(-n+6) {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+#visitTableBody > tr > td:nth-child(n+2):nth-child(-n+6) .visit-inline-input {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  box-sizing: border-box;
+  text-align: center !important;
+  text-align-last: center;
+}
+#visitTableBody > tr > td:nth-child(n+2):nth-child(-n+6) .visit-inline-textarea {
+  text-align: center !important;
+  padding-inline: 8px;
+}
+#visitTableBody > tr > td:nth-child(2) input,
+#visitTableBody > tr > td:nth-child(3) input {
+  text-align: center !important;
+  text-align-last: center;
+}
+#visitTableBody > tr > td:nth-child(6) .visit-multiselect {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  text-align: center;
+}
+#visitTableBody > tr > td:nth-child(6) .visit-multiselect summary {
+  justify-content: center;
+  text-align: center;
+}

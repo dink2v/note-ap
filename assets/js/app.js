@@ -912,7 +912,7 @@
           const nextTitle=prompt('Judul acara:',item.title||'');if(nextTitle===null)return;
           const nextDate=prompt('Tanggal (YYYY-MM-DD):',item.date||'');if(nextDate===null)return;
           const nextTime=prompt('Jam (HH:MM):',item.time||'09:00');if(nextTime===null)return;
-          if(!nextTitle.trim()||!/^\\d{4}-\\d{2}-\\d{2}$/.test(nextDate)||!/^\\d{2}:\\d{2}$/.test(nextTime)){alert('Judul, tanggal, atau jam tidak valid.');return;}
+          if(!nextTitle.trim()||!/^\d{4}-\d{2}-\d{2}$/.test(nextDate)||!/^\d{2}:\d{2}$/.test(nextTime)){alert('Judul, tanggal, atau jam tidak valid.');return;}
           item.title=nextTitle.trim();item.date=nextDate;item.time=nextTime;save();render();log('Jadwal '+(source==='note'?'Note AP':'Google Calendar')+' diperbarui di sandbox.');
         });
         const remove=document.createElement('button');remove.type='button';remove.textContent='Hapus';remove.addEventListener('click',()=>{

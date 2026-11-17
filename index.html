@@ -6,7 +6,7 @@
   <title>Note AP — Apotek Prapatan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/app.css?v=20261117-refcrud1">
+  <link rel="stylesheet" href="assets/css/app.css?v=20261117-appearance1">
 </head>
 <body>
 <div class="app-shell">
@@ -180,9 +180,9 @@
           </section>
           <section class="settings-panel" data-settings-panel="appearance" hidden>
             <div class="settings-panel-head"><div><h2>Tampilan & Bahasa</h2><p>Atur kenyamanan tampilan workspace.</p></div></div>
-            <div class="settings-preference-row"><div><b>Tema aplikasi</b><p>Pilih tampilan yang nyaman digunakan.</p></div><select id="settingTheme"><option value="light">Terang</option><option value="dark">Gelap (persiapan)</option><option value="system">Ikuti sistem (persiapan)</option></select></div>
-            <div class="settings-preference-row"><div><b>Bahasa aplikasi</b><p>Pilihan bahasa akan diperluas. Bahasa antarmuka baru aktif setelah terjemahannya tersedia.</p></div><input id="settingLanguage" type="text" value="Katalog semua bahasa" disabled aria-describedby="settingLanguageNote"></div>
-            <p class="settings-footnote" id="settingLanguageNote">Sesuai rencana, pilihan bahasa akan mencakup katalog bahasa yang luas. Pemilihan bahasa baru akan diaktifkan setelah terjemahan antarmuka tersedia.</p>
+            <div class="settings-preference-row"><div><b>Tema aplikasi</b><p>Pilih tampilan terang, gelap, atau mengikuti pengaturan perangkat.</p></div><select id="settingTheme"><option value="light">Terang</option><option value="dark">Gelap</option><option value="system">Ikuti sistem</option></select></div>
+            <div class="settings-preference-row"><div><b>Bahasa aplikasi</b><p>Pilih bahasa antarmuka workspace.</p></div><select id="settingLanguage" aria-describedby="settingLanguageNote"><option value="id">Bahasa Indonesia</option><option value="en">English</option></select></div>
+            <p class="settings-footnote" id="settingLanguageNote">Katalog bahasa tersedia bertahap. Saat ini terjemahan antarmuka lengkap tersedia dalam Bahasa Indonesia dan English; pilihan lainnya akan ditambahkan setelah terjemahan siap.</p>
             <div class="settings-actions"><button class="primary-btn" id="saveAppearanceSettings" type="button">Simpan Preferensi</button></div>
           </section>
         </div>
@@ -193,5 +193,5 @@
 </div>
 <div class="content-modal" id="contentModal" aria-hidden="true"><section class="content-modal-dialog" role="dialog" aria-modal="true" aria-label="Tambah Konten"><button type="button" class="content-modal-close" id="contentModalClose" aria-label="Tutup popup">×</button><iframe id="contentModalFrame" title="Form Tambah Konten" src="tambah-konten.html?v=20261116-2" loading="eager"></iframe></section></div>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261117-settingsfix1"></script>
+<script src="assets/js/app.js?v=20261117-appearance1"></script>
 </body></html>

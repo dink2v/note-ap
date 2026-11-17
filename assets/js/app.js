@@ -131,12 +131,14 @@
       if(!active)showPage(page);
     }
   });
-  const initialPage=window.location.hash.replace(/^#/,'')||'dashboard';
-  showPage(Object.prototype.hasOwnProperty.call(pageElements,initialPage)?initialPage:'dashboard');
   document.getElementById('newContentListBtn').addEventListener('click',openContentModal);
   const contentSearch=document.getElementById('contentSearch'),contentPlatform=document.getElementById('contentPlatform'),contentStatus=document.getElementById('contentStatus'),contentDateFrom=document.getElementById('contentDateFrom'),contentDateTo=document.getElementById('contentDateTo');
   [contentSearch,contentPlatform,contentStatus,contentDateFrom,contentDateTo].forEach(input=>input.addEventListener('input',renderContentList));
   document.getElementById('resetContentFilters').addEventListener('click',()=>{[contentSearch,contentPlatform,contentStatus,contentDateFrom,contentDateTo].forEach(input=>input.value='');renderContentList();});
+
+  // Render halaman awal setelah kontrol Konten dan filter selesai diinisialisasi.
+  const initialPage=window.location.hash.replace(/^#/,'')||'dashboard';
+  showPage(Object.prototype.hasOwnProperty.call(pageElements,initialPage)?initialPage:'dashboard');
   function renderContentList(){
     let items=[];try{const stored=JSON.parse(localStorage.getItem('noteAp.contents')||'[]');if(Array.isArray(stored))items=stored;}catch(error){}
     const query=contentSearch.value.trim().toLocaleLowerCase('id');

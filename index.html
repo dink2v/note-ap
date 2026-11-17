@@ -6,7 +6,7 @@
   <title>Note AP — Apotek Prapatan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/app.css?v=20261117-help1">
+  <link rel="stylesheet" href="assets/css/app.css?v=20261117-chat1">
 </head>
 <body>
 <div class="app-shell">
@@ -19,6 +19,7 @@
       <a class="nav-link" href="#konten" data-page="konten"><span>▤</span>Konten</a>
       <a class="nav-link" href="#kanban" data-page="kanban"><span>▥</span>Kanban</a>
       <a class="nav-link" href="#visit" data-page="visit"><span>↗</span>Visit</a>
+      <a class="nav-link" href="#chat" data-page="chat"><span>☏</span>Chat</a>
     </nav>
     <div class="nav-spacer"></div><div class="nav-label">PREFERENSI</div>
     <nav class="nav-list">
@@ -129,6 +130,23 @@
       
       </div>
     </section>
+    <section class="chat-page" id="chatPage" hidden>
+      <div class="chat-heading"><div><div class="eyebrow">TEAM COMMUNICATION</div><h1>Chat</h1><p class="muted">Ruang komunikasi anggota tim dan admin Note AP.</p></div><span class="chat-mode-tag">MODE PREVIEW LOKAL</span></div>
+      <div class="chat-workspace">
+        <aside class="chat-sidebar">
+          <div class="chat-sidebar-head"><b>Percakapan</b><span id="chatConversationCount">2 ruang</span></div>
+          <div class="chat-tabs" role="group" aria-label="Jenis percakapan"><button type="button" class="active" data-chat-filter="all">Semua</button><button type="button" data-chat-filter="private">Pribadi</button><button type="button" data-chat-filter="group">Grup</button></div>
+          <div class="chat-conversation-list" id="chatConversationList"></div>
+        </aside>
+        <section class="chat-thread">
+          <header class="chat-thread-header"><div class="chat-thread-avatar" id="chatThreadAvatar">A</div><div class="chat-thread-title"><b id="chatThreadName">Admin Note AP</b><small id="chatThreadSubtitle">Chat pribadi · Admin</small></div><span class="chat-thread-status"><i></i> Ruang percakapan</span></header>
+          <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
+          <form class="chat-composer" id="chatComposer"><textarea id="chatMessageInput" rows="1" maxlength="2000" placeholder="Tulis pesan..." aria-label="Tulis pesan" required></textarea><button type="submit" aria-label="Kirim pesan">➤</button></form>
+          <div class="chat-local-note" id="chatLocalNote">Pesan hanya tersimpan di browser ini. Belum terkirim ke admin atau anggota tim lain.</div>
+        </section>
+      </div>
+      <footer class="page-footer">Note AP <span>•</span> Team Communication <span class="demo-tag">MODE PREVIEW</span></footer>
+    </section>
     <section class="help-page" id="helpPage" hidden>
       <div class="help-heading">
         <div><div class="eyebrow">HELP CENTER</div><h1>Pusat Bantuan</h1><p class="muted">Panduan singkat menggunakan Note AP untuk mengelola perencanaan dan produksi konten Apotek Prapatan.</p></div>
@@ -221,5 +239,5 @@
 </div>
 <div class="content-modal" id="contentModal" aria-hidden="true"><section class="content-modal-dialog" role="dialog" aria-modal="true" aria-label="Tambah Konten"><button type="button" class="content-modal-close" id="contentModalClose" aria-label="Tutup popup">×</button><iframe id="contentModalFrame" title="Form Tambah Konten" src="tambah-konten.html?v=20261116-2" loading="eager"></iframe></section></div>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261117-help1"></script>
+<script src="assets/js/app.js?v=20261117-chat1"></script>
 </body></html>

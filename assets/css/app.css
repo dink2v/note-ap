@@ -911,3 +911,41 @@ body.calendar-item-open{overflow:hidden}
 /* Visit layout aligned with supplied production-visit reference */
 .visit-heading{margin-bottom:14px}.visit-overview-grid{grid-template-columns:minmax(0,1fr);gap:12px;margin-bottom:12px}.visit-today-card{display:grid;grid-template-columns:minmax(190px,.72fr) minmax(0,1.8fr);align-items:center;gap:18px;padding:17px 20px}.visit-today-card .visit-card-heading{margin:0;padding-right:18px;border-right:1px solid #e8eeeb;min-height:100%;display:flex;align-items:center}.visit-today-card .visit-card-heading h2{font-size:14px;margin:0 0 8px}.visit-today-card .visit-card-heading h3{font:800 20px/1.2 'Plus Jakarta Sans';margin:0;color:var(--ink)}.visit-today-card .visit-today-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:center}.visit-today-label{grid-column:1/-1}.visit-today-entry{display:grid;grid-template-columns:1fr;gap:8px;margin:0;padding:0;border:0;background:transparent}.visit-today-line{gap:3px}.visit-today-line b{font-size:10px;color:var(--ink)}.visit-today-line span{font-size:12px;font-weight:500}.visit-main-card{padding:15px 18px 12px}.visit-main-heading{margin-bottom:8px}.visit-main-heading h2{font-size:16px}.visit-table-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 10px}.visit-month-nav{display:flex;align-items:center;justify-content:center;gap:12px;color:#66766e;font-size:10px;font-weight:700}.visit-month-nav button{width:28px;height:28px;border:0;border-radius:8px;background:#fff;color:#c18b4b;font-size:20px;cursor:pointer}.visit-display-control{display:flex;align-items:center;gap:10px}.visit-display-control>b{font-size:11px;color:var(--ink)}.visit-view-toggle{display:flex;gap:7px}.visit-view-toggle button{display:flex;align-items:center;gap:7px;min-width:112px;justify-content:center;padding:8px 13px;border:1px solid #dce8e5;border-radius:22px;background:#fff;color:#62736d;font:700 11px 'DM Sans';cursor:pointer}.visit-view-toggle button.active{background:#279e9a;border-color:#279e9a;color:#fff}.visit-toggle-list,.visit-toggle-grid{font-size:15px;line-height:1}.visit-pagination{padding:0 0 8px}.visit-main-card .visit-table-wrap{margin:0 -18px}.visit-main-table{min-width:1180px;border-collapse:collapse}.visit-main-table th{background:#e4f5f3;color:#334b4a;text-align:center;border:1px solid #9ba9a6;font-size:8px;padding:12px 8px}.visit-main-table td{border:1px solid #aeb8b5;padding:8px 7px}.visit-main-table td:first-child{text-align:center}.visit-main-table .visit-inline-input{border:0;border-radius:3px;background:transparent;min-height:34px;padding:6px;font-size:10px}.visit-main-table .visit-inline-input:focus{background:#f8fffe;box-shadow:inset 0 0 0 1px #279e9a}.visit-main-card .visit-empty{border:1px solid #aeb8b5}.visit-add-schedule-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:8px;padding:10px 14px;border:2px solid #172321;border-radius:22px;background:#fff;color:#263633;font:800 13px 'Plus Jakarta Sans';cursor:pointer}.visit-add-schedule-btn:hover{background:#eff9f7;border-color:#279e9a}.visit-add-schedule-btn span{font-size:17px}.visit-grid-panel{padding-top:8px}
 @media(max-width:760px){.visit-today-card{grid-template-columns:1fr;gap:12px}.visit-today-card .visit-card-heading{border-right:0;border-bottom:1px solid #e8eeeb;padding:0 0 12px}.visit-today-card .visit-today-summary{grid-template-columns:1fr}.visit-table-toolbar{align-items:flex-start;flex-direction:column}.visit-display-control{width:100%;justify-content:space-between}.visit-view-toggle{flex:1}.visit-view-toggle button{min-width:0;flex:1}.visit-main-card{padding:13px}.visit-main-card .visit-table-wrap{margin:0 -13px}}
+
+
+/* Visit calendar planner: visual mengikuti kalender konten Note AP */
+.visit-month-nav #visitTodayMonth{width:auto;height:28px;padding:0 11px;border:1px solid #dce8e5;border-radius:8px;background:#fff;color:#279e9a;font:700 10px 'DM Sans';cursor:pointer}
+.visit-calendar{min-width:0;overflow-x:auto}
+.visit-calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));min-width:680px;gap:0;border-top:1px solid #eaf0f1;border-left:1px solid #eaf0f1;border-radius:10px;overflow:hidden}
+.visit-calendar-weekday{padding:10px 5px;text-align:center;background:#f5faf9;color:#728b87;font-size:9px;font-weight:800;border-right:1px solid #eaf0f1}
+.visit-calendar-day-cell{min-width:0;min-height:112px;padding:7px;border-top:1px solid #eaf0f1;border-right:1px solid #eaf0f1;background:#fff;cursor:pointer}
+.visit-calendar-day-cell.outside-month{background:#fafcfc}
+.visit-calendar-day-cell.is-today{background:#fffaf5;box-shadow:inset 0 0 0 1px #f4c89f}
+.visit-calendar-day-cell.is-selected{background:#f0fbf9;box-shadow:inset 0 0 0 2px #279e9a}
+.visit-calendar-day-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.visit-calendar-day-number{display:grid;place-items:center;width:23px;height:23px;border-radius:7px;color:#586b7b;font-size:10px;font-weight:700}
+.visit-calendar-day-cell.is-today .visit-calendar-day-number{background:#fff0e3;color:#d97726}
+.visit-calendar-day-cell.outside-month .visit-calendar-day-number{color:#bdc6cc}
+.visit-calendar-day-add{width:23px;height:23px;border:0;border-radius:7px;background:#e4f7f4;color:#159d91;font-size:16px;line-height:1;cursor:pointer;opacity:0;transition:opacity .15s,background .15s}
+.visit-calendar-day-cell:hover .visit-calendar-day-add,.visit-calendar-day-add:focus-visible{opacity:1}
+.visit-calendar-day-add:hover{background:#c9eee8}
+.visit-calendar-event-chip{display:flex;width:100%;min-width:0;flex-direction:column;gap:3px;margin:4px 0;padding:6px 7px;border:0;border-left:3px solid #98a7b5;border-radius:6px;background:#f0f3f5;text-align:left;cursor:pointer}
+.visit-calendar-event-chip b,.visit-calendar-event-chip small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.visit-calendar-event-chip b{color:#435467;font-size:9px;font-weight:700}
+.visit-calendar-event-chip small{color:#718297;font-size:8px}
+.visit-calendar-event-chip.planned{border-left-color:#1899a3;background:#e9f8f5}
+.visit-calendar-event-chip.progress{border-left-color:#ff9a3d;background:#fff4e8}
+.visit-calendar-event-chip.done{border-left-color:#27966a;background:#edf8f0}
+.visit-calendar-event-chip.cancelled{border-left-color:#d66b6b;background:#fff0f0}
+.visit-calendar-event-chip.other{border-left-color:#98a7b5}
+.visit-calendar-more{display:block;margin:4px 2px;color:#718297;font-size:8px;font-weight:700}
+.visit-calendar-selected{margin-top:16px;padding:13px;border:1px solid #eaf0f1;border-radius:10px;background:#fbfdfd}
+.visit-calendar-selected>b{display:block;margin-bottom:10px;font:800 11px 'Plus Jakarta Sans';text-transform:capitalize}
+.visit-calendar-selected-event{display:flex;align-items:flex-start;gap:12px;width:100%;padding:10px 0;border:0;border-top:1px solid #edf2f2;background:transparent;text-align:left;cursor:pointer}
+.visit-calendar-selected-event>b{min-width:48px;color:#279e9a;font-size:10px}
+.visit-calendar-selected-event>span{color:#53645a;font-size:10px;line-height:1.5;overflow-wrap:anywhere}
+.visit-calendar-selected-event.progress>b{color:#c47a2c}
+.visit-calendar-selected-event.done>b{color:#27966a}
+.visit-calendar-selected-event.cancelled>b{color:#c45c5c}
+.visit-calendar-add-selected{margin-top:11px;padding:8px 12px;border:1px solid #cde9e4;border-radius:8px;background:#eaf8f5;color:#168f87;font:700 10px 'DM Sans';cursor:pointer}
+@media(max-width:600px){.visit-grid-panel{padding:10px 0}.visit-calendar-grid{min-width:650px}.visit-calendar-day-cell{min-height:96px;padding:5px}.visit-calendar-event-chip{padding:5px}.visit-calendar-event-chip b{font-size:8px}}

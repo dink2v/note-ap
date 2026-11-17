@@ -364,7 +364,7 @@
     for(let slot=pageItems.length;slot<visitPageSize;slot++){
       const tr=document.createElement('tr');tr.className='visit-select-row visit-placeholder-row';
       const number=document.createElement('td');number.textContent=String(visitCurrentPage*visitPageSize+slot+1);tr.append(number);
-      const fields=visitFields.filter(field=>['visitDate','time','location','title','publishDate','talent','props','status','notes'].includes(field.key));
+      const fields=visitFields.filter(field=>['visitDate','location','title','talent','status','notes'].includes(field.key));
       fields.forEach(field=>{
         const td=document.createElement('td');
         if(field.key==='talent'){

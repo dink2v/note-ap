@@ -1130,3 +1130,14 @@ body.calendar-item-open{overflow:hidden}
   justify-content: center !important;
   text-align: center !important;
 }
+
+
+/* Seimbangkan sisi kiri dan kanan tabel Visit:
+   kolom NO diperlebar untuk mengimbangi ruang kosong di ujung kanan. */
+.visit-main-table thead th:first-child,
+#visitTableBody > tr > td:first-child {
+  width: 54px !important;
+  min-width: 54px !important;
+  max-width: 54px !important;
+  box-sizing: border-box !important;
+}

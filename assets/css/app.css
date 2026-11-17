@@ -1032,3 +1032,45 @@ body.calendar-item-open{overflow:hidden}
   justify-content: center;
   text-align: center;
 }
+
+
+/* Penyelarasan final kontrol Daftar Visit */
+#visitTableBody td { text-align:center !important; vertical-align:middle !important; }
+#visitTableBody td .visit-inline-input {
+  display:block;
+  width:100%;
+  min-width:0;
+  margin:0 auto;
+  box-sizing:border-box;
+  text-align:center !important;
+  text-align-last:center !important;
+}
+#visitTableBody td .visit-inline-textarea {
+  min-height:72px;
+  padding:10px 8px;
+  line-height:1.45;
+  text-align:center !important;
+  vertical-align:middle;
+}
+#visitTableBody td input[type="date"]::-webkit-datetime-edit,
+#visitTableBody td input[type="time"]::-webkit-datetime-edit {
+  text-align:center;
+}
+#visitTableBody td .visit-multiselect {
+  width:100%;
+  min-width:0;
+  margin:0 auto;
+}
+#visitTableBody td .visit-multiselect > summary {
+  min-height:38px;
+  justify-content:center;
+  text-align:center;
+  padding-inline:8px;
+}
+#visitTableBody td select.visit-inline-input {
+  text-align:center !important;
+  text-align-last:center !important;
+  padding-inline:24px 8px;
+}
+#visitTableBody td:nth-child(1) { width:38px; }
+#visitTableBody td:nth-child(2), #visitTableBody td:nth-child(3) { white-space:nowrap; }

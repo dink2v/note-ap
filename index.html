@@ -210,7 +210,6 @@
           <button class="settings-nav-item active" data-settings-tab="general"><span>⚙</span><span><b>Umum</b><small>Identitas workspace</small></span></button>
           <button class="settings-nav-item" data-settings-tab="references"><span>▤</span><span><b>Referensi</b><small>Standar konten</small></span></button>
           <button class="settings-nav-item" data-settings-tab="team"><span>♙</span><span><b>Tim</b><small>Anggota dan peran</small></span></button>
-          <button class="settings-nav-item" data-settings-tab="integration"><span>↔</span><span><b>Integrasi</b><small>Google Sheets</small></span></button>
           <button class="settings-nav-item" data-settings-tab="data"><span>▣</span><span><b>Manajemen Data</b><small>Backup dan pemulihan</small></span></button>
           <button class="settings-nav-item" data-settings-tab="appearance"><span>◐</span><span><b>Tampilan & Bahasa</b><small>Tema dan bahasa</small></span></button>
         </nav>
@@ -241,16 +240,14 @@
             <div class="settings-team-placeholder"><span>♙</span><b>Pengelolaan anggota tim</b><p>Daftar anggota, jabatan, dan tanggung jawab akan ditampilkan di sini setelah struktur data Tim dikonfirmasi.</p></div>
             <p class="settings-footnote">Talent untuk jadwal Visit tetap dikelola melalui referensi Google Sheets, bukan dari halaman Setelan ini.</p>
           </section>
-          <section class="settings-panel" data-settings-panel="integration" hidden>
+
+          <section class="settings-panel" data-settings-panel="data" hidden>
+            <div class="settings-panel-head"><div><h2>Manajemen Data</h2><p>Cadangkan data yang tersimpan pada browser ini.</p></div></div>
             <div class="settings-panel-head"><div><h2>Integrasi Google Sheets</h2><p>Status koneksi sumber data Note AP.</p></div><span class="settings-status pending">Belum terhubung</span></div>
             <div class="settings-integration-card"><div class="settings-google-mark">▦</div><div><b>Google Sheets</b><p>Spreadsheet referensi dan data kerja Apotek Prapatan.</p><small>Spreadsheet ID: 132FD2WyRTDOaZbOq_ABlyR1SWtesRh5i0XWkE_7p54w</small></div></div>
             <div class="settings-info-note">Koneksi otomatis belum aktif. Note AP masih menyimpan data di browser (localStorage). URL Google Apps Script Web App atau endpoint API belum dipasang, jadi status sinkronisasi belum dapat dinyatakan aktif.</div>
             <label class="settings-field">URL Apps Script Web App<input id="settingSheetsUrl" type="url" placeholder="https://script.google.com/macros/s/.../exec" disabled><small>Kolom ini akan diaktifkan setelah endpoint integrasi tersedia.</small></label>
-
-
-          </section>
-          <section class="settings-panel" data-settings-panel="data" hidden>
-            <div class="settings-panel-head"><div><h2>Manajemen Data</h2><p>Cadangkan data yang tersimpan pada browser ini.</p></div></div>
+            <div class="settings-divider"></div>
             <div class="settings-info-note">Backup ini mencakup data lokal Note AP pada browser/perangkat saat ini. Ini belum merupakan backup Google Sheets atau sinkronisasi lintas perangkat.</div>
             <div class="settings-data-actions"><article><span>↓</span><div><b>Ekspor Backup</b><p>Unduh salinan data konten, Visit, dan preferensi lokal.</p><button class="secondary-btn" id="exportNoteApData" type="button">Unduh Backup JSON</button></div></article><article><span>↑</span><div><b>Impor / Pulihkan Backup</b><p>Pulihkan data dari file backup JSON Note AP.</p><label class="secondary-btn settings-file-btn" for="importNoteApData">Pilih File Backup</label><input id="importNoteApData" type="file" accept="application/json,.json" hidden></div></article></div>
           </section>

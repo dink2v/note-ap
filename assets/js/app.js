@@ -291,6 +291,8 @@
   };
   const visitDateLabel=value=>value?formatContentDate(String(value)):'—';
   let visitCurrentPage=0,visitSelectedId=null;
+  let visitSelectMode=false;
+  const visitSelectedIds=new Set();
   let visitViewMode='list';
   let visitCalendarMonth=new Date(new Date().getFullYear(),new Date().getMonth(),1);
   let visitCalendarSelected=[new Date().getFullYear(),String(new Date().getMonth()+1).padStart(2,'0'),String(new Date().getDate()).padStart(2,'0')].join('-');
@@ -343,6 +345,38 @@
   document.getElementById('visitListViewBtn')?.addEventListener('click',()=>setVisitViewMode('list'));
   document.getElementById('visitAddScheduleBtn')?.addEventListener('click',()=>{setVisitViewMode('list');visitExtraRows++;renderVisitTables();const rows=document.querySelectorAll('#visitTableBody tr');const lastRow=rows[rows.length-1];const dateInput=lastRow?.querySelector('[data-new-visit-field="visitDate"]');if(dateInput){dateInput.focus();dateInput.scrollIntoView({behavior:'smooth',block:'nearest'});}showToast('Baris jadwal baru ditambahkan. Silakan isi kolom-kolomnya.');});
   document.getElementById('visitGridViewBtn')?.addEventListener('click',()=>setVisitViewMode('grid'));
+  document.getElementById('visitSelectBtn')?.addEventListener('click',()=>{
+    visitSelectMode=!visitSelectMode;
+    if(!visitSelectMode)visitSelectedIds.clear();
+    renderVisitTables();
+  });
+  document.getElementById('visitCancelSelectBtn')?.addEventListener('click',()=>{
+    visitSelectMode=false;visitSelectedIds.clear();renderVisitTables();
+  });
+  document.getElementById('visitSelectAll')?.addEventListener('change',event=>{
+    const monthKey=[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0')].join('-');
+    const monthVisits=sortedVisits().filter(item=>!item.visitDate||item.visitDate.slice(0,7)===monthKey);
+    if(event.target.checked)monthVisits.forEach(item=>visitSelectedIds.add(item.id));
+    else monthVisits.forEach(item=>visitSelectedIds.delete(item.id));
+    renderVisitTables();
+  });
+  document.getElementById('visitDeleteSelectedBtn')?.addEventListener('click',()=>{
+    const ids=[...visitSelectedIds];
+    if(!ids.length)return;
+    if(!confirm('Hapus '+ids.length+' jadwal Visit yang dipilih? Tindakan ini tidak dapat dibatalkan.'))return;
+    const remaining=readVisits().filter(item=>!visitSelectedIds.has(item.id));
+    if(!writeVisits(remaining))return;
+    const removed=ids.length;visitSelectedIds.clear();visitSelectMode=false;visitSelectedId=null;
+    visitCurrentPage=0;renderVisitTables();renderVisitCalendar(sortedVisits());
+    showToast(removed+' jadwal Visit berhasil dihapus.');
+  });
+  document.getElementById('visitTableBody')?.addEventListener('change',event=>{
+    const checkbox=event.target.closest('[data-visit-select-id]');
+    if(!checkbox)return;
+    if(checkbox.checked)visitSelectedIds.add(checkbox.dataset.visitSelectId);
+    else visitSelectedIds.delete(checkbox.dataset.visitSelectId);
+    renderVisitTables();
+  });
   function renderVisitTables(){
     const body=document.getElementById('visitTableBody');
     if(!body)return;
@@ -356,7 +390,12 @@
     body.replaceChildren();
     pageItems.forEach((v,index)=>{
       const tr=document.createElement('tr');tr.className='visit-select-row'+(v.id===visitSelectedId?' selected':'');tr.dataset.visitId=v.id;
-      const numberCell=document.createElement('td');numberCell.textContent=String(visitCurrentPage*visitPageSize+index+1);tr.append(numberCell);
+      const numberCell=document.createElement('td');
+      if(visitSelectMode){
+        const check=document.createElement('input');check.type='checkbox';check.className='visit-row-select';check.dataset.visitSelectId=v.id;check.checked=visitSelectedIds.has(v.id);check.setAttribute('aria-label','Pilih jadwal nomor '+(visitCurrentPage*visitPageSize+index+1));numberCell.append(check);
+      }
+      const numberLabel=document.createElement('span');numberLabel.className='visit-row-number';numberLabel.textContent=String(visitCurrentPage*visitPageSize+index+1);numberCell.append(numberLabel);tr.append(numberCell);
+      tr.classList.toggle('is-visit-checked',visitSelectedIds.has(v.id));
       const visitTableFields=visitFields;
       visitTableFields.forEach(field=>{const td=document.createElement('td');td.innerHTML=makeVisitInput(field,v[field.key],v.id);tr.append(td);});
       tr.addEventListener('click',event=>{if(event.target.closest('input,select,textarea'))return;visitSelectedId=v.id;renderVisitTables();});
@@ -394,6 +433,22 @@
     const empty=document.getElementById('visitEmpty');
     if(empty){empty.hidden=visits.length>0;empty.textContent='Belum ada data Visit untuk bulan '+new Intl.DateTimeFormat('id-ID',{month:'long',year:'numeric'}).format(visitCalendarMonth)+'.';}
     renderVisitMonthNav();
+    const selectBtn=document.getElementById('visitSelectBtn');
+    const selectAllWrap=document.getElementById('visitSelectAllWrap');
+    const selectAll=document.getElementById('visitSelectAll');
+    const deleteBtn=document.getElementById('visitDeleteSelectedBtn');
+    const cancelBtn=document.getElementById('visitCancelSelectBtn');
+    if(selectBtn){selectBtn.textContent=visitSelectMode?'Mode Select Aktif':'Select';selectBtn.setAttribute('aria-pressed',String(visitSelectMode));}
+    if(selectAllWrap)selectAllWrap.hidden=!visitSelectMode;
+    if(deleteBtn){deleteBtn.hidden=!visitSelectMode;deleteBtn.disabled=visitSelectedIds.size===0;deleteBtn.textContent='Hapus Terpilih ('+visitSelectedIds.size+')';}
+    if(cancelBtn)cancelBtn.hidden=!visitSelectMode;
+    if(selectAll){
+      const monthIds=visits.map(item=>item.id);
+      const selectedCount=monthIds.filter(id=>visitSelectedIds.has(id)).length;
+      selectAll.checked=monthIds.length>0&&selectedCount===monthIds.length;
+      selectAll.indeterminate=selectedCount>0&&selectedCount<monthIds.length;
+      selectAll.disabled=monthIds.length===0;
+    }
     const pageInfo=document.getElementById('visitPageInfo');if(pageInfo)pageInfo.textContent='Halaman '+(visitCurrentPage+1)+' dari '+pageCount;
     const today=new Date(),todayKey=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
     const todayDate=document.getElementById('visitTodayDate');if(todayDate)todayDate.textContent='Today · '+new Intl.DateTimeFormat('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(today);

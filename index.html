@@ -7,7 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/app.css?v=20261117-calendarplanner2">
-</head>
+<style>
+.calendar-content-detail-body{display:grid;gap:18px;max-height:min(62vh,680px);overflow:auto;padding:4px 2px 12px}.calendar-detail-section{padding:16px;border:1px solid var(--line,#e5ebe7);border-radius:14px;background:rgba(255,255,255,.55)}.calendar-detail-section h3{margin:0 0 12px;font-size:14px}.calendar-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.calendar-detail-field{min-width:0}.calendar-detail-field b{display:block;font-size:11px;color:var(--muted,#718078);margin-bottom:5px}.calendar-detail-field p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.55}.calendar-detail-field:has(p){grid-column:auto}@media(max-width:600px){.calendar-detail-grid{grid-template-columns:1fr}.calendar-content-detail-body{max-height:65vh}}
+</style></head>
 <body>
 <div class="app-shell">
   <aside class="sidebar" id="sidebar">
@@ -96,7 +98,7 @@
         <p class="calendar-planner-footnote">Klik tanggal kosong untuk membuat jadwal. Klik kartu konten untuk mengedit detailnya. Perubahan disimpan pada data konten Note AP di browser ini.</p>
       </section>
       <div class="calendar-embed-card">
-        <div class="calendar-embed-top"><div><span class="calendar-live-dot"></span><b>Google Calendar</b><small>Kalender utama akun Google</small></div><span class="calendar-timezone">Asia/Jakarta (WIB)</span></div>
+        <div class="calendar-embed-top"><div><span class="calendar-live-dot"></span><b>Google Calendar</b><small>Google Calendar · Tampilan jadwal tersinkron</small></div><span class="calendar-timezone">Asia/Jakarta (WIB)</span></div>
         <div class="format-color-legend" aria-label="Keterangan warna format konten"><span><i class="format-dot reels"></i>Reels</span><span><i class="format-dot carousel"></i>Carousel</span><span><i class="format-dot feed"></i>Feed</span></div>
         <div class="calendar-connection-note"><b>Perlu diketahui</b><span>Kalender yang tampil mengikuti akun Google yang sedang login. Untuk melihat kalender tim, buka Google Calendar dan pilih kalender tim yang sudah dibagikan kepada akun tersebut.</span></div>
         <iframe id="googleCalendarFrame" title="Kalender Google Note AP" src="https://calendar.google.com/calendar/embed?src=primary&ctz=Asia%2FJakarta&mode=MONTH&showTitle=0&showPrint=0&showTabs=1&showCalendars=0&showTz=0" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
@@ -185,7 +187,7 @@
         <article class="help-topic-card"><span>▥</span><b>Kanban</b><p>Pantau alur kerja dari Ideation hingga Published. Pindahkan atau perbarui tahap sesuai progres.</p></article>
         <article class="help-topic-card"><span>↗</span><b>Visit</b><p>Catat jadwal kunjungan produksi, lokasi, judul konten, talent, status, dan keterangan.</p></article>
         <article class="help-topic-card"><span>⚙</span><b>Setelan</b><p>Kelola referensi konten, preferensi tema dan bahasa, serta backup data lokal.</p></article>
-        <article class="help-topic-card"><span>▦</span><b>Kalender</b><p>Lihat kalender Google yang disematkan. Pastikan akun Google memiliki akses.</p></article>
+        <article class="help-topic-card"><span>▦</span><b>Kalender</b><p>Lihat jadwal dari data Konten yang sama dan buka detail konten langsung dari kalender.</p></article>
       </div>
       <section class="help-faq-section">
         <div class="help-section-heading"><div><div class="eyebrow">FAQ</div><h2>Pertanyaan yang sering diajukan</h2></div></div>
@@ -266,6 +268,14 @@
 </div>
 
 
+
+<section class="calendar-item-modal" id="calendarContentDetailModal" aria-hidden="true" hidden>
+  <div class="calendar-item-dialog" role="dialog" aria-modal="true" aria-labelledby="calendarContentDetailTitle">
+    <div class="calendar-item-dialog-head"><div><span class="calendar-planner-kicker">NOTE AP · DETAIL KONTEN</span><h2 id="calendarContentDetailTitle">Detail Konten</h2><p>Informasi diambil dari data konten yang sama dengan menu Konten dan Kanban.</p></div><button type="button" id="calendarContentDetailClose" aria-label="Tutup detail">×</button></div>
+    <div id="calendarContentDetailBody" class="calendar-content-detail-body"></div>
+    <div class="calendar-item-actions"><button type="button" class="primary-btn" id="calendarContentDetailDone">Tutup Detail</button></div>
+  </div>
+</section>
 
 <section class="calendar-item-modal" id="calendarItemModal" aria-hidden="true" hidden>
   <form class="calendar-item-dialog" id="calendarItemForm" role="dialog" aria-modal="true" aria-labelledby="calendarItemTitle">

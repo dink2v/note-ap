@@ -364,10 +364,10 @@
     const emptySlots=Math.max(0,baseEmptySlots+visitExtraRows-hiddenEmptyRows);
     if(event.target.checked){
       monthVisits.forEach(item=>visitSelectedIds.add(item.id));
-      for(let slot=0;slot<emptySlots;slot++)visitSelectedIds.add('VISIT_EMPTY|'+monthKey+'|'+slot);
+      for(let slot=0;slot<emptySlots;slot++)visitSelectedIds.add('VISIT_EMPTY|'+monthKey+'|'+visitCurrentPage+'|'+slot);
     }else{
       monthVisits.forEach(item=>visitSelectedIds.delete(item.id));
-      for(let slot=0;slot<visitPageSize+visitExtraRows;slot++)visitSelectedIds.delete('VISIT_EMPTY|'+monthKey+'|'+slot);
+      for(let slot=0;slot<visitPageSize+visitExtraRows;slot++)visitSelectedIds.delete('VISIT_EMPTY|'+monthKey+'|'+visitCurrentPage+'|'+slot);
     }
     renderVisitTables();
   });
@@ -452,7 +452,7 @@
       const tr=document.createElement('tr');tr.className='visit-select-row visit-placeholder-row';
       if(slot>=baseEmptySlots)tr.dataset.extraVisitRow='true';
       const number=document.createElement('td');
-      const emptySelectId='VISIT_EMPTY|'+monthKey+'|'+slot;
+      const emptySelectId='VISIT_EMPTY|'+monthKey+'|'+visitCurrentPage+'|'+slot;
       if(visitSelectMode){
         const check=document.createElement('input');check.type='checkbox';check.className='visit-row-select';check.dataset.visitSelectId=emptySelectId;check.checked=visitSelectedIds.has(emptySelectId);check.setAttribute('aria-label','Pilih baris kosong nomor '+(visitCurrentPage*visitPageSize+pageItems.length+slot+1));number.append(check);
       }
@@ -496,11 +496,16 @@
     if(deleteBtn){deleteBtn.hidden=!visitSelectMode;deleteBtn.disabled=visitSelectedIds.size===0;deleteBtn.textContent='Hapus Terpilih ('+visitSelectedIds.size+')';}
     if(cancelBtn)cancelBtn.hidden=!visitSelectMode;
     if(selectAll){
-      const monthIds=visits.map(item=>item.id);
-      const selectedCount=monthIds.filter(id=>visitSelectedIds.has(id)).length;
-      selectAll.checked=monthIds.length>0&&selectedCount===monthIds.length;
-      selectAll.indeterminate=selectedCount>0&&selectedCount<monthIds.length;
-      selectAll.disabled=monthIds.length===0;
+      const pageItemsForSelection=visits.slice(visitCurrentPage*visitPageSize,(visitCurrentPage+1)*visitPageSize);
+      const baseEmptyForSelection=Math.max(0,visitPageSize-pageItemsForSelection.length);
+      const hiddenForSelection=visitHiddenEmptyRowsByMonth.get(monthKey)||0;
+      const visibleEmptyForSelection=Math.max(0,baseEmptyForSelection+visitExtraRows-hiddenForSelection);
+      const visibleEmptyIds=Array.from({length:visibleEmptyForSelection},(_,slot)=>'VISIT_EMPTY|'+monthKey+'|'+visitCurrentPage+'|'+slot);
+      const visibleRowIds=[...visits.map(item=>item.id),...visibleEmptyIds];
+      const selectedCount=visibleRowIds.filter(id=>visitSelectedIds.has(id)).length;
+      selectAll.checked=visibleRowIds.length>0&&selectedCount===visibleRowIds.length;
+      selectAll.indeterminate=selectedCount>0&&selectedCount<visibleRowIds.length;
+      selectAll.disabled=visibleRowIds.length===0;
     }
     const pageInfo=document.getElementById('visitPageInfo');if(pageInfo)pageInfo.textContent='Halaman '+(visitCurrentPage+1)+' dari '+pageCount;
     const today=new Date(),todayKey=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');

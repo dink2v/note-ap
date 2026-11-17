@@ -6,7 +6,7 @@
   <title>Note AP — Apotek Prapatan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/app.css?v=20261117-googlecalendaronly1">
+  <link rel="stylesheet" href="assets/css/app.css?v=20261117-calendarplanner2">
 </head>
 <body>
 <div class="app-shell">
@@ -86,6 +86,15 @@
         <div class="calendar-page-actions"><button class="primary-btn" id="newContentCalendarBtn" type="button"><span>＋</span> Konten Baru</button><a class="secondary-btn" href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener">Buka Google Calendar ↗</a></div>
       </div>
       
+      <section class="calendar-planner-panel" aria-labelledby="noteApCalendarTitle">
+        <div class="calendar-planner-heading">
+          <div><span class="calendar-planner-kicker">NOTE AP CONTENT PLANNER</span><h2 id="noteApCalendarTitle">Jadwal Konten Note AP</h2><p>Tambah atau ubah jadwal langsung dari tanggal kalender. Data terhubung dengan menu Konten dan Kanban.</p></div>
+          <div class="calendar-planner-controls"><button type="button" id="noteApCalendarToday">Hari Ini</button><button type="button" id="noteApCalendarPrev" aria-label="Bulan sebelumnya">‹</button><strong id="noteApCalendarMonth">November 2026</strong><button type="button" id="noteApCalendarNext" aria-label="Bulan berikutnya">›</button></div>
+        </div>
+        <div class="calendar-planner-legend" aria-label="Legenda format konten"><span><i class="format-dot reels"></i>Reels</span><span><i class="format-dot carousel"></i>Carousel</span><span><i class="format-dot feed"></i>Feed</span><span><i class="calendar-dot other"></i>Format lain</span></div>
+        <div class="note-ap-calendar-grid" id="noteApCalendarGrid" aria-live="polite"></div>
+        <p class="calendar-planner-footnote">Klik tanggal kosong untuk membuat jadwal. Klik kartu konten untuk mengedit detailnya. Perubahan disimpan pada data konten Note AP di browser ini.</p>
+      </section>
       <div class="calendar-embed-card">
         <div class="calendar-embed-top"><div><span class="calendar-live-dot"></span><b>Google Calendar</b><small>Kalender utama akun Google</small></div><span class="calendar-timezone">Asia/Jakarta (WIB)</span></div>
         <div class="format-color-legend" aria-label="Keterangan warna format konten"><span><i class="format-dot reels"></i>Reels</span><span><i class="format-dot carousel"></i>Carousel</span><span><i class="format-dot feed"></i>Feed</span></div>
@@ -258,6 +267,24 @@
 
 
 
+<section class="calendar-item-modal" id="calendarItemModal" aria-hidden="true" hidden>
+  <form class="calendar-item-dialog" id="calendarItemForm" role="dialog" aria-modal="true" aria-labelledby="calendarItemTitle">
+    <div class="calendar-item-dialog-head"><div><span class="calendar-planner-kicker">NOTE AP CONTENT PLANNER</span><h2 id="calendarItemTitle">Tambah Jadwal Konten</h2><p>Isi detail jadwal. Data akan masuk ke Konten dan Kanban.</p></div><button type="button" id="calendarItemClose" aria-label="Tutup popup">×</button></div>
+    <input type="hidden" name="itemId">
+    <div class="calendar-item-fields">
+      <label class="calendar-item-field calendar-item-full"><span>Judul Konten <i>*</i></span><input name="title" maxlength="160" required placeholder="Masukkan judul konten"></label>
+      <label class="calendar-item-field"><span>Platform <i>*</i></span><select name="platform" required><option value="">Pilih platform</option><option>Instagram</option><option>TikTok</option></select></label>
+      <label class="calendar-item-field"><span>Format Konten <i>*</i></span><select name="format" required><option value="">Pilih format</option><option>Reels</option><option>Carousel</option><option>Feed</option><option>Video</option></select></label>
+      <label class="calendar-item-field"><span>Pilar Konten</span><input name="pillar" placeholder="Contoh: Edukasi Kesehatan"></label>
+      <label class="calendar-item-field"><span>Status</span><select name="status"><option>Ideation</option><option>Planning</option><option>Production</option><option>Editing</option><option>Review</option><option>Ready to Publish</option><option>Published</option></select></label>
+      <label class="calendar-item-field"><span>Tanggal Posting <i>*</i></span><input name="postingDate" type="date" required></label>
+      <label class="calendar-item-field"><span>Jam Posting</span><input name="postingTime" type="time"></label>
+    </div>
+    <div class="calendar-item-actions"><button type="button" class="calendar-item-cancel" id="calendarItemCancel">Batal</button><button type="submit" class="primary-btn" id="calendarItemSave">Simpan Jadwal</button></div>
+    <p class="calendar-item-note">Mode lokal: data tersimpan di browser/perangkat ini dan belum tersinkron ke Google Sheets.</p>
+  </form>
+</section>
+
 <div class="content-modal" id="contentModal" aria-hidden="true"><section class="content-modal-dialog" role="dialog" aria-modal="true" aria-label="Tambah Konten"><button type="button" class="content-modal-close" id="contentModalClose" aria-label="Tutup popup">×</button><iframe id="contentModalFrame" title="Form Tambah Konten" src="tambah-konten.html?v=20261116-2" loading="eager"></iframe></section></div>
 
 <section class="command-overlay" id="commandOverlay" aria-hidden="true" hidden>
@@ -270,5 +297,5 @@
 </section>
 <button class="command-launcher" id="commandLauncher" type="button" aria-label="Buka Command Center"><span>✳</span><span class="launcher-label">Command Center</span><kbd>Ctrl K</kbd></button>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261117-googlecalendaronly1"></script>
+<script src="assets/js/app.js?v=20261117-calendarplanner2"></script>
 </body></html>

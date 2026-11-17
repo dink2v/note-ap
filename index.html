@@ -6,7 +6,7 @@
   <title>Note AP — Apotek Prapatan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/app.css?v=20261117-settings1">
+  <link rel="stylesheet" href="assets/css/app.css?v=20261117-refcrud1">
 </head>
 <body>
 <div class="app-shell">
@@ -151,14 +151,15 @@
             </div><div class="settings-actions"><button class="primary-btn" id="saveGeneralSettings" type="button">Simpan Pengaturan</button></div>
           </section>
           <section class="settings-panel" data-settings-panel="references" hidden>
-            <div class="settings-panel-head"><div><h2>Referensi Konten</h2><p>Daftar acuan untuk menjaga konsistensi perencanaan konten.</p></div></div>
-            <div class="settings-info-note">Pengelolaan referensi ini merupakan area pengaturan workspace. Daftar yang sudah digunakan di form Konten akan disambungkan pada tahap integrasi berikutnya.</div>
-            <div class="settings-reference-grid">
-              <article class="settings-mini-card"><b>Pilar Konten</b><p>Edukasi Kesehatan · Promosi · Informasi Produk · Awareness</p><span>Referensi</span></article>
-              <article class="settings-mini-card"><b>Platform</b><p>Instagram · TikTok</p><span>Referensi</span></article>
-              <article class="settings-mini-card"><b>Format Konten</b><p>Feed · Carousel · Reels</p><span>Referensi</span></article>
-              <article class="settings-mini-card"><b>Tahapan Workflow</b><p>Ideation · Planning · Production · Editing · Review · Ready to Publish · Published</p><span>Workflow</span></article>
-            </div>
+            <div class="settings-panel-head"><div><h2>Referensi Konten</h2><p>Kelola daftar acuan yang digunakan dalam perencanaan dan produksi konten.</p></div><span class="settings-status">Bisa dikelola</span></div>
+            <div class="settings-info-note">Perubahan disimpan di browser ini untuk sementara. Integrasi Google Sheets akan ditambahkan setelah endpoint tersedia.</div>
+            <form class="reference-add-form" id="referenceAddForm">
+              <label class="settings-field">Kategori<select id="referenceCategory"><option value="pillars">Pilar Konten</option><option value="platforms">Platform</option><option value="formats">Format Konten</option><option value="stages">Tahapan Workflow</option></select></label>
+              <label class="settings-field reference-name-field">Nama referensi<input id="referenceName" type="text" placeholder="Contoh: Edukasi Kesehatan" maxlength="60" required></label>
+              <button class="primary-btn" type="submit">＋ Tambah Referensi</button>
+            </form>
+            <div class="reference-category-grid" id="referenceCategoryGrid"></div>
+            <p class="settings-footnote">Referensi nonaktif tidak akan ditawarkan sebagai pilihan baru pada form yang sudah mendukung data referensi. Referensi yang sudah tersimpan pada konten lama tetap dipertahankan.</p>
           </section>
           <section class="settings-panel" data-settings-panel="team" hidden>
             <div class="settings-panel-head"><div><h2>Tim</h2><p>Ringkasan pengelolaan anggota yang terlibat dalam produksi konten.</p></div></div>
@@ -192,5 +193,5 @@
 </div>
 <div class="content-modal" id="contentModal" aria-hidden="true"><section class="content-modal-dialog" role="dialog" aria-modal="true" aria-label="Tambah Konten"><button type="button" class="content-modal-close" id="contentModalClose" aria-label="Tutup popup">×</button><iframe id="contentModalFrame" title="Form Tambah Konten" src="tambah-konten.html?v=20261116-2" loading="eager"></iframe></section></div>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261117-settings1"></script>
+<script src="assets/js/app.js?v=20261117-refcrud1"></script>
 </body></html>

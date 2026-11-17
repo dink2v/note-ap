@@ -69,13 +69,12 @@
   const settingsPage=document.getElementById('settingsPage');
   const helpPage=document.getElementById('helpPage');
   function showPage(page){
-    const isCalendar=page==='kalender',isContent=page==='konten',isKanban=page==='kanban',isVisit=page==='visit',isChat=page==='chat',isSettings=page==='setelan',isHelp=page==='bantuan';
-    dashboardPage.hidden=isCalendar||isContent||isKanban||isVisit||isChat||isSettings||isHelp;
+    const isCalendar=page==='kalender',isContent=page==='konten',isKanban=page==='kanban',isVisit=page==='visit',isSettings=page==='setelan',isHelp=page==='bantuan';
+    dashboardPage.hidden=isCalendar||isContent||isKanban||isVisit||isSettings||isHelp;
     calendarPage.hidden=!isCalendar;
     contentPage.hidden=!isContent;
     kanbanPage.hidden=!isKanban;
     visitPage.hidden=!isVisit;
-    document.getElementById('chatPage').hidden=!isChat;
     settingsPage.hidden=!isSettings;
     helpPage.hidden=!isHelp;
     document.querySelectorAll('.nav-link').forEach(item=>item.classList.toggle('active',item.dataset.page===page));
@@ -84,14 +83,14 @@
     if(isContent)renderContentList();
     if(isKanban)renderKanban();
     if(isVisit||isSettings)renderVisitTables();
-    if(isChat)renderChat();
-    window.location.hash=isCalendar?'kalender':isContent?'konten':isKanban?'kanban':isVisit?'visit':isChat?'chat':isSettings?'setelan':isHelp?'bantuan':'dashboard';
+    if(isHelp)renderChat();
+    window.location.hash=isCalendar?'kalender':isContent?'konten':isKanban?'kanban':isVisit?'visit':isSettings?'setelan':isHelp?'bantuan':'dashboard';
   }
   document.querySelectorAll('.nav-link').forEach(link=>link.addEventListener('click',event=>{
     event.preventDefault();
     const page=link.dataset.page;
     document.getElementById('sidebar').classList.remove('open');
-    if(page==='dashboard'||page==='kalender'||page==='konten'||page==='kanban'||page==='visit'||page==='chat'||page==='setelan'||page==='bantuan'){showPage(page);return;}
+    if(page==='dashboard'||page==='kalender'||page==='konten'||page==='kanban'||page==='visit'||page==='setelan'||page==='bantuan'){showPage(page);return;}
     showToast('Halaman '+link.textContent.trim()+' sedang dalam tahap pengembangan.');
   }));
   document.querySelectorAll('a[href="#kalender"]').forEach(link=>link.addEventListener('click',event=>{
@@ -616,7 +615,7 @@
     persistChats();input.value='';renderChat();
   });
   renderChat();
-  if(window.location.hash==='#chat') showPage('chat');
+  if(window.location.hash==='#chat') showPage('bantuan');
   document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));
   document.addEventListener('click',event=>{
     const sidebar=document.getElementById('sidebar');

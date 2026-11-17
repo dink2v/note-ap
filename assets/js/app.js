@@ -354,17 +354,6 @@
   document.getElementById('visitCancelSelectBtn')?.addEventListener('click',()=>{
     visitSelectMode=false;visitSelectedIds.clear();renderVisitTables();
   });
-  document.getElementById('visitSelectAll')?.addEventListener('change',event=>{
-    const monthKey=[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0')].join('-');
-    const monthVisits=sortedVisits().filter(item=>!item.visitDate||item.visitDate.slice(0,7)===monthKey);
-    const pageItems=monthVisits.slice(visitCurrentPage*visitPageSize,(visitCurrentPage+1)*visitPageSize);
-    const baseEmptySlots=Math.max(0,visitPageSize-pageItems.length);
-    const hiddenEmptyRows=visitHiddenEmptyRowsByMonth.get(monthKey)||0;
-    const emptySlots=Math.max(0,baseEmptySlots+visitExtraRows-hiddenEmptyRows);
-    const visibleIds=[...pageItems.map(item=>item.id),...Array.from({length:emptySlots},(_,slot)=>'VISIT_EMPTY|'+monthKey+'|'+visitCurrentPage+'|'+slot)];
-    visibleIds.forEach(id=>event.target.checked?visitSelectedIds.add(id):visitSelectedIds.delete(id));
-    renderVisitTables();
-  });
   document.getElementById('visitDeleteSelectedBtn')?.addEventListener('click',()=>{
     const monthKey=[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0')].join('-');
     const before=readVisits();
@@ -469,26 +458,11 @@ tr.append(number);
     }
     renderVisitMonthNav();
     const selectBtn=document.getElementById('visitSelectBtn');
-    const selectAllWrap=document.getElementById('visitSelectAllWrap');
-    const selectAll=document.getElementById('visitSelectAll');
     const deleteBtn=document.getElementById('visitDeleteSelectedBtn');
     const cancelBtn=document.getElementById('visitCancelSelectBtn');
     if(selectBtn){selectBtn.textContent=visitSelectMode?'Mode Select Aktif':'Select';selectBtn.setAttribute('aria-pressed',String(visitSelectMode));}
-    if(selectAllWrap)selectAllWrap.hidden=!visitSelectMode;
     if(deleteBtn){deleteBtn.hidden=!visitSelectMode;deleteBtn.disabled=visitSelectedIds.size===0;deleteBtn.textContent='Hapus Terpilih ('+visitSelectedIds.size+')';}
     if(cancelBtn)cancelBtn.hidden=!visitSelectMode;
-    if(selectAll){
-      const pageItemsForSelection=visits.slice(visitCurrentPage*visitPageSize,(visitCurrentPage+1)*visitPageSize);
-      const baseEmptyForSelection=Math.max(0,visitPageSize-pageItemsForSelection.length);
-      const hiddenForSelection=visitHiddenEmptyRowsByMonth.get(monthKey)||0;
-      const visibleEmptyForSelection=Math.max(0,baseEmptyForSelection+visitExtraRows-hiddenForSelection);
-      const visibleEmptyIds=Array.from({length:visibleEmptyForSelection},(_,slot)=>'VISIT_EMPTY|'+monthKey+'|'+visitCurrentPage+'|'+slot);
-      const visibleRowIds=[...pageItemsForSelection.map(item=>item.id),...visibleEmptyIds];
-      const selectedCount=visibleRowIds.filter(id=>visitSelectedIds.has(id)).length;
-      selectAll.checked=visibleRowIds.length>0&&selectedCount===visibleRowIds.length;
-      selectAll.indeterminate=selectedCount>0&&selectedCount<visibleRowIds.length;
-      selectAll.disabled=visibleRowIds.length===0;
-    }
     const pageInfo=document.getElementById('visitPageInfo');if(pageInfo)pageInfo.textContent='Halaman '+(visitCurrentPage+1)+' dari '+pageCount;
     const today=new Date(),todayKey=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
     const todayDate=document.getElementById('visitTodayDate');if(todayDate)todayDate.textContent='Today · '+new Intl.DateTimeFormat('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(today);

@@ -424,7 +424,9 @@
       setVisitViewMode('list');
       renderVisitTables();
     };
+    let weekRow=null;
     for(let index=0;index<42;index++){
+      if(index%7===0){weekRow=document.createElement('div');weekRow.className='visit-calendar-week-row';grid.append(weekRow);}
       const date=new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate()+index);
       const key=[date.getFullYear(),String(date.getMonth()+1).padStart(2,'0'),String(date.getDate()).padStart(2,'0')].join('-');
       const dayVisits=(visitsByDate[key]||[]).slice().sort((a,b)=>String(a.time||'').localeCompare(String(b.time||'')));
@@ -452,7 +454,7 @@
         }
         visitCalendarSelected=key;renderVisitCalendar(visits);
       });
-      grid.append(cell);
+      weekRow.append(cell);
     }
     root.append(grid);
     const selected=document.createElement('div');selected.className='visit-calendar-selected';

@@ -1193,3 +1193,39 @@ body.calendar-item-open{overflow:hidden}
     padding-right: 14px !important;
   }
 }
+
+
+/* VISIT — ukuran kontrol seragam dan punya ruang di dalam setiap kolom */
+#visitTableBody > tr > td:not(:first-child) > .visit-inline-input,
+#visitTableBody > tr > td:not(:first-child) > .visit-multiselect {
+  display: block !important;
+  width: 90% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+#visitTableBody > tr > td:not(:first-child) > input.visit-inline-input,
+#visitTableBody > tr > td:not(:first-child) > select.visit-inline-input {
+  min-height: 36px !important;
+  padding: 7px 8px !important;
+  text-align: center !important;
+  text-align-last: center !important;
+}
+#visitTableBody > tr > td:not(:first-child) > textarea.visit-inline-textarea {
+  min-height: 68px !important;
+  padding: 8px 10px !important;
+  text-align: center !important;
+}
+#visitTableBody > tr > td:not(:first-child) > details.visit-multiselect > summary {
+  min-height: 36px !important;
+  padding: 8px 7px !important;
+  justify-content: center !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+#visitTableBody > tr > td:not(:first-child) {
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+  vertical-align: middle !important;
+}

@@ -102,7 +102,6 @@
   if(window.location.hash==='#konten') showPage('konten');
   if(window.location.hash==='#kanban') showPage('kanban');
   if(window.location.hash==='#visit') showPage('visit');
-  if(window.location.hash==='#chat') showPage('chat');
   if(window.location.hash==='#setelan') showPage('setelan');
   if(window.location.hash==='#bantuan') showPage('bantuan');
   document.getElementById('newContentListBtn').addEventListener('click',openContentModal);
@@ -617,6 +616,7 @@
     persistChats();input.value='';renderChat();
   });
   renderChat();
+  if(window.location.hash==='#chat') showPage('chat');
   document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));
   document.addEventListener('click',event=>{
     const sidebar=document.getElementById('sidebar');

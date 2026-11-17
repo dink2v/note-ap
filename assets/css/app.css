@@ -1321,3 +1321,19 @@ body.calendar-item-open{overflow:hidden}
 /* Tombol Edit detail harus tetap terlihat di bagian atas modal */
 .content-modal-dialog .form-title-row #detailEditTop:not([hidden]){display:inline-flex!important;align-items:center;justify-content:center;}
 
+/* Detail Konten: indikator mode edit mengikuti toggle Visit */
+.form-title-row .detail-edit-top{
+ display:inline-flex!important;align-items:center;justify-content:center;
+ min-height:38px;padding:4px 14px;margin-left:auto;flex:0 0 auto;
+ border:1px solid #e5ece7!important;border-radius:9px!important;
+ background:#f3f6f4!important;color:#829188!important;
+ font:700 12px "Plus Jakarta Sans",sans-serif;cursor:pointer;
+ box-shadow:none!important;
+}
+.form-title-row .detail-edit-top.is-editing{
+ background:#fff!important;color:#5145f5!important;
+ border-color:#e5e2ff!important;
+ box-shadow:0 1px 4px #183b2818!important;
+ cursor:default;
+}
+.form-title-row .detail-edit-top:disabled{opacity:1!important}

@@ -141,6 +141,15 @@
     const body=document.getElementById('contentTableBody');body.replaceChildren();
     filtered.forEach(item=>{
       const tr=document.createElement('tr');
+      tr.classList.add('content-row-clickable');
+      tr.tabIndex=0;
+      tr.setAttribute('role','button');
+      tr.setAttribute('aria-label','Lihat detail konten: '+(item.title||'Tanpa judul'));
+      tr.title='Klik untuk melihat detail konten';
+      tr.addEventListener('click',()=>openCalendarContentDetail(item));
+      tr.addEventListener('keydown',event=>{
+        if(event.key==='Enter'||event.key===' '){event.preventDefault();openCalendarContentDetail(item);}
+      });
       [item.title||'Tanpa judul',item.platform||'—',formatContentDate(item.postingDate),item.postingTime||'—',item.status||'—',item.format||'—'].forEach((value,index)=>{
         const td=document.createElement('td');td.textContent=value;
         if(index===4){const badge=document.createElement('span');badge.className='status-chip';badge.textContent=value;td.replaceChildren(badge);}

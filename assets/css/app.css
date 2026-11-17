@@ -949,3 +949,12 @@ body.calendar-item-open{overflow:hidden}
 .visit-calendar-selected-event.cancelled>b{color:#c45c5c}
 .visit-calendar-add-selected{margin-top:11px;padding:8px 12px;border:1px solid #cde9e4;border-radius:8px;background:#eaf8f5;color:#168f87;font:700 10px 'DM Sans';cursor:pointer}
 @media(max-width:600px){.visit-grid-panel{padding:10px 0}.visit-calendar-grid{min-width:650px}.visit-calendar-day-cell{min-height:96px;padding:5px}.visit-calendar-event-chip{padding:5px}.visit-calendar-event-chip b{font-size:8px}}
+
+.visit-calendar-legend{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:0 0 12px;padding:10px 12px;border:1px solid #eaf0f1;border-radius:9px;background:#fcfefd}
+.visit-calendar-legend>span{display:inline-flex;align-items:center;gap:7px;color:#64746b;font-size:9px;font-weight:700}
+.visit-status-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#98a7b5}
+.visit-status-dot.planned{background:#1899a3}
+.visit-status-dot.progress{background:#ff9a3d}
+.visit-status-dot.done{background:#27966a}
+.visit-status-dot.cancelled{background:#d66b6b}
+@media(max-width:600px){.visit-calendar-day-add{opacity:1}.visit-calendar-legend{gap:10px;padding:9px}.visit-calendar-legend>span{font-size:8px}}

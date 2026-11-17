@@ -295,6 +295,7 @@
   let visitCalendarMonth=new Date(new Date().getFullYear(),new Date().getMonth(),1);
   let visitCalendarSelected=[new Date().getFullYear(),String(new Date().getMonth()+1).padStart(2,'0'),String(new Date().getDate()).padStart(2,'0')].join('-');
   const visitPageSize=4;
+  let visitExtraRows=0;
   const visitFields=[
     {key:'visitDate',label:'TGL VISIT',type:'date'},
     {key:'time',label:'JAM',type:'time'},
@@ -340,7 +341,7 @@
     if(mode==='grid')renderVisitCalendar(sortedVisits());
   }
   document.getElementById('visitListViewBtn')?.addEventListener('click',()=>setVisitViewMode('list'));
-  document.getElementById('visitAddScheduleBtn')?.addEventListener('click',()=>{setVisitViewMode('list');const firstEmpty=document.querySelector('#visitTableBody [data-new-visit-field="visitDate"]');if(firstEmpty){firstEmpty.focus();firstEmpty.scrollIntoView({behavior:'smooth',block:'nearest'});showToast('Silakan isi baris kosong untuk menambahkan jadwal Visit.');return;}showToast('Isi jadwal melalui baris kosong pada daftar Visit.');});
+  document.getElementById('visitAddScheduleBtn')?.addEventListener('click',()=>{setVisitViewMode('list');visitExtraRows++;renderVisitTables();const rows=document.querySelectorAll('#visitTableBody tr');const lastRow=rows[rows.length-1];const dateInput=lastRow?.querySelector('[data-new-visit-field="visitDate"]');if(dateInput){dateInput.focus();dateInput.scrollIntoView({behavior:'smooth',block:'nearest'});}showToast('Baris jadwal baru ditambahkan. Silakan isi kolom-kolomnya.');});
   document.getElementById('visitGridViewBtn')?.addEventListener('click',()=>setVisitViewMode('grid'));
   function renderVisitTables(){
     const body=document.getElementById('visitTableBody');
@@ -363,9 +364,11 @@
     });
     // Batasi jumlah baris yang tampil menjadi tepat empat per halaman.
     // Baris kosong mengisi sisa slot setelah data tersimpan.
-    const emptySlots=Math.max(0,visitPageSize-pageItems.length);
+    const baseEmptySlots=Math.max(0,visitPageSize-pageItems.length);
+    const emptySlots=baseEmptySlots+visitExtraRows;
     for(let slot=0;slot<emptySlots;slot++){
       const tr=document.createElement('tr');tr.className='visit-select-row visit-placeholder-row';
+      if(slot>=baseEmptySlots)tr.dataset.extraVisitRow='true';
       const number=document.createElement('td');number.textContent=String(visitCurrentPage*visitPageSize+pageItems.length+slot+1);tr.append(number);
       const fields=visitFields;
       fields.forEach(field=>{
@@ -537,6 +540,7 @@
       const record={id:'VIS-'+Date.now().toString(36).toUpperCase(),visitDate:'',time:'',location:'',title:'',publishDate:'',talent:[],props:'',status:'',notes:'',createdAt:new Date().toISOString()};
       record[field]=value;
       const all=readVisits();all.push(record);writeVisits(all);
+      if(input.closest('tr')?.dataset.extraVisitRow==='true')visitExtraRows=Math.max(0,visitExtraRows-1);
       visitCurrentPage=0;visitSelectedId=record.id;renderVisitTables();showToast('Data Visit baru tersimpan. Lanjutkan isi kolom lainnya.');
       return;
     }

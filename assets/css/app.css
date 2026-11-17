@@ -701,3 +701,68 @@ body.modal-open{overflow:hidden;}
 #dashboardPage .quick-teal:hover{border-color:#bce9e2}
 @media(max-width:1000px){#dashboardPage .quick-actions-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){#dashboardPage .dashboard-quick-actions{padding:14px 12px;border-radius:14px}#dashboardPage .quick-actions-grid{gap:8px}#dashboardPage .quick-action{padding:10px 8px;gap:8px}#dashboardPage .quick-action-icon{width:30px;height:30px;flex-basis:30px}#dashboardPage .quick-action b{font-size:9px}#dashboardPage .quick-action small{font-size:8px}}
+
+
+/* NOTE AP GLOBAL DESIGN SYSTEM — ORANGE x TOSKA */
+:root{
+ --green:#f28c38;--green-dark:#d97726;
+ --ink:#263548;--muted:#8492a6;--line:#e9eef3;--bg:#f7f9fc;--white:#fff;
+ --na-orange:#f28c38;--na-orange-soft:#fff1e5;
+ --na-teal:#20b6a6;--na-teal-dark:#159d91;--na-teal-soft:#e4f7f4;
+ --na-shadow:0 5px 18px rgba(39,61,83,.055);
+ --na-radius:15px;
+}
+body{background:var(--bg);color:var(--ink)}
+.sidebar{background:#fff;border-right-color:#e8edf2}
+.brand-mark{background:var(--na-orange-soft);color:var(--na-orange)}
+.nav-link{color:#738297}
+.nav-link:hover,.nav-link.active{background:var(--na-teal-soft);color:var(--na-teal-dark)}
+.nav-link.active{box-shadow:inset 3px 0 var(--na-teal)}
+.nav-label{color:#a0aaba}
+.avatar{background:var(--na-orange-soft);color:#d97726}
+.eyebrow{color:var(--na-teal-dark)}
+.primary-btn{background:var(--na-orange);box-shadow:0 5px 13px #f28c3826}
+.primary-btn:hover{background:#dc7627}
+.secondary-btn:hover,.filter-reset-btn:hover{border-color:#9ddbd3;color:var(--na-teal-dark)}
+.notification-btn:hover,.notification-btn[aria-expanded=true]{border-color:#bce9e2;background:#f1fbf9;color:var(--na-teal-dark)}
+.notification-heading button,.all-notifications{color:var(--na-teal-dark)}
+.unread-dot{background:var(--na-orange)}
+.form-breadcrumb b,.text-link{color:var(--na-teal-dark)}
+.form-section-heading .section-number{background:var(--na-orange-soft);color:#d97726}
+.field input:focus,.field select:focus,.field textarea:focus,
+.content-search input:focus,.content-filter select:focus,.content-filter input:focus,
+.visit-form input:focus,.visit-form select:focus,.visit-form textarea:focus,
+.visit-inline-input:focus{border-color:#65c9bd;box-shadow:0 0 0 3px #20b6a61a}
+.approve-btn{border-color:#bce9e2;background:var(--na-teal-soft);color:var(--na-teal-dark)}
+.approved-pill{background:var(--na-teal-soft);color:var(--na-teal-dark)}
+.pending-pill{background:var(--na-orange-soft);color:#bd6d27}
+.phase-track .phase-active{background:var(--na-teal)}
+.status-chip{background:var(--na-teal-soft);color:var(--na-teal-dark)}
+.platform-cell{color:var(--na-teal-dark)!important}
+.content-empty>span{background:var(--na-teal-soft);color:var(--na-teal-dark)}
+.kanban-page .primary-btn{background:var(--na-orange)}
+.kanban-column{background:#f0f8f6;border-color:#e1f0ed}
+.kanban-column>header h2{color:var(--na-teal-dark)}
+.kanban-column>header>span{background:#dff3ef;color:#25877e}
+.kanban-card-actions button:hover{background:var(--na-teal-soft);color:var(--na-teal-dark);border-color:#bce9e2}
+.kanban-add-slot:hover,.kanban-column.drop-target .kanban-add-slot{border-color:#71cfc3;background:var(--na-teal-soft);color:var(--na-teal-dark)}
+.kanban-column.drop-target{background:#e4f7f4;border-color:#8ed8ce}
+.visit-actions button{color:var(--na-teal-dark)}
+.visit-kicker,.visit-today-time,.visit-today-select{color:var(--na-teal-dark)}
+.visit-today-date,.visit-detail-indicator{background:var(--na-orange-soft);color:#d97726}
+.visit-today-item:hover{border-color:#9ddbd3;background:#f3fbfa}
+.visit-select-row.selected{background:#eaf8f5;box-shadow:inset 3px 0 var(--na-teal)}
+.visit-page-btn:hover{border-color:#9ddbd3;color:var(--na-teal-dark)}
+.format-color-legend{background:#fbfefd}
+.format-dot.reels{background:var(--na-orange)}
+.format-dot.carousel{background:var(--na-teal)}
+.format-dot.feed{background:#86cfc6}
+.settings-card,.visit-table-panel,.visit-editor,.visit-card,.content-list-panel,.content-filter-panel,.calendar-embed-card,.panel,.stat-card{box-shadow:var(--na-shadow);border-color:#e9eef3;border-radius:var(--na-radius)}
+.content-table th,.visit-table th{background:#f3faf8;color:#718a87}
+.content-table td,.visit-table td{border-top-color:#edf2f3}
+.date-box{background:var(--na-orange-soft);color:#d97726}
+.toast{background:#263d4b}
+@media(max-width:700px){
+ .mobile-top{border-bottom-color:#e8edf2}
+ .mobile-top button{color:var(--na-teal-dark)}
+}

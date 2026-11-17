@@ -574,3 +574,17 @@ body.modal-open{overflow:hidden;}
  .chat-composer button{width:35px;height:35px;flex-basis:35px}
  .chat-local-note{padding:0 9px 9px;font-size:8px}
 }
+
+
+/* CHAT EMBEDDED IN HELP CENTER */
+.help-chat-block{margin:26px 0 30px;padding:22px;border:1px solid var(--line);border-radius:16px;background:var(--panel,#fff)}
+.help-chat-block>.help-section-heading{margin-bottom:16px}
+.help-chat-block .chat-page{padding:0;max-width:none;min-height:0;margin:0}
+.help-chat-block .chat-workspace{height:560px;min-height:430px;grid-template-columns:260px minmax(0,1fr)}
+.help-chat-block .chat-page .page-footer{display:none}
+@media(max-width:760px){
+ .help-chat-block{padding:13px;margin:20px 0}
+ .help-chat-block .chat-workspace{height:570px;min-height:500px;grid-template-columns:105px minmax(0,1fr)}
+}
+:root[data-theme="dark"] .help-chat-block{background:#18231c;border-color:#34463a}
+@media(prefers-color-scheme:dark){:root[data-theme="system"] .help-chat-block{background:#18231c;border-color:#34463a}}

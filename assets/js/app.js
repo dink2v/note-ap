@@ -300,7 +300,6 @@
     {key:'time',label:'JAM',type:'time'},
     {key:'location',label:'LOKASI',type:'text'},
     {key:'title',label:'JUDUL KONTEN',type:'textarea'},
-    {key:'publishDate',label:'TGL PUBLISH',type:'date'},
     {key:'talent',label:'TALENT',type:'text'},
     {key:'props',label:'PROPERTI / PRODUK',type:'text'},
     {key:'status',label:'STATUS',type:'select'},

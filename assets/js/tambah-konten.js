@@ -96,7 +96,11 @@ form.addEventListener('submit',async event=>{
 });
 document.getElementById('closeForm').addEventListener('click',()=>{if(confirm('Tutup popup konten? Perubahan yang belum disimpan akan hilang.')){if(typeof window.noteApContentModalClose==='function')window.noteApContentModalClose();else window.location.href='index.html';}});
 document.getElementById('duplicateForm').addEventListener('click',()=>{
- const data=Object.fromEntries(new FormData(form).entries());form.reset();Object.entries(data).forEach(([key,value])=>{if(form.elements[key])form.elements[key].value=value;});
+ const data={};
+  // FormData mengabaikan field disabled. Saat Detail masih mode lihat, baca value
+  // langsung dari elemen agar Duplicate tetap menyalin seluruh isi konten.
+  [...form.elements].forEach(element=>{if(element.name&&'value'in element)data[element.name]=element.value;});
+  form.reset();Object.entries(data).forEach(([key,value])=>{if(form.elements[key])form.elements[key].value=value;});
  if(detailMode){detailMode=false;editMode=true;detailItem=null;setFormLocked(false);document.querySelector('.form-title-row h1').textContent='Tambah Konten Baru';document.getElementById('detailEditTop')?.remove();const bottom=document.querySelector('.form-bottom-actions > div');const save=document.querySelector('button[type="submit"][form="contentForm"]');const edit=document.createElement('button');edit.type='button';edit.className='secondary-btn';edit.id='editForm';edit.textContent='Edit';bottom.insertBefore(edit,save);edit.addEventListener('click',()=>form.querySelector('input,select,textarea').focus());}
  showToast('Isi form berhasil diduplikasi.');window.scrollTo({top:0,behavior:'smooth'});
 });

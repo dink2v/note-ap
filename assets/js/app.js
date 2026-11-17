@@ -361,13 +361,38 @@
     renderVisitTables();
   });
   document.getElementById('visitDeleteSelectedBtn')?.addEventListener('click',()=>{
-    const ids=[...visitSelectedIds];
-    if(!ids.length)return;
-    if(!confirm('Hapus '+ids.length+' jadwal Visit yang dipilih? Tindakan ini tidak dapat dibatalkan.'))return;
-    const remaining=readVisits().filter(item=>!visitSelectedIds.has(item.id));
+    // Hanya hapus pilihan yang benar-benar masih berada pada bulan yang sedang dibuka.
+    const monthKey=[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0')].join('-');
+    const selectedIds=new Set(visitSelectedIds);
+    const before=readVisits();
+    const targets=before.filter(item=>selectedIds.has(item.id)&&(!item.visitDate||item.visitDate.slice(0,7)===monthKey));
+    if(!targets.length){
+      visitSelectedIds.clear();
+      renderVisitTables();
+      showToast('Tidak ada jadwal terpilih yang masih tersedia pada bulan ini.');
+      return;
+    }
+    if(!confirm('Hapus '+targets.length+' jadwal Visit yang dipilih? Tindakan ini tidak dapat dibatalkan.'))return;
+
+    const targetIds=new Set(targets.map(item=>item.id));
+    const remaining=before.filter(item=>!targetIds.has(item.id));
     if(!writeVisits(remaining))return;
-    const removed=ids.length;visitSelectedIds.clear();visitSelectMode=false;visitSelectedId=null;
-    visitCurrentPage=0;renderVisitTables();renderVisitCalendar(sortedVisits());
+
+    // Verifikasi hasil tulis sebelum UI menyatakan penghapusan berhasil.
+    const after=readVisits();
+    const stillExists=after.some(item=>targetIds.has(item.id));
+    if(stillExists){
+      showToast('Sebagian jadwal belum berhasil dihapus. Data pilihan tetap dipertahankan agar bisa dicoba lagi.');
+      return;
+    }
+
+    const removed=before.length-after.length;
+    visitSelectedIds.clear();
+    visitSelectMode=false;
+    visitSelectedId=null;
+    visitCurrentPage=0;
+    renderVisitTables();
+    renderVisitCalendar(sortedVisits());
     showToast(removed+' jadwal Visit berhasil dihapus.');
   });
   document.getElementById('visitTableBody')?.addEventListener('change',event=>{

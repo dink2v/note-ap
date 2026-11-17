@@ -136,9 +136,29 @@
   function formatContentDate(value){if(!value)return'—';const date=new Date(value+'T00:00:00');return Number.isNaN(date.getTime())?value:new Intl.DateTimeFormat('id-ID',{day:'2-digit',month:'short',year:'numeric'}).format(date);}
 
   const visitKey='noteAp.visits';
-  const readVisits=()=>{try{const v=JSON.parse(localStorage.getItem(visitKey)||'[]');return Array.isArray(v)?v:[];}catch(e){return[];}};
-  const writeVisits=items=>localStorage.setItem(visitKey,JSON.stringify(items));
-  const visitDateLabel=value=>value?formatContentDate(value):'—';
+  const readVisits=()=>{
+    try{
+      const value=JSON.parse(localStorage.getItem(visitKey)||'[]');
+      if(!Array.isArray(value))return[];
+      return value.filter(item=>item&&typeof item==='object'&&!Array.isArray(item)).map((item,index)=>({
+        ...item,
+        id:String(item.id||'VIS-IMPORTED-'+(index+1)),
+        visitDate:String(item.visitDate??''),
+        time:String(item.time??''),
+        location:String(item.location??''),
+        title:String(item.title??''),
+        publishDate:String(item.publishDate??''),
+        props:String(item.props??''),
+        status:String(item.status??''),
+        notes:String(item.notes??'')
+      }));
+    }catch(error){return[];}
+  };
+  const writeVisits=items=>{
+    try{localStorage.setItem(visitKey,JSON.stringify(items));return true;}
+    catch(error){showToast('Data Visit gagal disimpan. Periksa ruang penyimpanan browser.');return false;}
+  };
+  const visitDateLabel=value=>value?formatContentDate(String(value)):'—';
   let visitCurrentPage=0,visitSelectedId=null;
   let visitViewMode='list';
   let visitCalendarMonth=new Date(new Date().getFullYear(),new Date().getMonth(),1);
@@ -157,7 +177,7 @@
   ];
   const escapeVisit=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   const visitStatusOptions=['PLANNED','ON PROGRESS','DONE','CANCELLED'];
-  function sortedVisits(){return readVisits().sort((a,b)=>(a.visitDate||'').localeCompare(b.visitDate||'')||(a.time||'').localeCompare(b.time||''));}
+  function sortedVisits(){return readVisits().sort((a,b)=>String(a.visitDate||'').localeCompare(String(b.visitDate||''))||String(a.time||'').localeCompare(String(b.time||'')));}
   function getTalentOptions(){
     let configured=[];
     try{const saved=JSON.parse(localStorage.getItem('noteAp.talents')||'[]');if(Array.isArray(saved))configured=saved.map(item=>typeof item==='string'?item:item?.name).filter(Boolean);}catch(error){}
@@ -189,9 +209,11 @@
     if(gridBtn)gridBtn.classList.toggle('active',mode==='grid');
     if(mode==='grid')renderVisitCalendar(sortedVisits());
   }
-  document.getElementById('visitListViewBtn').addEventListener('click',()=>setVisitViewMode('list'));
-  document.getElementById('visitGridViewBtn').addEventListener('click',()=>setVisitViewMode('grid'));
+  document.getElementById('visitListViewBtn')?.addEventListener('click',()=>setVisitViewMode('list'));
+  document.getElementById('visitGridViewBtn')?.addEventListener('click',()=>setVisitViewMode('grid'));
   function renderVisitTables(){
+    const body=document.getElementById('visitTableBody');
+    if(!body)return;
     const allVisits=sortedVisits();
     const monthKey=[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0')].join('-');
     const visits=allVisits.filter(item=>!item.visitDate||item.visitDate.slice(0,7)===monthKey);
@@ -199,7 +221,7 @@
     visitCurrentPage=Math.min(visitCurrentPage,pageCount-1);
     const pageItems=visits.slice(visitCurrentPage*visitPageSize,(visitCurrentPage+1)*visitPageSize);
     if(!pageItems.some(item=>item.id===visitSelectedId))visitSelectedId=pageItems[0]?.id||null;
-    const body=document.getElementById('visitTableBody');body.replaceChildren();
+    body.replaceChildren();
     pageItems.forEach((v,index)=>{
       const tr=document.createElement('tr');tr.className='visit-select-row'+(v.id===visitSelectedId?' selected':'');tr.dataset.visitId=v.id;
       const numberCell=document.createElement('td');numberCell.textContent=String(visitCurrentPage*visitPageSize+index+1);tr.append(numberCell);
@@ -233,14 +255,14 @@
       });
       body.append(tr);
     }
-    document.getElementById('visitEmpty').hidden=visits.length>0;
-    document.getElementById('visitEmpty').textContent='Belum ada data Visit untuk bulan '+new Intl.DateTimeFormat('id-ID',{month:'long',year:'numeric'}).format(visitCalendarMonth)+'.';
+    const empty=document.getElementById('visitEmpty');
+    if(empty){empty.hidden=visits.length>0;empty.textContent='Belum ada data Visit untuk bulan '+new Intl.DateTimeFormat('id-ID',{month:'long',year:'numeric'}).format(visitCalendarMonth)+'.';}
     renderVisitMonthNav();
-    document.getElementById('visitPageInfo').textContent='Halaman '+(visitCurrentPage+1)+' dari '+pageCount;
+    const pageInfo=document.getElementById('visitPageInfo');if(pageInfo)pageInfo.textContent='Halaman '+(visitCurrentPage+1)+' dari '+pageCount;
     const today=new Date(),todayKey=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
-    document.getElementById('visitTodayDate').textContent='Today · '+new Intl.DateTimeFormat('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(today);
+    const todayDate=document.getElementById('visitTodayDate');if(todayDate)todayDate.textContent='Today · '+new Intl.DateTimeFormat('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(today);
     const todayVisits=visits.filter(v=>v.visitDate===todayKey);
-    const todayList=document.getElementById('visitTodayList');todayList.replaceChildren();
+    const todayList=document.getElementById('visitTodayList');if(!todayList)return;todayList.replaceChildren();
     const todayLabel=document.createElement('div');todayLabel.className='visit-today-label';todayLabel.textContent='Jadwal visit :';todayList.append(todayLabel);
     const todayEntries=todayVisits.length?todayVisits:[null];
     todayEntries.forEach(v=>{const item=document.createElement('div');item.className='visit-today-entry';[['Hari ini :',v?visitDateLabel(v.visitDate):'Tidak ada jadwal'],['Lokasi :',v?.location||'—'],['Jam :',v?.time||'—']].forEach(([label,value])=>{const row=document.createElement('div');row.className='visit-today-line';const key=document.createElement('b');key.textContent=label;const val=document.createElement('span');val.textContent=value;row.append(key,val);item.append(row);});todayList.append(item);});
@@ -285,9 +307,9 @@
     visitCurrentPage=0;
     renderVisitTables();
   }
-  document.getElementById('visitPrevMonth').addEventListener('click',()=>moveVisitMonth(-1));
-  document.getElementById('visitNextMonth').addEventListener('click',()=>moveVisitMonth(1));
-  document.getElementById('visitCalendar').addEventListener('click',event=>{
+  document.getElementById('visitPrevMonth')?.addEventListener('click',()=>moveVisitMonth(-1));
+  document.getElementById('visitNextMonth')?.addEventListener('click',()=>moveVisitMonth(1));
+  document.getElementById('visitCalendar')?.addEventListener('click',event=>{
     const day=event.target.closest('[data-calendar-date]');
     if(day){visitCalendarSelected=day.dataset.calendarDate;renderVisitCalendar(sortedVisits());}
   });
@@ -304,7 +326,7 @@
     if(focused?.dataset?.visitId===id&&focused?.dataset?.visitField===field){const replacement=document.querySelector('[data-visit-id="'+CSS.escape(id)+'"][data-visit-field="'+field+'"]');if(replacement){replacement.focus();if(replacement.setSelectionRange&&replacement.type==='text'){const end=replacement.value.length;replacement.setSelectionRange(end,end);}}}
     showToast('Perubahan Visit tersimpan.');
   }
-  document.getElementById('visitTableBody').addEventListener('change',event=>{
+  document.getElementById('visitTableBody')?.addEventListener('change',event=>{
     const input=event.target.closest('[data-new-visit-field]');
     if(input){
       const field=input.dataset.newVisitField;
@@ -327,9 +349,14 @@
       updateVisitField(existing.dataset.visitId,field,value);
     }
   });
-  document.getElementById('visitTodayList').addEventListener('change',event=>{const input=event.target.closest('[data-visit-id][data-visit-field]');if(input)updateVisitField(input.dataset.visitId,input.dataset.visitField,input.value);});
+  document.getElementById('visitTodayList')?.addEventListener('change',event=>{const input=event.target.closest('[data-visit-id][data-visit-field]');if(input)updateVisitField(input.dataset.visitId,input.dataset.visitField,input.value);});
   document.getElementById('visitPrevPage')?.addEventListener('click',()=>{visitCurrentPage=Math.max(0,visitCurrentPage-1);visitSelectedId=null;renderVisitTables();});
-  document.getElementById('visitNextPage')?.addEventListener('click',()=>{const max=Math.max(0,Math.ceil(sortedVisits().length/visitPageSize)-1);visitCurrentPage=Math.min(max,visitCurrentPage+1);visitSelectedId=null;renderVisitTables();});
+  document.getElementById('visitNextPage')?.addEventListener('click',()=>{
+    const monthKey=[visitCalendarMonth.getFullYear(),String(visitCalendarMonth.getMonth()+1).padStart(2,'0')].join('-');
+    const monthVisits=sortedVisits().filter(item=>!item.visitDate||String(item.visitDate).slice(0,7)===monthKey);
+    const max=Math.max(0,Math.ceil(monthVisits.length/visitPageSize)-1);
+    visitCurrentPage=Math.min(max,visitCurrentPage+1);visitSelectedId=null;renderVisitTables();
+  });
 
   function renderVisitEditorLegacy(){renderVisitTables();}
   const visitEditor=document.getElementById('visitEditor'),visitForm=document.getElementById('visitForm');
@@ -339,6 +366,7 @@
   if(visitEditor)visitEditor.hidden=true;
   const addSettingVisitBtn=document.getElementById('addSettingVisitBtn');
   renderVisitTables();
+  setVisitViewMode('list');
   if(window.location.hash==='#visit')showPage('visit');
   if(window.location.hash==='#setelan')showPage('setelan');
   window.addEventListener('storage',event=>{if(event.key==='noteAp.contents'){if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();}if(event.key==='noteAp.visits'){if(!visitPage.hidden||!settingsPage.hidden)renderVisitTables();}});

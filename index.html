@@ -6,7 +6,7 @@
   <title>Note AP — Apotek Prapatan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/app.css?v=20261117-sharedcontentcalendar">
+  <link rel="stylesheet" href="assets/css/app.css?v=20261117-notegcalremoved">
 <style>
 .calendar-content-detail-body{display:grid;gap:18px;max-height:min(62vh,680px);overflow:auto;padding:4px 2px 12px}.calendar-detail-section{padding:16px;border:1px solid var(--line,#e5ebe7);border-radius:14px;background:rgba(255,255,255,.55)}.calendar-detail-section h3{margin:0 0 12px;font-size:14px}.calendar-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.calendar-detail-field{min-width:0}.calendar-detail-field b{display:block;font-size:11px;color:var(--muted,#718078);margin-bottom:5px}.calendar-detail-field p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.55}.calendar-detail-field:has(p){grid-column:auto}@media(max-width:600px){.calendar-detail-grid{grid-template-columns:1fr}.calendar-content-detail-body{max-height:65vh}}
 </style></head>
@@ -84,8 +84,8 @@
     </div>
     <section class="calendar-page" id="calendarPage" hidden>
       <div class="calendar-page-heading">
-        <div><div class="eyebrow">CONTENT SCHEDULING</div><h1>Kalender Konten</h1><p class="muted">Gunakan kalender Google untuk melihat jadwal. Jadwal dari menu Konten Note AP belum masuk ke Google Calendar secara otomatis.</p></div>
-        <div class="calendar-page-actions"><button class="primary-btn" id="newContentCalendarBtn" type="button"><span>＋</span> Konten Baru</button><a class="secondary-btn" href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener">Buka Google Calendar ↗</a></div>
+        <div><div class="eyebrow">CONTENT SCHEDULING</div><h1>Kalender Konten</h1><p class="muted">Lihat dan atur jadwal dari data konten yang sama. Kalender ini terhubung langsung dengan menu Konten dan Kanban.</p></div>
+        <div class="calendar-page-actions"><button class="primary-btn" id="newContentCalendarBtn" type="button"><span>＋</span> Konten Baru</button></div>
       </div>
       
       <section class="calendar-planner-panel" aria-labelledby="noteApCalendarTitle">
@@ -97,13 +97,6 @@
         <div class="note-ap-calendar-grid" id="noteApCalendarGrid" aria-live="polite"></div>
         <p class="calendar-planner-footnote">Klik tanggal kosong untuk membuat jadwal. Klik kartu konten untuk mengedit detailnya. Perubahan disimpan pada data konten Note AP di browser ini.</p>
       </section>
-      <div class="calendar-embed-card">
-        <div class="calendar-embed-top"><div><span class="calendar-live-dot"></span><b>Google Calendar</b><small>Google Calendar · Tampilan jadwal tersinkron</small></div><span class="calendar-timezone">Asia/Jakarta (WIB)</span></div>
-        <div class="format-color-legend" aria-label="Keterangan warna format konten"><span><i class="format-dot reels"></i>Reels</span><span><i class="format-dot carousel"></i>Carousel</span><span><i class="format-dot feed"></i>Feed</span></div>
-        <div class="calendar-connection-note"><b>Perlu diketahui</b><span>Kalender yang tampil mengikuti akun Google yang sedang login. Untuk melihat kalender tim, buka Google Calendar dan pilih kalender tim yang sudah dibagikan kepada akun tersebut.</span></div>
-        <iframe id="googleCalendarFrame" title="Kalender Google Note AP" src="https://calendar.google.com/calendar/embed?src=primary&ctz=Asia%2FJakarta&mode=MONTH&showTitle=0&showPrint=0&showTabs=1&showCalendars=0&showTz=0" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-      </div>
-      <p class="calendar-help">Jika kalender kosong atau tidak dapat dibuka, periksa akun Google yang sedang login, izin akses kalender, dan pengaturan browser yang mengizinkan konten Google ditampilkan. Tombol “Buka Google Calendar” dapat digunakan untuk melihat kalender langsung di situs Google.</p>
     </section>
     <section class="content-page" id="contentPage" hidden>
       <div class="content-page-heading"><div><div class="eyebrow">CONTENT MANAGEMENT</div><h1>Konten</h1><p class="muted">Kelola seluruh ide, proses, dan publikasi konten Apotek Prapatan.</p></div><button class="primary-btn" id="newContentListBtn" type="button"><span>＋</span> Konten Baru</button></div>
@@ -198,7 +191,7 @@
           <details class="help-faq-item"><summary>Apakah data Note AP sudah tersimpan online dan tersinkron ke Google Sheets?</summary><p>Belum. Saat ini data konten, Visit, referensi, dan preferensi tertentu disimpan di localStorage browser/perangkat yang digunakan. Integrasi Google Sheets belum aktif karena endpoint koneksi belum dipasang.</p></details>
           <details class="help-faq-item"><summary>Apakah data bisa dibuka dari perangkat lain?</summary><p>Data yang tersimpan lokal tidak otomatis berpindah ke perangkat atau browser lain. Gunakan fitur Ekspor Backup dan Impor/Pulihkan Backup di Setelan → Manajemen Data untuk memindahkan salinan data secara manual.</p></details>
           <details class="help-faq-item"><summary>Bagaimana cara mencadangkan data?</summary><p>Buka Setelan → Manajemen Data → Unduh Backup JSON. Simpan file di tempat yang aman. Untuk memulihkan, pilih file backup melalui menu Pilih File Backup.</p></details>
-          <details class="help-faq-item"><summary>Mengapa kalender Google tidak muncul?</summary><p>Pastikan koneksi internet aktif dan kamu sudah login ke akun Google yang memiliki akses ke kalender terkait. Kamu juga dapat membuka Google Calendar melalui tombol di halaman Kalender.</p></details>
+          
           <details class="help-faq-item"><summary>Bagaimana jika tampilan atau data terlihat belum berubah?</summary><p>Coba muat ulang halaman dengan Ctrl + Shift + R. Perlu diingat, data lokal pada browser yang berbeda tidak otomatis sama.</p></details>
         </div>
       </section>
@@ -307,5 +300,5 @@
 </section>
 <button class="command-launcher" id="commandLauncher" type="button" aria-label="Buka Command Center"><span>✳</span><span class="launcher-label">Command Center</span><kbd>Ctrl K</kbd></button>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261117-sharedcontentcalendar"></script>
+<script src="assets/js/app.js?v=20261117-notegcalremoved"></script>
 </body></html>

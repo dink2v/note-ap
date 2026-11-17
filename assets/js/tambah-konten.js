@@ -36,13 +36,18 @@ function saveThroughAppsScript(payload){
  });
 }
 function setFormLocked(locked){
+ // Kunci/buka seluruh field pada ketiga panel form, bukan hanya Informasi Konten.
  [...form.elements].forEach(element=>{if(element.tagName==='BUTTON')return;element.disabled=locked;});
  document.querySelectorAll('[data-expand]').forEach(button=>button.disabled=locked);
  const save=document.querySelector('button[type="submit"][form="contentForm"]');
  if(save)save.disabled=locked;
+ form.dataset.editable=String(!locked);
 }
 function fillForm(item){
- const dateTime=[item.postingDate||'',item.postingTime||''].filter(Boolean).join('T');
+ const legacyDateTime=String(item.postDateTime||'');
+ const date=item.postingDate||legacyDateTime.split('T')[0]||'';
+ const time=item.postingTime||legacyDateTime.split('T')[1]||'';
+ const dateTime=date&&time?date+'T'+time:date;
  const values={title:item.title,platform:item.platform,format:item.format,duration:item.duration,pillar:item.pillar,status:item.status,postDateTime:dateTime,reference:item.reference,hook:item.hook,visualHook:item.visualHook,body:item.body,visualBody:item.visualBody,cta:item.cta,visualCta:item.visualCTA??item.visualCta,caption:item.caption,notes:item.notes};
  Object.entries(values).forEach(([name,value])=>{const field=form.elements[name];if(field&&value!=null)field.value=String(value);});
  const comments=Array.isArray(item.comments)?item.comments:[];
@@ -63,7 +68,9 @@ function makeItemFromForm(){
 }
 function postSaved(id,storage){if(window.parent&&window.parent!==window)window.parent.postMessage({type:'NOTE_AP_CONTENT_SAVED',id,storage},'*');}
 form.addEventListener('submit',async event=>{
- event.preventDefault();if(!form.reportValidity())return;
+ event.preventDefault();
+ if(detailMode&&!editMode){showToast('Klik Edit terlebih dahulu untuk mengubah konten.');return;}
+ if(!form.reportValidity())return;
  const submit=document.querySelector('button[type="submit"][form="contentForm"]')||form.querySelector('button[type="submit"]');
  if(submit){submit.disabled=true;submit.textContent='Menyimpan…';}
  try{
@@ -100,7 +107,15 @@ if(pageParams.get('mode')==='detail'){
  if(title)title.textContent='Detail Konten';
  if(titleRow&&editButton){editButton.textContent='Edit';editButton.id='detailEditTop';editButton.classList.add('detail-edit-top');titleRow.insertBefore(editButton,titleRow.querySelector(':scope > a.secondary-btn'));}
  const id=pageParams.get('id');detailItem=readItems().find(item=>String(item.id)===String(id));
- if(detailItem){fillForm(detailItem);setFormLocked(true);if(editButton)editButton.addEventListener('click',()=>{editMode=true;setFormLocked(false);form.querySelector('input,select,textarea')?.focus();showToast('Mode edit aktif. Setelah selesai, klik Simpan Konten.');});}
+ if(detailItem){
+  fillForm(detailItem);setFormLocked(true);
+  if(editButton)editButton.addEventListener('click',()=>{
+   if(editMode)return;
+   editMode=true;setFormLocked(false);
+   form.querySelector('input,select,textarea')?.focus();
+   showToast('Mode edit aktif. Semua kolom Informasi, Materi, Arahan Visual, Caption, dan Catatan sekarang bisa diubah.');
+  });
+ }
  else{setFormLocked(true);if(editButton)editButton.disabled=true;showToast('Data konten tidak ditemukan di browser ini.');const message=document.createElement('p');message.className='muted';message.textContent='Data konten ini tidak ditemukan pada penyimpanan browser yang sedang digunakan.';form.prepend(message);}
 }else if(editButton){editButton.addEventListener('click',()=>{form.querySelector('input,select,textarea').focus();showToast('Silakan edit informasi konten.');});}
 })();

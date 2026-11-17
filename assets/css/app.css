@@ -1265,3 +1265,46 @@ body.calendar-item-open{overflow:hidden}
 .visit-selection-controls #visitDeleteSelectedBtn:disabled{opacity:.45;cursor:not-allowed}
 .visit-selection-controls .visit-select-all-control{min-height:28px;padding:0 9px;border:1px solid #dce8e5;border-radius:8px;background:#fff}
 @media(max-width:760px){.visit-selection-controls{gap:6px}.visit-selection-controls .visit-select-all-control{font-size:9px}}
+
+
+/* Visit toolbar: Select, navigasi bulan, dan pilihan tampilan sejajar dalam satu baris */
+.visit-table-toolbar {
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:14px !important;
+  flex-wrap:nowrap !important;
+}
+.visit-table-toolbar > .visit-selection-controls {
+  display:flex;
+  align-items:center;
+  flex:0 0 auto;
+  gap:8px;
+  margin:0 !important;
+}
+.visit-table-toolbar > .visit-month-nav {
+  margin-left:auto !important;
+  flex:0 0 auto;
+}
+.visit-table-toolbar > .visit-display-control {
+  flex:0 0 auto;
+  width:auto;
+}
+@media(max-width:760px) {
+  .visit-table-toolbar {
+    flex-wrap:wrap !important;
+    align-items:center !important;
+    row-gap:10px !important;
+  }
+  .visit-table-toolbar > .visit-selection-controls {
+    order:0;
+  }
+  .visit-table-toolbar > .visit-month-nav {
+    order:1;
+    margin-left:auto !important;
+  }
+  .visit-table-toolbar > .visit-display-control {
+    order:2;
+    width:100%;
+  }
+}

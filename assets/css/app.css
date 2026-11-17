@@ -1308,9 +1308,3 @@ body.calendar-item-open{overflow:hidden}
     width:100%;
   }
 }
-
-
-/* Daftar Konten: baris dapat dibuka untuk melihat detail */
-.content-table tbody tr.content-row-clickable{cursor:pointer;}
-.content-table tbody tr.content-row-clickable:hover{background:var(--surface-soft,rgba(31,133,105,.055));}
-.content-table tbody tr.content-row-clickable:focus-visible{outline:2px solid var(--green);outline-offset:-2px;}

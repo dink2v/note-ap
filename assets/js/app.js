@@ -458,8 +458,6 @@
       });
       body.append(tr);
     }
-    const empty=document.getElementById('visitEmpty');
-    if(empty){empty.hidden=visits.length>0;empty.textContent='Belum ada data Visit untuk bulan '+new Intl.DateTimeFormat('id-ID',{month:'long',year:'numeric'}).format(visitCalendarMonth)+'.';}
     renderVisitMonthNav();
     const selectBtn=document.getElementById('visitSelectBtn');
     const selectAllWrap=document.getElementById('visitSelectAllWrap');

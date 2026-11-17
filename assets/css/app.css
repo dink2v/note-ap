@@ -1074,3 +1074,26 @@ body.calendar-item-open{overflow:hidden}
 }
 #visitTableBody td:nth-child(1) { width:38px; }
 #visitTableBody td:nth-child(2), #visitTableBody td:nth-child(3) { white-space:nowrap; }
+
+
+/* Visit: beri rongga kiri-kanan pada kontrol lima kolom pertama,
+   agar tidak menempel ke garis sel dan sejajar secara visual dengan Keterangan. */
+#visitTableBody > tr > td:nth-child(n+2):nth-child(-n+6) > .visit-inline-input,
+#visitTableBody > tr > td:nth-child(n+2):nth-child(-n+6) > .visit-multiselect {
+  width: calc(100% - 16px) !important;
+  max-width: calc(100% - 16px) !important;
+  min-width: 0;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box;
+}
+#visitTableBody > tr > td:nth-child(n+2):nth-child(-n+6) > .visit-inline-textarea {
+  width: calc(100% - 16px) !important;
+  max-width: calc(100% - 16px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box;
+}
+#visitTableBody > tr > td:nth-child(6) > .visit-multiselect {
+  width: calc(100% - 16px) !important;
+}

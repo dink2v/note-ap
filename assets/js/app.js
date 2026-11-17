@@ -360,10 +360,11 @@
       tr.addEventListener('click',event=>{if(event.target.closest('input,select,textarea'))return;visitSelectedId=v.id;renderVisitTables();});
       body.append(tr);
     });
-    // Pertahankan tinggi tabel: selalu tampilkan empat baris pada setiap halaman.
-    for(let slot=pageItems.length;slot<visitPageSize;slot++){
+    // Selalu sediakan empat baris input kosong di bawah data yang tersimpan.
+    // Baris kosong tetap tersedia meskipun halaman sudah memiliki data Visit.
+    for(let slot=0;slot<visitPageSize;slot++){
       const tr=document.createElement('tr');tr.className='visit-select-row visit-placeholder-row';
-      const number=document.createElement('td');number.textContent=String(visitCurrentPage*visitPageSize+slot+1);tr.append(number);
+      const number=document.createElement('td');number.textContent=String(visitCurrentPage*visitPageSize+pageItems.length+slot+1);tr.append(number);
       const fields=visitFields;
       fields.forEach(field=>{
         const td=document.createElement('td');

@@ -1320,3 +1320,12 @@ body.calendar-item-open{overflow:hidden}
 
 /* Tombol Edit detail harus tetap terlihat di bagian atas modal */
 .content-modal-dialog .form-title-row #detailEditTop:not([hidden]){display:inline-flex!important;align-items:center;justify-content:center;}
+
+
+/* Kontrol konfirmasi jadwal posting pada form Konten */
+.datetime-confirm-row{display:flex;align-items:stretch;gap:9px;width:100%}
+.datetime-confirm-row input{flex:1 1 auto;min-width:0}
+.datetime-confirm-row #confirmPostDateTime{flex:0 0 auto;min-width:68px;min-height:42px;padding:0 16px}
+.datetime-confirm-note{display:block;margin-top:7px;color:#23856d;font-weight:600}
+.datetime-confirm-note[hidden]{display:none!important}
+@media(max-width:480px){.datetime-confirm-row{gap:7px}.datetime-confirm-row #confirmPostDateTime{min-width:58px;padding:0 12px}}

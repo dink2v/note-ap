@@ -33,8 +33,11 @@ function setFormLocked(locked){
  document.getElementById('closeForm').textContent=detailMode?'Tutup Detail':'Tutup';
 }
 function loadDetailItem(){
+ // Aktifkan mode detail lebih dahulu agar tombol Edit selalu tampil di bagian atas.
+ editingDetail=false;
+ setFormLocked(true);
  const item=readLocalItems().find(entry=>String(entry.id)===detailId);
- if(!item){showToast('Data konten tidak ditemukan di penyimpanan browser ini.');return;}
+ if(!item){showToast('Data konten tidak ditemukan di penyimpanan browser ini. Periksa apakah konten tersimpan di browser yang sama.');return;}
  currentDetailItem=item;
  const dateTime=[item.postingDate||'',item.postingTime||''].filter(Boolean).join('T');
  const values={

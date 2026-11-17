@@ -603,3 +603,54 @@ body.modal-open{overflow:hidden;}
 .help-chat-content{padding-top:18px}
 :root[data-theme="dark"] .help-chat-summary-copy strong{color:#e6eee8}
 @media(max-width:600px){.help-chat-summary-copy strong{font-size:17px}.help-chat-summary-copy .muted{font-size:11px}}
+
+
+/* DASHBOARD UI/UX — SIMPLE & COLORFUL */
+#dashboardPage{--green:#4779e8;--green-dark:#3566d2;--ink:#26334a;--muted:#8792a6;--line:#e9edf5;--bg:#f6f8fd}
+#dashboardPage .welcome-row{padding:22px 24px;margin-bottom:20px;border:1px solid #e8edfa;border-radius:18px;background:linear-gradient(115deg,#eef4ff 0%,#f7f3ff 56%,#fff7ef 100%)}
+#dashboardPage .eyebrow{color:#6482d8}
+#dashboardPage .welcome-row h1{color:#25324a;font-size:26px}
+#dashboardPage .welcome-row .muted{color:#78859b;font-size:12px}
+#dashboardPage .primary-btn{background:#527fe8;box-shadow:0 6px 16px #527fe82b;border-radius:11px}
+#dashboardPage .primary-btn:hover{background:#3f6ed7}
+#dashboardPage .notification-btn{border-color:#e5eafa;background:#fff;color:#62769f}
+#dashboardPage .stats-grid{gap:13px;margin-bottom:18px}
+#dashboardPage .stat-card{position:relative;min-height:132px;padding:17px 17px 15px;border:1px solid #e9edf5;border-top:3px solid var(--stat-accent,#8b9ce8);border-radius:15px;box-shadow:0 5px 18px #34466b0a;transition:transform .18s ease,box-shadow .18s ease}
+#dashboardPage .stat-card:hover{transform:translateY(-2px);box-shadow:0 9px 22px #34466b12}
+#dashboardPage .stat-card:nth-child(1){--stat-accent:#9b83e8}
+#dashboardPage .stat-card:nth-child(2){--stat-accent:#5795ed}
+#dashboardPage .stat-card:nth-child(3){--stat-accent:#f0a34e}
+#dashboardPage .stat-card:nth-child(4){--stat-accent:#45b98a}
+#dashboardPage .stat-card:nth-child(5){--stat-accent:#35b8bc}
+#dashboardPage .stat-top{color:#77849a}
+#dashboardPage .stat-card strong{color:#26334a;font-size:29px}
+#dashboardPage .stat-card small{color:#929db0}
+#dashboardPage .stat-icon{width:34px;height:34px;border-radius:11px;font-size:14px}
+#dashboardPage .stat-icon.lilac{background:#f1edff;color:#8a6cdb}
+#dashboardPage .stat-icon.blue{background:#eaf2ff;color:#4f88e4}
+#dashboardPage .stat-icon.orange{background:#fff2e5;color:#e39a43}
+#dashboardPage .stat-icon.green{background:#e7f8ef;color:#36a879}
+#dashboardPage .stat-icon.teal{background:#e5f8f8;color:#2aa6aa}
+#dashboardPage .content-grid{gap:15px}
+#dashboardPage .panel{border:1px solid #e9edf5;border-radius:16px;box-shadow:0 5px 18px #34466b0a;padding:21px}
+#dashboardPage .panel h2{color:#29364e;font-size:14px}
+#dashboardPage .panel-heading .muted{color:#929db0}
+#dashboardPage .period-pill{border-color:#e8edf7;background:#f8faff;color:#71809c}
+#dashboardPage .chart-legend{color:#7f8ca3}
+#dashboardPage .dot.instagram{background:#5c8ee8}
+#dashboardPage .dot.tiktok{background:#a17ce5}
+#dashboardPage .grid-lines path{stroke:#edf0f7}
+#dashboardPage .area{fill:url(#fillA);opacity:.75}
+#dashboardPage .line-a{stroke:#5b8ee9}
+#dashboardPage .line-b{stroke:#a17ce5}
+#dashboardPage .chart-note{color:#9aa4b5}
+#dashboardPage .text-link{color:#527fe8}
+#dashboardPage .upcoming-item{border-bottom-color:#f0f2f8}
+#dashboardPage .date-box{background:#edf3ff;color:#527fe8;border-radius:11px}
+#dashboardPage .upcoming-item:nth-child(2) .date-box{background:#f3edff;color:#916fda}
+#dashboardPage .upcoming-item:nth-child(3) .date-box{background:#fff3e7;color:#dc9142}
+#dashboardPage .upcoming-info b{color:#34415a;font-size:11px}
+#dashboardPage .upcoming-info small{color:#929db0}
+#dashboardPage .time{color:#7f8ca3}
+#dashboardPage .page-footer{color:#a0aabd}
+@media(max-width:700px){#dashboardPage .welcome-row{padding:17px 15px;border-radius:15px;margin-bottom:15px}#dashboardPage .welcome-row h1{font-size:19px;line-height:1.4}#dashboardPage .welcome-row .muted{font-size:11px}#dashboardPage .stats-grid{gap:9px}#dashboardPage .stat-card{min-height:116px;padding:13px 12px}#dashboardPage .stat-card strong{font-size:25px;margin-top:11px}#dashboardPage .panel{padding:16px 13px;border-radius:14px}}

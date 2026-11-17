@@ -385,7 +385,9 @@
       showToast('Penghapusan belum terverifikasi. Data pilihan tetap dipertahankan agar bisa dicoba lagi.');
       return;
     }
-    if(emptyKeys.length){
+    if(total){
+      // Kurangi jumlah slot yang tampil sebanyak seluruh baris terpilih,
+      // termasuk ketika yang dihapus hanya jadwal tersimpan.
       visitHiddenEmptyRowsByMonth.set(monthKey,(visitHiddenEmptyRowsByMonth.get(monthKey)||0)+total);
     }
     const removed=targets.length+emptyKeys.length;

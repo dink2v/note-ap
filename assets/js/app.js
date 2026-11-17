@@ -183,12 +183,46 @@
         const event=document.createElement('button');event.type='button';event.className='calendar-event-chip '+calendarFormatClass(item.format);event.title='Klik untuk mengedit: '+(item.title||'Tanpa judul');
         const title=document.createElement('b');title.textContent=item.title||'Tanpa judul';
         const meta=document.createElement('small');meta.textContent=[item.postingTime||'',item.format||item.platform||''].filter(Boolean).join(' · ');
-        event.append(title,meta);event.addEventListener('click',()=>openCalendarItemModal(item));cell.append(event);
+        event.append(title,meta);event.addEventListener('click',()=>openCalendarContentDetail(item));cell.append(event);
       });
       cell.addEventListener('dblclick',event=>{if(event.target===cell||event.target===head||event.target===number)openCalendarItemModal(null,key);});
       calendarGrid.append(cell);
     }
   }
+  function openCalendarContentDetail(item){
+    const modal=document.getElementById('calendarContentDetailModal');
+    const body=document.getElementById('calendarContentDetailBody');
+    if(!modal||!body||!item)return;
+    const sections=[
+      {title:'Informasi Konten',fields:[['Judul Konten',item.title],['Platform',item.platform],['Format',item.format],['Durasi / Slide',item.duration],['Pilar Konten',item.pillar],['Status',item.status],['Tanggal Posting',formatContentDate(item.postingDate)],['Jam Posting',item.postingTime],['Referensi',item.reference]]},
+      {title:'Materi & Arahan Visual',fields:[['Hook / Opening',item.hook],['Visual Hook',item.visualHook],['Body / Naskah',item.body],['Visual Body',item.visualBody],['CTA',item.cta],['Visual CTA',item.visualCTA]]},
+      {title:'Caption & Catatan',fields:[['Caption',item.caption],['Catatan',item.notes]]}
+    ];
+    body.replaceChildren();
+    sections.forEach(section=>{
+      const group=document.createElement('section');group.className='calendar-detail-section';
+      const heading=document.createElement('h3');heading.textContent=section.title;group.append(heading);
+      const grid=document.createElement('div');grid.className='calendar-detail-grid';
+      section.fields.forEach(([label,value])=>{
+        if(value===undefined||value===null||String(value).trim()==='')return;
+        const field=document.createElement('div');field.className='calendar-detail-field';
+        const name=document.createElement('b');name.textContent=label;
+        const content=document.createElement('p');content.textContent=String(value);
+        field.append(name,content);grid.append(field);
+      });
+      if(grid.childElementCount)group.append(grid);else{const empty=document.createElement('p');empty.textContent='Belum diisi.';group.append(empty);}
+      body.append(group);
+    });
+    modal.hidden=false;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('calendar-item-open');
+  }
+  function closeCalendarContentDetail(){
+    const modal=document.getElementById('calendarContentDetailModal');
+    if(!modal)return;
+    modal.classList.remove('open');modal.setAttribute('aria-hidden','true');modal.hidden=true;document.body.classList.remove('calendar-item-open');
+  }
+  document.getElementById('calendarContentDetailClose')?.addEventListener('click',closeCalendarContentDetail);
+  document.getElementById('calendarContentDetailDone')?.addEventListener('click',closeCalendarContentDetail);
+  document.getElementById('calendarContentDetailModal')?.addEventListener('click',event=>{if(event.target.id==='calendarContentDetailModal')closeCalendarContentDetail();});
   function openCalendarItemModal(item,dateValue){
     if(!calendarItemModal||!calendarItemForm)return;
     calendarItemForm.reset();
@@ -227,6 +261,7 @@
   document.getElementById('noteApCalendarNext')?.addEventListener('click',()=>{calendarCursor.setMonth(calendarCursor.getMonth()+1);renderCalendarPlanner();});
   document.getElementById('noteApCalendarToday')?.addEventListener('click',()=>{calendarCursor=new Date();calendarCursor.setDate(1);renderCalendarPlanner();});
   renderCalendarPlanner();
+  window.addEventListener('storage',event=>{if(event.key==='noteAp.contents'){renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();}});
 
 
   const visitKey='noteAp.visits';

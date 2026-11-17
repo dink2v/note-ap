@@ -6,7 +6,7 @@
   <title>Note AP — Apotek Prapatan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/app.css?v=20261117-commandcenter1">
+  <link rel="stylesheet" href="assets/css/app.css?v=20261117-visitcalendarfix2">
 </head>
 <body>
 <div class="app-shell">
@@ -82,15 +82,15 @@
     </div>
     <section class="calendar-page" id="calendarPage" hidden>
       <div class="calendar-page-heading">
-        <div><div class="eyebrow">CONTENT SCHEDULING</div><h1>Kalender Konten</h1><p class="muted">Pantau dan kelola jadwal konten melalui Google Calendar.</p></div>
+        <div><div class="eyebrow">CONTENT SCHEDULING</div><h1>Kalender Konten</h1><p class="muted">Gunakan kalender Google untuk melihat jadwal. Jadwal dari menu Konten Note AP belum masuk ke Google Calendar secara otomatis.</p></div>
         <div class="calendar-page-actions"><button class="primary-btn" id="newContentCalendarBtn" type="button"><span>＋</span> Konten Baru</button><a class="secondary-btn" href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener">Buka Google Calendar ↗</a></div>
       </div>
       <div class="calendar-embed-card">
-        <div class="calendar-embed-top"><div><span class="calendar-live-dot"></span><b>Google Calendar</b><small>Kalender terhubung</small></div><span class="calendar-timezone">Asia/Jakarta (WIB)</span></div>
-        <div class="format-color-legend" aria-label="Keterangan warna format konten"><span><i class="format-dot reels"></i>Reels</span><span><i class="format-dot carousel"></i>Carousel</span><span><i class="format-dot feed"></i>Feed</span></div>
+        <div class="calendar-embed-top"><div><span class="calendar-live-dot"></span><b>Google Calendar</b><small>Kalender utama akun Google</small></div><span class="calendar-timezone">Asia/Jakarta (WIB)</span></div>
+        <div class="calendar-connection-note"><b>Perlu diketahui</b><span>Kalender yang tampil mengikuti akun Google yang sedang login. Untuk melihat kalender tim, buka Google Calendar dan pilih kalender tim yang sudah dibagikan kepada akun tersebut.</span></div>
         <iframe id="googleCalendarFrame" title="Kalender Google Note AP" src="https://calendar.google.com/calendar/embed?src=primary&ctz=Asia%2FJakarta&mode=MONTH&showTitle=0&showPrint=0&showTabs=1&showCalendars=0&showTz=0" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
-      <p class="calendar-help">Jika kalender tidak muncul, pastikan kamu sudah login ke Google dengan akun yang memiliki akses ke kalender yang disambungkan ke Note AP.</p>
+      <p class="calendar-help">Jika kalender kosong atau tidak dapat dibuka, periksa akun Google yang sedang login, izin akses kalender, dan pengaturan browser yang mengizinkan konten Google ditampilkan. Tombol “Buka Google Calendar” dapat digunakan untuk melihat kalender langsung di situs Google.</p>
     </section>
     <section class="content-page" id="contentPage" hidden>
       <div class="content-page-heading"><div><div class="eyebrow">CONTENT MANAGEMENT</div><h1>Konten</h1><p class="muted">Kelola seluruh ide, proses, dan publikasi konten Apotek Prapatan.</p></div><button class="primary-btn" id="newContentListBtn" type="button"><span>＋</span> Konten Baru</button></div>
@@ -123,17 +123,17 @@
     </section>
 
     <section class="visit-page" id="visitPage" hidden>
-      <div class="visit-heading"><div><div class="eyebrow">PRODUCTION SCHEDULE</div><h1>Visit</h1><p class="muted">Pantau data dan kalender jadwal kunjungan produksi.</p></div><div class="visit-month-nav visit-month-nav-outside" id="visitMonthNav"><button type="button" id="visitPrevMonth" aria-label="Bulan sebelumnya">‹</button><span id="visitMonthLabel">November 2026</span><button type="button" id="visitNextMonth" aria-label="Bulan berikutnya">›</button></div></div>
+      <div class="visit-heading"><div><div class="eyebrow">PRODUCTION VISIT</div><h1>Visit Produksi</h1><p class="muted">Catat rencana kunjungan produksi konten: tanggal, jam, lokasi, judul konten, talent, status, dan catatan pelaksanaan.</p></div><div class="visit-month-nav visit-month-nav-outside" id="visitMonthNav"><button type="button" id="visitPrevMonth" aria-label="Bulan sebelumnya">‹</button><span id="visitMonthLabel">November 2026</span><button type="button" id="visitNextMonth" aria-label="Bulan berikutnya">›</button></div></div>
       <div class="visit-overview-grid">
         <section class="visit-card visit-today-card">
-          <div class="visit-card-heading"><div><h2 id="visitTodayDate">Today</h2></div></div>
+          <div class="visit-card-heading"><div><span class="visit-kicker">RINGKASAN HARIAN</span><h2 id="visitTodayDate">Jadwal Hari Ini</h2><p class="muted">Daftar kunjungan yang dijadwalkan pada hari ini.</p></div></div>
           <div class="visit-today-summary" id="visitTodayList"><div class="visit-today-empty">Memuat jadwal hari ini...</div></div>
         </section>
         <section class="visit-card visit-main-card">
-          <div class="visit-card-heading visit-main-heading"><div><span class="visit-kicker">SCHEDULE</span><h2>Data Visit</h2><p class="muted">Pilih tampilan daftar atau kalender jadwal.</p></div><div class="visit-view-toggle" role="group" aria-label="Tampilan Data Visit"><button type="button" id="visitListViewBtn" class="active" aria-label="Tampilan daftar" title="Tampilan daftar"><span class="visit-toggle-list">☷</span></button><button type="button" id="visitGridViewBtn" aria-label="Tampilan kalender" title="Tampilan kalender"><span class="visit-toggle-grid">▦</span></button></div></div>
-          <div class="visit-pagination"><span id="visitPageInfo">Halaman 1</span></div><div id="visitListPanel">
-          <div class="visit-table-wrap"><table class="visit-table visit-main-table"><thead><tr><th>NO</th><th>TGL</th><th>LOKASI</th><th>JUDUL</th><th>TALEN</th><th>STATUS</th><th>KET</th></tr></thead><tbody id="visitTableBody"></tbody></table></div>
-          <div class="visit-empty" id="visitEmpty" hidden>Belum ada data Visit pada halaman ini.</div></div><div id="visitGridPanel" class="visit-grid-panel" hidden><div class="visit-calendar" id="visitCalendar"></div></div>
+          <div class="visit-card-heading visit-main-heading"><div><span class="visit-kicker">DAFTAR & KALENDER</span><h2>Jadwal Kunjungan</h2><p class="muted">Tampilan daftar untuk mengubah data langsung. Tampilan kalender untuk melihat sebaran jadwal per tanggal.</p></div><div class="visit-view-toggle" role="group" aria-label="Tampilan Data Visit"><button type="button" id="visitListViewBtn" class="active" aria-label="Tampilan daftar" title="Tampilan daftar"><span class="visit-toggle-list">☷</span></button><button type="button" id="visitGridViewBtn" aria-label="Tampilan kalender" title="Tampilan kalender"><span class="visit-toggle-grid">▦</span></button></div></div>
+          <div class="visit-pagination"><span id="visitPageInfo">Halaman 1 · 4 data per halaman</span></div><div id="visitListPanel">
+          <div class="visit-table-wrap"><table class="visit-table visit-main-table"><thead><tr><th>NO.</th><th>TANGGAL VISIT</th><th>LOKASI</th><th>JUDUL KONTEN</th><th>TALENT</th><th>STATUS</th><th>KETERANGAN</tr></thead><tbody id="visitTableBody"></tbody></table></div>
+          <div class="visit-empty" id="visitEmpty" hidden>Belum ada jadwal kunjungan pada bulan ini. Tambahkan data melalui formulir Visit untuk mulai membuat agenda.</div></div><div id="visitGridPanel" class="visit-grid-panel" hidden><div class="visit-calendar" id="visitCalendar"></div></div>
         </section>
       
       </div>
@@ -265,5 +265,5 @@
 </section>
 <button class="command-launcher" id="commandLauncher" type="button" aria-label="Buka Command Center"><span>✳</span><span class="launcher-label">Command Center</span><kbd>Ctrl K</kbd></button>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261117-commandcenter1"></script>
+<script src="assets/js/app.js?v=20261117-visitcalendarfix2"></script>
 </body></html>

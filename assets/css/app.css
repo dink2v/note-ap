@@ -1331,9 +1331,9 @@ body.calendar-item-open{overflow:hidden}
  box-shadow:none!important;
 }
 .form-title-row .detail-edit-top.is-editing{
- background:#fff!important;color:#5145f5!important;
- border-color:#e5e2ff!important;
- box-shadow:0 1px 4px #183b2818!important;
+ background:#f0eaff!important;color:#6846c7!important;
+ border-color:#dfd2ff!important;
+ box-shadow:0 1px 4px #6846c71a!important;
  cursor:default;
 }
 .form-title-row .detail-edit-top:disabled{opacity:1!important}

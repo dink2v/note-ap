@@ -3806,3 +3806,167 @@ button,a{touch-action:manipulation}
   visibility:visible !important;
   opacity:1 !important;
 }
+
+
+/* DARK MODE — Content Calendar: targeted text and surface contrast repair */
+:root[data-theme="dark"] body #calendarPage {
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-page-heading h1,
+:root[data-theme="dark"] body #calendarPage .calendar-insight-card b,
+:root[data-theme="dark"] body #calendarPage .calendar-toolbar-title h2,
+:root[data-theme="dark"] body #calendarPage .calendar-agenda-heading h3 {
+  color:#f0f6f1 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-page-heading .eyebrow,
+:root[data-theme="dark"] body #calendarPage .calendar-planner-kicker {
+  color:#8edacb !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-page-heading .muted,
+:root[data-theme="dark"] body #calendarPage .calendar-insight-card small,
+:root[data-theme="dark"] body #calendarPage .calendar-toolbar-title p,
+:root[data-theme="dark"] body #calendarPage .calendar-planner-footnote,
+:root[data-theme="dark"] body #calendarPage .calendar-agenda-copy small,
+:root[data-theme="dark"] body #calendarPage .calendar-agenda-empty,
+:root[data-theme="dark"] body #calendarPage .calendar-agenda-tip p {
+  color:#b9c9be !important;
+  opacity:1 !important;
+  -webkit-text-fill-color:#b9c9be !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-insight-card,
+:root[data-theme="dark"] body #calendarPage .calendar-main-panel,
+:root[data-theme="dark"] body #calendarPage .calendar-agenda-panel {
+  background:#18271f !important;
+  border-color:#3b5143 !important;
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-insight-icon.mint {
+  background:#1e4140 !important;
+  color:#8fe2d6 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-insight-icon.peach {
+  background:#4a3525 !important;
+  color:#ffc58e !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-insight-icon.lilac {
+  background:#382d50 !important;
+  color:#d5baff !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-toolbar,
+:root[data-theme="dark"] body #calendarPage .calendar-planner-legend,
+:root[data-theme="dark"] body #calendarPage .calendar-day-head {
+  background:#202f26 !important;
+  border-color:#405746 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-planner-controls strong {
+  color:#f0f6f1 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-planner-controls button,
+:root[data-theme="dark"] body #calendarPage .calendar-view-switch,
+:root[data-theme="dark"] body #calendarPage .calendar-view-switch button:not(.active) {
+  background:#26382d !important;
+  border-color:#405746 !important;
+  color:#dce9e0 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-view-switch button.active {
+  background:#276b51 !important;
+  border-color:#438b6a !important;
+  color:#ffffff !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-weekday {
+  background:#202f26 !important;
+  border-color:#405746 !important;
+  color:#cbd9cf !important;
+  -webkit-text-fill-color:#cbd9cf !important;
+}
+:root[data-theme="dark"] body #calendarPage .note-ap-calendar-grid {
+  border-color:#405746 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-day-cell,
+:root[data-theme="dark"] body #calendarPage .calendar-day-cell.outside-month {
+  background:#1a2820 !important;
+  border-color:#35483b !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-day-cell.is-today {
+  background:#263d30 !important;
+  box-shadow:inset 0 0 0 1px #568b69 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-day-number {
+  color:#e8f1eb !important;
+  -webkit-text-fill-color:#e8f1eb !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-day-cell.outside-month .calendar-day-number {
+  color:#91a69a !important;
+  -webkit-text-fill-color:#91a69a !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-day-cell.is-today .calendar-day-number {
+  background:#347653 !important;
+  color:#ffffff !important;
+  -webkit-text-fill-color:#ffffff !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-day-add {
+  background:#244b3a !important;
+  color:#9be0c8 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip,
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip.reels,
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip.carousel,
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip.feed,
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip.other {
+  background:#26382d !important;
+  border-left-color:#72b99a !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip.reels {
+  background:#493523 !important;
+  border-left-color:#f0ad70 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip.carousel {
+  background:#1e4140 !important;
+  border-left-color:#72d5c5 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip.feed {
+  background:#253c37 !important;
+  border-left-color:#8bcfc1 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip b {
+  color:#f0f6f1 !important;
+  -webkit-text-fill-color:#f0f6f1 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip small {
+  color:#c1d0c5 !important;
+  -webkit-text-fill-color:#c1d0c5 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-agenda-item {
+  background:#202f26 !important;
+  border-color:#35483b !important;
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-agenda-item:hover {
+  background:#293d31 !important;
+  border-color:#54745e !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-agenda-date {
+  background:#244b3a !important;
+  color:#b5ead4 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-agenda-date b,
+:root[data-theme="dark"] body #calendarPage .calendar-agenda-date small,
+:root[data-theme="dark"] body #calendarPage .calendar-agenda-copy b {
+  color:#e8f1eb !important;
+  -webkit-text-fill-color:#e8f1eb !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-agenda-live {
+  background:#244b3a !important;
+  color:#9be0c8 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-agenda-tip {
+  background:#26382d !important;
+  border:1px solid #405746 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-agenda-tip b,
+:root[data-theme="dark"] body #calendarPage .calendar-agenda-tip>span {
+  color:#9be0c8 !important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-planner-footnote span {
+  color:#8edacb !important;
+}

@@ -2869,3 +2869,161 @@ button,a{touch-action:manipulation}
 :root[data-theme="dark"] .kanban-card:hover{
   color:#f0f6f1;
 }
+
+
+/* DARK MODE — follow-up audit: remaining surfaces and legacy typography */
+:root[data-theme="dark"] .stat-card,
+:root[data-theme="dark"] .panel,
+:root[data-theme="dark"] .field input,
+:root[data-theme="dark"] .field select,
+:root[data-theme="dark"] .field textarea,
+:root[data-theme="dark"] .content-filter-panel,
+:root[data-theme="dark"] .content-list-panel,
+:root[data-theme="dark"] .content-search input,
+:root[data-theme="dark"] .content-filter select,
+:root[data-theme="dark"] .content-filter input,
+:root[data-theme="dark"] .visit-table-panel,
+:root[data-theme="dark"] .settings-card,
+:root[data-theme="dark"] .visit-editor,
+:root[data-theme="dark"] .visit-form input,
+:root[data-theme="dark"] .visit-form select,
+:root[data-theme="dark"] .visit-form textarea,
+:root[data-theme="dark"] .settings-nav,
+:root[data-theme="dark"] .settings-content,
+:root[data-theme="dark"] .settings-field input,
+:root[data-theme="dark"] .settings-field textarea,
+:root[data-theme="dark"] .settings-field select,
+:root[data-theme="dark"] .settings-preference-row select,
+:root[data-theme="dark"] .settings-data-actions .secondary-btn,
+:root[data-theme="dark"] .settings-file-btn,
+:root[data-theme="dark"] #dashboardPage .notification-btn,
+:root[data-theme="dark"] .calendar-planner-panel,
+:root[data-theme="dark"] .calendar-item-field input,
+:root[data-theme="dark"] .calendar-item-field select,
+:root[data-theme="dark"] .visit-month-nav #visitTodayMonth,
+:root[data-theme="dark"] .visit-month-nav #visitSelectBtn,
+:root[data-theme="dark"] .visit-month-nav #visitDeleteSelectedBtn,
+:root[data-theme="dark"] .visit-month-nav #visitCancelSelectBtn,
+:root[data-theme="dark"] .visit-selection-controls #visitSelectBtn,
+:root[data-theme="dark"] .visit-selection-controls #visitDeleteSelectedBtn,
+:root[data-theme="dark"] .visit-selection-controls #visitCancelSelectBtn,
+:root[data-theme="dark"] .visit-selection-controls .visit-select-all-control {
+  background-color:#1a2820 !important;
+  border-color:#405746 !important;
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] .settings-nav-item b,
+:root[data-theme="dark"] .settings-preference-row b,
+:root[data-theme="dark"] .settings-data-actions b,
+:root[data-theme="dark"] .settings-integration-card b,
+:root[data-theme="dark"] .reference-category-card>header b,
+:root[data-theme="dark"] .settings-mini-card b,
+:root[data-theme="dark"] .settings-content h2,
+:root[data-theme="dark"] .settings-content h3,
+:root[data-theme="dark"] .settings-content p,
+:root[data-theme="dark"] .help-welcome-card h2,
+:root[data-theme="dark"] .help-topic-card b,
+:root[data-theme="dark"] .chat-list-body b,
+:root[data-theme="dark"] .chat-thread-title b,
+:root[data-theme="dark"] .chat-message p,
+:root[data-theme="dark"] .command-input-wrap input,
+:root[data-theme="dark"] .command-result-copy b,
+:root[data-theme="dark"] .calendar-planner-heading h2,
+:root[data-theme="dark"] .calendar-item-dialog-head h2,
+:root[data-theme="dark"] .calendar-planner-controls strong,
+:root[data-theme="dark"] .calendar-event-chip b,
+:root[data-theme="dark"] .calendar-demo-heading h3,
+:root[data-theme="dark"] .calendar-demo-form h4,
+:root[data-theme="dark"] .calendar-demo-list-panel>header b,
+:root[data-theme="dark"] .calendar-demo-event-copy b,
+:root[data-theme="dark"] .calendar-insight-card b,
+:root[data-theme="dark"] .calendar-toolbar-title h2,
+:root[data-theme="dark"] .calendar-agenda-heading h3,
+:root[data-theme="dark"] .calendar-agenda-copy b,
+:root[data-theme="dark"] .calendar-agenda-tip b,
+:root[data-theme="dark"] .visit-talent-menu-head b,
+:root[data-theme="dark"] .visit-talent-search,
+:root[data-theme="dark"] .visit-talent-option,
+:root[data-theme="dark"] #dashboardPage .welcome-row h1,
+:root[data-theme="dark"] #dashboardPage .stat-card strong,
+:root[data-theme="dark"] #dashboardPage .panel h2,
+:root[data-theme="dark"] #dashboardPage .upcoming-info b,
+:root[data-theme="dark"] #dashboardPage .quick-actions-heading b,
+:root[data-theme="dark"] #dashboardPage .quick-action b {
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] .settings-nav-item small,
+:root[data-theme="dark"] .settings-footnote,
+:root[data-theme="dark"] .settings-info-note,
+:root[data-theme="dark"] .settings-preference-row p,
+:root[data-theme="dark"] .settings-integration-card p,
+:root[data-theme="dark"] .help-welcome-card p,
+:root[data-theme="dark"] .help-topic-card p,
+:root[data-theme="dark"] .chat-list-body small,
+:root[data-theme="dark"] .chat-message time,
+:root[data-theme="dark"] .calendar-planner-footnote,
+:root[data-theme="dark"] .calendar-agenda-tip,
+:root[data-theme="dark"] .calendar-demo-source,
+:root[data-theme="dark"] .visit-talent-menu-foot,
+:root[data-theme="dark"] .visit-talent-count,
+:root[data-theme="dark"] .content-table td:first-child {
+  color:#b7c6bb !important;
+}
+:root[data-theme="dark"] .settings-status,
+:root[data-theme="dark"] .settings-mini-card span,
+:root[data-theme="dark"] .settings-google-mark,
+:root[data-theme="dark"] .settings-data-actions article>span,
+:root[data-theme="dark"] .help-kicker,
+:root[data-theme="dark"] .help-topic-card>span,
+:root[data-theme="dark"] .calendar-planner-kicker,
+:root[data-theme="dark"] .calendar-day-add,
+:root[data-theme="dark"] .calendar-demo-kicker,
+:root[data-theme="dark"] .visit-calendar-day-add,
+:root[data-theme="dark"] .visit-calendar-selected-event>b {
+  color:#78c99b !important;
+}
+:root[data-theme="dark"] .format-color-legend,
+:root[data-theme="dark"] .notification-heading,
+:root[data-theme="dark"] .notification-item,
+:root[data-theme="dark"] .upcoming-item,
+:root[data-theme="dark"] .settings-divider,
+:root[data-theme="dark"] .settings-panel,
+:root[data-theme="dark"] .settings-preference-row,
+:root[data-theme="dark"] .settings-data-actions article,
+:root[data-theme="dark"] .chat-list-item,
+:root[data-theme="dark"] .chat-tabs,
+:root[data-theme="dark"] .calendar-agenda-item,
+:root[data-theme="dark"] .calendar-demo-event,
+:root[data-theme="dark"] .visit-talent-menu-head,
+:root[data-theme="dark"] .visit-talent-menu-foot {
+  border-color:#35483b !important;
+}
+:root[data-theme="dark"] .format-color-legend,
+:root[data-theme="dark"] .notification-item,
+:root[data-theme="dark"] .settings-panel,
+:root[data-theme="dark"] .settings-preference-row,
+:root[data-theme="dark"] .settings-data-actions article,
+:root[data-theme="dark"] .chat-list-item,
+:root[data-theme="dark"] .calendar-agenda-item,
+:root[data-theme="dark"] .calendar-demo-event {
+  background-color:#1a2820 !important;
+}
+:root[data-theme="dark"] .notification-heading,
+:root[data-theme="dark"] .visit-talent-menu-head,
+:root[data-theme="dark"] .visit-talent-menu-foot {
+  background-color:#202f26 !important;
+}
+:root[data-theme="dark"] .expand-dialog textarea,
+:root[data-theme="dark"] .command-input-wrap input,
+:root[data-theme="dark"] .chat-composer textarea,
+:root[data-theme="dark"] .visit-talent-search {
+  background:#111a15 !important;
+  border-color:#405746 !important;
+  color:#f0f6f1 !important;
+  color-scheme:dark;
+}
+:root[data-theme="dark"] input::placeholder,
+:root[data-theme="dark"] textarea::placeholder {
+  color:#91a69a !important;
+  opacity:1;
+}

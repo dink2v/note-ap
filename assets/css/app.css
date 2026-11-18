@@ -4766,3 +4766,145 @@ body :is(.calendar-item-dialog-head>button,.calendar-item-cancel,
 body .calendar-view-switch button.active{
   background:#426c5b!important;color:#fff!important;border-color:#789b8b!important;
 }
+
+/* NOTE AP — DARK REFINEMENT: CALENDAR / CONTENT / KANBAN / VISIT */
+body #calendarPage .calendar-insight-card,body #calendarPage .calendar-main-panel,body #calendarPage .calendar-agenda-panel,body #calendarPage .calendar-toolbar,body #calendarPage .calendar-planner-legend,body #calendarPage .calendar-agenda-tip,body #calendarPage .calendar-agenda-item{background:#102f2a!important;color:#dce8e2!important;border-color:#294b41!important;box-shadow:none!important}
+body #calendarPage .calendar-insight-icon.mint{background:#1d4034!important;color:#a7cda9!important}
+body #calendarPage .calendar-insight-icon.peach{background:#3b2d23!important;color:#e6a16a!important}
+body #calendarPage .calendar-insight-icon.lilac{background:#26313b!important;color:#a8b9d1!important}
+body #calendarPage .calendar-toolbar-title h2,body #calendarPage .calendar-agenda-heading h3{color:#e1ebe5!important}
+body #calendarPage .calendar-planner-kicker{color:#9ab7a9!important}
+body #calendarPage .calendar-view-switch{background:#0a2621!important;border-color:#31564b!important}
+body #calendarPage .calendar-view-switch button{background:transparent!important;color:#a9bbb1!important;border-color:transparent!important}
+body #calendarPage .calendar-view-switch button.active{background:#315849!important;color:#f0f5f1!important;border-color:#527763!important}
+body #calendarPage .calendar-planner-controls button{background:#17382f!important;color:#dce8e2!important;border-color:#31564b!important}
+body #calendarPage .calendar-planner-controls strong{color:#e1ebe5!important}
+body #calendarPage .calendar-weekday{background:#17382f!important;color:#c3d2c9!important;border-color:#31564b!important}
+body #calendarPage .calendar-day-cell{background:#102f2a!important;border-color:#294b41!important}
+body #calendarPage .calendar-day-cell.outside-month{background:#0a2521!important}
+body #calendarPage .calendar-day-cell.is-today{background:#173d34!important;box-shadow:inset 0 0 0 1px #789b8b!important}
+body #calendarPage .calendar-day-number{color:#e1ebe5!important}
+body #calendarPage .calendar-day-cell.outside-month .calendar-day-number{color:#81978c!important}
+body #calendarPage .calendar-day-cell.is-today .calendar-day-number{background:#426c5b!important;color:#fff!important}
+body #calendarPage .calendar-day-add{background:#244b3e!important;color:#c0dfce!important;border:1px solid #426c5b!important}
+body #calendarPage .calendar-planner-legend{border:1px solid #294b41!important}
+body #calendarPage .calendar-planner-legend>span{color:#dce8e2!important}
+body #calendarPage .format-dot.reels{background:#e6a16a!important}
+body #calendarPage .format-dot.carousel{background:#70c9c1!important}
+body #calendarPage .format-dot.feed{background:#a7cda9!important}
+body #calendarPage .calendar-dot.other{background:#b5c2bb!important}
+body #calendarPage .calendar-event-chip{background:#303a35!important;color:#e0e8e3!important;border:1px solid #53645a!important;border-left-width:4px!important}
+body #calendarPage .calendar-event-chip b{color:#e0e8e3!important}
+body #calendarPage .calendar-event-chip small{color:#aebeb5!important}
+body #calendarPage .calendar-event-chip.reels{background:#3b2d23!important;border-color:#80583b!important;border-left-color:#e6a16a!important}
+body #calendarPage .calendar-event-chip.reels b,body #calendarPage .calendar-event-chip.reels small{color:#ffd0a7!important}
+body #calendarPage .calendar-event-chip.carousel{background:#183a38!important;border-color:#356c66!important;border-left-color:#70c9c1!important}
+body #calendarPage .calendar-event-chip.carousel b,body #calendarPage .calendar-event-chip.carousel small{color:#b8eee8!important}
+body #calendarPage .calendar-event-chip.feed{background:#263b30!important;border-color:#4c755b!important;border-left-color:#a7cda9!important}
+body #calendarPage .calendar-event-chip.feed b,body #calendarPage .calendar-event-chip.feed small{color:#d1ead3!important}
+body #calendarPage .calendar-event-chip.other{background:#303a35!important;border-color:#53645a!important;border-left-color:#b5c2bb!important}
+body #calendarPage .calendar-event-chip.other b,body #calendarPage .calendar-event-chip.other small{color:#e0e8e3!important}
+body #calendarPage .calendar-day-cell.is-drop-target{background:#1d493b!important;outline:2px dashed #8bb7a0!important;outline-offset:-4px!important}
+body #calendarPage .calendar-agenda-date{background:#1b4036!important;color:#c4d9cc!important}
+body #calendarPage .calendar-agenda-copy b{color:#e1ebe5!important}
+body #calendarPage .calendar-agenda-copy small,body #calendarPage .calendar-planner-footnote{color:#91a79e!important}
+body #calendarPage .calendar-agenda-tip{background:#14352e!important;color:#dce8e2!important;border-color:#31564b!important}
+body #calendarPage .calendar-agenda-tip p{color:#b8c9c0!important}
+body #calendarPage .calendar-agenda-live{background:#1d4034!important;color:#a7cda9!important}
+
+/* CONTENT */
+body #contentPage .content-filter-panel,body #contentPage .content-list-panel,body #contentPage .content-table-wrap{background:#102f2a!important;color:#dce8e2!important;border-color:#294b41!important;box-shadow:none!important}
+body #contentPage .content-filter-panel{border:1px solid #294b41!important}
+body #contentPage .content-list-heading{background:#102f2a!important;border-color:#294b41!important}
+body #contentPage .content-list-heading h2,body #contentPage .content-table td:first-child{color:#e1ebe5!important}
+body #contentPage .content-list-heading .muted,body #contentPage .content-filter>span{color:#a5b8ae!important}
+body #contentPage .content-search input,body #contentPage .content-filter input,body #contentPage .content-filter select{background:#0a2621!important;color:#dce8e2!important;border-color:#31564b!important;box-shadow:none!important}
+body #contentPage .content-search input::placeholder{color:#81978c!important}
+body #contentPage .content-table{background:#102f2a!important;border-color:#294b41!important}
+body #contentPage .content-table th{background:#17382f!important;color:#c3d2c9!important;border-color:#31564b!important}
+body #contentPage .content-table td{background:#102f2a!important;color:#cbd9d1!important;border-color:#294b41!important}
+body #contentPage .content-table tbody tr:hover>td{background:#173d34!important}
+body #contentPage .content-empty{background:#102f2a!important;color:#a5b8ae!important}
+body #contentPage .content-empty b{color:#e1ebe5!important}
+body #contentPage .content-empty p{color:#91a79e!important}
+body #contentPage .filter-reset-btn{background:#17382f!important;color:#dce8e2!important;border-color:#31564b!important}
+body #contentPage .status-chip{filter:saturate(.7) brightness(.82)!important}
+body #contentPage .platform-cell{color:#a9c7b8!important}
+
+/* KANBAN */
+body #kanbanPage .kanban-board{background:transparent!important}
+body #kanbanPage .kanban-column{background:#0e2b26!important;border:1px solid #294b41!important;box-shadow:none!important}
+body #kanbanPage .kanban-column>header{border-color:#294b41!important}
+body #kanbanPage .kanban-column>header h2{color:#cbd9d1!important}
+body #kanbanPage .stage-count{background:#17382f!important;color:#b9cbbf!important;border-color:#31564b!important}
+body #kanbanPage .kanban-card{background:#17352e!important;color:#dce8e2!important;border:1px solid #31564b!important;box-shadow:0 4px 14px rgba(0,0,0,.14)!important}
+body #kanbanPage .kanban-card:hover{background:#1b4036!important;border-color:#527763!important}
+body #kanbanPage .kanban-card-top b{color:#e1ebe5!important}
+body #kanbanPage .kanban-grip{background:#24483c!important;color:#a9c1b2!important}
+body #kanbanPage .kanban-tag{filter:none!important}
+body #kanbanPage .kanban-tag.instagram{background:#243b31!important;color:#a8cdb5!important}
+body #kanbanPage .kanban-tag.tiktok{background:#26343a!important;color:#a9c5d0!important}
+body #kanbanPage .kanban-tag.pillar{background:#293b34!important;color:#c1d0c7!important}
+body #kanbanPage .kanban-card-actions{border-color:#294b41!important}
+body #kanbanPage .kanban-card-actions button{background:#244238!important;color:#c4d5cb!important;border-color:#3c6252!important}
+body #kanbanPage .kanban-card-actions button:hover{background:#315849!important;color:#f0f5f1!important}
+body #kanbanPage .kanban-date{color:#91a79e!important}
+body #kanbanPage .kanban-add-slot{background:#102f2a!important;color:#9ab7a9!important;border:1px dashed #426453!important}
+body #kanbanPage .kanban-add-slot:hover{background:#173d34!important;color:#dce8e2!important}
+body #kanbanPage .kanban-column.drop-target{background:#173d34!important;border-color:#789b8b!important}
+body #kanbanPage .kanban-card.dragging{opacity:.48!important}
+
+/* VISIT */
+body #visitPage .visit-card,body #visitPage .visit-table-panel,body #visitPage .visit-editor,body #visitPage .visit-table-toolbar,body #visitPage .visit-table-wrap,body #visitPage .visit-grid-panel{background:#102f2a!important;color:#dce8e2!important;border-color:#294b41!important;box-shadow:none!important}
+body #visitPage .visit-card-heading,body #visitPage .visit-table-toolbar,body #visitPage .visit-pagination{border-color:#294b41!important}
+body #visitPage .visit-card-heading h2,body #visitPage .visit-card-heading h3,body #visitPage .visit-heading h1{color:#e1ebe5!important}
+body #visitPage .visit-kicker,body #visitPage .visit-pagination,body #visitPage .visit-today-label{color:#9ab7a9!important}
+body #visitPage .visit-today-entry,body #visitPage .visit-today-item,body #visitPage .visit-today-selected,body #visitPage .visit-calendar-selected{background:#0e2b26!important;color:#dce8e2!important;border-color:#31564b!important}
+body #visitPage .visit-today-line b,body #visitPage .visit-today-line span,body #visitPage .visit-today-item b{color:#dce8e2!important}
+body #visitPage .visit-today-empty,body #visitPage .visit-today-location{color:#91a79e!important}
+body #visitPage .visit-metric-card{background:#17382f!important;color:#dce8e2!important;border-color:#31564b!important}
+body #visitPage .visit-metric-card span{color:#a5b8ae!important}
+body #visitPage .visit-metric-card strong{color:#e1ebe5!important}
+body #visitPage .visit-month-nav button,body #visitPage .visit-selection-controls button,body #visitPage .visit-display-control button,body #visitPage .visit-page-btn{background:#17382f!important;color:#dce8e2!important;border-color:#31564b!important}
+body #visitPage .visit-view-toggle{background:#0a2621!important;border-color:#31564b!important}
+body #visitPage .visit-view-toggle button:not(.active){background:transparent!important;color:#a9bbb1!important;border-color:transparent!important}
+body #visitPage .visit-view-toggle button.active{background:#426c5b!important;color:#f0f5f1!important;border-color:#789b8b!important}
+body #visitPage .visit-month-nav span{color:#e1ebe5!important}
+body #visitPage .visit-table{background:#102f2a!important;border-color:#294b41!important}
+body #visitPage .visit-table th{background:#17382f!important;color:#c3d2c9!important;border-color:#31564b!important}
+body #visitPage .visit-table td{background:#102f2a!important;color:#cbd9d1!important;border-color:#294b41!important}
+body #visitPage .visit-table tbody tr:hover>td{background:#173d34!important}
+body #visitPage .visit-table tbody tr.selected>td{background:#1b4036!important}
+body #visitPage .visit-table tbody tr.is-visit-checked>td{background:#24483c!important}
+body #visitPage .visit-table .visit-placeholder-row>td{background:#0e2b26!important;color:#71877e!important;border-color:#294b41!important}
+body #visitPage .visit-inline-input,body #visitPage .visit-inline-textarea,body #visitPage .visit-multiselect>summary,body #visitPage .visit-form input,body #visitPage .visit-form select,body #visitPage .visit-form textarea{background:#0a2621!important;color:#dce8e2!important;border-color:#31564b!important}
+body #visitPage .visit-inline-input::placeholder,body #visitPage .visit-inline-textarea::placeholder{color:#81978c!important}
+body #visitPage .visit-multiselect-menu{background:#102f2a!important;color:#dce8e2!important;border-color:#31564b!important}
+body #visitPage .visit-multiselect-menu label{color:#cbd9d1!important}
+body #visitPage .visit-multiselect-menu label:hover{background:#173d34!important}
+body #visitPage .visit-talent-search-wrap,body #visitPage .visit-talent-menu-foot{background:#0e2b26!important;color:#b9cbbf!important;border-color:#31564b!important}
+body #visitPage .visit-talent-option{color:#dce8e2!important}
+body #visitPage .visit-talent-option:hover{background:#173d34!important}
+body #visitPage .visit-month-nav #visitTodayMonth,body #visitPage .visit-month-nav #visitSelectBtn,body #visitPage .visit-month-nav #visitDeleteSelectedBtn,body #visitPage .visit-month-nav #visitCancelSelectBtn{background:#17382f!important;color:#c4d5cb!important;border-color:#31564b!important}
+body #visitPage .visit-add-schedule-btn{background:#24483c!important;color:#e1ebe5!important;border:1px solid #527763!important}
+body #visitPage .visit-add-schedule-btn:hover{background:#315849!important}
+body #visitPage .visit-calendar-legend{background:#0e2b26!important;border-color:#31564b!important}
+body #visitPage .visit-calendar-legend>span{color:#cbd9d1!important}
+body #visitPage .visit-calendar-weekday,body #visitPage .visit-calendar-weekday-row{background:#17382f!important;color:#c3d2c9!important;border-color:#31564b!important}
+body #visitPage .visit-calendar-day-cell{background:#102f2a!important;color:#dce8e2!important;border-color:#294b41!important}
+body #visitPage .visit-calendar-day-cell.outside-month{background:#0a2521!important;color:#81978c!important}
+body #visitPage .visit-calendar-day-cell.is-today{background:#173d34!important;box-shadow:inset 0 0 0 1px #789b8b!important}
+body #visitPage .visit-calendar-day-cell.is-selected{background:#1b443a!important;box-shadow:inset 0 0 0 2px #70c9c1!important}
+body #visitPage .visit-calendar-day-number{color:#e1ebe5!important}
+body #visitPage .visit-calendar-day-cell.is-today .visit-calendar-day-number{background:#426c5b!important;color:#fff!important}
+body #visitPage .visit-calendar-event-chip{background:#303a35!important;color:#e0e8e3!important;border:1px solid #53645a!important;border-left-width:4px!important}
+body #visitPage .visit-calendar-event-chip.progress{background:#3b3023!important;border-color:#805b38!important;border-left-color:#e6a16a!important;color:#ffd0a7!important}
+body #visitPage .visit-calendar-event-chip.done{background:#263b30!important;border-color:#4c755b!important;border-left-color:#a7cda9!important;color:#d1ead3!important}
+body #visitPage .visit-calendar-event-chip.cancelled{background:#3a292b!important;border-color:#71484d!important;border-left-color:#d68b91!important;color:#f0c4c7!important}
+body #visitPage .visit-calendar-event-chip.planned{background:#183a38!important;border-color:#356c66!important;border-left-color:#70c9c1!important;color:#b8eee8!important}
+body #visitPage .visit-status-dot.planned{background:#70c9c1!important}
+body #visitPage .visit-status-dot.progress{background:#e6a16a!important}
+body #visitPage .visit-status-dot.done{background:#a7cda9!important}
+body #visitPage .visit-status-dot.cancelled{background:#d68b91!important}
+body #visitPage .visit-row-delete{background:#3a292b!important;color:#f0c4c7!important;border-color:#71484d!important}
+body #visitPage .visit-row-delete:hover{background:#4a3033!important}

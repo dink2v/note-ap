@@ -482,6 +482,23 @@
     renderVisitTables();renderVisitCalendar(sortedVisits());
     showToast(removed+' baris Visit berhasil dihapus.');
   });
+  document.getElementById('visitTableBody')?.addEventListener('toggle',event=>{
+    const picker=event.target;
+    if(!picker.matches?.('.visit-multiselect'))return;
+    const menu=picker.querySelector('.visit-multiselect-menu');
+    if(!picker.open||!menu)return;
+    const rect=picker.querySelector('summary').getBoundingClientRect();
+    const width=Math.min(260,window.innerWidth-28);
+    const left=Math.max(14,Math.min(rect.left+(rect.width-width)/2,window.innerWidth-width-14));
+    const below=window.innerHeight-rect.bottom-14,above=rect.top-14;
+    const openUp=below<250&&above>below;
+    const available=Math.max(150,(openUp?above:below)-8);
+    Object.assign(menu.style,{position:'fixed',left:left+'px',right:'auto',top:openUp?'auto':(rect.bottom+7)+'px',bottom:openUp?(window.innerHeight-rect.top+7)+'px':'auto',width:width+'px',maxHeight:available+'px',overflow:'auto',transform:'none',zIndex:'9999'});
+    const options=menu.querySelector('.visit-talent-options');
+    if(options)options.style.maxHeight=Math.max(70,available-145)+'px';
+    const search=menu.querySelector('.visit-talent-search');
+    if(search)requestAnimationFrame(()=>search.focus());
+  },true);
   document.getElementById('visitTableBody')?.addEventListener('input',event=>{
     const search=event.target.closest('.visit-talent-search');
     if(!search)return;

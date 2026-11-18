@@ -4440,3 +4440,220 @@ body :is(.status-chip,.settings-status,.approved-pill,.pending-pill,
 body :is(button:disabled,input:disabled,select:disabled,textarea:disabled){opacity:.58}
 /* Native browser controls and selection follow the new palette. */
 ::selection{background:#3da987;color:#071f1a}
+
+
+
+/* =========================================================
+   NOTE AP — QUIET DARK FOREST / MUTED MINIMAL
+   ========================================================= */
+:root,:root[data-theme="light"],:root[data-theme="dark"]{
+  color-scheme:dark!important;
+  --bg:#0b2b26!important;
+  --panel:#102f2a!important;
+  --form-panel-bg:#102f2a!important;
+  --white:#102f2a!important;
+  --ink:#dce8e2!important;
+  --muted:#91a79e!important;
+  --line:#24463e!important;
+  --green:#789b8b!important;
+  --green-dark:#587d6d!important;
+  --na-orange:#b18b65!important;
+  --na-orange-soft:#332d26!important;
+  --surface-0:#081f1c!important;
+  --surface-1:#0b2b26!important;
+  --surface-2:#102f2a!important;
+  --surface-3:#12362f!important;
+  --surface-4:#173d34!important;
+  --surface-hover:#1b443a!important;
+  --input-bg:#0a2621!important;
+  --border-strong:#31564b!important;
+  --text-primary:#dce8e2!important;
+  --text-secondary:#91a79e!important;
+  --accent-mint:#9ab7a9!important;
+}
+html,body,body :is(.app-shell,.main-area,.page-wrap,.content-form-wrap,
+.dashboard-page,.calendar-page,.creative-calendar-page,.content-page,
+.kanban-page,.visit-page,.help-page,.settings-page,.chat-page){
+  background:#0b2b26!important;
+  color:#dce8e2!important;
+}
+body :is(.sidebar,.mobile-top){
+  background:#081f1c!important;
+  color:#dce8e2!important;
+  border-color:#24463e!important;
+}
+body :is(.brand,.brand b,.brand small,.sidebar-footer,.sidebar-footer b,
+.sidebar-footer small,.nav-label,.nav-link,.mobile-top button){
+  color:#dce8e2!important;
+}
+body .nav-link{background:transparent!important}
+body .nav-link:hover,body .nav-link.active{
+  background:#173d34!important;color:#e4eee8!important;
+  border-color:#31564b!important;
+}
+body :is(.brand-mark,.nav-icon,.quick-action-icon){
+  background:#1b4036!important;color:#a4bbae!important;
+}
+/* Calm, low-contrast surfaces. */
+body :is(.panel,.stat-card,.form-panel,.content-filter-panel,
+.content-list-panel,.kanban-column,.kanban-card,.visit-card,.visit-editor,
+.visit-table-panel,.visit-table-toolbar,.visit-table-wrap,.settings-card,
+.settings-panel,.settings-nav,.settings-content,.settings-preference-row,
+.settings-mini-card,.reference-category-card,.help-topic-card,.help-faq-item,
+.chat-workspace,.chat-thread,.chat-composer,.notification-popover,
+.command-dialog,.command-result,.calendar-planner-panel,.calendar-main-panel,
+.calendar-agenda-panel,.calendar-insight-card,.calendar-item-dialog,
+.calendar-detail-section,.calendar-demo,.calendar-demo-form,
+.calendar-demo-list-panel,.calendar-demo-history,.expand-dialog,
+.content-modal-dialog,.content-table,.visit-main-table,.visit-table,
+.help-chat-block,.dashboard-quick-actions,#dashboardPage .welcome-row){
+  background:#102f2a!important;color:#dce8e2!important;
+  border-color:#24463e!important;
+  box-shadow:0 6px 22px rgba(0,0,0,.16)!important;
+}
+/* Nested surfaces, calendars, tables and compact list rows. */
+body :is(.calendar-day-cell,.calendar-weekday,.visit-calendar-day-cell,
+.visit-calendar-day,.visit-today-inline,.visit-today-entry,
+.visit-calendar-selected,.visit-today-item,.visit-today-line,
+.content-table th,.content-table td,.visit-main-table th,.visit-main-table td,
+.visit-table th,.visit-table td,.settings-nav-item,.reference-item,
+.notification-item,.upcoming-item,.calendar-agenda-item,.chat-list-item,
+.chat-tabs,.visit-multiselect>summary,.visit-multiselect-menu,
+.quick-action,.command-result,.settings-preference-row){
+  background:#0e2b26!important;color:#d4e1da!important;
+  border-color:#24463e!important;
+}
+body :is(.calendar-day-cell.outside-month,.visit-calendar-day.outside-month){
+  background:#0a2521!important;color:#71877e!important;
+}
+body :is(.calendar-day-cell.today,.calendar-day-cell.is-today,
+.visit-calendar-day.today,.visit-calendar-day-cell.today){
+  background:#173d34!important;outline:1px solid #587d6d!important;
+}
+body :is(.calendar-day-cell:hover,.visit-calendar-day:hover,
+.quick-action:hover,.kanban-card:hover,.reference-category-card:hover,
+.help-topic-card:hover){background:#17382f!important}
+/* Dashboard highlights and charts no longer use pastel/white fills. */
+body #dashboardPage .welcome-row{
+  background:linear-gradient(115deg,#102f2a,#12352e)!important;
+  border-color:#24463e!important;
+}
+body .chart-placeholder{
+  background:linear-gradient(180deg,#102f2a,#0d2924)!important;
+  border-color:#31564b!important;color:#dce8e2!important;
+}
+body .chart-placeholder :is(strong,span){color:#c1d0c8!important}
+body .chart-icon,body .date-box,body .stat-icon,
+body .period-chip,body .status-pill{
+  background:#1a3a31!important;color:#b4c6bc!important;
+  border-color:#31564b!important;
+}
+body .stat-feed .stat-icon,body .stat-carousel .stat-icon,
+body .stat-published .stat-icon,body .stat-scheduled .stat-icon{
+  background:#1a3a31!important;color:#a9bdb2!important;
+}
+body :is(.calendar-insight-card,.visit-metric-card,.calendar-agenda-tip){
+  background:#102f2a!important;border-color:#24463e!important;
+}
+body .calendar-agenda-tip{background:#14352e!important}
+body :is(.help-welcome-card,.calendar-demo,.calendar-demo-form,
+.calendar-demo-list-panel,.calendar-demo-history){
+  background:#102f2a!important;border-color:#24463e!important;
+}
+/* Inputs and editable controls. */
+body :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),
+select,textarea,[contenteditable=true],.search-input,.filter-input,
+.form-control,.field input,.field select,.field textarea,
+.content-search input,.content-filter input,.content-filter select,
+.visit-form input,.visit-form select,.visit-form textarea,
+.visit-inline-input,.visit-inline-textarea,.settings-field input,
+.settings-field select,.settings-field textarea,.settings-preference-row select,
+.calendar-item-field input,.calendar-item-field select,
+.calendar-demo-form input,.command-input-wrap input,.chat-composer textarea,
+.expand-dialog textarea){
+  background:#0a2621!important;color:#dce8e2!important;
+  border-color:#31564b!important;caret-color:#dce8e2!important;
+  color-scheme:dark!important;
+}
+body input::placeholder,body textarea::placeholder{color:#788f85!important;opacity:1}
+body select option{background:#102f2a!important;color:#dce8e2!important}
+/* Typography and labels. */
+body :is(h1,h2,h3,h4,h5,h6,.page-title,.brand b,.settings-content h2,
+.settings-content h3,.settings-nav-item b,.settings-preference-row b,
+.reference-category-card>header b,.reference-item>span,.settings-mini-card b,
+.help-topic-card b,.help-faq-item summary,.chat-list-body b,
+.chat-thread-title b,.chat-message p,.command-result-copy b,
+.upcoming-info b,.visit-today-item b,.visit-detail-field b,
+.calendar-detail-field b,.stat-value,.stat-card strong){
+  color:#e1ebe5!important;
+}
+body :is(p,small,.muted,.text-muted,.helper-text,.form-hint,.empty-state,
+.settings-nav-item small,.settings-preference-row p,.settings-integration-card p,
+.settings-info-note,.reference-empty,.help-welcome-card p,.help-topic-card p,
+.help-faq-item p,.chat-list-body small,.chat-message time,.visit-today-location,
+.visit-today-empty,.visit-detail-placeholder,.calendar-agenda-empty,
+.calendar-planner-footnote,.page-wrap>.muted,.eyebrow,.updated-label,
+.stat-label,.stat-foot,.page-footer,.command-group-label){
+  color:#91a79e!important;
+}
+/* Buttons and accents are intentionally muted, not neon. */
+body :is(.primary-btn,.btn-primary,.submit-btn,.save-btn,
+button[type=submit],.primary-button){
+  background:#426c5b!important;border-color:#587d6d!important;
+  color:#edf3ef!important;box-shadow:none!important;
+}
+body :is(.secondary-btn,.filter-reset-btn,.content-modal-close,
+.calendar-item-cancel,.calendar-item-actions button,.visit-page-btn,
+.visit-month-nav button,.visit-calendar-header button,
+.visit-view-toggle button:not(.active),.reference-item-actions button,
+.settings-file-btn,.settings-data-actions .secondary-btn,
+.notification-btn,.command-launcher,.calendar-planner-controls button,
+.calendar-view-switch button:not(.active),.calendar-item-dialog-head>button,
+.calendar-demo-event-actions button,.visit-add-schedule-btn,
+.visit-selection-controls button){
+  background:#17382f!important;border-color:#31564b!important;
+  color:#c4d3cb!important;box-shadow:none!important;
+}
+body :is(.visit-view-toggle button.active,.calendar-view-switch button.active,
+.settings-nav-item.active){
+  background:#24483c!important;border-color:#456b5b!important;
+  color:#e0eae4!important;box-shadow:none!important;
+}
+body :is(button,a,.quick-action){
+  transition:background-color .18s ease,border-color .18s ease,color .18s ease;
+}
+body :is(button,a):hover{border-color:#587d6d!important}
+body a{color:#a5bcae!important}
+body .command-launcher{
+  background:rgba(16,47,42,.96)!important;
+  border-color:#31564b!important;color:#c4d3cb!important;
+}
+body .command-dialog,body .calendar-item-dialog,body .expand-dialog,
+body .content-modal-dialog{
+  background:#102f2a!important;border-color:#31564b!important;
+}
+body .command-overlay,body .calendar-item-modal,body .content-modal,
+body .expand-overlay{background:rgba(3,15,13,.78)!important}
+body .chat-messages{background:linear-gradient(#0e2b26,#0b2924)!important}
+body .chat-message,body .chat-message.mine{
+  background:#17382f!important;border-color:#31564b!important;color:#dce8e2!important;
+}
+/* Status labels retain meaning but use subdued tones. */
+body :is(.status-chip,.settings-status,.approved-pill,.pending-pill,
+.calendar-agenda-live,.kanban-tag,.status-pill){
+  filter:saturate(.55) brightness(.78)!important;
+  box-shadow:none!important;
+}
+/* Neutralize old inline white surfaces when data is rendered dynamically. */
+body [style*="background:#fff"],body [style*="background: #fff"],
+body [style*="background-color:#fff"],body [style*="background-color: #fff"],
+body [style*="background:white"],body [style*="background: white"],
+body [style*="background-color:white"],body [style*="background-color: white"],
+body [style*="rgb(255, 255, 255)"],body [style*="rgb(255,255,255)"]{
+  background:#102f2a!important;color:#dce8e2!important;border-color:#24463e!important;
+}
+body #visitTableBody>.visit-placeholder-row>td{
+  background:#102f2a!important;border-color:#24463e!important;color:#91a79e!important;
+}
+body :is(button:disabled,input:disabled,select:disabled,textarea:disabled){opacity:.55}
+::selection{background:#456b5b;color:#f1f5f2}

@@ -6,7 +6,7 @@
   <title>Note AP — Apotek Prapatan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/app.css?v=20261118-full-design-fix-6">
+  <link rel="stylesheet" href="assets/css/app.css?v=20261118-history-aligned-7">
 <style>
 .calendar-content-detail-body{display:grid;gap:18px;max-height:min(62vh,680px);overflow:auto;padding:4px 2px 12px}.calendar-detail-section{padding:16px;border:1px solid var(--line,#e5ebe7);border-radius:14px;background:rgba(255,255,255,.55)}.calendar-detail-section h3{margin:0 0 12px;font-size:14px}.calendar-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.calendar-detail-field{min-width:0}.calendar-detail-field b{display:block;font-size:11px;color:var(--muted,#718078);margin-bottom:5px}.calendar-detail-field p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.55}.calendar-detail-field:has(p){grid-column:auto}@media(max-width:600px){.calendar-detail-grid{grid-template-columns:1fr}.calendar-content-detail-body{max-height:65vh}}
 </style></head>
@@ -221,7 +221,7 @@
           <button class="settings-nav-item active" data-settings-tab="general"><span>⚙</span><span><b>Umum</b><small>Identitas workspace</small></span></button>
           <button class="settings-nav-item" data-settings-tab="references"><span>▤</span><span><b>Referensi</b><small>Standar konten</small></span></button>
           <button class="settings-nav-item" data-settings-tab="team"><span>♙</span><span><b>Tim</b><small>Anggota dan peran</small></span></button>
-          <button class="settings-nav-item" data-settings-tab="integration"><span>↔</span><span><b>Integrasi</b><small>Google Calendar</small></span></button>
+          
           <button class="settings-nav-item" data-settings-tab="data"><span>▣</span><span><b>Manajemen Data</b><small>Backup dan pemulihan</small></span></button>
           <button class="settings-nav-item" data-settings-tab="appearance"><span>◐</span><span><b>Tampilan & Bahasa</b><small>Tema dan bahasa</small></span></button>
         </nav>
@@ -253,22 +253,6 @@
             <p class="settings-footnote">Talent untuk jadwal Visit tetap dikelola melalui referensi Google Sheets, bukan dari halaman Setelan ini.</p>
           </section>
 
-          <section class="settings-panel" data-settings-panel="integration" hidden>
-            <div class="settings-panel-head"><div><h2>Integrasi Google Calendar</h2><p>Hubungkan Note AP ke Google Sheets dan kalender bersama Apotek Prapatan.</p></div><span class="settings-status pending" id="gcalConnectionBadge">Belum terhubung</span></div>
-            <div class="settings-info-note">Integrasi ini memakai Google Apps Script sebagai penghubung. Jadwal konten dikirim ke Google Sheets dan Google Calendar. Konflik perubahan menggunakan C — Last Saved Change Wins.</div>
-            <div class="settings-integration-card"><div class="settings-google-mark">▦</div><div><b>Google Workspace</b><p>Spreadsheet utama dan kalender bersama menjadi sumber sinkronisasi.</p><small>Spreadsheet: 132FD2WyRTDOaZbOq_ABlyR1SWtesRh5i0XWkE_7p54w</small></div></div>
-            <div class="settings-form-grid">
-              <label class="settings-field">Apps Script Web App URL<input id="gcalEndpoint" type="url" placeholder="https://script.google.com/macros/s/.../exec" autocomplete="url"><small>Masukkan URL deployment Web App dari Google Apps Script.</small></label>
-              <label class="settings-field">Token integrasi<input id="gcalToken" type="password" placeholder="Token yang sama dengan NOTEAP_API_TOKEN" autocomplete="new-password"><small>Token harus sama dengan Script Properties pada Apps Script.</small></label>
-            </div>
-            <div class="settings-actions"><button class="secondary-btn" id="gcalSaveConfig" type="button">Simpan Konfigurasi</button><button class="secondary-btn" id="gcalTestConnection" type="button">Tes Koneksi</button><button class="primary-btn" id="gcalSyncNow" type="button">↻ Sinkronkan Sekarang</button></div>
-            <div class="settings-info-note" id="gcalConnectionMessage" role="status">Belum ada koneksi yang diuji. Deploy Apps Script terlebih dahulu, lalu masukkan URL dan token di atas.</div>
-            <div class="calendar-demo">
-              <div class="calendar-demo-heading"><div><span class="calendar-demo-kicker">SYNC POLICY</span><h3>Aturan Sinkronisasi</h3></div><span class="calendar-demo-badge">Two-way</span></div>
-              <div class="calendar-demo-notice"><b>C — Last Saved Change Wins.</b> Perubahan dengan waktu simpan paling baru menjadi acuan. Perubahan dari Google Calendar akan diperbarui ke daftar konten Note AP, sedangkan perubahan Note AP akan diteruskan ke kalender.</div>
-              <div class="settings-footnote">Sinkronisasi nyata baru aktif setelah Apps Script dipasang dan URL deployment dimasukkan. Jangan membagikan token integrasi kepada orang lain.</div>
-            </div>
-          </section>
           <section class="settings-panel" data-settings-panel="data" hidden>
             <div class="settings-panel-head"><div><h2>Manajemen Data</h2><p>Cadangkan data yang tersimpan pada browser ini.</p></div></div>
             <div class="settings-panel-head"><div><h2>Integrasi Google Sheets</h2><p>Status koneksi sumber data Note AP.</p></div><span class="settings-status pending">Belum terhubung</span></div>
@@ -320,7 +304,7 @@
   </form>
 </section>
 
-<div class="content-modal" id="contentModal" aria-hidden="true"><section class="content-modal-dialog" role="dialog" aria-modal="true" aria-label="Form Konten"><button type="button" class="content-modal-close" id="contentModalClose" aria-label="Tutup popup">×</button><iframe id="contentModalFrame" title="Form Tambah atau Detail Konten" src="tambah-konten.html?v=20261118-full-design-fix-6" loading="eager"></iframe></section></div>
+<div class="content-modal" id="contentModal" aria-hidden="true"><section class="content-modal-dialog" role="dialog" aria-modal="true" aria-label="Form Konten"><button type="button" class="content-modal-close" id="contentModalClose" aria-label="Tutup popup">×</button><iframe id="contentModalFrame" title="Form Tambah atau Detail Konten" src="tambah-konten.html?v=20261118-history-aligned-7" loading="eager"></iframe></section></div>
 
 <section class="command-overlay" id="commandOverlay" aria-hidden="true" hidden>
  <div class="command-dialog" role="dialog" aria-modal="true" aria-labelledby="commandTitle">
@@ -332,5 +316,5 @@
 </section>
 <button class="command-launcher" id="commandLauncher" type="button" aria-label="Buka Command Center"><span>✳</span><span class="launcher-label">Command Center</span><kbd>Ctrl K</kbd></button>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261118-detail-cleanup-2"></script>
+<script src="assets/js/app.js?v=20261118-history-aligned-7"></script>
 </body></html>

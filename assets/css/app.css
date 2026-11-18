@@ -978,3 +978,93 @@ button,a,input,select,textarea{ -webkit-tap-highlight-color:transparent }
  .form-bottom-actions>div{display:grid;grid-template-columns:1fr 1fr}
  .form-bottom-actions>div .primary-btn{grid-column:1/-1}
 }
+
+
+/* =========================================================
+   NOTE AP — CALENDAR REFINEMENT
+   Calendar-only layout and interaction polish.
+   ========================================================= */
+.creative-calendar-page{max-width:1600px;padding-top:32px}
+.creative-calendar-hero{gap:20px}
+.creative-calendar-hero .muted{max-width:650px;margin-top:7px;font-size:12px}
+.calendar-page-actions .primary-btn{white-space:nowrap}
+.calendar-insight-card{min-height:76px}
+.calendar-main-panel{overflow:hidden}
+.calendar-toolbar{align-items:center}
+.calendar-toolbar-title p{max-width:440px}
+.calendar-toolbar-tools{gap:8px}
+.calendar-view-switch button{min-width:58px;min-height:32px}
+.calendar-planner-controls{gap:7px}
+.calendar-planner-controls button{min-width:34px;min-height:34px;font-size:14px}
+.calendar-planner-controls button:first-child{font-size:10px}
+.calendar-planner-controls strong{min-width:145px;font-size:12px;text-transform:capitalize}
+.calendar-planner-legend{padding:14px 2px 12px}
+.note-ap-calendar-grid{table-layout:fixed;background:#fff}
+.calendar-weekday{padding:11px 5px;background:#f0f9f7;color:#557b76;font-size:10px;letter-spacing:.2px}
+.calendar-day-cell{min-height:126px;padding:8px;gap:7px;cursor:pointer}
+.calendar-day-cell.outside-month{background:#fbfcfd}
+.calendar-day-cell.is-today{background:#fffaf5}
+.calendar-day-head{justify-content:space-between;min-height:26px}
+.calendar-day-number{width:26px;height:26px;font-size:11px}
+.calendar-day-add{display:grid;place-items:center;width:25px;height:25px;padding:0;border:1px solid #dcefe9;border-radius:8px;background:#f5fbf9;color:var(--na-teal-dark);font-size:17px;line-height:1;opacity:0;cursor:pointer;transition:opacity .15s ease,background .15s ease,border-color .15s ease,transform .15s ease}
+.calendar-day-cell:hover .calendar-day-add,.calendar-day-add:focus-visible{opacity:1}
+.calendar-day-add:hover{background:var(--na-teal-soft);border-color:#a9e1d8;transform:scale(1.04)}
+.calendar-day-cell.is-today .calendar-day-add{opacity:1}
+.calendar-event-chip{min-height:39px;padding:7px 8px;border-radius:7px;box-shadow:0 1px 2px rgba(39,61,83,.035)}
+.calendar-event-chip:hover{filter:saturate(1.08);box-shadow:0 2px 7px rgba(39,61,83,.09);transform:translateY(-1px)}
+.calendar-event-chip:focus-visible{outline:2px solid var(--na-teal);outline-offset:1px}
+.calendar-event-chip b{font-size:9px;line-height:1.4}
+.calendar-event-chip small{font-size:8px}
+.calendar-agenda-panel{position:relative}
+.calendar-agenda-list{max-height:470px;overflow:auto;overscroll-behavior:contain}
+.calendar-agenda-item{gap:11px;padding:13px 2px}
+.calendar-agenda-date{width:43px;height:45px;flex-basis:43px}
+.calendar-agenda-copy b{font-size:11px;line-height:1.4}
+.calendar-agenda-copy small{font-size:9px}
+.calendar-agenda-tip{align-items:flex-start}
+.note-ap-calendar-grid.view-day .calendar-day-cell{min-height:390px;padding:14px}
+.note-ap-calendar-grid.view-day .calendar-event-chip{max-width:520px;min-height:48px;padding:10px 12px}
+.note-ap-calendar-grid.view-day .calendar-event-chip b{font-size:11px}
+.note-ap-calendar-grid.view-day .calendar-event-chip small{font-size:9px}
+.note-ap-calendar-grid.view-week .calendar-day-cell{min-height:230px}
+@media(max-width:1100px){
+ .calendar-workspace{grid-template-columns:minmax(0,1fr)}
+ .calendar-agenda-panel{display:block}
+ .calendar-agenda-list{max-height:320px}
+ .calendar-agenda-tip{margin-top:12px}
+}
+@media(max-width:760px){
+ .creative-calendar-page{padding:22px 13px}
+ .creative-calendar-hero{gap:13px;margin-bottom:17px}
+ .creative-calendar-hero h1{font-size:23px}
+ .creative-calendar-hero .muted{font-size:11px}
+ .calendar-insight-strip{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ .calendar-insight-card{display:block;min-height:92px;padding:10px}
+ .calendar-insight-icon{width:29px;height:29px;margin-bottom:7px;font-size:13px}
+ .calendar-insight-card small{font-size:7px;letter-spacing:.25px}
+ .calendar-insight-card b{font-size:19px}
+ .calendar-main-panel{padding:13px 11px}
+ .calendar-toolbar{gap:11px}
+ .calendar-toolbar-title h2{font-size:16px}
+ .calendar-toolbar-title p{font-size:10px}
+ .calendar-planner-controls strong{min-width:0;font-size:11px}
+ .calendar-planner-controls button{min-width:32px;padding:5px 8px}
+ .calendar-planner-legend{gap:10px;font-size:8px}
+ .note-ap-calendar-grid{min-width:620px}
+ .calendar-day-cell{min-height:104px;padding:6px}
+ .calendar-day-add{width:23px;height:23px;opacity:1}
+ .calendar-event-chip{min-height:34px;padding:5px}
+ .calendar-agenda-panel{padding:14px}
+ .calendar-agenda-list{max-height:280px}
+ .note-ap-calendar-grid.view-day{min-width:0}
+ .note-ap-calendar-grid.view-day .calendar-day-cell{min-height:300px}
+}
+@media(max-width:420px){
+ .calendar-insight-card{padding:9px 7px}
+ .calendar-insight-card small{font-size:6.5px}
+ .calendar-insight-card b{font-size:17px}
+ .calendar-planner-controls{gap:4px}
+ .calendar-planner-controls strong{font-size:10px}
+ .calendar-planner-controls button:first-child{padding-inline:7px}
+ .calendar-planner-legend{gap:7px}
+}

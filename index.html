@@ -226,6 +226,7 @@
           <button class="settings-nav-item active" data-settings-tab="general"><span>⚙</span><span><b>Umum</b><small>Identitas workspace</small></span></button>
           <button class="settings-nav-item" data-settings-tab="references"><span>▤</span><span><b>Referensi</b><small>Standar konten</small></span></button>
           <button class="settings-nav-item" data-settings-tab="team"><span>♙</span><span><b>Tim</b><small>Anggota dan peran</small></span></button>
+          <button class="settings-nav-item" data-settings-tab="integration"><span>↔</span><span><b>Integrasi</b><small>Google Calendar</small></span></button>
           <button class="settings-nav-item" data-settings-tab="data"><span>▣</span><span><b>Manajemen Data</b><small>Backup dan pemulihan</small></span></button>
           <button class="settings-nav-item" data-settings-tab="appearance"><span>◐</span><span><b>Tampilan & Bahasa</b><small>Tema dan bahasa</small></span></button>
         </nav>
@@ -257,6 +258,30 @@
             <p class="settings-footnote">Talent untuk jadwal Visit tetap dikelola melalui referensi Google Sheets, bukan dari halaman Setelan ini.</p>
           </section>
 
+          <section class="settings-panel" data-settings-panel="integration" hidden>
+            <div class="settings-panel-head"><div><h2>Integrasi Google Calendar</h2><p>Preview alur sinkronisasi jadwal Note AP dengan Google Calendar.</p></div><span class="settings-status pending">Mode demo</span></div>
+            <div class="settings-info-note">Area ini adalah simulasi lokal untuk menguji alur kerja. Belum terhubung ke akun Google sungguhan dan tidak mengubah jadwal utama Note AP maupun Google Sheets.</div>
+            <div class="settings-integration-card"><div class="settings-google-mark">▦</div><div><b>Google Calendar</b><p>Uji tambah, edit, hapus, dan sinkronisasi jadwal dua arah.</p><small>Mode: Sandbox lokal · Data tersimpan pada browser ini</small></div></div>
+            <div class="settings-form-grid">
+              <label class="settings-field">Akun Google (demo)<input id="calendarDemoAccount" type="email" placeholder="nama@gmail.com"></label>
+              <label class="settings-field">Calendar ID (demo)<input id="calendarDemoCalendarId" type="text" placeholder="primary atau ID kalender"></label>
+            </div>
+            <div class="settings-actions"><button class="secondary-btn" id="calendarDemoSaveConfig" type="button">Simpan Konfigurasi Demo</button></div>
+            <div class="calendar-demo">
+              <div class="calendar-demo-heading"><div><span class="calendar-demo-kicker">TWO-WAY SYNC PREVIEW</span><h3>Jadwal Note AP & Google Calendar</h3></div><span class="calendar-demo-badge">Sandbox</span></div>
+              <div class="calendar-demo-notice"><b>Aturan konflik: C — Last Saved Change Wins.</b> Jika jadwal yang sama diubah di kedua sisi, versi dengan waktu perubahan paling baru akan digunakan. Data demo terpisah dari data konten utama.</div>
+              <div class="calendar-demo-columns">
+                <section class="calendar-demo-list-panel"><div class="calendar-demo-list-head"><div><b>Note AP</b><small id="calendarDemoNoteCount">0 jadwal</small></div></div><div class="calendar-demo-list" id="calendarDemoNoteList"></div>
+                  <form class="calendar-demo-form" id="calendarDemoNoteForm"><b>Tambah jadwal Note AP</b><input name="title" required maxlength="120" placeholder="Judul jadwal"><input name="date" type="date" required><input name="time" type="time" value="09:00" required><button class="primary-btn" type="submit">＋ Tambah Jadwal</button></form>
+                </section>
+                <section class="calendar-demo-list-panel"><div class="calendar-demo-list-head"><div><b>Google Calendar</b><small id="calendarDemoGoogleCount">0 acara</small></div></div><div class="calendar-demo-list" id="calendarDemoGoogleList"></div>
+                  <form class="calendar-demo-form" id="calendarDemoGoogleForm"><b>Tambah acara Google Calendar</b><input name="title" required maxlength="120" placeholder="Judul acara"><input name="date" type="date" required><input name="time" type="time" value="10:00" required><button class="secondary-btn" type="submit">＋ Tambah Acara</button></form>
+                </section>
+              </div>
+              <div class="calendar-demo-sync-actions"><button class="primary-btn" id="calendarDemoPush" type="button">Sinkronkan Note AP → Google Calendar</button><button class="secondary-btn" id="calendarDemoPull" type="button">Sinkronkan Google Calendar → Note AP</button><button class="calendar-demo-reset" id="calendarDemoReset" type="button">Reset Demo</button></div>
+              <section class="calendar-demo-history-panel"><h3>Riwayat Aktivitas Demo</h3><ol class="calendar-demo-history" id="calendarDemoHistory"></ol></section>
+            </div>
+          </section>
           <section class="settings-panel" data-settings-panel="data" hidden>
             <div class="settings-panel-head"><div><h2>Manajemen Data</h2><p>Cadangkan data yang tersimpan pada browser ini.</p></div></div>
             <div class="settings-panel-head"><div><h2>Integrasi Google Sheets</h2><p>Status koneksi sumber data Note AP.</p></div><span class="settings-status pending">Belum terhubung</span></div>
@@ -320,5 +345,5 @@
 </section>
 <button class="command-launcher" id="commandLauncher" type="button" aria-label="Buka Command Center"><span>✳</span><span class="launcher-label">Command Center</span><kbd>Ctrl K</kbd></button>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261118-calendar-refinement-2"></script>
+<script src="assets/js/app.js?v=20261118-google-calendar-sync-c"></script>
 </body></html>

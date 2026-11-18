@@ -2516,3 +2516,56 @@ button,a{touch-action:manipulation}
 :root[data-theme="dark"] .sidebar .brand-subtitle{
   color:#dce9e0 !important;
 }
+
+
+/* DARK MODE FALLBACK — catch inline white surfaces and legacy text colors */
+:root[data-theme="dark"] [style*="background:#fff"],
+:root[data-theme="dark"] [style*="background: #fff"],
+:root[data-theme="dark"] [style*="background-color:#fff"],
+:root[data-theme="dark"] [style*="background-color: #fff"],
+:root[data-theme="dark"] [style*="background:white"],
+:root[data-theme="dark"] [style*="background: white"],
+:root[data-theme="dark"] [style*="background-color:white"],
+:root[data-theme="dark"] [style*="background-color: white"],
+:root[data-theme="dark"] [style*="rgb(255, 255, 255)"],
+:root[data-theme="dark"] [style*="rgb(255,255,255)"]{
+  background:#1a2820 !important;
+  background-color:#1a2820 !important;
+  border-color:#405746 !important;
+}
+:root[data-theme="dark"] body{
+  background:#111a15 !important;
+  color:#e8f1eb;
+}
+:root[data-theme="dark"] body :is(h1,h2,h3,h4,h5,h6,p,label,legend,th,td,summary,figcaption,.title,.subtitle,.description,.helper-text,.empty-state,.form-label,.field-label){
+  color:#e8f1eb;
+}
+:root[data-theme="dark"] body :is(small,.muted,.text-muted,.hint,.helper,.help-text,.field-help,.form-hint,.meta,.caption,.subtext,.secondary-text){
+  color:#b7c6bb !important;
+}
+:root[data-theme="dark"] body :is(input,select,textarea,option){
+  color-scheme:dark;
+  background-color:#111a15;
+  color:#f0f6f1;
+  border-color:#405746;
+}
+:root[data-theme="dark"] body :is(input,textarea)::placeholder{
+  color:#aebfb2 !important;
+  opacity:1;
+}
+:root[data-theme="dark"] body :is(button,[role="button"]):not(.primary-btn):not(.btn-primary):not(.danger-btn):not(.status-badge):not(.platform-badge){
+  color:#e8f1eb;
+}
+:root[data-theme="dark"] body :is(table,thead,tbody,tfoot,tr,th,td){
+  border-color:#35483b;
+}
+:root[data-theme="dark"] body :is(.empty-state,.empty-placeholder,.no-data,.no-results,.table-empty,.calendar-empty){
+  background:#1a2820 !important;
+  color:#b7c6bb !important;
+  border-color:#35483b !important;
+}
+:root[data-theme="dark"] body :is(.dropdown-menu,.select-menu,.popover,.tooltip-panel,.modal-content,.dialog-content){
+  background:#1a2820 !important;
+  color:#e8f1eb !important;
+  border-color:#405746 !important;
+}

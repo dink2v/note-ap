@@ -815,6 +815,9 @@ body.command-open{overflow:hidden}
 .calendar-day-cell{min-width:0;min-height:112px;padding:7px;border-top:1px solid #eaf0f1;border-right:1px solid #eaf0f1;background:#fff}
 .calendar-day-cell.outside-month{background:#fafcfc}
 .calendar-day-cell.is-today{background:#fffaf5;box-shadow:inset 0 0 0 1px #f4c89f}
+.calendar-day-cell.is-drop-target{background:#e5f8f4!important;box-shadow:inset 0 0 0 2px #159d91}
+.calendar-event-chip[draggable="true"]{cursor:grab}
+.calendar-event-chip.is-dragging{opacity:.42;cursor:grabbing}
 .calendar-day-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
 .calendar-day-number{display:grid;place-items:center;width:23px;height:23px;border-radius:7px;color:#586b7b;font-size:10px;font-weight:700}
 .calendar-day-cell.is-today .calendar-day-number{background:#fff0e3;color:#d97726}

@@ -3762,3 +3762,47 @@ button,a{touch-action:manipulation}
   color:#ffd29f !important;
   border-color:#67543a !important;
 }
+
+
+/* DARK MODE — Engagement Rate chart: force contrast on every text node */
+:root[data-theme="dark"] body #dashboardPage .engagement-panel {
+  background:#18271f !important;
+  border-color:#3b5143 !important;
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] body #dashboardPage .engagement-panel .panel-heading h2 {
+  color:#f0f6f1 !important;
+}
+:root[data-theme="dark"] body #dashboardPage .engagement-panel .panel-heading p.muted {
+  color:#c1d0c5 !important;
+  opacity:1 !important;
+}
+:root[data-theme="dark"] body #dashboardPage .engagement-panel .period-pill {
+  background:#26382d !important;
+  border-color:#506657 !important;
+  color:#e2eee5 !important;
+}
+:root[data-theme="dark"] body #dashboardPage .engagement-panel .chart-legend,
+:root[data-theme="dark"] body #dashboardPage .engagement-panel .chart-legend span,
+:root[data-theme="dark"] body #dashboardPage .engagement-panel .chart-y,
+:root[data-theme="dark"] body #dashboardPage .engagement-panel .chart-y span,
+:root[data-theme="dark"] body #dashboardPage .engagement-panel .chart-x,
+:root[data-theme="dark"] body #dashboardPage .engagement-panel .chart-x span {
+  color:#d0ddd3 !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  -webkit-text-fill-color:#d0ddd3 !important;
+}
+:root[data-theme="dark"] body #dashboardPage .engagement-panel .chart-note {
+  color:#aebfb2 !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  -webkit-text-fill-color:#aebfb2 !important;
+}
+:root[data-theme="dark"] body #dashboardPage .engagement-panel .grid-lines path {
+  stroke:#405448 !important;
+}
+:root[data-theme="dark"] body #dashboardPage .engagement-panel .chart {
+  visibility:visible !important;
+  opacity:1 !important;
+}

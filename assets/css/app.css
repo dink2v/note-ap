@@ -5121,3 +5121,19 @@ body #visitPage .visit-status-dot.done{background:#67b879!important}
 body #visitPage .visit-status-dot.cancelled{background:#d68b91!important}
 body #visitPage .visit-row-delete{background:#fff0f1!important;color:#b4535b!important;border-color:#f0c5c9!important}
 body #visitPage .visit-row-delete:hover{background:#ffe4e6!important}
+
+
+/* Dashboard — preserve the original orange & turquoise identity */
+#dashboardPage{--green:#f28c38!important;--green-dark:#dc7627!important;--ink:#263548!important;--muted:#8492a6!important;--line:#e9eef3!important;--bg:#f7f9fc!important}
+body #dashboardPage .welcome-row{background:linear-gradient(115deg,#fff2e7 0%,#fff8f1 48%,#e8f8f5 100%)!important;border-color:#f5e8dc!important}
+body #dashboardPage .welcome-row h1{color:#263548!important}
+body #dashboardPage .eyebrow{color:#d9782b!important}
+body #dashboardPage :is(.panel,.stat-card,.dashboard-quick-actions){background:#fff!important;color:#263548!important;border-color:#e9eef3!important;box-shadow:0 5px 18px rgba(38,53,72,.045)!important}
+body #dashboardPage .chart-placeholder{background:linear-gradient(180deg,#fff,#f7fafc)!important;border-color:#e5ebf2!important;color:#64748b!important}
+body #dashboardPage .chart-placeholder :is(strong,span){color:#64748b!important}
+body #dashboardPage :is(.chart-icon,.period-chip,.status-pill){background:#f1f5f9!important;color:#64748b!important;border-color:#e2e8f0!important}
+body #dashboardPage .stat-icon.lilac{background:#fff0e3!important;color:#e58432!important}
+body #dashboardPage .stat-icon.blue{background:#e5f7f4!important;color:#169d91!important}
+body #dashboardPage .stat-icon.orange{background:#fff5df!important;color:#d9952f!important}
+body #dashboardPage .stat-icon.green{background:#e6f7ef!important;color:#299b70!important}
+body #dashboardPage .stat-icon.teal{background:#e3f7f5!important;color:#159d91!important}

@@ -5281,3 +5281,71 @@ body #visitPage .visit-status-dot.planned{background:#20b6a6!important}
 body #visitPage .visit-status-dot.progress{background:#f28c38!important}
 body #visitPage .visit-status-dot.done{background:#86c98e!important}
 body #visitPage .visit-status-dot.cancelled{background:#d68b91!important}
+
+
+
+/* NOTE AP DASHBOARD — focused light workspace */
+body:has(#dashboardPage:not([hidden])) .main-area{background:#f1f3f6!important}
+#dashboardPage{background:#f1f3f6!important}
+#dashboardPage .welcome-row{
+  background:#fff!important;border:1px solid #e4e8ee!important;border-radius:16px!important;
+  box-shadow:0 3px 12px rgba(31,41,55,.035)!important;padding:22px 24px!important
+}
+#dashboardPage .welcome-row h1{color:#263548!important}
+#dashboardPage .welcome-row .muted{color:#718096!important}
+#dashboardPage .eyebrow{color:#8792a2!important}
+#dashboardPage .stats-grid{gap:14px!important}
+#dashboardPage .stat-card{
+  background:#fff!important;border:1px solid #e4e8ee!important;border-top:1px solid #e4e8ee!important;
+  border-radius:14px!important;box-shadow:0 3px 12px rgba(31,41,55,.035)!important;
+  min-height:126px!important
+}
+#dashboardPage .stat-card strong{color:#263548!important}
+#dashboardPage .stat-card .stat-top>span:first-child{color:#64748b!important}
+#dashboardPage .stat-card small{color:#8792a2!important}
+#dashboardPage .stat-icon{border-radius:10px!important}
+#dashboardPage .dashboard-quick-actions,
+#dashboardPage .panel{
+  background:#fff!important;border:1px solid #e4e8ee!important;border-radius:15px!important;
+  box-shadow:0 3px 12px rgba(31,41,55,.035)!important
+}
+#dashboardPage .quick-actions-heading b,
+#dashboardPage .panel-heading h2{color:#263548!important}
+#dashboardPage .quick-actions-heading small,
+#dashboardPage .panel-heading .muted{color:#8792a2!important}
+#dashboardPage .quick-action{background:#fff!important;border-color:#e8ecf1!important}
+#dashboardPage .quick-action:hover{background:#fafbfc!important;border-color:#cbd5e1!important}
+#dashboardPage .quick-action b{color:#334155!important}
+#dashboardPage .quick-action small{color:#8792a2!important}
+#dashboardPage .period-pill{background:#f1f5f9!important;border:1px solid #e2e8f0!important;color:#64748b!important}
+#dashboardPage .dashboard-status-chart{display:grid;gap:13px;padding:8px 0 2px}
+#dashboardPage .dashboard-stage-row{display:grid;gap:7px}
+#dashboardPage .dashboard-stage-label{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#526174;font-size:12px}
+#dashboardPage .dashboard-stage-label b{color:#263548;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+#dashboardPage .dashboard-stage-track{height:8px;border-radius:99px;background:#edf1f5;overflow:hidden}
+#dashboardPage .dashboard-stage-track span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#20b6a6,#65c8bc);min-width:0;transition:width .25s ease}
+#dashboardPage .dashboard-empty{margin:0;padding:22px 12px;text-align:center;color:#8792a2;font-size:12px;line-height:1.6}
+#dashboardPage .upcoming-item.dashboard-upcoming-button{width:100%;border:0;border-bottom:1px solid #edf0f3;background:transparent;text-align:left;cursor:pointer;font:inherit;padding:11px 0}
+#dashboardPage .upcoming-item.dashboard-upcoming-button:last-child{border-bottom:0}
+#dashboardPage .upcoming-item.dashboard-upcoming-button:hover{background:#f8fafc;border-radius:10px}
+#dashboardPage .upcoming-info b{color:#334155}
+#dashboardPage .upcoming-info small{color:#8792a2}
+#dashboardPage .date-box{background:#f1f5f9;border:1px solid #e5eaf0;color:#475569}
+#dashboardPage .date-box small{color:#8792a2}
+#dashboardPage .time{color:#64748b}
+#dashboardPage .notification-popover{background:#fff!important;border:1px solid #e4e8ee!important;box-shadow:0 14px 40px rgba(31,41,55,.12)!important;color:#263548!important}
+#dashboardPage .notification-heading b{color:#263548}
+#dashboardPage .notification-heading small,
+#dashboardPage .notification-item p,
+#dashboardPage .notification-item small{color:#8792a2}
+#dashboardPage .notification-item{border-bottom:1px solid #edf0f3}
+#dashboardPage .notification-item.unread{background:#f8fafc}
+#dashboardPage .notification-empty{color:#8792a2}
+#dashboardPage .page-footer{color:#94a0af}
+@media(max-width:700px){
+  body:has(#dashboardPage:not([hidden])) .main-area,#dashboardPage{background:#f1f3f6!important}
+  #dashboardPage .welcome-row{padding:17px 15px!important}
+  #dashboardPage .stat-card{min-height:108px!important}
+  #dashboardPage .dashboard-stage-label{font-size:11px}
+  #dashboardPage .dashboard-status-chart{gap:11px}
+}

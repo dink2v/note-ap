@@ -259,27 +259,19 @@
           </section>
 
           <section class="settings-panel" data-settings-panel="integration" hidden>
-            <div class="settings-panel-head"><div><h2>Integrasi Google Calendar</h2><p>Preview alur sinkronisasi jadwal Note AP dengan Google Calendar.</p></div><span class="settings-status pending">Mode demo</span></div>
-            <div class="settings-info-note">Area ini adalah simulasi lokal untuk menguji alur kerja. Belum terhubung ke akun Google sungguhan dan tidak mengubah jadwal utama Note AP maupun Google Sheets.</div>
-            <div class="settings-integration-card"><div class="settings-google-mark">▦</div><div><b>Google Calendar</b><p>Uji tambah, edit, hapus, dan sinkronisasi jadwal dua arah.</p><small>Mode: Sandbox lokal · Data tersimpan pada browser ini</small></div></div>
+            <div class="settings-panel-head"><div><h2>Integrasi Google Calendar</h2><p>Hubungkan Note AP ke Google Sheets dan kalender bersama Apotek Prapatan.</p></div><span class="settings-status pending" id="gcalConnectionBadge">Belum terhubung</span></div>
+            <div class="settings-info-note">Integrasi ini memakai Google Apps Script sebagai penghubung. Jadwal konten dikirim ke Google Sheets dan Google Calendar. Konflik perubahan menggunakan C — Last Saved Change Wins.</div>
+            <div class="settings-integration-card"><div class="settings-google-mark">▦</div><div><b>Google Workspace</b><p>Spreadsheet utama dan kalender bersama menjadi sumber sinkronisasi.</p><small>Spreadsheet: 132FD2WyRTDOaZbOq_ABlyR1SWtesRh5i0XWkE_7p54w</small></div></div>
             <div class="settings-form-grid">
-              <label class="settings-field">Akun Google (demo)<input id="calendarDemoAccount" type="email" placeholder="nama@gmail.com"></label>
-              <label class="settings-field">Calendar ID (demo)<input id="calendarDemoCalendarId" type="text" placeholder="primary atau ID kalender"></label>
+              <label class="settings-field">Apps Script Web App URL<input id="gcalEndpoint" type="url" placeholder="https://script.google.com/macros/s/.../exec" autocomplete="url"><small>Masukkan URL deployment Web App dari Google Apps Script.</small></label>
+              <label class="settings-field">Token integrasi<input id="gcalToken" type="password" placeholder="Token yang sama dengan NOTEAP_API_TOKEN" autocomplete="new-password"><small>Token harus sama dengan Script Properties pada Apps Script.</small></label>
             </div>
-            <div class="settings-actions"><button class="secondary-btn" id="calendarDemoSaveConfig" type="button">Simpan Konfigurasi Demo</button></div>
-            <div class="calendar-demo" id="calendarIntegrationDemo">
-              <div class="calendar-demo-heading"><div><span class="calendar-demo-kicker">TWO-WAY SYNC PREVIEW</span><h3>Jadwal Note AP & Google Calendar</h3></div><span class="calendar-demo-badge">Sandbox</span></div>
-              <div class="calendar-demo-notice"><b>Aturan konflik: C — Last Saved Change Wins.</b> Jika jadwal yang sama diubah di kedua sisi, versi dengan waktu perubahan paling baru akan digunakan. Data demo terpisah dari data konten utama.</div>
-              <div class="calendar-demo-columns">
-                <section class="calendar-demo-list-panel"><div class="calendar-demo-list-head"><div><b>Note AP</b><small id="calendarDemoNoteCount">0 jadwal</small></div></div><div class="calendar-demo-list" id="calendarDemoNoteList"></div>
-                  <form class="calendar-demo-form" id="calendarDemoNoteForm"><b>Tambah jadwal Note AP</b><input name="title" required maxlength="120" placeholder="Judul jadwal"><input name="date" type="date" required><input name="time" type="time" value="09:00" required><button class="primary-btn" type="submit">＋ Tambah Jadwal</button></form>
-                </section>
-                <section class="calendar-demo-list-panel"><div class="calendar-demo-list-head"><div><b>Google Calendar</b><small id="calendarDemoGoogleCount">0 acara</small></div></div><div class="calendar-demo-list" id="calendarDemoGoogleList"></div>
-                  <form class="calendar-demo-form" id="calendarDemoGoogleForm"><b>Tambah acara Google Calendar</b><input name="title" required maxlength="120" placeholder="Judul acara"><input name="date" type="date" required><input name="time" type="time" value="10:00" required><button class="secondary-btn" type="submit">＋ Tambah Acara</button></form>
-                </section>
-              </div>
-              <div class="calendar-demo-sync-actions"><button class="primary-btn" id="calendarDemoPush" type="button">Sinkronkan Note AP → Google Calendar</button><button class="secondary-btn" id="calendarDemoPull" type="button">Sinkronkan Google Calendar → Note AP</button><button class="calendar-demo-reset" id="calendarDemoReset" type="button">Reset Demo</button></div>
-              <section class="calendar-demo-history-panel"><h3>Riwayat Aktivitas Demo</h3><ol class="calendar-demo-history" id="calendarDemoHistory"></ol></section>
+            <div class="settings-actions"><button class="secondary-btn" id="gcalSaveConfig" type="button">Simpan Konfigurasi</button><button class="secondary-btn" id="gcalTestConnection" type="button">Tes Koneksi</button><button class="primary-btn" id="gcalSyncNow" type="button">↻ Sinkronkan Sekarang</button></div>
+            <div class="settings-info-note" id="gcalConnectionMessage" role="status">Belum ada koneksi yang diuji. Deploy Apps Script terlebih dahulu, lalu masukkan URL dan token di atas.</div>
+            <div class="calendar-demo">
+              <div class="calendar-demo-heading"><div><span class="calendar-demo-kicker">SYNC POLICY</span><h3>Aturan Sinkronisasi</h3></div><span class="calendar-demo-badge">Two-way</span></div>
+              <div class="calendar-demo-notice"><b>C — Last Saved Change Wins.</b> Perubahan dengan waktu simpan paling baru menjadi acuan. Perubahan dari Google Calendar akan diperbarui ke daftar konten Note AP, sedangkan perubahan Note AP akan diteruskan ke kalender.</div>
+              <div class="settings-footnote">Sinkronisasi nyata baru aktif setelah Apps Script dipasang dan URL deployment dimasukkan. Jangan membagikan token integrasi kepada orang lain.</div>
             </div>
           </section>
           <section class="settings-panel" data-settings-panel="data" hidden>
@@ -345,5 +337,5 @@
 </section>
 <button class="command-launcher" id="commandLauncher" type="button" aria-label="Buka Command Center"><span>✳</span><span class="launcher-label">Command Center</span><kbd>Ctrl K</kbd></button>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261118-google-calendar-sync-c"></script>
+<script src="assets/js/app.js?v=20261118-google-calendar-live-1"></script>
 </body></html>

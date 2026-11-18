@@ -418,7 +418,8 @@
     const selected=splitTalentNames(value),options=getTalentOptions();
     const dataAttrs=isNew?'data-new-visit-field="talent"':'data-visit-id="'+escapeVisit(id)+'" data-visit-field="talent"';
     const summary=selected.length?selected.join(', '):'Pilih Talent';
-    return '<details class="visit-multiselect"><summary aria-label="Edit pilihan talent" title="Klik untuk mengubah pilihan talent"><span class="visit-talent-summary">'+escapeVisit(summary)+'</span></summary><div class="visit-multiselect-menu">'+options.map(name=>'<label><input type="checkbox" '+dataAttrs+' value="'+escapeVisit(name)+'" '+(selected.includes(name)?'checked':'')+'><span>'+escapeVisit(name)+'</span></label>').join('')+'</div></details>';
+    const optionRows=options.map(name=>'<label class="visit-talent-option"><input type="checkbox" '+dataAttrs+' value="'+escapeVisit(name)+'" '+(selected.includes(name)?'checked':'')+'><span>'+escapeVisit(name)+'</span><i aria-hidden="true"></i></label>').join('');
+    return '<details class="visit-multiselect"><summary aria-label="Pilih talent" title="Klik untuk memilih satu atau beberapa talent"><span class="visit-talent-summary">'+escapeVisit(summary)+'</span></summary><div class="visit-multiselect-menu"><div class="visit-talent-menu-head"><div><b>Pilih Talent</b><small>Pilih satu atau beberapa orang</small></div><span class="visit-talent-count">'+selected.length+' dipilih</span></div><div class="visit-talent-search-wrap"><span aria-hidden="true">⌕</span><input class="visit-talent-search" type="search" placeholder="Cari nama talent..." aria-label="Cari nama talent" autocomplete="off"></div><div class="visit-talent-options">'+optionRows+'</div><div class="visit-talent-empty" hidden>Talent tidak ditemukan.</div><div class="visit-talent-menu-foot"><span>✓ Pilihan tersimpan otomatis</span><small>Centang untuk memilih</small></div></div></details>';
   }
   function makeVisitInput(field,value,id){
     const safe=escapeVisit(value||'');
@@ -480,6 +481,20 @@
     visitCurrentPage=0;
     renderVisitTables();renderVisitCalendar(sortedVisits());
     showToast(removed+' baris Visit berhasil dihapus.');
+  });
+  document.getElementById('visitTableBody')?.addEventListener('input',event=>{
+    const search=event.target.closest('.visit-talent-search');
+    if(!search)return;
+    const menu=search.closest('.visit-multiselect-menu');
+    const query=search.value.trim().toLocaleLowerCase('id');
+    let visible=0;
+    menu.querySelectorAll('.visit-talent-option').forEach(option=>{
+      const match=option.textContent.trim().toLocaleLowerCase('id').includes(query);
+      option.hidden=!match;
+      if(match)visible++;
+    });
+    const empty=menu.querySelector('.visit-talent-empty');
+    if(empty)empty.hidden=visible>0;
   });
   document.getElementById('visitTableBody')?.addEventListener('change',event=>{
     const checkbox=event.target.closest('[data-visit-select-id]');
@@ -722,6 +737,8 @@ tr.append(number);
       }
       const summary=wrapper.querySelector('.visit-talent-summary');
       if(summary)summary.textContent=selected.length?selected.join(', '):'Pilih Talent';
+      const count=wrapper.querySelector('.visit-talent-count');
+      if(count)count.textContent=selected.length+' dipilih';
       showToast('Pilihan talent berhasil diperbarui.');
       return;
     }

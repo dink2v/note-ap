@@ -3595,3 +3595,48 @@ button,a{touch-action:manipulation}
   border-color:#405746 !important;
   color:#e7f1e9 !important;
 }
+
+
+
+/* DARK MODE — targeted audit for legacy text colors missed by generic text selectors */
+:root[data-theme="dark"] body :is(
+  .chart-y,.chart-x,.chart-note,.form-breadcrumb,.phase-labels,.visit-pagination,
+  .reference-empty,.chat-list-meta,.chat-empty,.command-hint,.command-group-label,
+  .command-empty,.calendar-item-note,.visit-talent-empty,.notification-empty,
+  .content-modal-loading,.visit-empty,.visit-today-empty,.visit-detail-placeholder,
+  .approval-status-row small,.date-time-fields label span,.team-comment small,
+  .visit-today-arrow
+) {
+  color:#b7c6bb !important;
+}
+:root[data-theme="dark"] body :is(
+  .visit-kicker,.visit-today-time,.visit-today-select,.maximize-btn,
+  .all-notifications,.notification-heading button,.form-breadcrumb a
+) {
+  color:#8edacb !important;
+}
+:root[data-theme="dark"] body .form-breadcrumb b,
+:root[data-theme="dark"] body .visit-today-label,
+:root[data-theme="dark"] body .chat-sidebar-head b,
+:root[data-theme="dark"] body .visit-display-control>b {
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] body .platform-cell {
+  color:#9adfc2 !important;
+}
+:root[data-theme="dark"] body .visit-actions button {
+  background:#24352a !important;
+  border-color:#405746 !important;
+  color:#e7f1e9 !important;
+}
+:root[data-theme="dark"] body .visit-row-delete {
+  background:#3b2422 !important;
+  border-color:#70403b !important;
+  color:#ffb4aa !important;
+}
+:root[data-theme="dark"] body .chat-tabs button:not(.active) {
+  color:#b7c6bb !important;
+}
+:root[data-theme="dark"] body .mobile-top button {
+  color:#e8f1eb !important;
+}

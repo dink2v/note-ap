@@ -4342,3 +4342,51 @@ button,a{touch-action:manipulation}
 ){
   background-color:#ffffff;
 }
+
+
+/* LIGHT MODE — deep forest-green workspace canvas */
+:root[data-theme="light"]{
+  --bg:#163832 !important;
+}
+:root[data-theme="light"] html,
+:root[data-theme="light"] body,
+:root[data-theme="light"] body :is(
+  .main-area,.page-wrap,.calendar-page,.creative-calendar-page,
+  .content-page,.kanban-page,.visit-page,.help-page,.settings-page,
+  .chat-page,.content-form-wrap
+){
+  background-color:#163832 !important;
+  color:#f2f7f5;
+}
+/* Page titles and supporting copy sit directly on the green canvas. */
+:root[data-theme="light"] body :is(
+  .page-wrap>h1,.page-wrap>h2,.calendar-page h1,
+  .content-page h1,.kanban-page h1,.visit-page h1,
+  .help-page h1,.settings-page h1,.chat-page h1
+){
+  color:#f5faf8 !important;
+}
+:root[data-theme="light"] body :is(
+  .page-wrap>.muted,.calendar-page>.muted,
+  .content-page>.muted,.kanban-page>.muted,
+  .visit-page>.muted,.help-page>.muted,
+  .settings-page>.muted,.chat-page>.muted
+){
+  color:#c5d8d2 !important;
+}
+/* White surfaces remain white with their normal dark text. */
+:root[data-theme="light"] body :is(
+  .sidebar,.mobile-top,.panel,.stat-card,.form-panel,
+  .content-filter-panel,.content-list-panel,.kanban-column,.kanban-card,
+  .visit-card,.visit-editor,.visit-table-panel,.settings-card,
+  .settings-panel,.settings-nav,.settings-content,.settings-mini-card,
+  .reference-category-card,.help-topic-card,.help-faq-item,
+  .chat-workspace,.chat-thread,.chat-composer,.notification-popover,
+  .calendar-planner-panel,.calendar-main-panel,.calendar-agenda-panel,
+  .calendar-insight-card,.calendar-item-dialog,.calendar-detail-section,
+  .calendar-demo,.calendar-demo-form,.calendar-demo-list-panel,
+  .calendar-demo-history,.expand-dialog,.content-modal-dialog
+){
+  background-color:#ffffff;
+  color:#263548;
+}

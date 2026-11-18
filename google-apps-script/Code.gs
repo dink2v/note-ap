@@ -80,6 +80,28 @@ function doPost(e) {
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
+function onEdit(e) {
+  if (!e || !e.range) return;
+  const sheet = e.range.getSheet();
+  if (sheet.getName() !== NOTEAP.CONTENTS_SHEET || e.range.getRow() < 2) return;
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map(String);
+  const updatedCol = headers.indexOf('updatedAt') + 1;
+  const syncCol = headers.indexOf('lastSyncAt') + 1;
+  const dataCol = headers.indexOf('dataJson') + 1;
+  const now = new Date().toISOString();
+  const row = e.range.getRow();
+  if (updatedCol > 0) sheet.getRange(row, updatedCol).setValue(now);
+  if (syncCol > 0) sheet.getRange(row, syncCol).setValue(now);
+  if (dataCol > 0) {
+    const cell = sheet.getRange(row, dataCol);
+    try {
+      const data = JSON.parse(String(cell.getValue() || '{}'));
+      data.updatedAt = now;
+      cell.setValue(JSON.stringify(data));
+    } catch (err) {}
+  }
+}
+
 function config_() {
   const p = PropertiesService.getScriptProperties();
   const spreadsheetId = p.getProperty('NOTEAP_SPREADSHEET_ID');

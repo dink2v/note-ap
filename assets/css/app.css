@@ -5363,3 +5363,52 @@ body:has(#dashboardPage:not([hidden])) .main-area{background:#f1f3f6!important}
   .calendar-toolbar-title p{font-size:10px;line-height:1.55;}
   .calendar-planner-footnote{font-size:9px;line-height:1.5;}
 }
+
+
+/* CALENDAR UI RESTORE — original mint/peach workspace look */
+#calendarPage.creative-calendar-page{
+  background:
+    radial-gradient(ellipse at 8% 0%,#e4faf4 0,transparent 34%),
+    radial-gradient(ellipse at 92% 6%,#fff0e6 0,transparent 29%) !important;
+  color:#263f3b;
+}
+#calendarPage .creative-calendar-hero h1{color:#263f3b!important}
+#calendarPage .creative-calendar-hero .muted{color:#718783!important}
+#calendarPage .calendar-insight-card{
+  background:rgba(255,255,255,.88)!important;
+  border-color:#e7efed!important;
+  box-shadow:0 7px 22px rgba(38,78,75,.045)!important;
+}
+#calendarPage .calendar-main-panel,
+#calendarPage .calendar-agenda-panel{
+  background:rgba(255,255,255,.94)!important;
+  border-color:#e5eeeb!important;
+  box-shadow:0 9px 28px rgba(38,78,75,.055)!important;
+}
+#calendarPage .calendar-toolbar-title h2,
+#calendarPage .calendar-agenda-heading h3{color:#2c4846!important}
+#calendarPage .calendar-toolbar-title p,
+#calendarPage .calendar-agenda-tip p{color:#82918a!important}
+#calendarPage .calendar-planner-controls strong{color:#2c4846!important}
+#calendarPage .calendar-planner-controls button,
+#calendarPage .calendar-view-switch button:not(.active){
+  background:#fff!important;border-color:#e5eeeb!important;color:#718783!important;
+}
+#calendarPage .calendar-view-switch button.active,
+#calendarPage .calendar-planner-controls button:hover{
+  background:#20b6a6!important;border-color:#20b6a6!important;color:#fff!important;
+}
+#calendarPage .calendar-planner-legend,
+#calendarPage .calendar-planner-footnote{color:#82918a!important}
+#calendarPage .calendar-agenda-item{
+  background:#f8fcfa!important;border-color:#e8f0ed!important;
+}
+#calendarPage .calendar-agenda-item b{color:#2c4846!important}
+#calendarPage .calendar-agenda-item small{color:#82918a!important}
+@media(max-width:600px){
+  #calendarPage.creative-calendar-page{
+    background:
+      radial-gradient(ellipse at 8% 0%,#e4faf4 0,transparent 34%),
+      radial-gradient(ellipse at 92% 6%,#fff0e6 0,transparent 29%) !important;
+  }
+}

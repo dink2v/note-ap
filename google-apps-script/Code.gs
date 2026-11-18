@@ -62,16 +62,19 @@ function doGet(e) {
 
 function doPost(e) {
   let result;
+  let requestId = '';
   try {
     const raw = e && e.parameter && e.parameter.payload;
     if (!raw) throw new Error('Payload tidak ditemukan.');
     const payload = JSON.parse(raw);
+    requestId = String(payload.requestId || '');
     authorize_(payload.token);
     if (payload.action !== 'sync') throw new Error('Aksi tidak dikenal.');
     result = sync_(payload.items || [], payload.deletedIds || []);
   } catch (err) {
     result = { ok: false, error: err.message || String(err) };
   }
+  if (requestId) result.requestId = requestId;
   const encoded = JSON.stringify(result).replace(/</g, '\\u003c');
   const html = '<!doctype html><meta charset="utf-8"><script>' +
     'window.parent.postMessage({type:"NOTEAP_GCAL_RESULT",payload:' + encoded + '},"*");' +
@@ -184,6 +187,16 @@ function iso_(value) {
 }
 
 function sync_(incoming, deletedIds) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(30000);
+  try {
+    return syncLocked_(incoming, deletedIds);
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function syncLocked_(incoming, deletedIds) {
   const cfg = config_();
   const ss = SpreadsheetApp.openById(cfg.spreadsheetId);
   const calendar = getCalendar_(cfg.calendarId);
@@ -261,6 +274,7 @@ function sync_(incoming, deletedIds) {
       return;
     }
     let event = eventByNoteId.get(item.id);
+    if (!event && item.googleEventId) event = calendar.getEventById(item.googleEventId);
     if (!event && item.googleEventId) {
       // A linked event was deleted directly in Google Calendar: keep the content,
       // but clear its publication schedule and mapping instead of recreating it.

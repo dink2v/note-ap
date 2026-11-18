@@ -6,7 +6,7 @@
   <title>Note AP — Apotek Prapatan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/app.css?v=20261118-dashboard-light-fix-1">
+  <link rel="stylesheet" href="assets/css/app.css?v=20261118-dashboard-light-fix-2">
 <style>
 .calendar-content-detail-body{display:grid;gap:18px;max-height:min(62vh,680px);overflow:auto;padding:4px 2px 12px}.calendar-detail-section{padding:16px;border:1px solid var(--line,#e5ebe7);border-radius:14px;background:rgba(255,255,255,.55)}.calendar-detail-section h3{margin:0 0 12px;font-size:14px}.calendar-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.calendar-detail-field{min-width:0}.calendar-detail-field b{display:block;font-size:11px;color:var(--muted,#718078);margin-bottom:5px}.calendar-detail-field p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.55}.calendar-detail-field:has(p){grid-column:auto}@media(max-width:600px){.calendar-detail-grid{grid-template-columns:1fr}.calendar-content-detail-body{max-height:65vh}}
 </style></head>
@@ -41,21 +41,19 @@
             <section class="notification-popover" id="notificationPopover" hidden>
               <div class="notification-heading"><div><b>Notifikasi</b><small>Informasi terbaru workspace</small></div><button id="markAllRead">Tandai dibaca</button></div>
               <div class="notification-list" id="notificationList">
-                <article class="notification-item unread"><span class="notification-icon green">✓</span><div><b>Dashboard siap digunakan</b><p>Tampilan awal Note AP berhasil dibuat.</p><small>Baru saja</small></div><span class="unread-dot"></span></article>
-                <article class="notification-item unread"><span class="notification-icon amber">◷</span><div><b>Konten akan datang</b><p>Fungsi Paru-Paru dijadwalkan pada 16 November.</p><small>Preview</small></div><span class="unread-dot"></span></article>
-                <article class="notification-empty" id="notificationEmpty" hidden>Tidak ada notifikasi baru.</article>
+                <article class="notification-empty" id="notificationEmpty">Belum ada notifikasi. Data akan muncul mengikuti aktivitas konten.</article>
               </div>
-              <a class="all-notifications" href="#notifikasi" id="allNotifications">Lihat semua notifikasi →</a>
+              <a class="all-notifications" href="#konten" id="allNotifications">Lihat semua konten →</a>
             </section>
           </div>
         </div>
       </section>
       <section class="stats-grid">
-        <article class="stat-card"><div class="stat-top"><span>Total Reels</span><span class="stat-icon lilac">▶</span></div><strong id="reelsCount">12</strong><small>Konten video pendek</small></article>
-        <article class="stat-card"><div class="stat-top"><span>Total Feed</span><span class="stat-icon blue">▤</span></div><strong id="feedCount">8</strong><small>Single post & feed</small></article>
-        <article class="stat-card"><div class="stat-top"><span>Total Carousel</span><span class="stat-icon orange">▧</span></div><strong id="carouselCount">6</strong><small>Konten multi-slide</small></article>
-        <article class="stat-card"><div class="stat-top"><span>Publikasi</span><span class="stat-icon green">✓</span></div><strong id="publishedCount">14</strong><small>Konten telah dipublikasikan</small></article>
-        <article class="stat-card"><div class="stat-top"><span>Terjadwal</span><span class="stat-icon teal">◷</span></div><strong id="scheduledCount">5</strong><small>Siap untuk dipublikasikan</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Total Reels</span><span class="stat-icon lilac">▶</span></div><strong id="reelsCount">0</strong><small>Konten video pendek</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Total Feed</span><span class="stat-icon blue">▤</span></div><strong id="feedCount">0</strong><small>Single post & feed</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Total Carousel</span><span class="stat-icon orange">▧</span></div><strong id="carouselCount">0</strong><small>Konten multi-slide</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Publikasi</span><span class="stat-icon green">✓</span></div><strong id="publishedCount">0</strong><small>Konten telah dipublikasikan</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Terjadwal</span><span class="stat-icon teal">◷</span></div><strong id="scheduledCount">0</strong><small>Siap untuk dipublikasikan</small></article>
       </section>
       <section class="dashboard-quick-actions" aria-label="Akses cepat">
         <div class="quick-actions-heading"><div><b>Akses Cepat</b><small>Langsung menuju pekerjaanmu</small></div></div>
@@ -334,5 +332,5 @@
 </section>
 <button class="command-launcher" id="commandLauncher" type="button" aria-label="Buka Command Center"><span>✳</span><span class="launcher-label">Command Center</span><kbd>Ctrl K</kbd></button>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261118-dashboard-light-fix-1"></script>
+<script src="assets/js/app.js?v=20261118-dashboard-light-fix-2"></script>
 </body></html>

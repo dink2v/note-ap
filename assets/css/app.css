@@ -3392,3 +3392,143 @@ button,a{touch-action:manipulation}
 :root[data-theme="dark"] .kanban-page .page-footer {
   color:#9caf9f !important;
 }
+
+
+/* DARK MODE — complete calendar surfaces and navigation text contrast */
+:root[data-theme="dark"] body .sidebar .brand,
+:root[data-theme="dark"] body .sidebar .brand b,
+:root[data-theme="dark"] body .sidebar .brand small,
+:root[data-theme="dark"] body .sidebar .nav-label,
+:root[data-theme="dark"] body .sidebar .nav-link,
+:root[data-theme="dark"] body .sidebar .nav-link span,
+:root[data-theme="dark"] body .sidebar .sidebar-footer,
+:root[data-theme="dark"] body .sidebar .sidebar-footer b,
+:root[data-theme="dark"] body .sidebar .sidebar-footer small,
+:root[data-theme="dark"] body .sidebar .more,
+:root[data-theme="dark"] body .mobile-top,
+:root[data-theme="dark"] body .mobile-top b {
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] body .sidebar .nav-link {
+  background:transparent !important;
+}
+:root[data-theme="dark"] body .sidebar .nav-link.active,
+:root[data-theme="dark"] body .sidebar .nav-link:hover {
+  background:#294b36 !important;
+  color:#ffffff !important;
+}
+:root[data-theme="dark"] body .sidebar .nav-link.active span,
+:root[data-theme="dark"] body .sidebar .nav-link:hover span {
+  color:#ffffff !important;
+}
+:root[data-theme="dark"] body .settings-nav,
+:root[data-theme="dark"] body .settings-nav-item {
+  background:#17251c !important;
+  border-color:#35483b !important;
+  color:#dce9e0 !important;
+}
+:root[data-theme="dark"] body .settings-nav-item b,
+:root[data-theme="dark"] body .settings-nav-item small,
+:root[data-theme="dark"] body .settings-nav-item span {
+  color:#dce9e0 !important;
+}
+:root[data-theme="dark"] body .settings-nav-item.active {
+  background:#294b36 !important;
+  border-color:#527c5e !important;
+}
+:root[data-theme="dark"] body .settings-nav-item.active,
+:root[data-theme="dark"] body .settings-nav-item.active b,
+:root[data-theme="dark"] body .settings-nav-item.active small,
+:root[data-theme="dark"] body .settings-nav-item.active span {
+  color:#ffffff !important;
+}
+
+/* Calendar page and all nested planner surfaces */
+:root[data-theme="dark"] body .calendar-page,
+:root[data-theme="dark"] body .creative-calendar-page,
+:root[data-theme="dark"] body .calendar-workspace {
+  background:#111a15 !important;
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] body .calendar-page :is(h1,h2,h3,h4,b,strong,label,.calendar-planner-kicker,.calendar-weekday,.calendar-day-number,.calendar-day-add,.calendar-agenda-date,.calendar-agenda-copy,.calendar-agenda-tip,.calendar-toolbar-title,.calendar-demo-heading,.calendar-demo-kicker,.calendar-demo-source,.calendar-demo-event-copy) {
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] body .calendar-page :is(p,small,.muted,.calendar-planner-footnote,.calendar-agenda-live,.calendar-demo-notice,.calendar-demo-empty,.calendar-empty,.calendar-agenda-empty) {
+  color:#b7c6bb !important;
+}
+:root[data-theme="dark"] body .calendar-planner-panel,
+:root[data-theme="dark"] body .calendar-main-panel,
+:root[data-theme="dark"] body .calendar-agenda-panel,
+:root[data-theme="dark"] body .calendar-insight-card,
+:root[data-theme="dark"] body .calendar-demo-form,
+:root[data-theme="dark"] body .calendar-demo-list-panel,
+:root[data-theme="dark"] body .calendar-demo-history,
+:root[data-theme="dark"] body .calendar-item-dialog,
+:root[data-theme="dark"] body .calendar-detail-section,
+:root[data-theme="dark"] body .calendar-agenda-list,
+:root[data-theme="dark"] body .calendar-agenda-item,
+:root[data-theme="dark"] body .calendar-day-cell,
+:root[data-theme="dark"] body .calendar-day-cell.outside-month {
+  background:#1a2820 !important;
+  border-color:#35483b !important;
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] body .calendar-toolbar,
+:root[data-theme="dark"] body .calendar-planner-controls,
+:root[data-theme="dark"] body .calendar-planner-legend,
+:root[data-theme="dark"] body .calendar-insight-strip,
+:root[data-theme="dark"] body .calendar-demo-event,
+:root[data-theme="dark"] body .calendar-item-dialog-head {
+  background:#202f26 !important;
+  border-color:#35483b !important;
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] body .calendar-planner-controls button,
+:root[data-theme="dark"] body .calendar-view-switch,
+:root[data-theme="dark"] body .calendar-view-switch button:not(.active),
+:root[data-theme="dark"] body .calendar-item-actions button,
+:root[data-theme="dark"] body .calendar-item-cancel,
+:root[data-theme="dark"] body .calendar-item-dialog-head>button,
+:root[data-theme="dark"] body .calendar-demo-event-actions button,
+:root[data-theme="dark"] body .calendar-demo-reset {
+  background:#26382d !important;
+  border-color:#405746 !important;
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] body .calendar-view-switch button.active,
+:root[data-theme="dark"] body .calendar-day-cell.is-today {
+  background:#31563d !important;
+  border-color:#5c8966 !important;
+  color:#ffffff !important;
+}
+:root[data-theme="dark"] body .calendar-day-head,
+:root[data-theme="dark"] body .calendar-weekday {
+  background:#202f26 !important;
+  border-color:#35483b !important;
+  color:#cbd9cf !important;
+}
+:root[data-theme="dark"] body .calendar-day-cell :is(.calendar-day-number,.calendar-day-add),
+:root[data-theme="dark"] body .calendar-agenda-item :is(b,strong,span,small),
+:root[data-theme="dark"] body .calendar-demo-event :is(b,strong,small,span),
+:root[data-theme="dark"] body .calendar-detail-section :is(h3,b,p) {
+  color:#dce9e0 !important;
+}
+:root[data-theme="dark"] body .calendar-day-cell.is-today :is(.calendar-day-number,.calendar-day-add) {
+  color:#ffffff !important;
+}
+:root[data-theme="dark"] body .calendar-day-cell,
+:root[data-theme="dark"] body .calendar-day-head,
+:root[data-theme="dark"] body .calendar-event-chip,
+:root[data-theme="dark"] body .calendar-detail-section,
+:root[data-theme="dark"] body .calendar-demo-event {
+  box-shadow:none !important;
+}
+:root[data-theme="dark"] body .calendar-page :is(input,select,textarea) {
+  background:#111a15 !important;
+  border-color:#405746 !important;
+  color:#f0f6f1 !important;
+  color-scheme:dark;
+}
+:root[data-theme="dark"] body .calendar-page :is(input,textarea)::placeholder {
+  color:#91a69a !important;
+}

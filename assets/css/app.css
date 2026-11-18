@@ -5588,3 +5588,180 @@ body .content-form-wrap #contentForm[data-editable="true"] .field select{cursor:
   background:#24352b!important;
   border-color:#405747!important;
 }
+
+
+/* CALENDAR — dedicated, complete content detail layout */
+#calendarContentDetailModal{
+  z-index:120!important;
+  padding:clamp(10px,2.5vw,28px)!important;
+  background:rgba(8,25,21,.62)!important;
+  backdrop-filter:blur(8px);
+}
+#calendarContentDetailModal .calendar-item-dialog{
+  display:flex;
+  flex-direction:column;
+  width:min(940px,100%)!important;
+  max-height:min(92vh,980px)!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border:1px solid #dce9e2!important;
+  border-radius:20px!important;
+  background:#f7faf8!important;
+  color:#243b32!important;
+  box-shadow:0 28px 90px rgba(4,24,18,.32)!important;
+}
+#calendarContentDetailModal .calendar-item-dialog-head{
+  flex:0 0 auto;
+  margin:0!important;
+  padding:22px 26px 18px!important;
+  border-bottom:1px solid #e3ece6!important;
+  background:linear-gradient(115deg,#ffffff,#f0f8f4)!important;
+}
+#calendarContentDetailModal .calendar-item-dialog-head h2{
+  margin:5px 0 4px!important;
+  color:#203d32!important;
+  font-size:22px!important;
+  font-weight:800!important;
+}
+#calendarContentDetailModal .calendar-item-dialog-head p{
+  margin:0!important;color:#71877c!important;font-size:11px!important;
+}
+#calendarContentDetailModal .calendar-item-dialog-head>button{
+  width:38px;height:38px;flex-basis:38px;
+  border:1px solid #dce9e2!important;border-radius:12px!important;
+  background:#fff!important;color:#547065!important;font-size:24px!important;
+}
+#calendarContentDetailModal .calendar-content-detail-body{
+  min-height:0;
+  flex:1 1 auto;
+  overflow:auto;
+  display:grid;
+  gap:14px;
+  padding:20px 26px 24px;
+  overscroll-behavior:contain;
+}
+#calendarContentDetailModal .calendar-detail-hero{
+  padding:19px 21px;
+  border:1px solid #d6ebe2;
+  border-radius:16px;
+  background:linear-gradient(120deg,#eaf8f1,#f2f8ff 58%,#fff4e9);
+}
+#calendarContentDetailModal .calendar-detail-kicker{
+  color:#438b72;font-size:9px;font-weight:900;letter-spacing:1.2px;
+}
+#calendarContentDetailModal .calendar-detail-hero h3{
+  margin:7px 0 12px;color:#203d32;font-size:21px;line-height:1.35;font-weight:850;
+  overflow-wrap:anywhere;
+}
+#calendarContentDetailModal .calendar-detail-badges{display:flex;flex-wrap:wrap;gap:7px}
+#calendarContentDetailModal .calendar-detail-badge{
+  display:inline-flex;align-items:center;padding:6px 10px;border-radius:30px;
+  background:#fff;color:#3f7160;font-size:9px;font-weight:800;border:1px solid #dcebe3;
+}
+#calendarContentDetailModal .calendar-detail-badge.badge-1{background:#fff3e7;color:#a7652e;border-color:#f4dfca}
+#calendarContentDetailModal .calendar-detail-badge.badge-2{background:#e9f4ff;color:#426e9a;border-color:#d6e8f8}
+#calendarContentDetailModal .calendar-detail-schedule{margin:12px 0 0;color:#637d70;font-size:10px;font-weight:700}
+#calendarContentDetailModal .calendar-detail-section{
+  min-width:0;padding:17px 18px!important;
+  border:1px solid #e1ebe5!important;border-radius:15px!important;
+  background:#fff!important;color:#263d33!important;
+}
+#calendarContentDetailModal .calendar-detail-section-head{margin-bottom:13px}
+#calendarContentDetailModal .calendar-detail-section-head h3{
+  margin:0;color:#294b3d;font-size:13px;font-weight:850;
+}
+#calendarContentDetailModal .calendar-detail-section-head p{
+  margin:4px 0 0;color:#91a198;font-size:9px;line-height:1.5;
+}
+#calendarContentDetailModal .calendar-detail-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;
+}
+#calendarContentDetailModal .calendar-detail-field{
+  min-width:0;padding:11px 12px;border:1px solid #edf1ee;border-radius:10px;
+  background:#f9fbfa;
+}
+#calendarContentDetailModal .calendar-detail-field.is-long{grid-column:1/-1}
+#calendarContentDetailModal .calendar-detail-field b{
+  display:block;margin:0 0 6px;color:#82948a!important;font-size:9px;font-weight:800;
+}
+#calendarContentDetailModal .calendar-detail-field p{
+  margin:0;color:#30483c!important;font-size:11px;line-height:1.65;
+  white-space:pre-wrap;overflow-wrap:anywhere;
+}
+#calendarContentDetailModal .calendar-detail-field p.is-empty{
+  color:#a6b2ab!important;font-style:italic;
+}
+#calendarContentDetailModal .calendar-detail-record-list{display:grid;gap:8px}
+#calendarContentDetailModal .calendar-detail-record{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
+  padding:10px 12px;border:1px solid #edf1ee;border-radius:10px;background:#fafcfb;
+}
+#calendarContentDetailModal .calendar-detail-record p{
+  margin:0;color:#40574b;font-size:10px;line-height:1.6;overflow-wrap:anywhere;
+}
+#calendarContentDetailModal .calendar-detail-record small{
+  flex:0 0 auto;color:#91a198;font-size:8px;
+}
+#calendarContentDetailModal .calendar-detail-empty{
+  margin:0;padding:12px;border:1px dashed #dce7e0;border-radius:10px;
+  color:#91a198;font-size:10px;text-align:center;
+}
+#calendarContentDetailModal .calendar-item-actions{
+  flex:0 0 auto;margin:0!important;padding:14px 26px 18px!important;
+  border-top:1px solid #e3ece6!important;background:#fff!important;
+}
+#calendarContentDetailModal .calendar-item-actions button{
+  min-height:39px;padding:0 17px;border-radius:10px!important;font-size:10px!important;
+}
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-item-dialog{
+  background:#14251d!important;color:#e5f0e8!important;border-color:#344d3e!important;
+}
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-item-dialog-head,
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-item-actions{
+  background:#1a3025!important;border-color:#344d3e!important;
+}
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-item-dialog-head h2,
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-detail-hero h3{
+  color:#eff8f1!important;
+}
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-item-dialog-head p,
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-detail-section-head p,
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-detail-schedule{
+  color:#a6bbae!important;
+}
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-detail-hero{
+  background:linear-gradient(120deg,#1d3b2d,#203747 58%,#493525)!important;border-color:#3b5c49!important;
+}
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-detail-section{
+  background:#1a3025!important;border-color:#344d3e!important;color:#e5f0e8!important;
+}
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-detail-section-head h3,
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-detail-field p,
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-detail-record p{
+  color:#e3efe6!important;
+}
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-detail-field,
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-detail-record{
+  background:#14251d!important;border-color:#344d3e!important;
+}
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-detail-field b,
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-detail-field p.is-empty,
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-detail-empty,
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-detail-record small{
+  color:#9db4a5!important;
+}
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-detail-badge{
+  background:#294537!important;color:#d8eee0!important;border-color:#42634f!important;
+}
+@media(max-width:640px){
+  #calendarContentDetailModal{padding:8px!important}
+  #calendarContentDetailModal .calendar-item-dialog{max-height:95vh!important;border-radius:15px!important}
+  #calendarContentDetailModal .calendar-item-dialog-head{padding:16px 16px 13px!important}
+  #calendarContentDetailModal .calendar-content-detail-body{padding:13px;gap:10px}
+  #calendarContentDetailModal .calendar-detail-hero{padding:15px}
+  #calendarContentDetailModal .calendar-detail-hero h3{font-size:17px}
+  #calendarContentDetailModal .calendar-detail-section{padding:13px!important}
+  #calendarContentDetailModal .calendar-detail-grid{grid-template-columns:minmax(0,1fr);gap:7px}
+  #calendarContentDetailModal .calendar-detail-field.is-long{grid-column:auto}
+  #calendarContentDetailModal .calendar-item-actions{padding:11px 13px 14px!important}
+}

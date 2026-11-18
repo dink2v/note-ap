@@ -254,7 +254,7 @@
     const now=Date.now();
     items.filter(item=>['review','ready to publish'].includes(String(item.status||'').toLowerCase()))
       .slice(0,4).forEach(item=>notifications.push({
-        id:'status:'+normalized(item.status)+':'+item.id,title:normalized(item.status)==='review'?'Konten menunggu review':'Konten siap dipublikasikan',
+        id:'status:'+String(item.status||'').toLowerCase()+':'+item.id,title:String(item.status||'').toLowerCase()==='review'?'Konten menunggu review':'Konten siap dipublikasikan',
         detail:item.title||'Konten tanpa judul',meta:item.postingDate?formatContentDate(item.postingDate):'Perlu tindak lanjut',tone:item.status==='Review'?'amber':'green',item:item
       }));
     upcoming.slice(0,4).forEach(item=>{

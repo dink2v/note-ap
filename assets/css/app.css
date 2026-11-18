@@ -1530,3 +1530,57 @@ body.calendar-item-open{overflow:hidden}
     grid-template-columns:repeat(2,minmax(0,1fr));
   }
 }
+
+
+/* VISIT — Total Visit dan Target di sisi kanan kartu Ringkasan Harian */
+.visit-today-card{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 280px;
+  align-items:center;
+  gap:18px;
+}
+.visit-today-card .visit-today-heading{
+  display:contents;
+}
+.visit-today-card .visit-today-heading>div:first-child{
+  grid-column:1;
+  grid-row:1;
+  min-width:0;
+}
+.visit-today-card .visit-today-heading .visit-metrics{
+  grid-column:2;
+  grid-row:1 / span 2;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  width:100%;
+  min-width:0;
+  margin:0;
+  gap:10px;
+}
+.visit-today-card .visit-today-summary{
+  grid-column:1;
+  grid-row:2;
+  min-width:0;
+}
+@media(max-width:760px){
+  .visit-today-card{
+    grid-template-columns:minmax(0,1fr);
+    gap:12px;
+  }
+  .visit-today-card .visit-today-heading{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:12px;
+  }
+  .visit-today-card .visit-today-heading>div:first-child,
+  .visit-today-card .visit-today-heading .visit-metrics,
+  .visit-today-card .visit-today-summary{
+    grid-column:auto;
+    grid-row:auto;
+  }
+  .visit-today-card .visit-today-heading .visit-metrics{
+    width:100%;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}

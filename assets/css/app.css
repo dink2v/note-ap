@@ -1818,3 +1818,30 @@ body.calendar-item-open{overflow:hidden}
 #visitTableBody .visit-multiselect[open]{position:relative;z-index:9999}
 #visitTableBody .visit-multiselect-menu{z-index:9999;max-height:min(420px,calc(100vh - 28px));overflow:auto}
 #visitTableBody .visit-talent-options{max-height:220px}
+
+
+/* NOTE AP — Visit table gridline consistency fix
+   Pastikan garis pemisah NO dan TGL VISIT selalu terlihat pada header,
+   baris data, dan baris kosong, termasuk saat baris dipilih. */
+.visit-main-table {
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+}
+.visit-main-table thead th,
+#visitTableBody > tr > td {
+  border-top: 1px solid #aeb8b5 !important;
+  border-right: 1px solid #aeb8b5 !important;
+  border-bottom: 1px solid #aeb8b5 !important;
+}
+.visit-main-table thead th:first-child,
+#visitTableBody > tr > td:first-child {
+  border-left: 1px solid #aeb8b5 !important;
+}
+.visit-main-table thead th:nth-child(2),
+#visitTableBody > tr > td:nth-child(2) {
+  border-left: 1px solid #aeb8b5 !important;
+}
+#visitTableBody > tr.selected > td,
+#visitTableBody > tr.is-visit-checked > td {
+  border-color: #aeb8b5 !important;
+}

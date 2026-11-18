@@ -1847,70 +1847,21 @@ body.calendar-item-open{overflow:hidden}
 }
 
 
-/* VISIT — samakan lebar kolom, ukuran kontrol, dan perataan isi tabel */
-.visit-main-table{
-  width:100% !important;
-  min-width:1420px !important;
-  table-layout:fixed !important;
-}
+/* VISIT — rapikan perataan teks saja, tanpa mengubah ukuran kolom atau kontrol */
 .visit-main-table thead th,
 #visitTableBody > tr > td{
-  vertical-align:middle !important;
   text-align:center !important;
-}
-.visit-main-table thead th{
-  height:44px;
-  padding:10px 8px !important;
-  white-space:normal;
-  line-height:1.35;
-}
-.visit-main-table th:nth-child(1), #visitTableBody td:nth-child(1){width:48px;min-width:48px}
-.visit-main-table th:nth-child(2), #visitTableBody td:nth-child(2){width:130px;min-width:130px}
-.visit-main-table th:nth-child(3), #visitTableBody td:nth-child(3){width:95px;min-width:95px}
-.visit-main-table th:nth-child(4), #visitTableBody td:nth-child(4){width:165px;min-width:165px}
-.visit-main-table th:nth-child(5), #visitTableBody td:nth-child(5){width:220px;min-width:220px}
-.visit-main-table th:nth-child(6), #visitTableBody td:nth-child(6){width:170px;min-width:170px}
-.visit-main-table th:nth-child(7), #visitTableBody td:nth-child(7){width:190px;min-width:190px}
-.visit-main-table th:nth-child(8), #visitTableBody td:nth-child(8){width:145px;min-width:145px}
-.visit-main-table th:nth-child(9), #visitTableBody td:nth-child(9){width:257px;min-width:257px}
-#visitTableBody > tr:not(.visit-placeholder-row) > td{
-  height:92px;
-  padding:8px !important;
-}
-#visitTableBody > tr > td > .visit-inline-input,
-#visitTableBody > tr > td > .visit-multiselect{
-  display:block;
-  width:100% !important;
-  max-width:none !important;
-  min-width:0 !important;
-  margin:0 auto !important;
-  box-sizing:border-box !important;
-  font-size:10px;
+  vertical-align:middle !important;
 }
 #visitTableBody > tr > td > input.visit-inline-input,
 #visitTableBody > tr > td > select.visit-inline-input{
-  height:38px !important;
-  min-height:38px !important;
-  padding:7px 8px !important;
   text-align:center !important;
   text-align-last:center !important;
 }
 #visitTableBody > tr > td > textarea.visit-inline-textarea{
-  height:72px !important;
-  min-height:72px !important;
-  max-height:72px !important;
-  padding:9px 10px !important;
-  line-height:1.4 !important;
   text-align:left !important;
-  resize:none !important;
-  overflow-y:auto !important;
 }
 #visitTableBody > tr > td > details.visit-multiselect > summary{
-  height:38px !important;
-  min-height:38px !important;
-  padding:7px 8px !important;
   justify-content:center !important;
   text-align:center !important;
-  box-sizing:border-box !important;
 }
-#visitTableBody > tr > td:nth-child(1){font-variant-numeric:tabular-nums}

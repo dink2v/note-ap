@@ -418,7 +418,7 @@
     const selected=splitTalentNames(value),options=getTalentOptions();
     const dataAttrs=isNew?'data-new-visit-field="talent"':'data-visit-id="'+escapeVisit(id)+'" data-visit-field="talent"';
     const summary=selected.length?selected.join(', '):'Pilih Talent';
-    return '<details class="visit-multiselect"><summary aria-label="Edit pilihan talent" title="Klik untuk mengubah pilihan talent"><span class="visit-talent-summary">'+escapeVisit(summary)+'</span><small class="visit-talent-edit">Ubah</small></summary><div class="visit-multiselect-menu">'+options.map(name=>'<label><input type="checkbox" '+dataAttrs+' value="'+escapeVisit(name)+'" '+(selected.includes(name)?'checked':'')+'><span>'+escapeVisit(name)+'</span></label>').join('')+'</div></details>';
+    return '<details class="visit-multiselect"><summary aria-label="Edit pilihan talent" title="Klik untuk mengubah pilihan talent"><span class="visit-talent-summary">'+escapeVisit(summary)+'</span></summary><div class="visit-multiselect-menu">'+options.map(name=>'<label><input type="checkbox" '+dataAttrs+' value="'+escapeVisit(name)+'" '+(selected.includes(name)?'checked':'')+'><span>'+escapeVisit(name)+'</span></label>').join('')+'</div></details>';
   }
   function makeVisitInput(field,value,id){
     const safe=escapeVisit(value||'');

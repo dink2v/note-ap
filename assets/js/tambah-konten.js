@@ -109,7 +109,7 @@ const initialCalendarDate=pageParams.get('date');
    if(index<0)throw new Error('Data konten tidak ditemukan di penyimpanan browser ini. Data tidak diubah.');
    const now=new Date().toISOString(),updated={...items[index],...makeItemFromForm(),updatedAt:now};
    updated.history=[...(Array.isArray(items[index].history)?items[index].history:[]),{type:'Konten diperbarui melalui Detail Konten',at:now}];
-   items[index]=updated;writeItems(items);detailItem=updated;logActivity('Perubahan konten berhasil disimpan.');showToast('Perubahan berhasil disimpan ke konten yang sama.');editMode=false;setFormLocked(true);postSaved(updated.id,'local');
+   items[index]=updated;writeItems(items);detailItem=updated;logActivity('Perubahan konten berhasil disimpan.');showToast('Perubahan berhasil disimpan ke konten yang sama.');editMode=false;setFormLocked(true);const topEdit=document.getElementById('detailEditTop');if(topEdit){topEdit.textContent='Edit Konten';topEdit.classList.remove('is-editing');topEdit.setAttribute('aria-label','Aktifkan mode edit konten');}postSaved(updated.id,'local');
   }else{
    const item=makeItemFromForm(),now=new Date(),id='NAP-'+now.getTime().toString(36).toUpperCase();
    const saved={...item,id,createdAt:now.toISOString(),updatedAt:now.toISOString(),storage:'local',approvals:[],comments:[],history:[{type:'Konten dibuat melalui Note AP',at:now.toISOString()}]};
@@ -170,9 +170,10 @@ if(pageParams.get('mode')==='detail'){
   titleRow?.appendChild(topEdit);
   editButton?.remove();
   topEdit.addEventListener('click',()=>{
+   if(!editMode){editMode=true;setFormLocked(false);topEdit.textContent='Sedang Mengedit';topEdit.classList.add('is-editing');topEdit.setAttribute('aria-label','Fokus ke kolom edit konten');showToast('Mode edit aktif. Ubah kolom yang diperlukan lalu klik Simpan Konten.');}
    const firstField=form.elements.namedItem('title');
    if(firstField){firstField.focus();firstField.select?.();}
-   showToast('Detail Konten sudah dalam mode edit. Ubah kolom yang diperlukan lalu klik Simpan Konten.');
+   if(editMode)showToast('Ubah kolom yang diperlukan lalu klik Simpan Konten.');
   });
  }else{
   setFormLocked(true);

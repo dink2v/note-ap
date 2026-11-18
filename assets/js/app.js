@@ -425,8 +425,8 @@
     const safe=escapeVisit(value||'');
     if(field.key==='talent')return makeTalentSelect(value,id,false);
     if(field.type==='select')return '<select class="visit-inline-input" data-visit-id="'+escapeVisit(id)+'" data-visit-field="'+field.key+'">'+visitStatusOptions.map(status=>'<option value="'+status+'" '+(value===status?'selected':'')+'>'+status+'</option>').join('')+'</select>';
-    if(field.type==='textarea')return '<textarea rows="2" class="visit-inline-input visit-inline-textarea" data-visit-id="'+escapeVisit(id)+'" data-visit-field="'+field.key+'" placeholder="'+(field.key==='location'?'Lokasi':'Isi '+field.label.toLowerCase())+'">'+safe+'</textarea>';
-    return '<input class="visit-inline-input" type="'+field.type+'" data-visit-id="'+escapeVisit(id)+'" data-visit-field="'+field.key+'" value="'+safe+'" placeholder="'+(field.key==='location'?'Lokasi':'Isi '+field.label.toLowerCase())+'">';
+    if(field.type==='textarea')return '<textarea rows="2" class="visit-inline-input visit-inline-textarea" data-visit-id="'+escapeVisit(id)+'" data-visit-field="'+field.key+'" placeholder="'+('Isi '+field.label.toLowerCase())+'">'+safe+'</textarea>';
+    return '<input class="visit-inline-input" type="'+field.type+'" data-visit-id="'+escapeVisit(id)+'" data-visit-field="'+field.key+'" value="'+safe+'" placeholder="'+('Isi '+field.label.toLowerCase())+'">';
   }
   function setVisitViewMode(mode){
     visitViewMode=mode;
@@ -574,10 +574,10 @@ tr.append(number);
           visitStatusOptions.forEach(status=>{const option=document.createElement('option');option.value=status;option.textContent=status;select.append(option);});
           td.append(select);
         }else if(field.type==='textarea'){
-          const textarea=document.createElement('textarea');textarea.rows=2;textarea.className='visit-inline-input visit-inline-textarea';textarea.dataset.newVisitField=field.key;textarea.placeholder=field.key==='location'?'Lokasi':'Isi '+field.label.toLowerCase();
+          const textarea=document.createElement('textarea');textarea.rows=2;textarea.className='visit-inline-input visit-inline-textarea';textarea.dataset.newVisitField=field.key;textarea.placeholder='Isi '+field.label.toLowerCase();
           td.append(textarea);
         }else{
-          const input=document.createElement('input');input.className='visit-inline-input';input.type=field.type;input.dataset.newVisitField=field.key;input.placeholder=field.key==='location'?'Lokasi':'Isi '+field.label.toLowerCase();
+          const input=document.createElement('input');input.className='visit-inline-input';input.type=field.type;input.dataset.newVisitField=field.key;input.placeholder='Isi '+field.label.toLowerCase();
           td.append(input);
         }
         tr.append(td);

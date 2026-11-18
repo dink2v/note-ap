@@ -5818,3 +5818,120 @@ body .content-form-wrap #contentForm[data-editable="true"] .field select{cursor:
   background:rgba(35,53,43,.94)!important;
   border-color:rgba(255,255,255,.10)!important;
 }
+
+
+/* NOTE AP — modal glass backdrop + clear editing surface (2026-11-18) */
+.content-modal,
+#calendarContentDetailModal,
+#calendarItemModal{
+  background:rgba(19,34,28,.30)!important;
+  -webkit-backdrop-filter:blur(11px) saturate(125%)!important;
+  backdrop-filter:blur(11px) saturate(125%)!important;
+}
+.content-modal-dialog{
+  background:rgba(255,255,255,.985)!important;
+  border:1px solid rgba(255,255,255,.9)!important;
+  box-shadow:0 28px 90px rgba(14,35,25,.28)!important;
+  overflow:hidden!important;
+}
+.content-modal-dialog iframe{
+  background:#fff!important;
+}
+#calendarContentDetailModal .calendar-item-dialog,
+#calendarItemModal .calendar-item-dialog{
+  background:rgba(255,255,255,.97)!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  border:1px solid rgba(255,255,255,.92)!important;
+  box-shadow:0 28px 90px rgba(14,35,25,.26)!important;
+  color:#26372f!important;
+}
+#calendarContentDetailModal .calendar-item-dialog-head,
+#calendarContentDetailModal .calendar-item-actions,
+#calendarItemModal .calendar-item-dialog-head{
+  background:#fff!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  border-color:#e9efeb!important;
+}
+#calendarContentDetailModal .calendar-original-detail-section{
+  background:#fff!important;
+  border-color:#e8efea!important;
+}
+#calendarContentDetailModal .calendar-original-detail-intro h3,
+#calendarContentDetailModal .calendar-item-dialog h2,
+#calendarItemModal .calendar-item-dialog h2{
+  color:#26372f!important;
+}
+#calendarContentDetailModal .calendar-original-detail-info-row span,
+#calendarContentDetailModal .calendar-original-detail-copy-item h4,
+#calendarContentDetailModal .calendar-original-detail-hint{
+  color:#74847b!important;
+}
+#calendarContentDetailModal .calendar-original-detail-info-row strong,
+#calendarContentDetailModal .calendar-original-detail-copy-item p,
+#calendarContentDetailModal .calendar-original-detail-plain{
+  color:#293a31!important;
+}
+.content-form-wrap .form-panel{
+  background:#fff!important;
+  border-color:#e8efea!important;
+  box-shadow:0 5px 20px rgba(31,67,48,.055)!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+.content-form-wrap .form-section-heading .section-number{
+  background:#fff0e4!important;
+  color:#d9752b!important;
+}
+.content-form-wrap .field input:focus,
+.content-form-wrap .field select:focus,
+.content-form-wrap .field textarea:focus{
+  border-color:#f28c38!important;
+  box-shadow:0 0 0 3px rgba(242,140,56,.13)!important;
+}
+.content-form-wrap .maximize-btn,
+.content-form-wrap .form-breadcrumb b{
+  color:#159b91!important;
+}
+.content-form-wrap .primary-btn{
+  background:#f28c38!important;
+  box-shadow:0 6px 16px rgba(242,140,56,.22)!important;
+}
+.content-form-wrap .primary-btn:hover{background:#df792b!important}
+.content-form-wrap .secondary-btn{
+  border-color:#cce9e5!important;
+  color:#138f87!important;
+}
+.content-form-wrap .secondary-btn:hover{
+  background:#effaf8!important;
+  border-color:#20b6a6!important;
+}
+:root[data-theme="dark"] .content-modal-dialog,
+:root[data-theme="dark"] .content-modal-dialog iframe{
+  background:#18231c!important;
+}
+:root[data-theme="dark"] .content-form-wrap .form-panel{
+  background:#1b2921!important;
+  border-color:#34483a!important;
+}
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-item-dialog,
+:root[data-theme="dark"] #calendarItemModal .calendar-item-dialog{
+  background:rgba(25,39,31,.985)!important;
+  color:#e6eee8!important;
+}
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-item-dialog-head,
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-item-actions,
+:root[data-theme="dark"] #calendarItemModal .calendar-item-dialog-head{
+  background:#1b2921!important;
+  border-color:#34483a!important;
+}
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-original-detail-section{
+  background:#202f26!important;
+  border-color:#34483a!important;
+}
+@media(max-width:700px){
+  .content-modal{padding:10px!important;align-items:center!important}
+  .content-modal-dialog{width:100%!important;height:calc(100dvh - 20px)!important;max-height:calc(100dvh - 20px)!important;border-radius:18px!important}
+  .content-modal-dialog iframe{border-radius:0 0 18px 18px!important}
+}

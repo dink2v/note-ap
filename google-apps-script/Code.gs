@@ -224,6 +224,7 @@ function sync_(incoming, deletedIds) {
     };
     merged.set(id, imported);
     event.setDescription((event.getDescription() || '') + '\n[NOTEAP_ID:' + id + ']');
+    eventByNoteId.set(id, event);
     counts.imported++;
   });
 

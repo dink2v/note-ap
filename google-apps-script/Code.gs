@@ -22,7 +22,7 @@ const NOTEAP = {
   CONTENT_HEADERS: [
     'id', 'title', 'platform', 'format', 'pillar', 'status',
     'postingDate', 'postingTime', 'updatedAt', 'googleEventId',
-    'deleted', 'lastSyncAt'
+    'deleted', 'lastSyncAt', 'dataJson'
   ],
   LOG_HEADERS: ['timestamp', 'action', 'contentId', 'result', 'details']
 };
@@ -116,24 +116,26 @@ function readContentRows_(sheet) {
   return values.slice(1).filter(row => row[0]).map(row => {
     const obj = {};
     headers.forEach((key, i) => obj[key] = row[i]);
-    return normalizeContent_(obj);
+    let full = {};
+    try { full = obj.dataJson ? JSON.parse(String(obj.dataJson)) : {}; } catch (err) {}
+    return normalizeContent_(Object.assign({}, full, obj));
   });
 }
 
 function normalizeContent_(item) {
-  return {
-    id: String(item.id || ''),
-    title: String(item.title || ''),
-    platform: String(item.platform || 'Instagram'),
-    format: String(item.format || 'Feed'),
-    pillar: String(item.pillar || ''),
-    status: String(item.status || 'Planning'),
-    postingDate: dateString_(item.postingDate),
-    postingTime: timeString_(item.postingTime),
-    updatedAt: iso_(item.updatedAt),
-    googleEventId: String(item.googleEventId || ''),
-    deleted: item.deleted === true || String(item.deleted).toLowerCase() === 'true'
-  };
+  const full = Object.assign({}, item || {});
+  full.id = String(full.id || '');
+  full.title = String(full.title || '');
+  full.platform = String(full.platform || 'Instagram');
+  full.format = String(full.format || 'Feed');
+  full.pillar = String(full.pillar || '');
+  full.status = String(full.status || 'Planning');
+  full.postingDate = dateString_(full.postingDate);
+  full.postingTime = timeString_(full.postingTime);
+  full.updatedAt = iso_(full.updatedAt);
+  full.googleEventId = String(full.googleEventId || '');
+  full.deleted = full.deleted === true || String(full.deleted).toLowerCase() === 'true';
+  return full;
 }
 
 function dateString_(value) {
@@ -274,7 +276,7 @@ function sync_(incoming) {
   output.forEach(item => rows.push([
     item.id, item.title, item.platform, item.format, item.pillar, item.status,
     item.postingDate, item.postingTime, item.updatedAt, item.googleEventId,
-    item.deleted, now
+    item.deleted, now, JSON.stringify(item)
   ]));
   sheet.clearContents();
   sheet.getRange(1, 1, rows.length, NOTEAP.CONTENT_HEADERS.length).setValues(rows);

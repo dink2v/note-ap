@@ -390,29 +390,77 @@
   }
   let selectedCalendarContent=null;
   function openCalendarContentDetail(item){
-    selectedCalendarContent=item;
+    if(!item||typeof item!=='object')return;
+    const latest=calendarReadItems().find(row=>String(row.id||'')===String(item.id||''));
+    selectedCalendarContent=latest||item;
+    const data=selectedCalendarContent;
     const modal=document.getElementById('calendarContentDetailModal');
     const body=document.getElementById('calendarContentDetailBody');
-    if(!modal||!body||!item)return;
-    const sections=[
-      {title:'Informasi Konten',fields:[['Judul Konten',item.title],['Platform',item.platform],['Format',item.format],['Durasi / Slide',item.duration],['Pilar Konten',item.pillar],['Status',item.status],['Tanggal Posting',formatContentDate(item.postingDate)],['Jam Posting',item.postingTime],['Referensi',item.reference]]},
-      {title:'Materi & Arahan Visual',fields:[['Hook / Opening',item.hook],['Visual Hook',item.visualHook],['Body / Naskah',item.body],['Visual Body',item.visualBody],['CTA',item.cta],['Visual CTA',item.visualCTA]]},
-      {title:'Caption & Catatan',fields:[['Caption',item.caption],['Catatan',item.notes]]}
-    ];
+    const heading=document.getElementById('calendarContentDetailTitle');
+    if(!modal||!body)return;
+    if(heading)heading.textContent='Detail Konten';
     body.replaceChildren();
-    sections.forEach(section=>{
+
+    const display=value=>{
+      if(value===undefined||value===null||String(value).trim()==='')return 'Belum diisi';
+      if(Array.isArray(value))return value.length?value.map(entry=>typeof entry==='string'?entry:entry?.name||entry?.text||entry?.status||JSON.stringify(entry)).join(', '):'Belum ada data';
+      if(typeof value==='object')return value.text||value.message||value.name||value.status||JSON.stringify(value);
+      return String(value);
+    };
+    const hero=document.createElement('section');hero.className='calendar-detail-hero';
+    const kicker=document.createElement('span');kicker.className='calendar-detail-kicker';kicker.textContent='RINGKASAN KONTEN';
+    const title=document.createElement('h3');title.textContent=data.title||'Konten tanpa judul';
+    const meta=document.createElement('div');meta.className='calendar-detail-badges';
+    [data.platform,data.format,data.status].filter(Boolean).forEach((value,index)=>{
+      const chip=document.createElement('span');chip.className='calendar-detail-badge badge-'+index;chip.textContent=String(value);meta.append(chip);
+    });
+    const schedule=document.createElement('p');schedule.className='calendar-detail-schedule';
+    schedule.textContent=[formatContentDate(data.postingDate),data.postingTime||'Jam belum ditentukan'].filter(Boolean).join(' · ');
+    hero.append(kicker,title,meta,schedule);body.append(hero);
+
+    const sections=[
+      {title:'Informasi Konten',description:'Identitas dan jadwal publikasi',fields:[['Judul Konten',data.title],['Platform',data.platform],['Format Konten',data.format],['Durasi / Jumlah Slide',data.duration],['Pilar Konten',data.pillar],['Status Workflow',data.status],['Tanggal Posting',data.postingDate?formatContentDate(data.postingDate):''],['Jam Posting',data.postingTime],['Referensi / Link',data.reference]]},
+      {title:'Materi & Arahan Visual',description:'Naskah dan arahan untuk produksi',fields:[['Hook / Opening',data.hook],['Arahan Visual Hook',data.visualHook],['Body / Naskah',data.body],['Arahan Visual Body',data.visualBody],['Call to Action (CTA)',data.cta],['Arahan Visual CTA',data.visualCTA??data.visualCta]]},
+      {title:'Caption & Catatan',description:'Materi pendukung publikasi',fields:[['Caption',data.caption],['Catatan Internal',data.notes]]}
+    ];
+    sections.forEach((section,index)=>{
       const group=document.createElement('section');group.className='calendar-detail-section';
-      const heading=document.createElement('h3');heading.textContent=section.title;group.append(heading);
+      const head=document.createElement('div');head.className='calendar-detail-section-head';
+      const h=document.createElement('h3');h.textContent=section.title;
+      const desc=document.createElement('p');desc.textContent=section.description;head.append(h,desc);group.append(head);
       const grid=document.createElement('div');grid.className='calendar-detail-grid';
       section.fields.forEach(([label,value])=>{
-        if(value===undefined||value===null||String(value).trim()==='')return;
-        const field=document.createElement('div');field.className='calendar-detail-field';
+        const field=document.createElement('div');field.className='calendar-detail-field'+(String(value??'').length>150?' is-long':'');
         const name=document.createElement('b');name.textContent=label;
-        const content=document.createElement('p');content.textContent=String(value);
+        const content=document.createElement('p');content.textContent=display(value);
+        if(value===undefined||value===null||String(value).trim()==='')content.classList.add('is-empty');
         field.append(name,content);grid.append(field);
       });
-      if(grid.childElementCount)group.append(grid);else{const empty=document.createElement('p');empty.textContent='Belum diisi.';group.append(empty);}
-      body.append(group);
+      group.append(grid);body.append(group);
+    });
+
+    const extraSections=[
+      {title:'Approval',description:'Status persetujuan konten',items:Array.isArray(data.approvals)?data.approvals:[],empty:'Belum ada catatan approval'},
+      {title:'Komentar Tim',description:'Catatan dan diskusi pada konten',items:Array.isArray(data.comments)?data.comments:[],empty:'Belum ada komentar'},
+      {title:'Riwayat Aktivitas',description:'Perubahan yang tercatat pada konten',items:Array.isArray(data.history)?data.history:[],empty:'Belum ada riwayat aktivitas'}
+    ];
+    extraSections.forEach(section=>{
+      const group=document.createElement('section');group.className='calendar-detail-section calendar-detail-extra';
+      const head=document.createElement('div');head.className='calendar-detail-section-head';
+      const h=document.createElement('h3');h.textContent=section.title;
+      const desc=document.createElement('p');desc.textContent=section.description;head.append(h,desc);group.append(head);
+      const list=document.createElement('div');list.className='calendar-detail-record-list';
+      if(!section.items.length){const empty=document.createElement('p');empty.className='calendar-detail-empty';empty.textContent=section.empty;list.append(empty);}
+      section.items.forEach(entry=>{
+        const record=document.createElement('div');record.className='calendar-detail-record';
+        const text=document.createElement('p');
+        if(typeof entry==='string')text.textContent=entry;
+        else text.textContent=entry?.text||entry?.message||entry?.type||entry?.status||JSON.stringify(entry);
+        record.append(text);
+        if(entry&&typeof entry==='object'&&entry.at){const time=document.createElement('small');const date=new Date(entry.at);time.textContent=Number.isNaN(date.getTime())?'':new Intl.DateTimeFormat('id-ID',{dateStyle:'medium',timeStyle:'short'}).format(date);record.append(time);}
+        list.append(record);
+      });
+      group.append(list);body.append(group);
     });
     modal.hidden=false;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('calendar-item-open');
   }

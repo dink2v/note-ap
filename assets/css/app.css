@@ -1884,3 +1884,7 @@ body.calendar-item-open{overflow:hidden}
 .visit-main-table.is-resizing-col *{cursor:col-resize!important;user-select:none!important}
 .visit-main-table.is-resizing-row,
 .visit-main-table.is-resizing-row *{cursor:row-resize!important;user-select:none!important}
+
+
+/* FORM KONTEN — sembunyikan label OPSIONAL tanpa menghapus field atau keterangannya */
+.optional-section-tag{display:none!important}

@@ -1865,3 +1865,22 @@ body.calendar-item-open{overflow:hidden}
   justify-content:center !important;
   text-align:center !important;
 }
+
+
+/* VISIT — kontrol ukuran kolom dan tinggi baris dengan drag */
+.visit-table-wrap{overflow:auto;max-width:100%}
+.visit-main-table{min-width:100%}
+.visit-main-table thead th{position:relative}
+.visit-main-table thead th::after{
+  content:"";position:absolute;top:0;right:-3px;width:7px;height:100%;
+  cursor:col-resize;z-index:5;
+}
+.visit-main-table tbody tr>td:last-child{position:relative}
+.visit-main-table tbody tr>td:last-child::after{
+  content:"";position:absolute;left:0;right:0;bottom:-3px;height:7px;
+  cursor:row-resize;z-index:4;
+}
+.visit-main-table.is-resizing-col,
+.visit-main-table.is-resizing-col *{cursor:col-resize!important;user-select:none!important}
+.visit-main-table.is-resizing-row,
+.visit-main-table.is-resizing-row *{cursor:row-resize!important;user-select:none!important}

@@ -302,9 +302,16 @@
   document.getElementById('calendarContentDetailDone')?.addEventListener('click',closeCalendarContentDetail);
   document.getElementById('calendarContentDetailEdit')?.addEventListener('click',()=>{
     if(!selectedCalendarContent)return;
-    const item=selectedCalendarContent;
+    // Ambil ulang data terbaru berdasarkan ID agar form edit selalu memakai
+    // sumber data Konten yang sama, bukan salinan detail kalender yang lama.
+    const latestItem=calendarReadItems().find(item=>String(item.id||'')===String(selectedCalendarContent.id||''));
+    if(!latestItem){
+      showToast('Konten tidak ditemukan. Data tidak diubah.');
+      return;
+    }
+    selectedCalendarContent=latestItem;
     closeCalendarContentDetail();
-    openContentDetail(item);
+    openContentDetail(latestItem);
   });
   document.getElementById('calendarContentDetailModal')?.addEventListener('click',event=>{if(event.target.id==='calendarContentDetailModal')closeCalendarContentDetail();});
   function openCalendarItemModal(item,dateValue){

@@ -68,7 +68,7 @@ function doPost(e) {
     const payload = JSON.parse(raw);
     authorize_(payload.token);
     if (payload.action !== 'sync') throw new Error('Aksi tidak dikenal.');
-    result = sync_(payload.items || []);
+    result = sync_(payload.items || [], payload.deletedIds || []);
   } catch (err) {
     result = { ok: false, error: err.message || String(err) };
   }
@@ -160,7 +160,7 @@ function iso_(value) {
   return isNaN(d.getTime()) ? new Date(0).toISOString() : d.toISOString();
 }
 
-function sync_(incoming) {
+function sync_(incoming, deletedIds) {
   const cfg = config_();
   const ss = SpreadsheetApp.openById(cfg.spreadsheetId);
   const calendar = getCalendar_(cfg.calendarId);
@@ -171,8 +171,13 @@ function sync_(incoming) {
   const byId = new Map(sheetItems.map(item => [item.id, item]));
   const incomingItems = incoming.map(normalizeContent_).filter(item => item.id);
   const now = new Date().toISOString();
-  const counts = { created: 0, updated: 0, imported: 0, deleted: 0, conflicts: 0 };
+  const counts = { created: 0, updated: 0, imported: 0, deleted: 0, calendarDeleted: 0, conflicts: 0 };
   const merged = new Map(byId);
+  const removedIds = (deletedIds || []).map(String).filter(Boolean);
+  removedIds.forEach(id => {
+    const old = merged.get(id);
+    if (old) merged.set(id, Object.assign({}, old, { deleted: true, updatedAt: now }));
+  });
 
   incomingItems.forEach(local => {
     const stored = merged.get(local.id);
@@ -225,13 +230,24 @@ function sync_(incoming) {
   const output = [];
   merged.forEach(item => {
     if (item.deleted) {
-      const event = eventByNoteId.get(item.id);
+      const event = eventByNoteId.get(item.id) || (item.googleEventId ? calendar.getEventById(item.googleEventId) : null);
       if (event) event.deleteEvent();
       counts.deleted++;
       output.push(item);
       return;
     }
-    const event = eventByNoteId.get(item.id);
+    let event = eventByNoteId.get(item.id);
+    if (!event && item.googleEventId) {
+      // A linked event was deleted directly in Google Calendar: keep the content,
+      // but clear its publication schedule and mapping instead of recreating it.
+      item.postingDate = '';
+      item.postingTime = '';
+      item.googleEventId = '';
+      item.updatedAt = now;
+      counts.calendarDeleted++;
+      output.push(item);
+      return;
+    }
     const start = new Date(item.postingDate + 'T' + item.postingTime + ':00');
     if (!item.postingDate || isNaN(start.getTime())) {
       output.push(item);
@@ -283,5 +299,5 @@ function sync_(incoming) {
   sheet.setFrozenRows(1);
   sheet.autoResizeColumns(1, NOTEAP.CONTENT_HEADERS.length);
   logSheet.appendRow([now, 'sync', '', 'ok', JSON.stringify(counts)]);
-  return { ok: true, counts: counts, items: output.filter(item => !item.deleted), syncedAt: now };
+  return { ok: true, counts: counts, items: output.filter(item => !item.deleted), deletedIds: removedIds, syncedAt: now };
 }

@@ -4308,3 +4308,37 @@ button,a{touch-action:manipulation}
   background-color:#222b3a;
   border-color:#39465a;
 }
+
+
+/* LIGHT MODE — force the outer workspace canvas to soft grey */
+:root[data-theme="light"]{
+  --bg:#eef1f5 !important;
+  --panel:#ffffff;
+  --line:#e1e6ed;
+}
+:root[data-theme="light"] html,
+:root[data-theme="light"] body{
+  background:#eef1f5 !important;
+}
+:root[data-theme="light"] body :is(
+  .main-area,.page-wrap,.calendar-page,.creative-calendar-page,
+  .content-page,.kanban-page,.visit-page,.help-page,.settings-page,
+  .chat-page,.content-form-wrap
+){
+  background-color:#eef1f5 !important;
+}
+/* Keep the navigation rail and content cards white for clear separation. */
+:root[data-theme="light"] body :is(
+  .sidebar,.mobile-top,.panel,.stat-card,.form-panel,
+  .content-filter-panel,.content-list-panel,.kanban-column,.kanban-card,
+  .visit-card,.visit-editor,.visit-table-panel,.settings-card,
+  .settings-panel,.settings-nav,.settings-content,.settings-mini-card,
+  .reference-category-card,.help-topic-card,.help-faq-item,
+  .chat-workspace,.chat-thread,.chat-composer,.notification-popover,
+  .calendar-planner-panel,.calendar-main-panel,.calendar-agenda-panel,
+  .calendar-insight-card,.calendar-item-dialog,.calendar-detail-section,
+  .calendar-demo,.calendar-demo-form,.calendar-demo-list-panel,
+  .calendar-demo-history,.expand-dialog,.content-modal-dialog
+){
+  background-color:#ffffff;
+}

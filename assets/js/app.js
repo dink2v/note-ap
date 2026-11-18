@@ -400,31 +400,126 @@
     if(!modal||!body)return;
     if(heading)heading.textContent='DETAIL KONTEN';
     body.replaceChildren();
-    const value=(...values)=>{const found=values.find(v=>v!==undefined&&v!==null&&String(v).trim()!=='');return found===undefined?'—':String(found);};
-    const statusHeader=document.createElement('div');statusHeader.className='calendar-original-detail-status';
-    const statusLabel=document.createElement('span');statusLabel.textContent='STATUS KONTEN';
-    const statusValue=document.createElement('strong');statusValue.textContent=value(data.status);
-    statusHeader.append(statusLabel,statusValue);body.append(statusHeader);
-    const intro=document.createElement('div');intro.className='calendar-original-detail-intro';
-    const title=document.createElement('h3');title.textContent=value(data.title);
-    const identity=document.createElement('p');identity.textContent=[value(data.id),data.postingDate?formatContentDate(data.postingDate):'Tanggal belum ditentukan'].join('  ·  ');
-    intro.append(title,identity);body.append(intro);
-    const makeSection=(name,content)=>{const section=document.createElement('section');section.className='calendar-original-detail-section';const h=document.createElement('h3');h.textContent=name;section.append(h,content);body.append(section);};
-    const info=document.createElement('div');info.className='calendar-original-detail-info';
-    [['Kategori',value(data.category,data.contentCategory)],['Pilar',value(data.pillar)],['Platform',value(data.platform)],['Format',value(data.format)],['Tanggal Publish',data.postingDate?formatContentDate(data.postingDate):'Belum ditentukan'],['Status',value(data.status)],['Talent',value(data.talent)]].forEach(([label,text])=>{const row=document.createElement('div');row.className='calendar-original-detail-info-row';const key=document.createElement('span');key.textContent=label;const val=document.createElement('strong');val.textContent=text;row.append(key,val);info.append(row);});
+
+    const value=(...values)=>{
+      const found=values.find(v=>v!==undefined&&v!==null&&String(v).trim()!=='');
+      return found===undefined?'—':String(found);
+    };
+    const postingDate=String(data.postingDate||data.postDateTime||'').split('T')[0];
+    const postingTime=String(data.postingTime||String(data.postDateTime||'').split('T')[1]||'').slice(0,5);
+    const formattedDate=postingDate?formatContentDate(postingDate):'Belum ditentukan';
+
+    const statusHeader=document.createElement('div');
+    statusHeader.className='calendar-original-detail-status';
+    const statusLabel=document.createElement('span');
+    statusLabel.textContent='STATUS KONTEN';
+    const statusValue=document.createElement('strong');
+    statusValue.textContent=value(data.status);
+    statusHeader.append(statusLabel,statusValue);
+    body.append(statusHeader);
+
+    const intro=document.createElement('div');
+    intro.className='calendar-original-detail-intro';
+    const title=document.createElement('h3');
+    title.textContent=value(data.title);
+    const identity=document.createElement('p');
+    identity.textContent=[value(data.id),formattedDate,postingTime||'Jam belum diatur'].join('  ·  ');
+    intro.append(title,identity);
+    body.append(intro);
+
+    const makeSection=(name,content,description='')=>{
+      const section=document.createElement('section');
+      section.className='calendar-original-detail-section';
+      const h=document.createElement('h3');
+      h.textContent=name;
+      section.append(h);
+      if(description){
+        const hint=document.createElement('p');
+        hint.className='calendar-original-detail-hint';
+        hint.textContent=description;
+        section.append(hint);
+      }
+      section.append(content);
+      body.append(section);
+      return section;
+    };
+
+    const info=document.createElement('div');
+    info.className='calendar-original-detail-info';
+    [
+      ['Kategori',value(data.category,data.contentCategory)],
+      ['Pilar',value(data.pillar)],
+      ['Platform',value(data.platform)],
+      ['Format',value(data.format)],
+      ['Tanggal Publish',formattedDate],
+      ['Status',value(data.status)],
+      ['Talent',value(data.talent)]
+    ].forEach(([label,text])=>{
+      const row=document.createElement('div');
+      row.className='calendar-original-detail-info-row';
+      const key=document.createElement('span');
+      key.textContent=label;
+      const val=document.createElement('strong');
+      val.textContent=text;
+      row.append(key,val);
+      info.append(row);
+    });
     makeSection('Informasi Konten',info);
-    const content=document.createElement('div');content.className='calendar-original-detail-copy';
-    const addCopy=(label,text)=>{const wrap=document.createElement('div');wrap.className='calendar-original-detail-copy-item';const h=document.createElement('h4');h.textContent=label;const p=document.createElement('p');p.textContent=value(text);if(!text||!String(text).trim())p.classList.add('is-empty');wrap.append(h,p);content.append(wrap);};
-    addCopy('Hook / Opening',data.hook);
-    addCopy('Isi Konten / Slide',data.body);
-    addCopy('Arahan Visual',[data.visualHook?'Visual Hook: '+data.visualHook:'',data.visualBody?'Visual Body: '+data.visualBody:'',(data.visualCTA||data.visualCta)?'Visual CTA: '+(data.visualCTA||data.visualCta):''].filter(Boolean).join('\n\n'));
-    addCopy('CTA (Call to Action)',data.cta);
-    makeSection('Isi Konten / Slide',content);
-    const caption=document.createElement('p');caption.className='calendar-original-detail-plain';caption.textContent=value(data.caption);if(!data.caption)caption.classList.add('is-empty');
+
+    const addCopy=(host,label,text)=>{
+      const wrap=document.createElement('div');
+      wrap.className='calendar-original-detail-copy-item';
+      const h=document.createElement('h4');
+      h.textContent=label;
+      const p=document.createElement('p');
+      p.textContent=value(text);
+      if(!text||!String(text).trim())p.classList.add('is-empty');
+      wrap.append(h,p);
+      host.append(wrap);
+    };
+
+    const content=document.createElement('div');
+    content.className='calendar-original-detail-copy';
+    addCopy(content,'Hook / Opening',data.hook);
+    addCopy(content,'Isi Konten / Slide',data.body);
+    addCopy(content,'CTA (Call to Action)',data.cta);
+    makeSection('Isi Konten / Slide',content,'Naskah utama konten sesuai urutan penyampaian.');
+
+    const visualValues=[
+      ['Visual Hook',data.visualHook],
+      ['Visual Body',data.visualBody],
+      ['Visual CTA',data.visualCTA??data.visualCta]
+    ];
+    if(visualValues.some(([,v])=>v&&String(v).trim())){
+      const visuals=document.createElement('div');
+      visuals.className='calendar-original-detail-copy';
+      visualValues.forEach(([label,text])=>{if(text&&String(text).trim())addCopy(visuals,label,text);});
+      makeSection('Arahan Visual',visuals,'Panduan visual untuk proses desain atau produksi.');
+    }
+
+    if(data.reference&&String(data.reference).trim()){
+      const reference=document.createElement('p');
+      reference.className='calendar-original-detail-plain';
+      reference.textContent=String(data.reference);
+      makeSection('Referensi',reference);
+    }
+
+    const caption=document.createElement('p');
+    caption.className='calendar-original-detail-plain';
+    caption.textContent=value(data.caption);
+    if(!data.caption)caption.classList.add('is-empty');
     makeSection('Caption',caption);
-    const notes=document.createElement('p');notes.className='calendar-original-detail-plain';notes.textContent=value(data.notes);if(!data.notes)notes.classList.add('is-empty');
+
+    const notes=document.createElement('p');
+    notes.className='calendar-original-detail-plain';
+    notes.textContent=value(data.notes);
+    if(!data.notes)notes.classList.add('is-empty');
     makeSection('Catatan',notes);
-    modal.hidden=false;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('calendar-item-open');
+
+    modal.hidden=false;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.classList.add('calendar-item-open');
   }
   function closeCalendarContentDetail(){
     const modal=document.getElementById('calendarContentDetailModal');

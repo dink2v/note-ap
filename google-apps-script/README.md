@@ -51,4 +51,5 @@ The URL and token are stored in local storage on the browser/device used to conf
 - The first successful sync creates the `NoteAP_Contents` and `NoteAP_SyncLog` tabs if they do not exist.
 - Use the same shared Google account/calendar and the same Note AP workspace data when testing from multiple devices.
 - The Web App is configured for public endpoint access and relies on the shared API token. Anyone who can inspect a browser where the token is stored can retrieve it. Do not use this token-based setup for a public app with untrusted users; use a proper authenticated backend for that case.
-- The app currently triggers sync manually. Automatic background scheduling and complete deletion/tombstone propagation are not enabled yet.
+- The app supports manual sync plus an automatic sync every 5 minutes while the Note AP page is open, and a sync when the tab becomes visible again.
+- Complete deletion/tombstone propagation is not enabled yet; do not assume deleting a Note AP item automatically removes its linked Calendar event.

@@ -1888,3 +1888,107 @@ body.calendar-item-open{overflow:hidden}
 
 /* FORM KONTEN — sembunyikan label OPSIONAL tanpa menghapus field atau keterangannya */
 .optional-section-tag{display:none!important}
+
+
+
+/* RESPONSIVE REFINEMENT — Note AP (mobile, tablet, desktop) */
+*,*::before,*::after{box-sizing:border-box}
+html{width:100%;max-width:100%;overflow-x:hidden}
+body{width:100%;max-width:100%;overflow-x:hidden}
+img,svg,video,canvas{max-width:100%}
+button,input,select,textarea{max-width:100%;font:inherit}
+.main-area,.page-wrap,.calendar-page,.content-form-wrap,.help-page,.settings-page,.visit-page{min-width:0;max-width:100%}
+.panel,.stat-card,.content-list-panel,.settings-content,.form-panel{min-width:0}
+.table-wrap,.table-scroll,.content-table-wrap,.visit-table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{max-width:100%}
+input,select,textarea{min-width:0}
+button,a{touch-action:manipulation}
+@media(max-width:1100px){
+ .page-wrap{padding:30px 22px}
+ .calendar-page{padding:30px 22px}
+ .stats-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .visit-main-heading,.visit-heading{flex-wrap:wrap}
+ .visit-main-heading .visit-metrics{flex:1 1 100%;width:100%;margin:8px 0 0}
+ .help-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+ .main-area{margin-left:0;width:100%;min-width:0}
+ .mobile-top{position:sticky;top:0;z-index:20;padding-inline:14px}
+ .page-wrap,.calendar-page{width:100%;padding:22px 14px 28px}
+ .welcome-row,.calendar-page-heading,.visit-heading{align-items:flex-start;flex-wrap:wrap}
+ .welcome-row{gap:12px}
+ .welcome-row>div{min-width:0;flex:1 1 100%}
+ .welcome-row .primary-btn,.calendar-page-actions>*{min-height:40px}
+ .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .stat-card{min-width:0;padding:12px;min-height:105px}
+ .stat-card strong{font-size:22px}
+ .panel{padding:14px 12px;border-radius:12px}
+ .calendar-page-heading{gap:12px}
+ .calendar-page-actions{display:flex;flex-wrap:wrap;gap:8px}
+ .calendar-page-actions>*{flex:1 1 auto}
+ .calendar-toolbar-tools{gap:10px}
+ .calendar-planner-controls{display:flex;flex-wrap:wrap;gap:8px}
+ .calendar-planner-controls strong{flex:1 1 100%;text-align:center}
+ .calendar-view-switch{max-width:100%;overflow-x:auto}
+ .note-ap-calendar-grid{grid-template-columns:repeat(7,minmax(0,1fr));overflow-x:auto}
+ .calendar-weekday{padding:8px 1px;font-size:clamp(7px,2vw,9px);letter-spacing:-.2px}
+ .calendar-day-cell{min-width:0;min-height:92px;padding:3px}
+ .calendar-day-head{gap:2px}
+ .calendar-day-number,.calendar-day-add{width:22px;height:22px;flex:0 0 22px}
+ .calendar-day-add{opacity:1}
+ .calendar-event-chip{min-width:0;padding:4px 3px;margin:3px 0;gap:2px;border-left-width:2px}
+ .calendar-event-chip b{font-size:clamp(7px,1.8vw,9px);line-height:1.25;overflow-wrap:anywhere}
+ .calendar-event-chip small{font-size:7px;line-height:1.2;overflow-wrap:anywhere}
+ .calendar-agenda-list{grid-template-columns:1fr}
+ .visit-main-heading{align-items:flex-start;flex-wrap:wrap}
+ .visit-main-heading .visit-heading-title{flex:1 1 100%}
+ .visit-main-heading .visit-metrics{flex:1 1 100%;width:100%;grid-template-columns:repeat(2,minmax(0,1fr))}
+ .visit-month-nav,.visit-month-nav-outside{width:100%;justify-content:center;margin:8px 0}
+ .visit-view-toggle{max-width:100%;overflow-x:auto}
+ .visit-calendar{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+ .visit-main-table{min-width:780px}
+ .visit-main-table th,.visit-main-table td{padding:7px 5px;font-size:10px}
+ .form-title-row{flex-wrap:wrap;align-items:flex-start}
+ .form-title-row h1{font-size:20px}
+ .content-modal{padding:0}
+ .content-modal-dialog{width:100%;height:100dvh;max-height:100dvh;border-radius:0;overflow:auto}
+ .content-modal-dialog>.content-form-wrap{padding:22px 14px 24px}
+ .content-modal-dialog .form-title-row{padding-right:38px}
+ .content-modal-close{position:sticky;top:8px;margin:8px 8px -44px 0}
+ .form-panel{padding:15px 12px}
+ .form-grid,.date-time-fields{grid-template-columns:1fr;gap:13px}
+ .field.full{grid-column:1}
+ .form-actions{flex-direction:column;align-items:stretch}
+ .form-actions>div{width:100%;display:flex;flex-wrap:wrap}
+ .form-actions button{flex:1 1 auto;min-height:42px}
+ .help-topic-grid{grid-template-columns:1fr}
+ .help-chat-block .chat-workspace{height:auto;min-height:0;grid-template-columns:1fr;gap:10px}
+ .help-chat-block .chat-sidebar{max-height:190px;overflow:auto}
+ .help-chat-block .chat-conversation-list{max-height:120px;overflow:auto}
+ .help-chat-block .chat-thread{min-height:390px}
+ .help-chat-block .chat-messages{min-height:210px;max-height:300px}
+ .help-chat-block .chat-composer textarea{min-width:0}
+ .settings-layout,.settings-grid{grid-template-columns:1fr}
+ .toast{width:calc(100% - 28px);max-width:420px;text-align:center}
+}
+@media(max-width:420px){
+ .page-wrap,.calendar-page{padding-inline:10px}
+ .mobile-top{padding-inline:10px}
+ .welcome-row h1,.calendar-page-heading h1{font-size:19px}
+ .stats-grid{gap:7px}
+ .stat-card{padding:10px;min-height:96px}
+ .stat-card strong{font-size:20px}
+ .calendar-day-cell{min-height:80px;padding:2px}
+ .calendar-day-number,.calendar-day-add{width:19px;height:19px;flex-basis:19px;font-size:9px}
+ .calendar-event-chip{padding:3px 2px;margin:2px 0}
+ .calendar-event-chip b{font-size:7px}
+ .calendar-event-chip small{font-size:6px}
+ .visit-main-heading .visit-metrics{gap:7px}
+ .visit-metric-card{padding:9px}
+ .content-modal-dialog>.content-form-wrap{padding-inline:10px}
+ .form-title-row h1{font-size:18px}
+ .help-chat-block{padding:10px}
+}
+@media(hover:none){
+ .calendar-day-add{opacity:1}
+}

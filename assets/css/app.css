@@ -1414,18 +1414,23 @@ body.calendar-item-open{overflow:hidden}
 @media(max-width:600px){.creative-calendar-page{padding:24px 14px}.creative-calendar-hero h1{font-size:24px!important}.calendar-insight-strip{gap:7px}.calendar-insight-card{gap:7px;padding:10px 8px}.calendar-insight-icon{width:29px;height:29px;flex-basis:29px;font-size:14px}.calendar-insight-card small{font-size:6px;letter-spacing:0}.calendar-insight-card b{font-size:17px}.calendar-main-panel,.calendar-agenda-panel{padding:11px;border-radius:14px}.calendar-toolbar-tools{align-items:stretch;flex-direction:column}.calendar-planner-controls{justify-content:space-between}.calendar-planner-controls strong{flex:1}.calendar-view-switch{align-self:flex-start}.calendar-day-cell{min-height:91px;padding:4px}.calendar-day-number,.calendar-day-add{width:21px;height:21px}.calendar-event-chip{padding:5px 4px;margin:3px 0}.calendar-event-chip b{font-size:7px}.calendar-event-chip small{font-size:6px}.note-ap-calendar-grid.view-week{min-width:620px}.note-ap-calendar-grid.view-day .calendar-day-cell{min-height:300px}.calendar-agenda-list{grid-template-columns:1fr}}
 
 
-/* VISIT — dua kolom ringkasan di ruang kanan header Jadwal Visiting */
+/* VISIT — Total Visit dan Target sejajar dengan judul Jadwal Visiting */
 .visit-main-heading{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:18px;
 }
+.visit-main-heading .visit-heading-title{
+  flex:1 1 auto;
+  min-width:0;
+}
 .visit-main-heading .visit-metrics{
   display:grid;
-  grid-template-columns:repeat(2,minmax(112px,1fr));
+  flex:0 0 280px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:10px;
-  width:min(100%,280px);
+  width:280px;
   margin-left:auto;
 }
 .visit-metric-card{

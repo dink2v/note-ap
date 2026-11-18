@@ -1308,8 +1308,11 @@ function renderVisitCalendar(visits){
       if(!result||!result.ok){setStatus('Sinkronisasi gagal: '+(result&&result.error||'Respons tidak valid.'),false);return;}
       const existing=(()=>{try{return JSON.parse(localStorage.getItem('noteAp.contents')||'[]');}catch(error){return[];}})();
       const merged=new Map(existing.map(item=>[String(item.id),item]));
+      (result.deletedIds||[]).forEach(id=>merged.delete(String(id)));
       (result.items||[]).forEach(item=>{const old=merged.get(String(item.id));if(!old||Date.parse(item.updatedAt||'')>=Date.parse(old.updatedAt||''))merged.set(String(item.id),item);});
-      localStorage.setItem('noteAp.contents',JSON.stringify([...merged.values()]));
+      const finalItems=[...merged.values()];
+      localStorage.setItem('noteAp.contents',JSON.stringify(finalItems));
+      localStorage.setItem('noteAp.googleCalendar.lastSeenContentIds',JSON.stringify(finalItems.map(item=>String(item.id))));
       renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();
       const c=result.counts||{};
       setStatus('Sinkronisasi berhasil · '+(c.created||0)+' dibuat · '+(c.updated||0)+' diperbarui · '+(c.imported||0)+' diimpor · '+(c.conflicts||0)+' konflik diselesaikan. Waktu: '+new Date(result.syncedAt).toLocaleString('id-ID'),true);
@@ -1318,7 +1321,10 @@ function renderVisitCalendar(visits){
     document.getElementById('gcalSyncNow').addEventListener('click',()=>{
       const c=validConfig();if(!c)return;
       let items=[];try{const value=JSON.parse(localStorage.getItem('noteAp.contents')||'[]');if(Array.isArray(value))items=value;}catch(error){}
-      const payload={action:'sync',token:c.token,items:items};
+      let lastSeen=[];try{const value=JSON.parse(localStorage.getItem('noteAp.googleCalendar.lastSeenContentIds')||'[]');if(Array.isArray(value))lastSeen=value.map(String);}catch(error){}
+      const currentIds=new Set(items.map(item=>String(item.id)));
+      const deletedIds=lastSeen.filter(id=>!currentIds.has(id));
+      const payload={action:'sync',token:c.token,items:items,deletedIds:deletedIds};
       const form=document.createElement('form');form.method='POST';form.action=c.endpoint;form.target=syncFrame.name;form.style.display='none';
       const input=document.createElement('input');input.type='hidden';input.name='payload';input.value=JSON.stringify(payload);form.append(input);
       document.body.append(form);setStatus('Sinkronisasi dua arah sedang berjalan…',false);form.submit();form.remove();

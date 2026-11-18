@@ -140,6 +140,7 @@ function readContentRows_(sheet) {
     headers.forEach((key, i) => obj[key] = row[i]);
     let full = {};
     try { full = obj.dataJson ? JSON.parse(String(obj.dataJson)) : {}; } catch (err) {}
+    delete obj.dataJson;
     return normalizeContent_(Object.assign({}, full, obj));
   });
 }

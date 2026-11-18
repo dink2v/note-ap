@@ -1766,3 +1766,13 @@ body.calendar-item-open{overflow:hidden}
   .visit-today-card>.visit-today-heading{border-right:0;padding:0}
   .visit-today-card>.visit-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
+
+/* VISIT — teks Judul Konten dan Keterangan rata kiri agar rapi */
+#visitTableBody > tr > td:nth-child(5) > input.visit-inline-input,
+#visitTableBody > tr > td:nth-child(9) > textarea.visit-inline-textarea {
+  text-align: left !important;
+  text-align-last: left !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}

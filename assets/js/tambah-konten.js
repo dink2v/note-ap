@@ -3,6 +3,21 @@ const form=document.getElementById('contentForm'),toast=document.getElementById(
 let timer,expandedField=null,detailItem=null,detailMode=false,editMode=false;
 const config=window.NOTE_AP_CONFIG||{},pageParams=new URLSearchParams(window.location.search);
 const CONTENT_KEY='noteAp.contents';
+const themeMedia=window.matchMedia('(prefers-color-scheme: dark)');
+function applyStoredTheme(){
+ try{
+  const prefs=JSON.parse(localStorage.getItem('noteAp.settings')||'{}');
+  const preference=prefs.theme==='dark'||prefs.theme==='system'?prefs.theme:'light';
+  const effective=preference==='system'?(themeMedia.matches?'dark':'light'):preference;
+  document.documentElement.dataset.theme=effective;
+  document.documentElement.dataset.themePreference=preference;
+  const meta=document.querySelector('meta[name="theme-color"]');
+  if(meta)meta.setAttribute('content',effective==='dark'?'#111a15':'#f7faf8');
+ }catch(error){document.documentElement.dataset.theme='light';}
+}
+applyStoredTheme();
+themeMedia.addEventListener?.('change',()=>{try{const prefs=JSON.parse(localStorage.getItem('noteAp.settings')||'{}');if(prefs.theme==='system')applyStoredTheme();}catch(error){}});
+window.addEventListener('storage',event=>{if(event.key==='noteAp.settings')applyStoredTheme();});
 function showToast(message){toast.textContent=message;toast.classList.add('show');clearTimeout(timer);timer=setTimeout(()=>toast.classList.remove('show'),3500);}
 function readItems(){try{const value=JSON.parse(localStorage.getItem(CONTENT_KEY)||'[]');return Array.isArray(value)?value:[];}catch(error){return[];}}
 function writeItems(items){localStorage.setItem(CONTENT_KEY,JSON.stringify(items));}

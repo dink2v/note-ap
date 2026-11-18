@@ -6,7 +6,7 @@
   <title>Note AP — Apotek Prapatan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/app.css?v=20261118-original-design-restore-3">
+  <link rel="stylesheet" href="assets/css/app.css?v=20261118-dashboard-light-fix-1">
 <style>
 .calendar-content-detail-body{display:grid;gap:18px;max-height:min(62vh,680px);overflow:auto;padding:4px 2px 12px}.calendar-detail-section{padding:16px;border:1px solid var(--line,#e5ebe7);border-radius:14px;background:rgba(255,255,255,.55)}.calendar-detail-section h3{margin:0 0 12px;font-size:14px}.calendar-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.calendar-detail-field{min-width:0}.calendar-detail-field b{display:block;font-size:11px;color:var(--muted,#718078);margin-bottom:5px}.calendar-detail-field p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.55}.calendar-detail-field:has(p){grid-column:auto}@media(max-width:600px){.calendar-detail-grid{grid-template-columns:1fr}.calendar-content-detail-body{max-height:65vh}}
 </style></head>
@@ -67,17 +67,14 @@
         </div>
       </section>
       <section class="content-grid">
-        <article class="panel engagement-panel">
-          <div class="panel-heading"><div><h2>Engagement Rate Tren</h2><p class="muted">Performa interaksi konten dari waktu ke waktu</p></div><span class="period-pill">6 Bulan terakhir⌄</span></div>
-          <div class="chart-legend"><span><i class="dot instagram"></i>Instagram</span><span><i class="dot tiktok"></i>TikTok</span></div>
-          <div class="chart-wrap"><div class="chart-y"><span>8%</span><span>6%</span><span>4%</span><span>2%</span><span>0%</span></div><svg class="chart" viewBox="0 0 620 210" preserveAspectRatio="none" role="img" aria-label="Grafik tren engagement contoh"><defs><linearGradient id="fillA" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#279b70" stop-opacity=".18"/><stop offset="1" stop-color="#279b70" stop-opacity="0"/></linearGradient></defs><g class="grid-lines"><path d="M0 12H620M0 56H620M0 100H620M0 144H620M0 188H620"/></g><path class="area" d="M0 140 C50 132 60 95 120 110 S190 135 245 85 S330 102 370 65 S440 88 495 50 S560 62 620 25 L620 188 L0 188Z"/><path class="line line-a" d="M0 140 C50 132 60 95 120 110 S190 135 245 85 S330 102 370 65 S440 88 495 50 S560 62 620 25"/><path class="line line-b" d="M0 160 C60 150 75 130 120 145 S200 115 245 130 S320 120 370 105 S445 115 495 90 S565 105 620 78"/></svg></div>
-          <div class="chart-x"><span>Jun</span><span>Jul</span><span>Agu</span><span>Sep</span><span>Okt</span><span>Nov</span></div>
-          <p class="chart-note">* Grafik ini masih data ilustrasi. Integrasi metrik akan ditambahkan pada tahap berikutnya.</p>
+        <article class="panel engagement-panel dashboard-workflow-panel">
+          <div class="panel-heading"><div><h2>Status Alur Konten</h2><p class="muted">Jumlah konten pada setiap tahap pengerjaan</p></div><span class="period-pill" id="dashboardTotalLabel">0 konten</span></div>
+          <div class="dashboard-status-chart" id="dashboardStatusChart" aria-live="polite">
+            <p class="dashboard-empty">Belum ada data konten. Tambahkan konten untuk melihat ringkasan.</p>
+          </div>
         </article>
-        <article class="panel upcoming-panel"><div class="panel-heading"><div><h2>Akan Datang</h2><p class="muted">Jadwal konten terdekat</p></div><a href="#kalender" class="text-link">Lihat semua →</a></div><div id="upcomingList" class="upcoming-list">
-          <div class="upcoming-item"><div class="date-box"><b>16</b><small>NOV</small></div><div class="upcoming-info"><b>Fungsi Paru-Paru</b><small>Instagram · Carousel</small></div><span class="time">09:00</span></div>
-          <div class="upcoming-item"><div class="date-box"><b>18</b><small>NOV</small></div><div class="upcoming-info"><b>Tips Menjaga Imun</b><small>TikTok · Reels</small></div><span class="time">13:00</span></div>
-          <div class="upcoming-item"><div class="date-box"><b>20</b><small>NOV</small></div><div class="upcoming-info"><b>Kenali Obat Bebas</b><small>Instagram · Feed</small></div><span class="time">10:00</span></div>
+        <article class="panel upcoming-panel"><div class="panel-heading"><div><h2>Akan Datang</h2><p class="muted">Jadwal publikasi terdekat yang belum selesai</p></div><a href="#kalender" class="text-link">Lihat semua →</a></div><div id="upcomingList" class="upcoming-list">
+          <p class="dashboard-empty">Belum ada jadwal publikasi mendatang.</p>
         </div></article>
       </section>
       <footer class="page-footer">Note AP <span>•</span> Content Planning & Management System <span class="demo-tag">MODE PREVIEW</span></footer>
@@ -337,5 +334,5 @@
 </section>
 <button class="command-launcher" id="commandLauncher" type="button" aria-label="Buka Command Center"><span>✳</span><span class="launcher-label">Command Center</span><kbd>Ctrl K</kbd></button>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261118-google-calendar-live-4"></script>
+<script src="assets/js/app.js?v=20261118-dashboard-light-fix-1"></script>
 </body></html>

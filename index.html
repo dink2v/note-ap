@@ -195,7 +195,7 @@
         <article class="help-topic-card"><span>▥</span><b>Kanban</b><p>Pantau alur kerja dari Ideation hingga Published. Pindahkan atau perbarui tahap sesuai progres.</p></article>
         <article class="help-topic-card"><span>↗</span><b>Visit</b><p>Catat jadwal kunjungan produksi, lokasi, judul konten, talent, status, dan keterangan.</p></article>
         <article class="help-topic-card"><span>⚙</span><b>Setelan</b><p>Kelola referensi konten, preferensi tema dan bahasa, serta backup data lokal.</p></article>
-        <article class="help-topic-card"><span>▦</span><b>Kalender</b><p>Lihat jadwal dari data Konten yang sama dan buka detail konten langsung dari kalender.</p></article>
+        <article class="help-topic-card"><span>▦</span><b>Kalender</b><p>Klik area kosong pada tanggal atau tombol + untuk membuka form Tambah Konten lengkap. Klik kartu untuk melihat detail atau mengedit konten, dan seret kartu untuk mengubah jadwal.</p></article>
       </div>
       <section class="help-faq-section">
         <div class="help-section-heading"><div><div class="eyebrow">FAQ</div><h2>Pertanyaan yang sering diajukan</h2></div></div>
@@ -207,7 +207,8 @@
           <details class="help-faq-item"><summary>Apakah data bisa dibuka dari perangkat lain?</summary><p>Data yang tersimpan lokal tidak otomatis berpindah ke perangkat atau browser lain. Gunakan fitur Ekspor Backup dan Impor/Pulihkan Backup di Setelan → Manajemen Data untuk memindahkan salinan data secara manual.</p></details>
           <details class="help-faq-item"><summary>Bagaimana cara mencadangkan data?</summary><p>Buka Setelan → Manajemen Data → Unduh Backup JSON. Simpan file di tempat yang aman. Untuk memulihkan, pilih file backup melalui menu Pilih File Backup.</p></details>
           
-          <details class="help-faq-item"><summary>Bagaimana cara menggunakan Kalender Konten?</summary><p>Buka menu Kalender untuk melihat jadwal konten berdasarkan tanggal. Pilih tanggal atau kartu konten untuk melihat detailnya. Data kalender menggunakan data yang sama dengan menu Konten dan Kanban.</p></details>
+          <details class="help-faq-item"><summary>Bagaimana cara menambahkan konten langsung dari Kalender?</summary><p>Buka menu <b>Kalender</b>, lalu klik area kosong pada kolom tanggal yang diinginkan atau tekan tombol <b>+</b> di tanggal tersebut. Form <b>Tambah Konten</b> lengkap akan terbuka, sama seperti saat membuat konten dari menu Konten. Tanggal yang dipilih otomatis terisi. Lengkapi informasi konten lainnya, lalu simpan. Konten baru akan muncul di Kalender, Konten, dan Kanban.</p></details>
+          <details class="help-faq-item"><summary>Bagaimana cara melihat atau mengedit konten dari Kalender?</summary><p>Klik kartu konten yang sudah ada untuk melihat detailnya. Pilih <b>Edit</b> pada detail untuk membuka form Detail Konten lengkap. Untuk mengubah tanggal publikasi dengan cepat, seret kartu ke tanggal tujuan.</p></details>
           <details class="help-faq-item"><summary>Bagaimana cara menambahkan jadwal Visit?</summary><p>Buka menu Visit, lalu pilih <b>Tambah Jadwal Visiting</b>. Isi tanggal, jam, lokasi, judul konten, talent, properti/produk, status, dan keterangan pada baris yang tersedia.</p></details>
           <details class="help-faq-item"><summary>Bagaimana cara menghapus beberapa jadwal Visit sekaligus?</summary><p>Di menu Visit bagian Daftar, tekan <b>Select</b>, centang baris yang ingin dihapus, lalu pilih <b>Hapus Terpilih</b> dan konfirmasi. Gunakan <b>Pilih Semua</b> untuk mencentang seluruh baris yang sedang tampil, termasuk baris kosong. Tekan <b>Batal</b> untuk keluar dari mode pilih.</p></details>
           <details class="help-faq-item"><summary>Apa arti status pada jadwal Visit?</summary><p><b>Planned</b> berarti direncanakan, <b>On Progress</b> berarti sedang berjalan, <b>Done</b> berarti selesai, dan <b>Cancelled</b> berarti dibatalkan. Perbarui status sesuai kondisi jadwal.</p></details>
@@ -307,7 +308,7 @@
   </form>
 </section>
 
-<div class="content-modal" id="contentModal" aria-hidden="true"><section class="content-modal-dialog" role="dialog" aria-modal="true" aria-label="Tambah Konten"><button type="button" class="content-modal-close" id="contentModalClose" aria-label="Tutup popup">×</button><iframe id="contentModalFrame" title="Form Tambah Konten" src="tambah-konten.html?v=20261116-2" loading="eager"></iframe></section></div>
+<div class="content-modal" id="contentModal" aria-hidden="true"><section class="content-modal-dialog" role="dialog" aria-modal="true" aria-label="Tambah Konten"><button type="button" class="content-modal-close" id="contentModalClose" aria-label="Tutup popup">×</button><iframe id="contentModalFrame" title="Form Tambah Konten" src="tambah-konten.html?v=20261118-calendar-full-form-help-1" loading="eager"></iframe></section></div>
 
 <section class="command-overlay" id="commandOverlay" aria-hidden="true" hidden>
  <div class="command-dialog" role="dialog" aria-modal="true" aria-labelledby="commandTitle">
@@ -319,5 +320,5 @@
 </section>
 <button class="command-launcher" id="commandLauncher" type="button" aria-label="Buka Command Center"><span>✳</span><span class="launcher-label">Command Center</span><kbd>Ctrl K</kbd></button>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261118-visit-talent-picker-2"></script>
+<script src="assets/js/app.js?v=20261118-calendar-full-form-help-1"></script>
 </body></html>

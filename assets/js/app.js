@@ -221,8 +221,7 @@
         const meta=document.createElement('small');meta.textContent=[item.postingTime||'',item.format||item.platform||''].filter(Boolean).join(' · ');
         event.addEventListener('dragstart',dragEvent=>{dragEvent.dataTransfer.setData('text/noteap-content-id',String(item.id||''));dragEvent.dataTransfer.effectAllowed='move';event.classList.add('is-dragging');});
         event.addEventListener('dragend',()=>{event.classList.remove('is-dragging');calendarGrid.querySelectorAll('.is-drop-target').forEach(target=>target.classList.remove('is-drop-target'));});
-        event.addEventListener('click',()=>{if(Date.now()<calendarSuppressClickUntil)return;openCalendarContentDetail(item);});cell.append(event);
-        event.append(title,meta);event.addEventListener('click',()=>openCalendarContentDetail(item));cell.append(event);
+        event.append(title,meta);event.addEventListener('click',()=>{if(Date.now()<calendarSuppressClickUntil)return;openCalendarContentDetail(item);});cell.append(event);
       });
       cell.addEventListener('dblclick',event=>{if(event.target===cell||event.target===head||event.target===number)openCalendarItemModal(null,key);});
       calendarGrid.append(cell);

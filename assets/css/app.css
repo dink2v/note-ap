@@ -3313,3 +3313,82 @@ button,a{touch-action:manipulation}
 :root[data-theme="dark"] body :is(.primary-btn,.approve-btn,.status-chip,.format-chip,.pending-pill,.approved-pill,[class*="status-"],[class*="stage-color-"]) {
   color:inherit;
 }
+
+
+/* DARK MODE — Kanban board: columns, cards, controls and empty slots */
+:root[data-theme="dark"] .kanban-page {
+  background:var(--bg);
+  color:var(--ink);
+}
+:root[data-theme="dark"] .kanban-board {
+  background:transparent !important;
+  scrollbar-color:#465b4c #18241c;
+}
+:root[data-theme="dark"] .kanban-column {
+  background:#202f26 !important;
+  border-color:#3b5142 !important;
+  color:#e8f1eb !important;
+  box-shadow:0 5px 18px rgba(0,0,0,.12);
+}
+:root[data-theme="dark"] .kanban-column>header h2 {
+  color:#a8d8bb !important;
+}
+:root[data-theme="dark"] .kanban-column>header>span {
+  background:#31483a !important;
+  color:#d5e9dc !important;
+  border:1px solid #496451;
+}
+:root[data-theme="dark"] .kanban-cards {
+  background:transparent !important;
+  scrollbar-color:#465b4c transparent;
+}
+:root[data-theme="dark"] .kanban-card {
+  background:#17231b !important;
+  border-color:#3a5041 !important;
+  color:#edf5ef !important;
+  box-shadow:0 4px 14px rgba(0,0,0,.2) !important;
+}
+:root[data-theme="dark"] .kanban-card-top b {
+  color:#edf5ef !important;
+}
+:root[data-theme="dark"] .kanban-grip {
+  background:#293a2f !important;
+  color:#b4c7b9 !important;
+}
+:root[data-theme="dark"] .kanban-card-actions {
+  border-top-color:#35483b !important;
+}
+:root[data-theme="dark"] .kanban-card-actions button {
+  background:#26382d !important;
+  border-color:#405746 !important;
+  color:#d6e5da !important;
+}
+:root[data-theme="dark"] .kanban-card-actions button:hover {
+  background:#304b39 !important;
+  border-color:#5c8a6b !important;
+  color:#f1fff4 !important;
+}
+:root[data-theme="dark"] .kanban-date {
+  color:#a6b8aa !important;
+}
+:root[data-theme="dark"] .kanban-add-slot {
+  background:#1b2a21 !important;
+  border-color:#526b59 !important;
+  color:#b7cabb !important;
+}
+:root[data-theme="dark"] .kanban-add-slot:hover,
+:root[data-theme="dark"] .kanban-column.drop-target .kanban-add-slot {
+  background:#294333 !important;
+  border-color:#79ad88 !important;
+  color:#e5f7e9 !important;
+}
+:root[data-theme="dark"] .kanban-column.drop-target {
+  background:#263d2e !important;
+  border-color:#6d9d79 !important;
+}
+:root[data-theme="dark"] .kanban-column.drop-target .kanban-card {
+  border-color:#52745c !important;
+}
+:root[data-theme="dark"] .kanban-page .page-footer {
+  color:#9caf9f !important;
+}

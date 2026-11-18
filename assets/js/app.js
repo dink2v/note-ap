@@ -262,11 +262,16 @@
         event.addEventListener('dragend',()=>{event.classList.remove('is-dragging');calendarGrid.querySelectorAll('.is-drop-target').forEach(target=>target.classList.remove('is-drop-target'));});
         event.append(title,meta);event.addEventListener('click',()=>{if(Date.now()<calendarSuppressClickUntil)return;openCalendarContentDetail(item);});cell.append(event);
       });
-      cell.addEventListener('dblclick',event=>{if(event.target===cell||event.target===head||event.target===number)openContentModal(null,key);});
+      // Klik area kosong pada tanggal langsung membuka form Tambah Konten lengkap.
+      // Tombol tambah dan kartu konten tetap menjalankan aksi masing-masing.
+      cell.addEventListener('click',event=>{
+        if(event.target.closest('button'))return;
+        openContentModal(null,key);
+      });
       calendarGrid.append(cell);
     }
     document.querySelectorAll('[data-calendar-view]').forEach(button=>{const active=button.dataset.calendarView===calendarViewMode;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
-    const hint=document.getElementById('calendarViewHint');if(hint)hint.textContent=calendarViewMode==='month'?'Ringkasan satu bulan. Seret kartu ke tanggal lain untuk menjadwalkan ulang.':calendarViewMode==='week'?'Fokus jadwal satu minggu dengan ruang lebih lega.':'Fokus satu hari dan seluruh konten yang dijadwalkan.';
+    const hint=document.getElementById('calendarViewHint');if(hint)hint.textContent=calendarViewMode==='month'?'Klik area kosong pada tanggal atau tombol + untuk membuka form Tambah Konten. Seret kartu untuk mengubah jadwal.':calendarViewMode==='week'?'Klik area kosong pada tanggal atau tombol + untuk membuka form Tambah Konten. Tampilan ini berfokus pada satu minggu.':'Klik area kosong atau tombol + untuk menambahkan konten pada hari ini. Tampilan ini berfokus pada satu hari.';
   }
   let selectedCalendarContent=null;
   function openCalendarContentDetail(item){

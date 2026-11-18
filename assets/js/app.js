@@ -268,7 +268,7 @@
       dot.style.display='none';if(empty)empty.hidden=true;return;
     }
     notifications.forEach(notice=>{
-      const article=document.createElement('article');article.className='notification-item'+(read.includes(notice.id)?'':' unread');
+      const article=document.createElement('article');article.dataset.noticeId=notice.id;article.className='notification-item'+(read.includes(notice.id)?'':' unread');
       const icon=document.createElement('span');icon.className='notification-icon '+notice.tone;icon.textContent=notice.tone==='amber'?'◷':notice.tone==='green'?'✓':'▣';
       const copy=document.createElement('div');const title=document.createElement('b');title.textContent=notice.title;
       const detail=document.createElement('p');detail.textContent=notice.detail;
@@ -1293,13 +1293,7 @@ function renderVisitCalendar(visits){
     }
   });
   document.getElementById('markAllRead').addEventListener('click',()=>{
-    const ids=[...document.querySelectorAll('#notificationList .notification-item')].map(item=>{
-      const title=item.querySelector('b')?.textContent||'';
-      const detail=item.querySelector('p')?.textContent||'';
-      const data=readDashboardItems().find(row=>(row.title||'Konten tanpa judul')===detail);
-      if(!data)return '';
-      return title.includes('menunggu review')||title.includes('siap dipublikasikan')?'status:'+data.id:'due:'+data.id;
-    }).filter(Boolean);
+    const ids=[...document.querySelectorAll('#notificationList .notification-item')].map(item=>item.dataset.noticeId).filter(Boolean);
     let read=[];try{read=JSON.parse(localStorage.getItem('noteAp.dashboard.readNotifications')||'[]');}catch(error){}
     localStorage.setItem('noteAp.dashboard.readNotifications',JSON.stringify([...new Set([...read,...ids])]));
     renderDashboard();showToast('Notifikasi ditandai sudah dibaca.');

@@ -289,16 +289,25 @@
   const calendarMonthLabel=document.getElementById('noteApCalendarMonth');
   const calendarItemModal=document.getElementById('calendarItemModal');
   const calendarItemForm=document.getElementById('calendarItemForm');
-  let calendarCursor=new Date();calendarCursor.setDate(1);
+  let calendarCursor=new Date();
   let calendarViewMode='month';
   const calendarDateKey=date=>[date.getFullYear(),String(date.getMonth()+1).padStart(2,'0'),String(date.getDate()).padStart(2,'0')].join('-');
-  const calendarReadItems=()=>{try{const rows=JSON.parse(localStorage.getItem('noteAp.contents')||'[]');return Array.isArray(rows)?rows.filter(item=>item&&typeof item==='object'):[];}catch(error){return[];}};
+  const calendarStatusKey=item=>String(item?.status||'').trim().toLocaleLowerCase('id');
+  const calendarIsPublished=item=>calendarStatusKey(item)==='published';
+  const calendarIsValidDate=value=>{
+    const match=String(value||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if(!match)return false;
+    const date=new Date(Number(match[1]),Number(match[2])-1,Number(match[3]));
+    return date.getFullYear()===Number(match[1])&&date.getMonth()===Number(match[2])-1&&date.getDate()===Number(match[3]);
+  };
+  const calendarReadItems=()=>{try{const rows=JSON.parse(localStorage.getItem('noteAp.contents')||'[]');return Array.isArray(rows)?rows.filter(item=>item&&typeof item==='object'&&!Array.isArray(item)):[];}catch(error){return[];}};
   const calendarFormatClass=format=>{const value=String(format||'').toLowerCase();return value==='reels'?'reels':value==='carousel'?'carousel':value==='feed'?'feed':'other';};
   let calendarSuppressClickUntil=0;
   function moveCalendarContent(itemId,targetDate){
     const items=calendarReadItems(),index=items.findIndex(item=>String(item.id||'')===String(itemId||''));
     if(index<0){showToast('Konten tidak ditemukan. Jadwal tidak dipindahkan.');return;}
-    if(!targetDate||String(items[index].postingDate||'')===targetDate)return;
+    if(!calendarIsValidDate(targetDate)){showToast('Tanggal tujuan tidak valid. Jadwal tidak dipindahkan.');return;}
+    if(String(items[index].postingDate||'')===targetDate)return;
     const now=new Date().toISOString();items[index]={...items[index],postingDate:targetDate,updatedAt:now};
     try{localStorage.setItem('noteAp.contents',JSON.stringify(items));calendarSuppressClickUntil=Date.now()+700;renderDashboard();renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();showToast('Jadwal berhasil dipindahkan ke '+formatContentDate(targetDate)+'.');}
     catch(error){showToast('Jadwal gagal dipindahkan. Penyimpanan browser tidak dapat diperbarui.');}
@@ -306,7 +315,7 @@
   function renderCalendarAgenda(items){
     const host=document.getElementById('calendarAgendaList');if(!host)return;
     const today=calendarDateKey(new Date());
-    const upcoming=items.filter(item=>item.postingDate&&String(item.postingDate)>=today).sort((a,b)=>String(a.postingDate).localeCompare(String(b.postingDate))||String(a.postingTime||'').localeCompare(String(b.postingTime||''))).slice(0,6);
+    const upcoming=items.filter(item=>calendarIsValidDate(item.postingDate)&&String(item.postingDate)>=today&&!calendarIsPublished(item)).sort((a,b)=>String(a.postingDate).localeCompare(String(b.postingDate))||String(a.postingTime||'').localeCompare(String(b.postingTime||''))).slice(0,6);
     host.replaceChildren();
     if(!upcoming.length){const empty=document.createElement('p');empty.className='calendar-agenda-empty';empty.textContent='Belum ada jadwal mendatang.';host.append(empty);return;}
     upcoming.forEach(item=>{
@@ -323,10 +332,12 @@
     if(!calendarGrid||!calendarMonthLabel)return;
     const year=calendarCursor.getFullYear(),month=calendarCursor.getMonth();
     const items=calendarReadItems();
-    const monthCount=items.filter(item=>String(item.postingDate||'').startsWith(year+'-'+String(month+1).padStart(2,'0'))).length;
+    const monthKey=year+'-'+String(month+1).padStart(2,'0');
+    const monthItems=items.filter(item=>calendarIsValidDate(item.postingDate)&&String(item.postingDate).startsWith(monthKey));
     const todayKey=calendarDateKey(new Date());
-    const upcomingCount=items.filter(item=>item.postingDate&&String(item.postingDate)>=todayKey&&item.status!=='Published').length;
-    const publishedCount=items.filter(item=>item.status==='Published'&&String(item.postingDate||'').startsWith(year+'-'+String(month+1).padStart(2,'0'))).length;
+    const monthCount=monthItems.filter(item=>!calendarIsPublished(item)).length;
+    const upcomingCount=items.filter(item=>calendarIsValidDate(item.postingDate)&&String(item.postingDate)>=todayKey&&!calendarIsPublished(item)).length;
+    const publishedCount=monthItems.filter(calendarIsPublished).length;
     const statMonth=document.getElementById('calendarStatMonth'),statUpcoming=document.getElementById('calendarStatUpcoming'),statPublished=document.getElementById('calendarStatPublished');
     if(statMonth)statMonth.textContent=String(monthCount);
     if(statUpcoming)statUpcoming.textContent=String(upcomingCount);
@@ -357,7 +368,7 @@
       const head=document.createElement('div');head.className='calendar-day-head';
       const number=document.createElement('span');number.className='calendar-day-number';number.textContent=String(date.getDate());head.append(number);
       const add=document.createElement('button');add.type='button';add.className='calendar-day-add';add.textContent='+';add.title='Tambah jadwal pada '+key;add.setAttribute('aria-label','Tambah jadwal '+key);add.addEventListener('click',()=>openContentModal(null,key));head.append(add);cell.append(head);
-      const dayItems=items.filter(item=>String(item.postingDate||'')===key).sort((a,b)=>String(a.postingTime||'').localeCompare(String(b.postingTime||'')));
+      const dayItems=items.filter(item=>calendarIsValidDate(item.postingDate)&&String(item.postingDate)===key).sort((a,b)=>String(a.postingTime||'').localeCompare(String(b.postingTime||'')));
       dayItems.forEach(item=>{
         const event=document.createElement('button');event.type='button';event.draggable=true;event.className='calendar-event-chip '+calendarFormatClass(item.format);event.title='Seret ke tanggal lain untuk memindahkan jadwal. Klik untuk melihat detail: '+(item.title||'Tanpa judul');
         const title=document.createElement('b');title.textContent=item.title||'Tanpa judul';
@@ -375,7 +386,7 @@
       calendarGrid.append(cell);
     }
     document.querySelectorAll('[data-calendar-view]').forEach(button=>{const active=button.dataset.calendarView===calendarViewMode;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
-    const hint=document.getElementById('calendarViewHint');if(hint)hint.textContent=calendarViewMode==='month'?'Klik area kosong pada tanggal atau tombol + untuk membuka form Tambah Konten. Seret kartu untuk mengubah jadwal.':calendarViewMode==='week'?'Klik area kosong pada tanggal atau tombol + untuk membuka form Tambah Konten. Tampilan ini berfokus pada satu minggu.':'Klik area kosong atau tombol + untuk menambahkan konten pada hari ini. Tampilan ini berfokus pada satu hari.';
+    const hint=document.getElementById('calendarViewHint');if(hint)hint.textContent=calendarViewMode==='month'?'Klik tanggal atau tombol + untuk menambah konten. Di komputer, seret kartu untuk mengubah tanggal; di HP, buka kartu lalu pilih Edit.':calendarViewMode==='week'?'Tampilan satu minggu. Di komputer, seret kartu untuk menjadwalkan ulang; di HP, buka kartu lalu pilih Edit.':'Tampilan satu hari. Klik area kosong untuk menambah konten; buka kartu lalu pilih Edit untuk mengubah jadwal.';
   }
   let selectedCalendarContent=null;
   function openCalendarContentDetail(item){
@@ -461,8 +472,8 @@
     catch(error){showToast('Jadwal gagal disimpan. Penyimpanan browser mungkin penuh.');}
   });
   document.querySelectorAll('[data-calendar-view]').forEach(button=>button.addEventListener('click',()=>{calendarViewMode=button.dataset.calendarView||'month';renderCalendarPlanner();}));
-  document.getElementById('noteApCalendarPrev')?.addEventListener('click',()=>{if(calendarViewMode==='month')calendarCursor.setMonth(calendarCursor.getMonth()-1);else if(calendarViewMode==='week')calendarCursor.setDate(calendarCursor.getDate()-7);else calendarCursor.setDate(calendarCursor.getDate()-1);renderCalendarPlanner();});
-  document.getElementById('noteApCalendarNext')?.addEventListener('click',()=>{if(calendarViewMode==='month')calendarCursor.setMonth(calendarCursor.getMonth()+1);else if(calendarViewMode==='week')calendarCursor.setDate(calendarCursor.getDate()+7);else calendarCursor.setDate(calendarCursor.getDate()+1);renderCalendarPlanner();});
+  document.getElementById('noteApCalendarPrev')?.addEventListener('click',()=>{if(calendarViewMode==='month')calendarCursor=new Date(calendarCursor.getFullYear(),calendarCursor.getMonth()-1,1);else if(calendarViewMode==='week')calendarCursor.setDate(calendarCursor.getDate()-7);else calendarCursor.setDate(calendarCursor.getDate()-1);renderCalendarPlanner();});
+  document.getElementById('noteApCalendarNext')?.addEventListener('click',()=>{if(calendarViewMode==='month')calendarCursor=new Date(calendarCursor.getFullYear(),calendarCursor.getMonth()+1,1);else if(calendarViewMode==='week')calendarCursor.setDate(calendarCursor.getDate()+7);else calendarCursor.setDate(calendarCursor.getDate()+1);renderCalendarPlanner();});
   document.getElementById('noteApCalendarToday')?.addEventListener('click',()=>{calendarCursor=new Date();renderCalendarPlanner();});
   renderCalendarPlanner();
   window.addEventListener('storage',event=>{if(event.key==='noteAp.contents'){renderDashboard();renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();}});
@@ -1394,12 +1405,16 @@ function renderVisitCalendar(visits){
       script.src=c.endpoint+'?action=health&token='+encodeURIComponent(c.token)+'&callback='+callback;
       document.head.append(script);
     });
+    const syncButton=document.getElementById('gcalSyncNow');
+    let syncInProgress=false,activeSyncRequestId='',syncRequestTimeout=null,syncRequestCounter=0;
     let syncFrame=document.getElementById('gcalSyncFrame');
     if(!syncFrame){syncFrame=document.createElement('iframe');syncFrame.id='gcalSyncFrame';syncFrame.name='gcalSyncFrame';syncFrame.hidden=true;document.body.append(syncFrame);}
     window.addEventListener('message',event=>{
       if(event.source!==syncFrame.contentWindow||!event.data||event.data.type!=='NOTEAP_GCAL_RESULT')return;
       const result=event.data.payload;
-      if(!result||!result.ok){setStatus('Sinkronisasi gagal: '+(result&&result.error||'Respons tidak valid.'),false);return;}
+      if(!result||!syncInProgress||result.requestId!==activeSyncRequestId)return;
+      clearTimeout(syncRequestTimeout);syncRequestTimeout=null;syncInProgress=false;activeSyncRequestId='';syncButton.disabled=false;
+      if(!result.ok){setStatus('Sinkronisasi gagal: '+(result.error||'Respons tidak valid.'),false);return;}
       const existing=(()=>{try{return JSON.parse(localStorage.getItem('noteAp.contents')||'[]');}catch(error){return[];}})();
       const merged=new Map(existing.map(item=>[String(item.id),item]));
       (result.deletedIds||[]).forEach(id=>merged.delete(String(id)));
@@ -1412,16 +1427,21 @@ function renderVisitCalendar(visits){
       setStatus('Sinkronisasi berhasil · '+(c.created||0)+' dibuat · '+(c.updated||0)+' diperbarui · '+(c.imported||0)+' diimpor · '+(c.conflicts||0)+' konflik diselesaikan. Waktu: '+new Date(result.syncedAt).toLocaleString('id-ID'),true);
       showToast('Google Calendar dan Note AP berhasil disinkronkan.');
     });
-    document.getElementById('gcalSyncNow').addEventListener('click',()=>{
+    syncButton.addEventListener('click',()=>{
+      if(syncInProgress)return;
       const c=validConfig();if(!c)return;
       let items=[];try{const value=JSON.parse(localStorage.getItem('noteAp.contents')||'[]');if(Array.isArray(value))items=value;}catch(error){}
       let lastSeen=[];try{const value=JSON.parse(localStorage.getItem('noteAp.googleCalendar.lastSeenContentIds')||'[]');if(Array.isArray(value))lastSeen=value.map(String);}catch(error){}
       const currentIds=new Set(items.map(item=>String(item.id)));
       const deletedIds=lastSeen.filter(id=>!currentIds.has(id));
-      const payload={action:'sync',token:c.token,items:items,deletedIds:deletedIds};
+      const requestId='noteap-'+Date.now()+'-'+(++syncRequestCounter);
+      activeSyncRequestId=requestId;syncInProgress=true;syncButton.disabled=true;
+      const payload={action:'sync',token:c.token,items:items,deletedIds:deletedIds,requestId:requestId};
       const form=document.createElement('form');form.method='POST';form.action=c.endpoint;form.target=syncFrame.name;form.style.display='none';
       const input=document.createElement('input');input.type='hidden';input.name='payload';input.value=JSON.stringify(payload);form.append(input);
-      document.body.append(form);setStatus('Sinkronisasi dua arah sedang berjalan…',false);form.submit();form.remove();
+      document.body.append(form);setStatus('Sinkronisasi dua arah sedang berjalan…',false);
+      syncRequestTimeout=setTimeout(()=>{if(activeSyncRequestId!==requestId)return;syncInProgress=false;activeSyncRequestId='';syncButton.disabled=false;syncRequestTimeout=null;setStatus('Sinkronisasi belum menerima respons. Periksa koneksi atau deployment Apps Script sebelum mencoba lagi.',false);},60000);
+      form.submit();form.remove();
     });
     if(config.endpoint&&config.token)setStatus('Konfigurasi tersimpan. Tekan Tes Koneksi untuk memeriksa akses.',false);
     // Background refresh while the workspace is open; users can always sync manually.

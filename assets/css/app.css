@@ -5349,3 +5349,17 @@ body:has(#dashboardPage:not([hidden])) .main-area{background:#f1f3f6!important}
   #dashboardPage .dashboard-stage-label{font-size:11px}
   #dashboardPage .dashboard-status-chart{gap:11px}
 }
+
+
+/* CALENDAR REFINEMENT — scrollable weekly view on small screens */
+.calendar-grid-scroll{width:100%;min-width:0;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;}
+.calendar-grid-scroll:focus-visible{outline:2px solid #20b6a6;outline-offset:3px;border-radius:10px;}
+.calendar-main-panel{min-width:0;}
+@media(max-width:600px){
+  .calendar-grid-scroll{border-radius:10px;}
+  .calendar-grid-scroll .note-ap-calendar-grid.view-week{min-width:620px;}
+  .calendar-grid-scroll .note-ap-calendar-grid.view-month{min-width:0;width:100%;}
+  .calendar-grid-scroll .note-ap-calendar-grid.view-day{min-width:0;width:100%;}
+  .calendar-toolbar-title p{font-size:10px;line-height:1.55;}
+  .calendar-planner-footnote{font-size:9px;line-height:1.5;}
+}

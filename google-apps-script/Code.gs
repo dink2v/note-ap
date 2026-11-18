@@ -42,7 +42,7 @@ function doGet(e) {
         spreadsheetConfigured: Boolean(cfg.spreadsheetId),
         calendarConfigured: Boolean(cfg.calendarId),
         spreadsheetName: SpreadsheetApp.openById(cfg.spreadsheetId).getName(),
-        calendarName: CalendarApp.getCalendarById(cfg.calendarId).getName(),
+        calendarName: getCalendar_(cfg.calendarId).getName(),
         serverTime: new Date().toISOString()
       };
     } else {
@@ -87,6 +87,13 @@ function config_() {
   if (!spreadsheetId) throw new Error('Set NOTEAP_SPREADSHEET_ID di Script Properties.');
   if (!calendarId) throw new Error('Set NOTEAP_CALENDAR_ID di Script Properties.');
   return { spreadsheetId: spreadsheetId, calendarId: calendarId };
+}
+
+
+function getCalendar_(calendarId) {
+  return String(calendarId).toLowerCase() === 'primary'
+    ? CalendarApp.getDefaultCalendar()
+    : CalendarApp.getCalendarById(calendarId);
 }
 
 function authorize_(provided) {
@@ -154,7 +161,7 @@ function iso_(value) {
 function sync_(incoming) {
   const cfg = config_();
   const ss = SpreadsheetApp.openById(cfg.spreadsheetId);
-  const calendar = CalendarApp.getCalendarById(cfg.calendarId);
+  const calendar = getCalendar_(cfg.calendarId);
   if (!calendar) throw new Error('Google Calendar tidak ditemukan atau tidak memiliki akses.');
   const sheet = ensureSheet_(ss, NOTEAP.CONTENTS_SHEET, NOTEAP.CONTENT_HEADERS);
   const logSheet = ensureSheet_(ss, NOTEAP.LOG_SHEET, NOTEAP.LOG_HEADERS);

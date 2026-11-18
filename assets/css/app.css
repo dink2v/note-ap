@@ -2077,3 +2077,259 @@ button,a{touch-action:manipulation}
 :root[data-theme="dark"] .page-footer,
 :root[data-theme="dark"] .field-help,
 :root[data-theme="dark"] .required-note{color:#91a397}
+
+
+/* DARK MODE AUDIT — remove remaining light surfaces and improve text contrast */
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ink:#edf5ef;
+  --muted:#b4c2b8;
+  --line:#35483b;
+  --bg:#111a15;
+  --panel:#1a2820;
+  --white:#1a2820;
+}
+:root[data-theme="dark"] body,
+:root[data-theme="dark"] .app-shell,
+:root[data-theme="dark"] .main-area,
+:root[data-theme="dark"] .page-wrap,
+:root[data-theme="dark"] .calendar-page,
+:root[data-theme="dark"] .creative-calendar-page,
+:root[data-theme="dark"] .content-page,
+:root[data-theme="dark"] .visit-page,
+:root[data-theme="dark"] .settings-page,
+:root[data-theme="dark"] .help-page,
+:root[data-theme="dark"] .chat-page{
+  background-color:#111a15;
+  color:#e8f1eb;
+}
+:root[data-theme="dark"] .sidebar,
+:root[data-theme="dark"] .mobile-top,
+:root[data-theme="dark"] .panel,
+:root[data-theme="dark"] .stat-card,
+:root[data-theme="dark"] .settings-nav,
+:root[data-theme="dark"] .settings-content,
+:root[data-theme="dark"] .settings-mini-card,
+:root[data-theme="dark"] .reference-category-card,
+:root[data-theme="dark"] .visit-card,
+:root[data-theme="dark"] .content-list-panel,
+:root[data-theme="dark"] .dashboard-quick-actions,
+:root[data-theme="dark"] .quick-action,
+:root[data-theme="dark"] .calendar-planner-panel,
+:root[data-theme="dark"] .calendar-main-panel,
+:root[data-theme="dark"] .calendar-agenda-panel,
+:root[data-theme="dark"] .calendar-insight-card,
+:root[data-theme="dark"] .calendar-item-dialog,
+:root[data-theme="dark"] .calendar-demo,
+:root[data-theme="dark"] .calendar-demo-form,
+:root[data-theme="dark"] .calendar-demo-list-panel,
+:root[data-theme="dark"] .calendar-demo-history,
+:root[data-theme="dark"] .kanban-column,
+:root[data-theme="dark"] .kanban-card,
+:root[data-theme="dark"] .visit-today-card,
+:root[data-theme="dark"] .visit-metric-card,
+:root[data-theme="dark"] .visit-table-toolbar,
+:root[data-theme="dark"] .visit-table-wrap,
+:root[data-theme="dark"] .command-dialog,
+:root[data-theme="dark"] .command-result,
+:root[data-theme="dark"] .notification-popover,
+:root[data-theme="dark"] .content-modal-dialog,
+:root[data-theme="dark"] .help-topic-card,
+:root[data-theme="dark"] .help-faq-item,
+:root[data-theme="dark"] .chat-workspace,
+:root[data-theme="dark"] .chat-thread,
+:root[data-theme="dark"] .chat-composer{
+  background:#1a2820 !important;
+  border-color:#35483b !important;
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] #dashboardPage .welcome-row{
+  background:linear-gradient(115deg,#202e39 0%,#28283a 55%,#302b25 100%) !important;
+  border-color:#3c4b54 !important;
+}
+:root[data-theme="dark"] #dashboardPage .dashboard-quick-actions,
+:root[data-theme="dark"] #dashboardPage .quick-action{
+  background:#1a2820 !important;
+  border-color:#35483b !important;
+}
+:root[data-theme="dark"] #dashboardPage .notification-btn,
+:root[data-theme="dark"] .visit-month-nav button,
+:root[data-theme="dark"] .visit-view-toggle button,
+:root[data-theme="dark"] .visit-month-nav #visitTodayMonth,
+:root[data-theme="dark"] .visit-month-nav #visitSelectBtn,
+:root[data-theme="dark"] .visit-month-nav #visitDeleteSelectedBtn,
+:root[data-theme="dark"] .visit-month-nav #visitCancelSelectBtn,
+:root[data-theme="dark"] .visit-selection-controls button,
+:root[data-theme="dark"] .visit-main-card button,
+:root[data-theme="dark"] .calendar-toolbar button,
+:root[data-theme="dark"] .calendar-view-switch button,
+:root[data-theme="dark"] .calendar-planner-controls button,
+:root[data-theme="dark"] .calendar-item-dialog button:not(.primary-btn),
+:root[data-theme="dark"] .reference-item-actions button,
+:root[data-theme="dark"] .settings-data-actions .secondary-btn,
+:root[data-theme="dark"] .settings-file-btn,
+:root[data-theme="dark"] .command-launcher{
+  background:#24352a !important;
+  border-color:#405746 !important;
+  color:#e1eee5 !important;
+}
+:root[data-theme="dark"] .calendar-day-cell,
+:root[data-theme="dark"] .visit-calendar-day-cell,
+:root[data-theme="dark"] .visit-calendar-day,
+:root[data-theme="dark"] .calendar-agenda-item,
+:root[data-theme="dark"] .calendar-agenda-list,
+:root[data-theme="dark"] .visit-today-entry,
+:root[data-theme="dark"] .visit-calendar-selected,
+:root[data-theme="dark"] .reference-item,
+:root[data-theme="dark"] .settings-nav-item,
+:root[data-theme="dark"] .settings-info-note,
+:root[data-theme="dark"] .settings-team-placeholder,
+:root[data-theme="dark"] .notification-item,
+:root[data-theme="dark"] .upcoming-item{
+  background:#202f26 !important;
+  border-color:#3b5041 !important;
+  color:#e4eee7 !important;
+}
+:root[data-theme="dark"] .calendar-day-cell.is-today,
+:root[data-theme="dark"] .visit-calendar-day-cell.is-today,
+:root[data-theme="dark"] .visit-calendar-day.has-visit,
+:root[data-theme="dark"] .visit-calendar-day.is-selected,
+:root[data-theme="dark"] .settings-nav-item.active,
+:root[data-theme="dark"] .visit-view-toggle button.active,
+:root[data-theme="dark"] .calendar-view-switch button.active{
+  background:#294b36 !important;
+  border-color:#527c5e !important;
+  color:#f0fff3 !important;
+}
+:root[data-theme="dark"] .calendar-demo-notice,
+:root[data-theme="dark"] .help-note,
+:root[data-theme="dark"] .chat-mode-tag{
+  background:#302b20 !important;
+  border-color:#5b5035 !important;
+  color:#f1dfb6 !important;
+}
+:root[data-theme="dark"] .calendar-demo-badge,
+:root[data-theme="dark"] .calendar-demo-source,
+:root[data-theme="dark"] .calendar-demo-source.google{
+  background:#3a3025 !important;
+  color:#f3c58f !important;
+}
+:root[data-theme="dark"] .chat-sidebar,
+:root[data-theme="dark"] .chat-messages,
+:root[data-theme="dark"] .chat-thread{
+  background:#141f18 !important;
+}
+:root[data-theme="dark"] .chat-message,
+:root[data-theme="dark"] .chat-composer textarea,
+:root[data-theme="dark"] .calendar-item-field input,
+:root[data-theme="dark"] .calendar-item-field select,
+:root[data-theme="dark"] .calendar-demo-form input,
+:root[data-theme="dark"] .settings-field input,
+:root[data-theme="dark"] .settings-field textarea,
+:root[data-theme="dark"] .settings-field select,
+:root[data-theme="dark"] .settings-preference-row select,
+:root[data-theme="dark"] .visit-inline-input,
+:root[data-theme="dark"] .visit-inline-textarea,
+:root[data-theme="dark"] .visit-multiselect-menu,
+:root[data-theme="dark"] .visit-talent-search,
+:root[data-theme="dark"] .command-dialog input,
+:root[data-theme="dark"] .field input,
+:root[data-theme="dark"] .field textarea,
+:root[data-theme="dark"] .field select{
+  background:#111a15 !important;
+  border-color:#405746 !important;
+  color:#f0f6f1 !important;
+}
+:root[data-theme="dark"] input::placeholder,
+:root[data-theme="dark"] textarea::placeholder,
+:root[data-theme="dark"] .visit-inline-input::placeholder,
+:root[data-theme="dark"] .visit-inline-textarea::placeholder{
+  color:#9aada0 !important;
+  opacity:1;
+}
+:root[data-theme="dark"] h1,
+:root[data-theme="dark"] h2,
+:root[data-theme="dark"] h3,
+:root[data-theme="dark"] h4,
+:root[data-theme="dark"] b,
+:root[data-theme="dark"] strong,
+:root[data-theme="dark"] label,
+:root[data-theme="dark"] .welcome-row h1,
+:root[data-theme="dark"] .calendar-toolbar-title h2,
+:root[data-theme="dark"] .calendar-agenda-heading h3,
+:root[data-theme="dark"] .calendar-insight-card b,
+:root[data-theme="dark"] .calendar-agenda-copy b,
+:root[data-theme="dark"] .command-result-copy b,
+:root[data-theme="dark"] .chat-list-body b,
+:root[data-theme="dark"] .chat-thread-title b,
+:root[data-theme="dark"] .chat-message p,
+:root[data-theme="dark"] .visit-today-line span,
+:root[data-theme="dark"] .visit-metric-card strong,
+:root[data-theme="dark"] .settings-nav-item b,
+:root[data-theme="dark"] .reference-item>span,
+:root[data-theme="dark"] .field>span,
+:root[data-theme="dark"] .form-section-heading h2{
+  color:#f0f6f1 !important;
+}
+:root[data-theme="dark"] p,
+:root[data-theme="dark"] small,
+:root[data-theme="dark"] .muted,
+:root[data-theme="dark"] .field-help,
+:root[data-theme="dark"] .required-note,
+:root[data-theme="dark"] .page-footer,
+:root[data-theme="dark"] .settings-footnote,
+:root[data-theme="dark"] .calendar-toolbar-title p,
+:root[data-theme="dark"] .calendar-insight-card small,
+:root[data-theme="dark"] .calendar-agenda-copy small,
+:root[data-theme="dark"] .calendar-agenda-date small,
+:root[data-theme="dark"] .command-result-copy small,
+:root[data-theme="dark"] .chat-list-body small,
+:root[data-theme="dark"] .chat-thread-title small,
+:root[data-theme="dark"] .chat-thread-status,
+:root[data-theme="dark"] .chat-local-note,
+:root[data-theme="dark"] .visit-calendar-weekday,
+:root[data-theme="dark"] .visit-today-line b,
+:root[data-theme="dark"] .settings-nav-item small,
+:root[data-theme="dark"] .help-topic-card p,
+:root[data-theme="dark"] .help-faq-item p{
+  color:#b7c6bb !important;
+}
+:root[data-theme="dark"] .visit-main-table th,
+:root[data-theme="dark"] .visit-main-table td,
+:root[data-theme="dark"] .content-table th,
+:root[data-theme="dark"] .content-table td{
+  background-color:#1a2820 !important;
+  border-color:#3b5041 !important;
+  color:#e6efe9 !important;
+}
+:root[data-theme="dark"] .visit-main-table th,
+:root[data-theme="dark"] .content-table th{
+  background-color:#26382c !important;
+  color:#f0f6f1 !important;
+}
+:root[data-theme="dark"] #visitTableBody>.visit-placeholder-row>td{
+  background:#1a2820 !important;
+  border-color:#3b5041 !important;
+}
+:root[data-theme="dark"] .sidebar .nav-link,
+:root[data-theme="dark"] .sidebar .nav-label,
+:root[data-theme="dark"] .mobile-top,
+:root[data-theme="dark"] .calendar-day-number,
+:root[data-theme="dark"] .calendar-agenda-date b,
+:root[data-theme="dark"] .visit-calendar-day-number{
+  color:#dce9e0 !important;
+}
+:root[data-theme="dark"] .command-dialog,
+:root[data-theme="dark"] .command-dialog *{
+  scrollbar-color:#526b59 #1a2820;
+}
+:root[data-theme="dark"] .form-panel{
+  background:#1a2820 !important;
+  border-color:#35483b !important;
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] .form-panel p,
+:root[data-theme="dark"] .form-panel small,
+:root[data-theme="dark"] .form-panel .muted{
+  color:#b7c6bb !important;
+}

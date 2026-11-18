@@ -5552,3 +5552,39 @@ html body #calendarPage .calendar-event-chip.other small{color:#526477!important
 :root[data-theme="dark"] body #calendarPage .calendar-event-chip.carousel small{color:#b8eee8!important;-webkit-text-fill-color:#b8eee8!important}
 :root[data-theme="dark"] body #calendarPage .calendar-event-chip.feed b,
 :root[data-theme="dark"] body #calendarPage .calendar-event-chip.feed small{color:#d1ead3!important;-webkit-text-fill-color:#d1ead3!important}
+
+
+/* DETAIL KONTEN — readable view mode and clear edit state */
+body .content-form-wrap #contentForm[data-editable="false"] .field input:disabled,
+body .content-form-wrap #contentForm[data-editable="false"] .field select:disabled,
+body .content-form-wrap #contentForm[data-editable="false"] .field textarea:disabled{
+  opacity:1!important;
+  color:#263b32!important;
+  -webkit-text-fill-color:#263b32!important;
+  background:#f5f8f6!important;
+  border-color:#e1e9e4!important;
+  box-shadow:none!important;
+  cursor:default!important;
+}
+body .content-form-wrap #contentForm[data-editable="false"] .field textarea:disabled{
+  resize:none;
+  overflow:auto;
+}
+body .content-form-wrap #contentForm[data-editable="false"] .maximize-btn:disabled{
+  opacity:.45!important;
+  cursor:not-allowed!important;
+}
+body .content-form-wrap #contentForm[data-editable="true"] .field input,
+body .content-form-wrap #contentForm[data-editable="true"] .field select,
+body .content-form-wrap #contentForm[data-editable="true"] .field textarea{
+  cursor:text;
+}
+body .content-form-wrap #contentForm[data-editable="true"] .field select{cursor:pointer}
+:root[data-theme="dark"] body .content-form-wrap #contentForm[data-editable="false"] .field input:disabled,
+:root[data-theme="dark"] body .content-form-wrap #contentForm[data-editable="false"] .field select:disabled,
+:root[data-theme="dark"] body .content-form-wrap #contentForm[data-editable="false"] .field textarea:disabled{
+  color:#e5eee8!important;
+  -webkit-text-fill-color:#e5eee8!important;
+  background:#24352b!important;
+  border-color:#405747!important;
+}

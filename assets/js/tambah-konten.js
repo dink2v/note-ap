@@ -140,6 +140,10 @@ if(pageParams.get('mode')==='detail'){
  const title=document.querySelector('.form-title-row h1');
  const titleRow=document.querySelector('.form-title-row');
  if(title)title.textContent='Detail Konten';
+ const breadcrumb=document.querySelector('.form-breadcrumb b');
+ if(breadcrumb)breadcrumb.textContent='Detail Konten';
+ const subtitle=document.querySelector('.form-title-row .muted');
+ if(subtitle)subtitle.textContent='Tinjau informasi, materi, arahan visual, caption, dan riwayat konten.';
  const id=pageParams.get('id');
  detailItem=readItems().find(item=>String(item.id)===String(id));
  if(detailItem){
@@ -170,10 +174,11 @@ if(pageParams.get('mode')==='detail'){
   titleRow?.appendChild(topEdit);
   editButton?.remove();
   topEdit.addEventListener('click',()=>{
-   if(!editMode){editMode=true;setFormLocked(false);topEdit.textContent='Sedang Mengedit';topEdit.classList.add('is-editing');topEdit.setAttribute('aria-label','Fokus ke kolom edit konten');showToast('Mode edit aktif. Ubah kolom yang diperlukan lalu klik Simpan Konten.');}
+   const wasLocked=!editMode;
+   if(wasLocked){editMode=true;setFormLocked(false);topEdit.textContent='Sedang Mengedit';topEdit.classList.add('is-editing');topEdit.setAttribute('aria-label','Fokus ke kolom edit konten');}
    const firstField=form.elements.namedItem('title');
    if(firstField){firstField.focus();firstField.select?.();}
-   if(editMode)showToast('Ubah kolom yang diperlukan lalu klik Simpan Konten.');
+   showToast(wasLocked?'Mode edit aktif. Ubah kolom yang diperlukan lalu klik Simpan Konten.':'Ubah kolom yang diperlukan lalu klik Simpan Konten.');
   });
  }else{
   setFormLocked(true);

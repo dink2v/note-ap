@@ -3546,17 +3546,7 @@ button,a{touch-action:manipulation}
   .page-footer,.footnote,.settings-footnote,.settings-info-note,
   .calendar-planner-footnote,.calendar-agenda-live,.calendar-demo-notice,
   .empty-description,.placeholder-text
-):not(button):not(button *):not(a):not(a *)
- :not(.primary-btn):not(.primary-btn *):not(.secondary-btn):not(.secondary-btn *)
- :not(.approve-btn):not(.approve-btn *):not(.filter-reset-btn):not(.filter-reset-btn *)
- :not(.status-chip):not(.status-chip *):not([class*="status-"]):not([class*="status-"] *)
- :not(.format-chip):not(.format-chip *):not(.pending-pill):not(.pending-pill *)
- :not(.approved-pill):not(.approved-pill *):not(.kanban-tag):not(.kanban-tag *)
- :not(.demo-tag):not(.demo-tag *):not(.chat-mode-tag):not(.chat-mode-tag *)
- :not(.calendar-event-chip):not(.calendar-event-chip *)
- :not(.visit-calendar-event-chip):not(.visit-calendar-event-chip *)
- :not(.stage-color-0):not(.stage-color-1):not(.stage-color-2)
- :not(.stage-color-3):not(.stage-color-4):not(.stage-color-5):not(.stage-color-6) {
+):not(button):not(button *):not(a):not(a *):not(.primary-btn):not(.primary-btn *):not(.secondary-btn):not(.secondary-btn *):not(.approve-btn):not(.approve-btn *):not(.filter-reset-btn):not(.filter-reset-btn *):not(.status-chip):not(.status-chip *):not([class*="status-"]):not([class*="status-"] *):not(.format-chip):not(.format-chip *):not(.pending-pill):not(.pending-pill *):not(.approved-pill):not(.approved-pill *):not(.kanban-tag):not(.kanban-tag *):not(.demo-tag):not(.demo-tag *):not(.chat-mode-tag):not(.chat-mode-tag *):not(.calendar-event-chip):not(.calendar-event-chip *):not(.visit-calendar-event-chip):not(.visit-calendar-event-chip *):not(.stage-color-0):not(.stage-color-1):not(.stage-color-2):not(.stage-color-3):not(.stage-color-4):not(.stage-color-5):not(.stage-color-6) {
   color:#e8f1eb !important;
 }
 :root[data-theme="dark"] body :is(
@@ -3565,13 +3555,7 @@ button,a{touch-action:manipulation}
   .page-footer,.footnote,.settings-footnote,.settings-info-note,
   .calendar-planner-footnote,.calendar-agenda-live,.calendar-demo-notice,
   .empty-description,.placeholder-text
-):not(button):not(button *):not(a):not(a *)
- :not(.status-chip):not(.status-chip *):not([class*="status-"]):not([class*="status-"] *)
- :not(.format-chip):not(.format-chip *):not(.pending-pill):not(.pending-pill *)
- :not(.approved-pill):not(.approved-pill *):not(.kanban-tag):not(.kanban-tag *)
- :not(.demo-tag):not(.demo-tag *):not(.chat-mode-tag):not(.chat-mode-tag *)
- :not(.calendar-event-chip):not(.calendar-event-chip *)
- :not(.visit-calendar-event-chip):not(.visit-calendar-event-chip *) {
+):not(button):not(button *):not(a):not(a *):not(.status-chip):not(.status-chip *):not([class*="status-"]):not([class*="status-"] *):not(.format-chip):not(.format-chip *):not(.pending-pill):not(.pending-pill *):not(.approved-pill):not(.approved-pill *):not(.kanban-tag):not(.kanban-tag *):not(.demo-tag):not(.demo-tag *):not(.chat-mode-tag):not(.chat-mode-tag *):not(.calendar-event-chip):not(.calendar-event-chip *):not(.visit-calendar-event-chip):not(.visit-calendar-event-chip *) {
   color:#b7c6bb !important;
 }
 :root[data-theme="dark"] body :is(input,textarea,select,option) {

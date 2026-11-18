@@ -4469,3 +4469,99 @@ button,a{touch-action:manipulation}
 ){
   color:#c5d8d2 !important;
 }
+
+
+/* FULL FOREST UI REDESIGN — unified Note AP surfaces */
+:root{
+  --bg:#0b2b26 !important;--panel:#123a33 !important;
+  --form-panel-bg:#123a33 !important;--white:#123a33 !important;
+  --ink:#edf7f3 !important;--muted:#a9c5bb !important;
+  --line:#28534a !important;--green:#65c6a7 !important;
+  --green-dark:#3da987 !important;--na-orange:#f0a35e;color-scheme:dark;
+}
+:root[data-theme="light"],:root[data-theme="dark"]{
+  --bg:#0b2b26 !important;--panel:#123a33 !important;
+  --form-panel-bg:#123a33 !important;--white:#123a33 !important;
+  --ink:#edf7f3 !important;--muted:#a9c5bb !important;
+  --line:#28534a !important;--green:#65c6a7 !important;
+  --green-dark:#3da987 !important;color-scheme:dark;
+}
+:root,html,body,
+body :is(.app-shell,.main-area,.page-wrap,.content-form-wrap,
+.dashboard-page,.calendar-page,.creative-calendar-page,.content-page,
+.kanban-page,.visit-page,.help-page,.settings-page,.chat-page){
+  background:#0b2b26 !important;color:#edf7f3 !important;
+}
+body :is(.sidebar,.mobile-top,.panel,.stat-card,.form-panel,
+.content-filter-panel,.content-list-panel,.kanban-column,.kanban-card,
+.visit-card,.visit-editor,.visit-table-panel,.visit-table-toolbar,
+.visit-table-wrap,.settings-card,.settings-panel,.settings-nav,
+.settings-content,.settings-preference-row,.settings-mini-card,
+.reference-category-card,.help-topic-card,.help-faq-item,
+.chat-workspace,.chat-thread,.chat-composer,.notification-popover,
+.command-dialog,.command-result,.calendar-planner-panel,
+.calendar-main-panel,.calendar-agenda-panel,.calendar-insight-card,
+.calendar-item-dialog,.calendar-detail-section,.calendar-demo,
+.calendar-demo-form,.calendar-demo-list-panel,.calendar-demo-history,
+.expand-dialog,.content-modal-dialog,.content-table,.visit-main-table,
+.visit-table,.dropdown-menu,.select-menu,.notification-menu,.popover,
+.modal,.modal-content,.help-chat-block,.dashboard-quick-actions){
+  background-color:#123a33 !important;color:#edf7f3 !important;
+  border-color:#28534a !important;box-shadow:0 8px 26px rgba(0,0,0,.12);
+}
+body :is(.calendar-day-cell,.visit-calendar-day-cell,.visit-calendar-day,
+.visit-today-inline,.visit-today-entry,.visit-calendar-selected,
+.visit-today-item,.visit-today-line,.content-table th,.content-table td,
+.visit-main-table th,.visit-main-table td,.visit-table th,.visit-table td,
+.settings-nav-item,.reference-item,.notification-item,.upcoming-item,
+.calendar-agenda-item,.chat-list-item,.chat-tabs,
+.visit-multiselect>summary,.visit-multiselect-menu,.quick-action){
+  background-color:#0f332d !important;color:#e8f4ef !important;
+  border-color:#28534a !important;
+}
+body :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),
+select,textarea,[contenteditable=true],.search-input,.filter-input,
+.form-control,.field input,.field select,.field textarea,
+.content-search input,.content-filter input,.content-filter select,
+.visit-form input,.visit-form select,.visit-form textarea,
+.visit-inline-input,.settings-field input,.settings-field select,
+.settings-field textarea,.calendar-item-field input,
+.calendar-item-field select,.calendar-demo-form input){
+  background:#0a2722 !important;color:#f1faf6 !important;
+  border-color:#37675c !important;caret-color:#f1faf6;color-scheme:dark;
+}
+body input::placeholder,body textarea::placeholder{color:#91b2a6 !important;opacity:1}
+body :is(.page-wrap h1,.page-wrap h2,.page-wrap h3,.calendar-page h1,
+.content-page h1,.kanban-page h1,.visit-page h1,.help-page h1,
+.settings-page h1,.chat-page h1,.brand,.brand b,.sidebar-footer b,
+.panel h1,.panel h2,.panel h3,.stat-card h1,.stat-card h2,.stat-card h3,
+.form-panel h1,.form-panel h2,.form-panel h3,.settings-card h2,
+.settings-card h3,.help-topic-card h3,.help-faq-item summary){
+  color:#f1faf6 !important;
+}
+body :is(.brand small,.sidebar-footer small,.nav-label,.page-wrap>.muted,
+.muted,.text-muted,.helper-text,.form-hint,.empty-state,
+.settings-info-note,.visit-today-location,.chat-message time,
+.calendar-agenda-empty,.calendar-planner-footnote){color:#a9c5bb !important}
+body :is(.nav-link,.secondary-btn,.filter-reset-btn,.visit-page-btn,
+.visit-calendar-header button,.visit-month-nav button,
+.calendar-planner-controls button,.calendar-item-cancel,
+.calendar-item-dialog-head>button,.calendar-demo-event-actions button,
+.reference-item-actions button,.settings-file-btn,
+.settings-data-actions .secondary-btn){
+  background-color:#17463d !important;color:#d9eee6 !important;
+  border-color:#37675c !important;
+}
+body :is(.nav-link:hover,.nav-link.active,.quick-action:hover,
+button:hover:not(:disabled)){border-color:#65c6a7 !important}
+body a{color:#79d7b7}
+body :is(.sidebar,.mobile-top){background:#09251f !important;border-color:#28534a !important}
+body :is(.brand-mark,.nav-link.active .nav-icon,.quick-action-icon){
+  background:#17463d !important;color:#82dfbf !important;
+}
+body .chat-message{background:#17463d !important;border-color:#326257 !important;color:#edf7f3 !important}
+body :is(.chat-message *,.notification-popover *,.command-dialog *,
+.calendar-item-dialog *,.expand-dialog *,.content-modal-dialog *){color:inherit}
+body :is(.calendar-day-cell.today,.visit-calendar-day.today,
+.visit-calendar-day-cell.today){outline:1px solid #65c6a7 !important;background:#1b5145 !important}
+body :is(button:disabled,input:disabled,select:disabled,textarea:disabled){opacity:.58}

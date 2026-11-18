@@ -1992,3 +1992,88 @@ button,a{touch-action:manipulation}
 @media(hover:none){
  .calendar-day-add{opacity:1}
 }
+
+
+/* DARK THEME — shared refinements for every Note AP workspace surface */
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --panel:#18231c;
+  --form-panel-bg:#18231c;
+}
+:root[data-theme="dark"] .form-panel,
+:root[data-theme="dark"] .calendar-item-dialog,
+:root[data-theme="dark"] .calendar-detail-section,
+:root[data-theme="dark"] .kanban-column,
+:root[data-theme="dark"] .kanban-card,
+:root[data-theme="dark"] .content-card,
+:root[data-theme="dark"] .content-row,
+:root[data-theme="dark"] .visit-table-panel,
+:root[data-theme="dark"] .visit-editor,
+:root[data-theme="dark"] .settings-card,
+:root[data-theme="dark"] .settings-panel,
+:root[data-theme="dark"] .settings-preference-row,
+:root[data-theme="dark"] .help-faq-item,
+:root[data-theme="dark"] .help-topic-card,
+:root[data-theme="dark"] .chat-thread{
+  background:#18231c;
+  border-color:#34463a;
+  color:#e6eee8;
+}
+:root[data-theme="dark"] .form-section-heading,
+:root[data-theme="dark"] .comments-block,
+:root[data-theme="dark"] .history-block,
+:root[data-theme="dark"] .calendar-item-dialog-head,
+:root[data-theme="dark"] .calendar-item-actions,
+:root[data-theme="dark"] .settings-panel-head{
+  border-color:#34463a;
+}
+:root[data-theme="dark"] .field>span,
+:root[data-theme="dark"] .form-section-heading h2,
+:root[data-theme="dark"] .calendar-detail-field p,
+:root[data-theme="dark"] .calendar-item-dialog h2,
+:root[data-theme="dark"] .kanban-card,
+:root[data-theme="dark"] .settings-card h2,
+:root[data-theme="dark"] .settings-panel h2{
+  color:#e6eee8;
+}
+:root[data-theme="dark"] .field input,
+:root[data-theme="dark"] .field select,
+:root[data-theme="dark"] .field textarea,
+:root[data-theme="dark"] .expand-dialog,
+:root[data-theme="dark"] .expand-dialog textarea,
+:root[data-theme="dark"] .calendar-item-dialog,
+:root[data-theme="dark"] .settings-preference-row select{
+  background:#111a15;
+  border-color:#34463a;
+  color:#e6eee8;
+}
+:root[data-theme="dark"] .secondary-btn,
+:root[data-theme="dark"] .content-modal-close,
+:root[data-theme="dark"] .calendar-item-actions button{
+  background:#202e25;
+  border-color:#3a4c40;
+  color:#dce8df;
+}
+:root[data-theme="dark"] .format-color-legend,
+:root[data-theme="dark"] .calendar-toolbar,
+:root[data-theme="dark"] .calendar-planner-controls,
+:root[data-theme="dark"] .calendar-day-cell,
+:root[data-theme="dark"] .calendar-agenda-list,
+:root[data-theme="dark"] .kanban-board{
+  background:#141e18;
+  border-color:#34463a;
+  color:#dce8df;
+}
+:root[data-theme="dark"] .calendar-event-chip,
+:root[data-theme="dark"] .kanban-tag{
+  filter:brightness(.82) saturate(.9);
+}
+:root[data-theme="dark"] .notification-btn{
+  background:#18231c;
+  border-color:#34463a;
+  color:#dce8df;
+}
+:root[data-theme="dark"] .toast{background:#263a2d;color:#f3fff6}
+:root[data-theme="dark"] .page-footer,
+:root[data-theme="dark"] .field-help,
+:root[data-theme="dark"] .required-note{color:#91a397}

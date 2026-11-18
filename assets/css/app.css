@@ -3532,3 +3532,35 @@ button,a{touch-action:manipulation}
 :root[data-theme="dark"] body .calendar-page :is(input,textarea)::placeholder {
   color:#91a69a !important;
 }
+
+
+/* DARK MODE — global readable text safety net across every workspace page */
+:root[data-theme="dark"] body :not(svg):not(path):not(img):not(video):not(canvas):not(script):not(style) {
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] body :is(
+  p,small,caption,figcaption,.muted,.text-muted,.subtle,.hint,.helper-text,
+  .field-help,.field-hint,.form-hint,.form-help,.description,.subtitle,
+  .eyebrow,.kicker,.page-footer,.footnote,.settings-footnote,.settings-info-note,
+  .calendar-planner-footnote,.calendar-agenda-live,.calendar-demo-notice,
+  .empty-description,.empty-state p,.placeholder-text
+) {
+  color:#b7c6bb !important;
+}
+:root[data-theme="dark"] body :is(input,textarea,select,option) {
+  color:#f0f6f1 !important;
+  background-color:#17251c !important;
+  border-color:#405746 !important;
+}
+:root[data-theme="dark"] body :is(input,textarea)::placeholder {
+  color:#9aada0 !important;
+  opacity:1 !important;
+}
+:root[data-theme="dark"] body :is(button,a,[role="button"],summary) {
+  text-decoration-color:currentColor;
+}
+:root[data-theme="dark"] body :is(button,a,[role="button"]):disabled,
+:root[data-theme="dark"] body :is(input,textarea,select):disabled {
+  color:#aebdb2 !important;
+  opacity:.85;
+}

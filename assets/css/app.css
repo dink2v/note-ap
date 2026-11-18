@@ -4252,316 +4252,191 @@ button,a{touch-action:manipulation}
 }
 
 
-/* GLOBAL BACKGROUND PALETTE — soft neutral surfaces in both themes */
-:root[data-theme="light"]{
-  --bg:#f1f3f6;
-  --panel:#ffffff;
-  --line:#e2e7ee;
-  --ink:#172033;
-  --muted:#667085;
-  --form-panel-bg:#ffffff;
-  color-scheme:light;
-}
-:root[data-theme="light"] body,
-:root[data-theme="light"] body :is(.app-shell,.main-area,.page-wrap,.content-form-wrap,.content-page,.visit-page,.settings-page,.help-page,.chat-page){
-  background-color:#f1f3f6;
-}
-:root[data-theme="light"] body :is(
-  .panel,.stat-card,.form-panel,.content-filter-panel,.content-list-panel,
-  .kanban-column,.kanban-card,.visit-card,.visit-editor,.visit-table-panel,
-  .visit-table-toolbar,.visit-table-wrap,.settings-card,.settings-panel,
-  .settings-nav,.settings-content,.settings-preference-row,.settings-mini-card,
-  .reference-category-card,.help-topic-card,.help-faq-item,.chat-workspace,
-  .chat-thread,.chat-composer,.notification-popover,.command-dialog,
-  .command-result,.calendar-planner-panel,.calendar-main-panel,
-  .calendar-agenda-panel,.calendar-insight-card,.calendar-item-dialog,
-  .calendar-detail-section,.calendar-demo,.calendar-demo-form,
-  .calendar-demo-list-panel,.calendar-demo-history,.expand-dialog,
-  .content-modal-dialog
-){
-  background-color:#ffffff;
-  border-color:#e2e7ee;
-}
+
+
+/* =========================================================
+   NOTE AP — FOREST GREEN DESIGN SYSTEM
+   Base: #0b2b26 | layered greens + mint accents
+   ========================================================= */
+:root,
+:root[data-theme="light"],
 :root[data-theme="dark"]{
-  --bg:#171c26;
-  --panel:#222b3a;
-  --line:#39465a;
-  --form-panel-bg:#222b3a;
-}
-:root[data-theme="dark"] body,
-:root[data-theme="dark"] body :is(.app-shell,.main-area,.page-wrap,.content-form-wrap,.content-page,.visit-page,.settings-page,.help-page,.chat-page){
-  background-color:#171c26;
-}
-:root[data-theme="dark"] body :is(
-  .panel,.stat-card,.form-panel,.content-filter-panel,.content-list-panel,
-  .kanban-column,.kanban-card,.visit-card,.visit-editor,.visit-table-panel,
-  .visit-table-toolbar,.visit-table-wrap,.settings-card,.settings-panel,
-  .settings-nav,.settings-content,.settings-preference-row,.settings-mini-card,
-  .reference-category-card,.help-topic-card,.help-faq-item,.chat-workspace,
-  .chat-thread,.chat-composer,.notification-popover,.command-dialog,
-  .command-result,.calendar-planner-panel,.calendar-main-panel,
-  .calendar-agenda-panel,.calendar-insight-card,.calendar-item-dialog,
-  .calendar-detail-section,.calendar-demo,.calendar-demo-form,
-  .calendar-demo-list-panel,.calendar-demo-history,.expand-dialog,
-  .content-modal-dialog
-){
-  background-color:#222b3a;
-  border-color:#39465a;
-}
-
-
-/* LIGHT MODE — force the outer workspace canvas to soft grey */
-:root[data-theme="light"]{
-  --bg:#eef1f5 !important;
-  --panel:#ffffff;
-  --line:#e1e6ed;
-}
-:root[data-theme="light"] html,
-:root[data-theme="light"] body{
-  background:#eef1f5 !important;
-}
-:root[data-theme="light"] body :is(
-  .main-area,.page-wrap,.calendar-page,.creative-calendar-page,
-  .content-page,.kanban-page,.visit-page,.help-page,.settings-page,
-  .chat-page,.content-form-wrap
-){
-  background-color:#eef1f5 !important;
-}
-/* Keep the navigation rail and content cards white for clear separation. */
-:root[data-theme="light"] body :is(
-  .sidebar,.mobile-top,.panel,.stat-card,.form-panel,
-  .content-filter-panel,.content-list-panel,.kanban-column,.kanban-card,
-  .visit-card,.visit-editor,.visit-table-panel,.settings-card,
-  .settings-panel,.settings-nav,.settings-content,.settings-mini-card,
-  .reference-category-card,.help-topic-card,.help-faq-item,
-  .chat-workspace,.chat-thread,.chat-composer,.notification-popover,
-  .calendar-planner-panel,.calendar-main-panel,.calendar-agenda-panel,
-  .calendar-insight-card,.calendar-item-dialog,.calendar-detail-section,
-  .calendar-demo,.calendar-demo-form,.calendar-demo-list-panel,
-  .calendar-demo-history,.expand-dialog,.content-modal-dialog
-){
-  background-color:#ffffff;
-}
-
-
-/* LIGHT MODE — deep forest-green workspace canvas */
-:root[data-theme="light"]{
-  --bg:#163832 !important;
-}
-:root[data-theme="light"] html,
-:root[data-theme="light"] body,
-:root[data-theme="light"] body :is(
-  .main-area,.page-wrap,.calendar-page,.creative-calendar-page,
-  .content-page,.kanban-page,.visit-page,.help-page,.settings-page,
-  .chat-page,.content-form-wrap
-){
-  background-color:#163832 !important;
-  color:#f2f7f5;
-}
-/* Page titles and supporting copy sit directly on the green canvas. */
-:root[data-theme="light"] body :is(
-  .page-wrap>h1,.page-wrap>h2,.calendar-page h1,
-  .content-page h1,.kanban-page h1,.visit-page h1,
-  .help-page h1,.settings-page h1,.chat-page h1
-){
-  color:#f5faf8 !important;
-}
-:root[data-theme="light"] body :is(
-  .page-wrap>.muted,.calendar-page>.muted,
-  .content-page>.muted,.kanban-page>.muted,
-  .visit-page>.muted,.help-page>.muted,
-  .settings-page>.muted,.chat-page>.muted
-){
-  color:#c5d8d2 !important;
-}
-/* White surfaces remain white with their normal dark text. */
-:root[data-theme="light"] body :is(
-  .sidebar,.mobile-top,.panel,.stat-card,.form-panel,
-  .content-filter-panel,.content-list-panel,.kanban-column,.kanban-card,
-  .visit-card,.visit-editor,.visit-table-panel,.settings-card,
-  .settings-panel,.settings-nav,.settings-content,.settings-mini-card,
-  .reference-category-card,.help-topic-card,.help-faq-item,
-  .chat-workspace,.chat-thread,.chat-composer,.notification-popover,
-  .calendar-planner-panel,.calendar-main-panel,.calendar-agenda-panel,
-  .calendar-insight-card,.calendar-item-dialog,.calendar-detail-section,
-  .calendar-demo,.calendar-demo-form,.calendar-demo-list-panel,
-  .calendar-demo-history,.expand-dialog,.content-modal-dialog
-){
-  background-color:#ffffff;
-  color:#263548;
-}
-
-
-/* LIGHT MODE — replace every white workspace surface with forest green */
-:root[data-theme="light"]{
-  --panel:#163832 !important;
-  --form-panel-bg:#163832 !important;
-  --line:#42645d !important;
-  --ink:#f2f7f5 !important;
-  --muted:#c5d8d2 !important;
-}
-:root[data-theme="light"] body :is(
-  .sidebar,.mobile-top,.panel,.stat-card,.form-panel,
-  .content-filter-panel,.content-list-panel,.kanban-column,.kanban-card,
-  .visit-card,.visit-editor,.visit-table-panel,.visit-table-toolbar,
-  .visit-table-wrap,.settings-card,.settings-panel,.settings-nav,
-  .settings-content,.settings-preference-row,.settings-mini-card,
-  .reference-category-card,.help-topic-card,.help-faq-item,
-  .chat-workspace,.chat-thread,.chat-composer,.notification-popover,
-  .command-dialog,.command-result,.calendar-planner-panel,
-  .calendar-main-panel,.calendar-agenda-panel,.calendar-insight-card,
-  .calendar-item-dialog,.calendar-detail-section,.calendar-demo,
-  .calendar-demo-form,.calendar-demo-list-panel,.calendar-demo-history,
-  .expand-dialog,.content-modal-dialog,.content-table,
-  .visit-main-table,.visit-table,.dropdown-menu,.select-menu,
-  .notification-menu,.popover,.modal,.modal-content
-){
-  background-color:#163832 !important;
-  border-color:#42645d !important;
-  color:#f2f7f5 !important;
-}
-:root[data-theme="light"] body :is(
-  .content-table th,.content-table td,
-  .visit-main-table th,.visit-main-table td,
-  .visit-table th,.visit-table td,
-  .settings-nav-item,.reference-item,.notification-item,
-  .upcoming-item,.calendar-agenda-item,.chat-list-item,
-  .chat-tabs,.visit-today-entry,.visit-calendar-selected,
-  .visit-today-item,.visit-today-line,.visit-multiselect>summary,
-  .visit-multiselect-menu
-){
-  background-color:#163832 !important;
-  border-color:#42645d !important;
-  color:#f2f7f5 !important;
-}
-:root[data-theme="light"] body :is(
-  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
-  select,textarea,[contenteditable="true"],
-  .search-input,.filter-input,.form-control
-){
-  background-color:#163832 !important;
-  border-color:#58776f !important;
-  color:#f2f7f5 !important;
-  caret-color:#f2f7f5;
   color-scheme:dark;
+  --bg:#0b2b26;
+  --panel:#123a33;
+  --form-panel-bg:#123a33;
+  --white:#123a33;
+  --ink:#edf7f3;
+  --muted:#a9c5bb;
+  --line:#28534a;
+  --green:#65c6a7;
+  --green-dark:#3da987;
+  --na-orange:#f0a35e;
+  --na-orange-soft:#4a3829;
+  --surface-0:#08231f;
+  --surface-1:#0b2b26;
+  --surface-2:#0f332d;
+  --surface-3:#123a33;
+  --surface-4:#17463d;
+  --surface-hover:#1d5145;
+  --input-bg:#092720;
+  --border-strong:#37675c;
+  --text-primary:#edf7f3;
+  --text-secondary:#a9c5bb;
+  --accent-mint:#79d7b7;
 }
-:root[data-theme="light"] body :is(input,textarea)::placeholder{
-  color:#c5d8d2 !important;
-  opacity:1;
+html,body{
+  background:var(--surface-1)!important;
+  color:var(--text-primary)!important;
 }
-:root[data-theme="light"] body :is(
-  .sidebar,.mobile-top,.panel,.stat-card,.form-panel,
-  .content-filter-panel,.content-list-panel,.kanban-column,.kanban-card,
-  .visit-card,.visit-editor,.visit-table-panel,.settings-card,
-  .settings-panel,.settings-nav,.settings-content,.settings-mini-card,
-  .reference-category-card,.help-topic-card,.help-faq-item,
-  .chat-workspace,.chat-thread,.chat-composer,.notification-popover,
-  .calendar-planner-panel,.calendar-main-panel,.calendar-agenda-panel,
-  .calendar-insight-card,.calendar-item-dialog,.calendar-detail-section,
-  .calendar-demo,.calendar-demo-form,.calendar-demo-list-panel,
-  .calendar-demo-history,.expand-dialog,.content-modal-dialog
-) :is(h1,h2,h3,h4,h5,h6,p,span,label,strong,b,small,td,th,li){
-  color:inherit;
-}
-:root[data-theme="light"] body :is(
-  .muted,.text-muted,.helper-text,.form-hint,.empty-state,
-  .settings-info-note,.visit-today-location,.chat-message time
-){
-  color:#c5d8d2 !important;
-}
-
-
-/* FULL FOREST UI REDESIGN — unified Note AP surfaces */
-:root{
-  --bg:#0b2b26 !important;--panel:#123a33 !important;
-  --form-panel-bg:#123a33 !important;--white:#123a33 !important;
-  --ink:#edf7f3 !important;--muted:#a9c5bb !important;
-  --line:#28534a !important;--green:#65c6a7 !important;
-  --green-dark:#3da987 !important;--na-orange:#f0a35e;color-scheme:dark;
-}
-:root[data-theme="light"],:root[data-theme="dark"]{
-  --bg:#0b2b26 !important;--panel:#123a33 !important;
-  --form-panel-bg:#123a33 !important;--white:#123a33 !important;
-  --ink:#edf7f3 !important;--muted:#a9c5bb !important;
-  --line:#28534a !important;--green:#65c6a7 !important;
-  --green-dark:#3da987 !important;color-scheme:dark;
-}
-:root,html,body,
 body :is(.app-shell,.main-area,.page-wrap,.content-form-wrap,
 .dashboard-page,.calendar-page,.creative-calendar-page,.content-page,
 .kanban-page,.visit-page,.help-page,.settings-page,.chat-page){
-  background:#0b2b26 !important;color:#edf7f3 !important;
+  background:var(--surface-1)!important;
+  color:var(--text-primary)!important;
 }
-body :is(.sidebar,.mobile-top,.panel,.stat-card,.form-panel,
-.content-filter-panel,.content-list-panel,.kanban-column,.kanban-card,
-.visit-card,.visit-editor,.visit-table-panel,.visit-table-toolbar,
-.visit-table-wrap,.settings-card,.settings-panel,.settings-nav,
-.settings-content,.settings-preference-row,.settings-mini-card,
-.reference-category-card,.help-topic-card,.help-faq-item,
+/* Navigation stays darker to frame the workspace. */
+body :is(.sidebar,.mobile-top){
+  background:var(--surface-0)!important;
+  color:var(--text-primary)!important;
+  border-color:var(--line)!important;
+}
+body :is(.brand,.brand b,.brand small,.sidebar-footer,.sidebar-footer b,
+.sidebar-footer small,.nav-label,.nav-link,.mobile-top button){
+  color:var(--text-primary)!important;
+}
+body .nav-link{background:transparent!important}
+body .nav-link:hover,
+body .nav-link.active{
+  background:var(--surface-4)!important;
+  color:#f4fffa!important;
+  border-color:var(--border-strong)!important;
+}
+body :is(.brand-mark,.nav-icon,.quick-action-icon){
+  background:#1a5145!important;
+  color:#91e2c4!important;
+}
+/* Main cards and work areas use a mid-tone green, not flat canvas green. */
+body :is(.panel,.stat-card,.form-panel,.content-filter-panel,
+.content-list-panel,.kanban-column,.kanban-card,.visit-card,.visit-editor,
+.visit-table-panel,.visit-table-toolbar,.visit-table-wrap,.settings-card,
+.settings-panel,.settings-nav,.settings-content,.settings-preference-row,
+.settings-mini-card,.reference-category-card,.help-topic-card,.help-faq-item,
 .chat-workspace,.chat-thread,.chat-composer,.notification-popover,
-.command-dialog,.command-result,.calendar-planner-panel,
-.calendar-main-panel,.calendar-agenda-panel,.calendar-insight-card,
-.calendar-item-dialog,.calendar-detail-section,.calendar-demo,
-.calendar-demo-form,.calendar-demo-list-panel,.calendar-demo-history,
-.expand-dialog,.content-modal-dialog,.content-table,.visit-main-table,
-.visit-table,.dropdown-menu,.select-menu,.notification-menu,.popover,
-.modal,.modal-content,.help-chat-block,.dashboard-quick-actions){
-  background-color:#123a33 !important;color:#edf7f3 !important;
-  border-color:#28534a !important;box-shadow:0 8px 26px rgba(0,0,0,.12);
+.command-dialog,.command-result,.calendar-planner-panel,.calendar-main-panel,
+.calendar-agenda-panel,.calendar-insight-card,.calendar-item-dialog,
+.calendar-detail-section,.calendar-demo,.calendar-demo-form,
+.calendar-demo-list-panel,.calendar-demo-history,.expand-dialog,
+.content-modal-dialog,.content-table,.visit-main-table,.visit-table,
+.help-chat-block,.dashboard-quick-actions){
+  background:var(--surface-3)!important;
+  color:var(--text-primary)!important;
+  border-color:var(--line)!important;
+  box-shadow:0 8px 26px rgba(0,0,0,.13);
 }
+/* Nested rows, list items and table cells provide visual depth. */
 body :is(.calendar-day-cell,.visit-calendar-day-cell,.visit-calendar-day,
 .visit-today-inline,.visit-today-entry,.visit-calendar-selected,
 .visit-today-item,.visit-today-line,.content-table th,.content-table td,
 .visit-main-table th,.visit-main-table td,.visit-table th,.visit-table td,
 .settings-nav-item,.reference-item,.notification-item,.upcoming-item,
 .calendar-agenda-item,.chat-list-item,.chat-tabs,
-.visit-multiselect>summary,.visit-multiselect-menu,.quick-action){
-  background-color:#0f332d !important;color:#e8f4ef !important;
-  border-color:#28534a !important;
+.visit-multiselect>summary,.visit-multiselect-menu,.quick-action,
+.command-result,.settings-preference-row,.help-faq-item){
+  background:var(--surface-2)!important;
+  color:var(--text-primary)!important;
+  border-color:var(--line)!important;
 }
+body :is(.stat-card:nth-child(2),.quick-action:hover,.kanban-card:hover,
+.reference-category-card:hover,.help-topic-card:hover){
+  background:var(--surface-4)!important;
+}
+/* Inputs and editable controls. */
 body :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),
 select,textarea,[contenteditable=true],.search-input,.filter-input,
 .form-control,.field input,.field select,.field textarea,
 .content-search input,.content-filter input,.content-filter select,
 .visit-form input,.visit-form select,.visit-form textarea,
-.visit-inline-input,.settings-field input,.settings-field select,
-.settings-field textarea,.calendar-item-field input,
-.calendar-item-field select,.calendar-demo-form input){
-  background:#0a2722 !important;color:#f1faf6 !important;
-  border-color:#37675c !important;caret-color:#f1faf6;color-scheme:dark;
+.visit-inline-input,.visit-inline-textarea,.settings-field input,
+.settings-field select,.settings-field textarea,.settings-preference-row select,
+.calendar-item-field input,.calendar-item-field select,
+.calendar-demo-form input,.command-input-wrap input,.chat-composer textarea,
+.expand-dialog textarea){
+  background:var(--input-bg)!important;
+  color:var(--text-primary)!important;
+  border-color:var(--border-strong)!important;
+  caret-color:var(--text-primary);
+  color-scheme:dark;
 }
-body input::placeholder,body textarea::placeholder{color:#91b2a6 !important;opacity:1}
-body :is(.page-wrap h1,.page-wrap h2,.page-wrap h3,.calendar-page h1,
-.content-page h1,.kanban-page h1,.visit-page h1,.help-page h1,
-.settings-page h1,.chat-page h1,.brand,.brand b,.sidebar-footer b,
-.panel h1,.panel h2,.panel h3,.stat-card h1,.stat-card h2,.stat-card h3,
-.form-panel h1,.form-panel h2,.form-panel h3,.settings-card h2,
-.settings-card h3,.help-topic-card h3,.help-faq-item summary){
-  color:#f1faf6 !important;
+body input::placeholder,body textarea::placeholder{
+  color:#91b2a6!important;opacity:1;
 }
-body :is(.brand small,.sidebar-footer small,.nav-label,.page-wrap>.muted,
-.muted,.text-muted,.helper-text,.form-hint,.empty-state,
-.settings-info-note,.visit-today-location,.chat-message time,
-.calendar-agenda-empty,.calendar-planner-footnote){color:#a9c5bb !important}
-body :is(.nav-link,.secondary-btn,.filter-reset-btn,.visit-page-btn,
-.visit-calendar-header button,.visit-month-nav button,
-.calendar-planner-controls button,.calendar-item-cancel,
-.calendar-item-dialog-head>button,.calendar-demo-event-actions button,
-.reference-item-actions button,.settings-file-btn,
-.settings-data-actions .secondary-btn){
-  background-color:#17463d !important;color:#d9eee6 !important;
-  border-color:#37675c !important;
+body select option{
+  background:var(--surface-2);
+  color:var(--text-primary);
 }
-body :is(.nav-link:hover,.nav-link.active,.quick-action:hover,
-button:hover:not(:disabled)){border-color:#65c6a7 !important}
-body a{color:#79d7b7}
-body :is(.sidebar,.mobile-top){background:#09251f !important;border-color:#28534a !important}
-body :is(.brand-mark,.nav-link.active .nav-icon,.quick-action-icon){
-  background:#17463d !important;color:#82dfbf !important;
+/* Typography: readable contrast on all layered surfaces. */
+body :is(h1,h2,h3,h4,h5,h6,.page-title,.brand b,.settings-content h2,
+.settings-content h3,.settings-nav-item b,.settings-preference-row b,
+.reference-category-card>header b,.reference-item>span,.settings-mini-card b,
+.help-topic-card b,.help-faq-item summary,.chat-list-body b,
+.chat-thread-title b,.chat-message p,.command-result-copy b,
+.upcoming-info b,.visit-today-item b,.visit-detail-field b,
+.calendar-detail-field b,.stat-value,.stat-card strong){
+  color:#f2fbf7!important;
 }
-body .chat-message{background:#17463d !important;border-color:#326257 !important;color:#edf7f3 !important}
-body :is(.chat-message *,.notification-popover *,.command-dialog *,
-.calendar-item-dialog *,.expand-dialog *,.content-modal-dialog *){color:inherit}
+body :is(p,small,.muted,.text-muted,.helper-text,.form-hint,.empty-state,
+.settings-nav-item small,.settings-preference-row p,.settings-integration-card p,
+.settings-info-note,.reference-empty,.help-welcome-card p,.help-topic-card p,
+.help-faq-item p,.chat-list-body small,.chat-message time,.visit-today-location,
+.visit-today-empty,.visit-detail-placeholder,.calendar-agenda-empty,
+.calendar-planner-footnote,.page-wrap>.muted){
+  color:var(--text-secondary)!important;
+}
+/* Buttons have distinct roles and an intentional accent hierarchy. */
+body :is(.primary-btn,.btn-primary,.submit-btn,.save-btn,
+button[type=submit]){
+  background:#2d9b78!important;
+  border-color:#58c39d!important;
+  color:#f5fffa!important;
+}
+body :is(.secondary-btn,.filter-reset-btn,.content-modal-close,
+.calendar-item-cancel,.calendar-item-actions button,.visit-page-btn,
+.visit-month-nav button,.visit-calendar-header button,
+.visit-view-toggle button:not(.active),.reference-item-actions button,
+.settings-file-btn,.settings-data-actions .secondary-btn,
+.notification-btn,.command-launcher,.calendar-planner-controls button,
+.calendar-view-switch button:not(.active),.calendar-item-dialog-head>button,
+.calendar-demo-event-actions button){
+  background:var(--surface-4)!important;
+  border-color:var(--border-strong)!important;
+  color:#d9eee6!important;
+}
+body :is(.visit-view-toggle button.active,.calendar-view-switch button.active,
+.settings-nav-item.active){
+  background:#246b58!important;
+  border-color:#65c6a7!important;
+  color:#f4fffa!important;
+}
+body :is(button,a,.quick-action){transition:background-color .18s ease,border-color .18s ease,color .18s ease}
+body :is(button,a):hover{border-color:#65c6a7}
+body a{color:var(--accent-mint)}
+body .chat-message{
+  background:var(--surface-4)!important;
+  border-color:var(--border-strong)!important;
+  color:var(--text-primary)!important;
+}
+body .chat-message.mine{background:#205b4b!important}
+body :is(.notification-popover *,.command-dialog *,.calendar-item-dialog *,
+.expand-dialog *,.content-modal-dialog *){color:inherit}
 body :is(.calendar-day-cell.today,.visit-calendar-day.today,
-.visit-calendar-day-cell.today){outline:1px solid #65c6a7 !important;background:#1b5145 !important}
+.visit-calendar-day-cell.today){
+  outline:1px solid #65c6a7!important;
+  background:#1b5145!important;
+}
+/* Preserve semantic status colors while keeping their text legible. */
+body :is(.status-chip,.settings-status,.approved-pill,.pending-pill,
+.calendar-agenda-live,.kanban-tag){filter:saturate(.9) brightness(.95)}
 body :is(button:disabled,input:disabled,select:disabled,textarea:disabled){opacity:.58}
+/* Native browser controls and selection follow the new palette. */
+::selection{background:#3da987;color:#071f1a}

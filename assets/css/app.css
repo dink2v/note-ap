@@ -4390,3 +4390,82 @@ button,a{touch-action:manipulation}
   background-color:#ffffff;
   color:#263548;
 }
+
+
+/* LIGHT MODE — replace every white workspace surface with forest green */
+:root[data-theme="light"]{
+  --panel:#163832 !important;
+  --form-panel-bg:#163832 !important;
+  --line:#42645d !important;
+  --ink:#f2f7f5 !important;
+  --muted:#c5d8d2 !important;
+}
+:root[data-theme="light"] body :is(
+  .sidebar,.mobile-top,.panel,.stat-card,.form-panel,
+  .content-filter-panel,.content-list-panel,.kanban-column,.kanban-card,
+  .visit-card,.visit-editor,.visit-table-panel,.visit-table-toolbar,
+  .visit-table-wrap,.settings-card,.settings-panel,.settings-nav,
+  .settings-content,.settings-preference-row,.settings-mini-card,
+  .reference-category-card,.help-topic-card,.help-faq-item,
+  .chat-workspace,.chat-thread,.chat-composer,.notification-popover,
+  .command-dialog,.command-result,.calendar-planner-panel,
+  .calendar-main-panel,.calendar-agenda-panel,.calendar-insight-card,
+  .calendar-item-dialog,.calendar-detail-section,.calendar-demo,
+  .calendar-demo-form,.calendar-demo-list-panel,.calendar-demo-history,
+  .expand-dialog,.content-modal-dialog,.content-table,
+  .visit-main-table,.visit-table,.dropdown-menu,.select-menu,
+  .notification-menu,.popover,.modal,.modal-content
+){
+  background-color:#163832 !important;
+  border-color:#42645d !important;
+  color:#f2f7f5 !important;
+}
+:root[data-theme="light"] body :is(
+  .content-table th,.content-table td,
+  .visit-main-table th,.visit-main-table td,
+  .visit-table th,.visit-table td,
+  .settings-nav-item,.reference-item,.notification-item,
+  .upcoming-item,.calendar-agenda-item,.chat-list-item,
+  .chat-tabs,.visit-today-entry,.visit-calendar-selected,
+  .visit-today-item,.visit-today-line,.visit-multiselect>summary,
+  .visit-multiselect-menu
+){
+  background-color:#163832 !important;
+  border-color:#42645d !important;
+  color:#f2f7f5 !important;
+}
+:root[data-theme="light"] body :is(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,textarea,[contenteditable="true"],
+  .search-input,.filter-input,.form-control
+){
+  background-color:#163832 !important;
+  border-color:#58776f !important;
+  color:#f2f7f5 !important;
+  caret-color:#f2f7f5;
+  color-scheme:dark;
+}
+:root[data-theme="light"] body :is(input,textarea)::placeholder{
+  color:#c5d8d2 !important;
+  opacity:1;
+}
+:root[data-theme="light"] body :is(
+  .sidebar,.mobile-top,.panel,.stat-card,.form-panel,
+  .content-filter-panel,.content-list-panel,.kanban-column,.kanban-card,
+  .visit-card,.visit-editor,.visit-table-panel,.settings-card,
+  .settings-panel,.settings-nav,.settings-content,.settings-mini-card,
+  .reference-category-card,.help-topic-card,.help-faq-item,
+  .chat-workspace,.chat-thread,.chat-composer,.notification-popover,
+  .calendar-planner-panel,.calendar-main-panel,.calendar-agenda-panel,
+  .calendar-insight-card,.calendar-item-dialog,.calendar-detail-section,
+  .calendar-demo,.calendar-demo-form,.calendar-demo-list-panel,
+  .calendar-demo-history,.expand-dialog,.content-modal-dialog
+) :is(h1,h2,h3,h4,h5,h6,p,span,label,strong,b,small,td,th,li){
+  color:inherit;
+}
+:root[data-theme="light"] body :is(
+  .muted,.text-muted,.helper-text,.form-hint,.empty-state,
+  .settings-info-note,.visit-today-location,.chat-message time
+){
+  color:#c5d8d2 !important;
+}

@@ -67,14 +67,14 @@ function setFormLocked(locked){
   button.disabled=Boolean(locked);
  });
  const save=document.querySelector('button[type="submit"][form="contentForm"]');
- if(save)save.disabled=Boolean(locked);
+ if(save){save.disabled=Boolean(locked);save.hidden=Boolean(locked);}
  form.dataset.editable=String(!locked);
 }
 function fillForm(item){
  const legacyDateTime=String(item.postDateTime||'');
  const date=item.postingDate||legacyDateTime.split('T')[0]||'';
  const time=item.postingTime||legacyDateTime.split('T')[1]||'';
- const dateTime=date&&time?date+'T'+time:date;
+ const dateTime=date?date+'T'+(time||'00:00'):'';
  const values={title:item.title,platform:item.platform,format:item.format,duration:item.duration,pillar:item.pillar,status:item.status,postDateTime:dateTime,reference:item.reference,hook:item.hook,visualHook:item.visualHook,body:item.body,visualBody:item.visualBody,cta:item.cta,visualCta:item.visualCTA??item.visualCta,caption:item.caption,notes:item.notes};
  Object.entries(values).forEach(([name,value])=>{const field=form.elements[name];if(field&&value!=null)field.value=String(value);});
  const comments=Array.isArray(item.comments)?item.comments:[];

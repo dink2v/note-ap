@@ -5462,3 +5462,51 @@ body #calendarPage .calendar-agenda-tip{background:linear-gradient(135deg,#e8f8f
 body #calendarPage .calendar-agenda-tip p{color:#718a87!important}
 body #calendarPage .calendar-agenda-live{background:#e1f7f1!important;color:#159d91!important;border-color:#c8eee5!important}
 @media(max-width:700px){body #calendarPage{background:#f7faf9!important}body #calendarPage .calendar-insight-strip{gap:8px}body #calendarPage .calendar-insight-card{padding:11px 9px}}
+
+
+/* CALENDAR CONTENT COLUMNS — keep titles readable inside each date cell */
+body #calendarPage .calendar-day-cell{
+  min-width:0;
+  min-height:122px;
+  height:auto;
+  overflow:visible;
+}
+body #calendarPage .calendar-event-chip{
+  width:100%;
+  min-width:0;
+  height:auto;
+  align-items:stretch;
+  white-space:normal;
+  overflow:visible;
+  padding:7px 8px;
+  gap:4px;
+}
+body #calendarPage .calendar-event-chip b{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  white-space:normal;
+  overflow:hidden;
+  text-overflow:clip;
+  overflow-wrap:anywhere;
+  word-break:normal;
+  line-height:1.35;
+}
+body #calendarPage .calendar-event-chip small{
+  display:block;
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+  overflow-wrap:anywhere;
+  line-height:1.3;
+}
+body #calendarPage .note-ap-calendar-grid.view-week .calendar-day-cell,
+body #calendarPage .note-ap-calendar-grid.view-day .calendar-day-cell{
+  height:auto;
+  overflow:visible;
+}
+@media(max-width:700px){
+  body #calendarPage .calendar-event-chip{padding:5px 4px;gap:3px}
+  body #calendarPage .calendar-event-chip b{-webkit-line-clamp:3;font-size:9px!important}
+  body #calendarPage .calendar-event-chip small{font-size:8px!important}
+}

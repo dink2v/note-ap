@@ -1778,3 +1778,38 @@ body.calendar-item-open{overflow:hidden}
   padding-left: 10px !important;
   padding-right: 10px !important;
 }
+
+
+/* VISIT — Talent picker yang lebih rapi dan mudah digunakan */
+.visit-multiselect{z-index:2}
+.visit-multiselect[open]{z-index:30}
+.visit-multiselect-menu{
+  left:50%;right:auto;transform:translateX(-50%);
+  width:260px;min-width:240px;max-width:min(280px,calc(100vw - 32px));
+  max-height:none;overflow:visible;padding:0;border:1px solid #dce9e1;border-radius:14px;
+  box-shadow:0 18px 44px rgba(25,61,43,.18);text-align:left;background:#fff
+}
+.visit-talent-menu-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 14px 11px;border-bottom:1px solid #edf2ee}
+.visit-talent-menu-head>div{display:grid;gap:3px;text-align:left}
+.visit-talent-menu-head b{font:800 12px "Plus Jakarta Sans";color:#203c2d}
+.visit-talent-menu-head small{font:500 10px "DM Sans";color:#84928a}
+.visit-talent-count{flex:none;padding:5px 8px;border-radius:20px;background:#eaf6ef;color:#23764c;font:700 9px "DM Sans"}
+.visit-talent-search-wrap{display:flex;align-items:center;gap:8px;margin:10px 11px;padding:0 10px;border:1px solid #e5ece7;border-radius:9px;background:#f8faf8;color:#7b8c81}
+.visit-talent-search-wrap>span{font-size:17px;line-height:1}
+.visit-talent-search{width:100%;min-width:0;height:34px;border:0!important;outline:0!important;background:transparent!important;box-shadow:none!important;color:#294536;font:500 11px "DM Sans"}
+.visit-talent-options{display:grid;gap:2px;max-height:190px;overflow:auto;padding:2px 9px 9px}
+.visit-talent-option{display:flex;align-items:center;gap:9px;padding:9px 9px;border-radius:8px;cursor:pointer;color:#42594a;font:600 11px "DM Sans";text-align:left;transition:background .15s ease}
+.visit-talent-option:hover{background:#f1f8f3}
+.visit-talent-option[hidden]{display:none}
+.visit-talent-option input{width:15px;height:15px;flex:none;margin:0;accent-color:#218653}
+.visit-talent-option span{flex:1;min-width:0}
+.visit-talent-option i{width:7px;height:7px;border-radius:50%;background:transparent}
+.visit-talent-option:has(input:checked){background:#eff8f2;color:#1f7547}
+.visit-talent-option:has(input:checked) i{background:#2c9b60}
+.visit-talent-empty{padding:14px 12px;text-align:center;color:#8b9990;font:500 10px "DM Sans"}
+.visit-talent-empty[hidden]{display:none}
+.visit-talent-menu-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 13px;border-top:1px solid #edf2ee;background:#fbfdfb;border-radius:0 0 14px 14px;color:#43805b;font:600 9px "DM Sans"}
+.visit-talent-menu-foot small{color:#96a39a;font-weight:500}
+@media(max-width:760px){
+  .visit-multiselect-menu{left:auto;right:0;transform:none;width:250px;max-width:calc(100vw - 28px)}
+}

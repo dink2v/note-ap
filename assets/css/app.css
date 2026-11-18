@@ -3970,3 +3970,47 @@ button,a{touch-action:manipulation}
 :root[data-theme="dark"] body #calendarPage .calendar-planner-footnote span {
   color:#8edacb !important;
 }
+
+
+/* CONTENT CALENDAR — improve typography size and readability in both themes */
+#calendarPage .calendar-page-heading h1{font-size:28px!important;line-height:1.25!important}
+#calendarPage .calendar-page-heading .eyebrow,
+#calendarPage .calendar-planner-kicker{font-size:11px!important;letter-spacing:.9px!important}
+#calendarPage .calendar-page-heading .muted{font-size:14px!important;line-height:1.6!important}
+#calendarPage .calendar-insight-card small{font-size:11px!important;letter-spacing:.45px!important;line-height:1.4!important}
+#calendarPage .calendar-insight-card b{font-size:23px!important;line-height:1.25!important}
+#calendarPage .calendar-toolbar-title h2{font-size:21px!important;line-height:1.3!important}
+#calendarPage .calendar-toolbar-title p{font-size:12px!important;line-height:1.55!important}
+#calendarPage .calendar-planner-controls strong{font-size:14px!important}
+#calendarPage .calendar-view-switch button{font-size:12px!important;padding:8px 12px!important}
+#calendarPage .calendar-planner-legend{font-size:11px!important}
+#calendarPage .calendar-weekday{font-size:12px!important;padding:11px 5px!important}
+#calendarPage .calendar-day-number{font-size:13px!important;width:27px!important;height:27px!important}
+#calendarPage .calendar-day-add{font-size:18px!important;width:25px!important;height:25px!important}
+#calendarPage .calendar-event-chip{padding:7px 8px!important;gap:4px!important}
+#calendarPage .calendar-event-chip b{font-size:11px!important;line-height:1.35!important}
+#calendarPage .calendar-event-chip small{font-size:10px!important;line-height:1.3!important}
+#calendarPage .calendar-agenda-heading h3{font-size:17px!important;line-height:1.35!important}
+#calendarPage .calendar-agenda-date b{font-size:16px!important}
+#calendarPage .calendar-agenda-date small{font-size:10px!important}
+#calendarPage .calendar-agenda-copy b{font-size:12px!important;line-height:1.4!important}
+#calendarPage .calendar-agenda-copy small{font-size:11px!important;line-height:1.4!important}
+#calendarPage .calendar-agenda-empty{font-size:12px!important;line-height:1.5!important}
+#calendarPage .calendar-agenda-tip b{font-size:12px!important}
+#calendarPage .calendar-agenda-tip p{font-size:11px!important;line-height:1.55!important}
+#calendarPage .calendar-planner-footnote{font-size:11px!important;line-height:1.6!important}
+@media(max-width:700px){
+  #calendarPage .calendar-page-heading h1{font-size:24px!important}
+  #calendarPage .calendar-page-heading .muted{font-size:13px!important}
+  #calendarPage .calendar-insight-card small{font-size:10px!important}
+  #calendarPage .calendar-insight-card b{font-size:20px!important}
+  #calendarPage .calendar-toolbar-title h2{font-size:18px!important}
+  #calendarPage .calendar-toolbar-title p{font-size:11px!important}
+  #calendarPage .calendar-weekday{font-size:10px!important;padding:8px 2px!important}
+  #calendarPage .calendar-day-number{font-size:12px!important;width:24px!important;height:24px!important}
+  #calendarPage .calendar-event-chip{padding:5px 4px!important}
+  #calendarPage .calendar-event-chip b{font-size:10px!important}
+  #calendarPage .calendar-event-chip small{font-size:9px!important}
+  #calendarPage .calendar-agenda-copy b{font-size:11px!important}
+  #calendarPage .calendar-agenda-copy small{font-size:10px!important}
+}

@@ -1813,3 +1813,8 @@ body.calendar-item-open{overflow:hidden}
 @media(max-width:760px){
   .visit-multiselect-menu{left:auto;right:0;transform:none;width:250px;max-width:calc(100vw - 28px)}
 }
+
+/* Visit Talent picker: dropdown mengambang agar tidak terpotong wrapper tabel */
+#visitTableBody .visit-multiselect[open]{position:relative;z-index:9999}
+#visitTableBody .visit-multiselect-menu{z-index:9999;max-height:min(420px,calc(100vh - 28px));overflow:auto}
+#visitTableBody .visit-talent-options{max-height:220px}

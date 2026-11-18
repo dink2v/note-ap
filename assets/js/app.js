@@ -19,6 +19,7 @@
   window.addEventListener('message',event=>{
     if(event.source!==contentModalFrame.contentWindow||!event.data||event.data.type!=='NOTE_AP_CONTENT_SAVED')return;
     closeContentModal();
+    renderDashboard();
     if(!contentPage.hidden)renderContentList();
     if(!kanbanPage.hidden)renderKanban();
     renderCalendarPlanner();
@@ -299,7 +300,7 @@
     if(index<0){showToast('Konten tidak ditemukan. Jadwal tidak dipindahkan.');return;}
     if(!targetDate||String(items[index].postingDate||'')===targetDate)return;
     const now=new Date().toISOString();items[index]={...items[index],postingDate:targetDate,updatedAt:now};
-    try{localStorage.setItem('noteAp.contents',JSON.stringify(items));calendarSuppressClickUntil=Date.now()+700;renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();showToast('Jadwal berhasil dipindahkan ke '+formatContentDate(targetDate)+'.');}
+    try{localStorage.setItem('noteAp.contents',JSON.stringify(items));calendarSuppressClickUntil=Date.now()+700;renderDashboard();renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();showToast('Jadwal berhasil dipindahkan ke '+formatContentDate(targetDate)+'.');}
     catch(error){showToast('Jadwal gagal dipindahkan. Penyimpanan browser tidak dapat diperbarui.');}
   }
   function renderCalendarAgenda(items){
@@ -456,7 +457,7 @@
     const updated={...(existingIndex>=0?items[existingIndex]:{}),title:values.title.trim(),platform:values.platform,format:values.format,pillar:values.pillar.trim(),status:values.status,postingDate:values.postingDate,postingTime:values.postingTime,updatedAt:now};
     if(existingIndex>=0)items[existingIndex]=updated;
     else{updated.id='NAP-'+Date.now().toString(36).toUpperCase();updated.createdAt=now;updated.duration='';updated.reference='';updated.hook='';updated.visualHook='';updated.body='';updated.visualBody='';updated.cta='';updated.visualCTA='';updated.caption='';updated.notes='';updated.approvals=[];updated.comments=[];updated.history=[{type:'Jadwal konten dibuat dari Kalender Note AP',at:now}];updated.storage='local';items.unshift(updated);}
-    try{localStorage.setItem('noteAp.contents',JSON.stringify(items));closeCalendarItemModal();renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();showToast(existingIndex>=0?'Jadwal konten berhasil diperbarui.':'Jadwal konten berhasil ditambahkan.');}
+    try{localStorage.setItem('noteAp.contents',JSON.stringify(items));closeCalendarItemModal();renderDashboard();renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();showToast(existingIndex>=0?'Jadwal konten berhasil diperbarui.':'Jadwal konten berhasil ditambahkan.');}
     catch(error){showToast('Jadwal gagal disimpan. Penyimpanan browser mungkin penuh.');}
   });
   document.querySelectorAll('[data-calendar-view]').forEach(button=>button.addEventListener('click',()=>{calendarViewMode=button.dataset.calendarView||'month';renderCalendarPlanner();}));
@@ -1168,7 +1169,7 @@ function renderVisitCalendar(visits){
 
   const kanbanStages=['Ideation','Planning','Production','Editing','Review','Ready to Publish','Published'];
   function readKanban(){try{const value=JSON.parse(localStorage.getItem('noteAp.contents')||'[]');return Array.isArray(value)?value:[];}catch(error){return[];}}
-  function writeKanban(items){localStorage.setItem('noteAp.contents',JSON.stringify(items));}
+  function writeKanban(items){localStorage.setItem('noteAp.contents',JSON.stringify(items));renderDashboard();}
   function renderKanban(){
     const items=readKanban();
     document.querySelectorAll('.kanban-column').forEach(column=>{
@@ -1406,7 +1407,7 @@ function renderVisitCalendar(visits){
       const finalItems=[...merged.values()];
       localStorage.setItem('noteAp.contents',JSON.stringify(finalItems));
       localStorage.setItem('noteAp.googleCalendar.lastSeenContentIds',JSON.stringify(finalItems.map(item=>String(item.id))));
-      renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();
+      renderDashboard();renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();
       const c=result.counts||{};
       setStatus('Sinkronisasi berhasil · '+(c.created||0)+' dibuat · '+(c.updated||0)+' diperbarui · '+(c.imported||0)+' diimpor · '+(c.conflicts||0)+' konflik diselesaikan. Waktu: '+new Date(result.syncedAt).toLocaleString('id-ID'),true);
       showToast('Google Calendar dan Note AP berhasil disinkronkan.');

@@ -18,7 +18,7 @@
   window.noteApContentModalClose=closeContentModal;
   window.addEventListener('message',event=>{
     if(event.source!==contentModalFrame.contentWindow||!event.data||event.data.type!=='NOTE_AP_CONTENT_SAVED')return;
-    closeContentModal();
+    if(event.data.mode!=='detail')closeContentModal();
     renderDashboard();
     if(!contentPage.hidden)renderContentList();
     if(!kanbanPage.hidden)renderKanban();

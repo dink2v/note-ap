@@ -510,7 +510,7 @@ tr.append(numberCell);
       tr.classList.toggle('is-visit-checked',visitSelectedIds.has(v.id));
       const visitTableFields=visitFields;
       visitTableFields.forEach(field=>{const td=document.createElement('td');td.innerHTML=makeVisitInput(field,v[field.key],v.id);tr.append(td);});
-      tr.addEventListener('click',event=>{if(event.target.closest('input,select,textarea'))return;visitSelectedId=v.id;renderVisitTables();});
+      tr.addEventListener('click',event=>{if(event.target.closest('input,select,textarea,.visit-multiselect,.visit-multiselect *'))return;visitSelectedId=v.id;renderVisitTables();});
       body.append(tr);
     });
     // Batasi jumlah baris yang tampil menjadi tepat empat per halaman.

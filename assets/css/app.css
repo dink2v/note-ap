@@ -5780,3 +5780,41 @@ body .content-form-wrap #contentForm[data-editable="true"] .field select{cursor:
   #calendarContentDetailModal .calendar-original-detail-intro h3{font-size:18px}
   #calendarContentDetailModal .calendar-item-actions{padding:11px 14px 14px!important}
 }
+
+/* NOTE AP — restore original translucent glass detail panel */
+#calendarContentDetailModal .calendar-item-dialog{
+  background:rgba(255,255,255,.70)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(155%)!important;
+  backdrop-filter:blur(22px) saturate(155%)!important;
+  border:1px solid rgba(255,255,255,.78)!important;
+  box-shadow:0 24px 72px rgba(35,53,44,.20),inset 0 1px 0 rgba(255,255,255,.68)!important;
+}
+#calendarContentDetailModal .calendar-item-dialog-head,
+#calendarContentDetailModal .calendar-item-actions{
+  background:rgba(255,255,255,.38)!important;
+  -webkit-backdrop-filter:blur(18px)!important;
+  backdrop-filter:blur(18px)!important;
+  border-color:rgba(255,255,255,.48)!important;
+}
+#calendarContentDetailModal .calendar-content-detail-body{
+  background:transparent!important;
+}
+#calendarContentDetailModal .calendar-original-detail-section{
+  background:rgba(255,255,255,.92)!important;
+  border-color:rgba(226,235,229,.88)!important;
+}
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-item-dialog{
+  background:rgba(27,42,34,.72)!important;
+  border-color:rgba(255,255,255,.13)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(145%)!important;
+  backdrop-filter:blur(22px) saturate(145%)!important;
+}
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-item-dialog-head,
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-item-actions{
+  background:rgba(27,42,34,.42)!important;
+  border-color:rgba(255,255,255,.10)!important;
+}
+:root[data-theme="dark"] #calendarContentDetailModal .calendar-original-detail-section{
+  background:rgba(35,53,43,.94)!important;
+  border-color:rgba(255,255,255,.10)!important;
+}

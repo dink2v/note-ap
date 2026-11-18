@@ -109,7 +109,7 @@ const initialCalendarDate=pageParams.get('date');
    if(index<0)throw new Error('Data konten tidak ditemukan di penyimpanan browser ini. Data tidak diubah.');
    const now=new Date().toISOString(),updated={...items[index],...makeItemFromForm(),updatedAt:now};
    updated.history=[...(Array.isArray(items[index].history)?items[index].history:[]),{type:'Konten diperbarui melalui Detail Konten',at:now}];
-   items[index]=updated;writeItems(items);detailItem=updated;logActivity('Perubahan konten berhasil disimpan.');showToast('Perubahan berhasil disimpan ke konten yang sama.');editMode=false;setFormLocked(true);const topEdit=document.getElementById('detailEditTop');if(topEdit){topEdit.textContent='Edit Konten';topEdit.classList.remove('is-editing');topEdit.setAttribute('aria-label','Aktifkan mode edit konten');}postSaved(updated.id,'local','detail');
+   items[index]=updated;writeItems(items);detailItem=updated;fillForm(updated);editMode=false;setFormLocked(true);const topEdit=document.getElementById('detailEditTop');if(topEdit){topEdit.textContent='Edit Konten';topEdit.classList.remove('is-editing');topEdit.setAttribute('aria-label','Aktifkan mode edit konten');}showToast('Perubahan berhasil disimpan. Detail kembali ke mode baca.');postSaved(updated.id,'local','detail');
   }else{
    const item=makeItemFromForm(),now=new Date(),id='NAP-'+now.getTime().toString(36).toUpperCase();
    const saved={...item,id,createdAt:now.toISOString(),updatedAt:now.toISOString(),storage:'local',approvals:[],comments:[],history:[{type:'Konten dibuat melalui Note AP',at:now.toISOString()}]};
@@ -148,37 +148,29 @@ if(pageParams.get('mode')==='detail'){
  detailItem=readItems().find(item=>String(item.id)===String(id));
  if(detailItem){
   fillForm(detailItem);
-  // Detail langsung dapat diedit. Tidak lagi mengunci field dan menunggu
-  // event tombol Edit yang sebelumnya gagal terpicu di dalam iframe.
-  editMode=true;
-  setFormLocked(false);
-  form.querySelectorAll('input, select, textarea, button').forEach(control=>{
-   control.disabled=false;
-   control.removeAttribute('disabled');
-   control.readOnly=false;
-   control.removeAttribute('readonly');
-   control.removeAttribute('aria-disabled');
-  });
-  form.querySelectorAll('fieldset').forEach(group=>{
-   group.disabled=false;
-   group.removeAttribute('disabled');
-  });
-  const save=document.querySelector('button[type="submit"][form="contentForm"]');
-  if(save){save.disabled=false;save.removeAttribute('disabled');}
+  // Detail dibuka dalam mode baca. Pengguna harus menekan Edit Konten
+  // sebelum field dapat diubah; setelah disimpan, kembali ke mode baca.
+  editMode=false;
+  setFormLocked(true);
   const topEdit=document.createElement('button');
   topEdit.type='button';
   topEdit.id='detailEditTop';
-  topEdit.className='secondary-btn detail-edit-top is-editing';
-  topEdit.textContent='Sedang Mengedit';
-  topEdit.setAttribute('aria-label','Fokus ke kolom edit konten');
+  topEdit.className='secondary-btn detail-edit-top';
+  topEdit.textContent='Edit Konten';
+  topEdit.setAttribute('aria-label','Aktifkan mode edit konten');
   titleRow?.appendChild(topEdit);
   editButton?.remove();
   topEdit.addEventListener('click',()=>{
-   const wasLocked=!editMode;
-   if(wasLocked){editMode=true;setFormLocked(false);topEdit.textContent='Sedang Mengedit';topEdit.classList.add('is-editing');topEdit.setAttribute('aria-label','Fokus ke kolom edit konten');}
+   if(!editMode){
+    editMode=true;
+    setFormLocked(false);
+    topEdit.textContent='Sedang Mengedit';
+    topEdit.classList.add('is-editing');
+    topEdit.setAttribute('aria-label','Mode edit konten aktif');
+    showToast('Mode edit aktif. Ubah kolom yang diperlukan lalu klik Simpan Konten.');
+   }
    const firstField=form.elements.namedItem('title');
    if(firstField){firstField.focus();firstField.select?.();}
-   showToast(wasLocked?'Mode edit aktif. Ubah kolom yang diperlukan lalu klik Simpan Konten.':'Ubah kolom yang diperlukan lalu klik Simpan Konten.');
   });
  }else{
   setFormLocked(true);

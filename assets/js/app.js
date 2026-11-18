@@ -237,7 +237,7 @@
     }else calendarMonthLabel.textContent=new Intl.DateTimeFormat('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(calendarCursor);
     calendarGrid.className='note-ap-calendar-grid view-'+calendarViewMode;
     calendarGrid.replaceChildren();
-    ['Sen','Sel','Rab','Kam','Jum','Sab','Min'].slice(0,calendarViewMode==='day'?1:7).forEach(day=>{const label=document.createElement('div');label.className='calendar-weekday';label.textContent=day;calendarGrid.append(label);});
+    const weekdayLabels=calendarViewMode==='day'?[new Intl.DateTimeFormat('id-ID',{weekday:'short'}).format(calendarCursor)]:['Sen','Sel','Rab','Kam','Jum','Sab','Min'];weekdayLabels.forEach(day=>{const label=document.createElement('div');label.className='calendar-weekday';label.textContent=day;calendarGrid.append(label);});
     let startDate,dayCount;
     if(calendarViewMode==='month'){const first=new Date(year,month,1),offset=(first.getDay()+6)%7;startDate=new Date(year,month,1-offset);dayCount=42;}
     else if(calendarViewMode==='week'){startDate=new Date(calendarCursor);startDate.setDate(startDate.getDate()-((startDate.getDay()+6)%7));dayCount=7;}

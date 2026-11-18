@@ -5137,3 +5137,147 @@ body #dashboardPage .stat-icon.blue{background:#e5f7f4!important;color:#169d91!i
 body #dashboardPage .stat-icon.orange{background:#fff5df!important;color:#d9952f!important}
 body #dashboardPage .stat-icon.green{background:#e6f7ef!important;color:#299b70!important}
 body #dashboardPage .stat-icon.teal{background:#e3f7f5!important;color:#159d91!important}
+
+
+/* NOTE AP — EXACT ORIGINAL ORANGE x TOSKA LIGHT DESIGN */
+:root,:root[data-theme="light"],:root[data-theme="dark"]{
+  color-scheme:light!important;
+  --green:#f28c38!important;--green-dark:#d97726!important;
+  --ink:#263548!important;--muted:#8492a6!important;--line:#e9eef3!important;
+  --bg:#f7f9fc!important;--white:#fff!important;
+  --na-orange:#f28c38!important;--na-orange-soft:#fff1e5!important;
+  --na-teal:#20b6a6!important;--na-teal-dark:#159d91!important;--na-teal-soft:#e4f7f4!important;
+  --panel:#fff!important;--form-panel-bg:#fff!important;
+  --surface-0:#f7f9fc!important;--surface-1:#fff!important;--surface-2:#fff!important;
+  --surface-3:#f8fafc!important;--surface-4:#f0f8f6!important;--surface-hover:#f1fbf9!important;
+  --input-bg:#fff!important;--border-strong:#dce7e4!important;
+  --text-primary:#263548!important;--text-secondary:#8492a6!important;
+}
+html,body,body :is(.app-shell,.main-area,.page-wrap,.content-form-wrap,
+.dashboard-page,.calendar-page,.creative-calendar-page,.content-page,
+.kanban-page,.visit-page,.help-page,.settings-page,.chat-page){
+  background:#f7f9fc!important;color:#263548!important;
+}
+body :is(.sidebar,.mobile-top){background:#fff!important;color:#263548!important;border-color:#e8edf2!important}
+body :is(.brand,.brand b,.brand small,.sidebar-footer,.sidebar-footer b,
+.sidebar-footer small,.nav-label,.nav-link,.mobile-top button){color:#738297!important}
+body .brand-mark,body .avatar{background:#fff1e5!important;color:#d97726!important}
+body .nav-link:hover,body .nav-link.active{background:#e4f7f4!important;color:#159d91!important;border-color:#bce9e2!important}
+body .nav-link.active{box-shadow:inset 3px 0 #20b6a6!important}
+body :is(.panel,.stat-card,.form-panel,.content-filter-panel,.content-list-panel,
+.kanban-card,.visit-card,.visit-editor,.visit-table-panel,.visit-table-toolbar,
+.visit-table-wrap,.settings-card,.settings-panel,.settings-nav,.settings-content,
+.settings-preference-row,.settings-mini-card,.reference-category-card,.help-topic-card,
+.help-faq-item,.chat-workspace,.chat-thread,.chat-composer,.notification-popover,
+.command-dialog,.command-result,.calendar-planner-panel,.calendar-main-panel,
+.calendar-agenda-panel,.calendar-insight-card,.calendar-item-dialog,
+.calendar-detail-section,.calendar-demo,.calendar-demo-form,.calendar-demo-list-panel,
+.calendar-demo-history,.expand-dialog,.content-modal-dialog,.content-table,
+.visit-main-table,.visit-table,.help-chat-block,.dashboard-quick-actions){
+  background:#fff!important;color:#263548!important;border-color:#e9eef3!important;
+  box-shadow:0 5px 18px rgba(39,61,83,.055)!important;
+}
+body :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea,
+[contenteditable=true],.search-input,.filter-input,.form-control,.field input,.field select,
+.field textarea,.content-search input,.content-filter input,.content-filter select,
+.visit-form input,.visit-form select,.visit-form textarea,.visit-inline-input,
+.visit-inline-textarea,.settings-field input,.settings-field select,.settings-field textarea,
+.settings-preference-row select,.calendar-item-field input,.calendar-item-field select,
+.calendar-demo-form input,.command-input-wrap input,.chat-composer textarea,.expand-dialog textarea){
+  background:#fff!important;color:#263548!important;border-color:#dce7e4!important;
+  caret-color:#263548!important;color-scheme:light!important;
+}
+body input::placeholder,body textarea::placeholder{color:#9aa6b7!important;opacity:1}
+body select option{background:#fff!important;color:#263548!important}
+body :is(h1,h2,h3,h4,h5,h6,.page-title,.brand b,.settings-content h2,.settings-content h3,
+.settings-nav-item b,.settings-preference-row b,.reference-category-card>header b,
+.reference-item>span,.settings-mini-card b,.help-topic-card b,.help-faq-item summary,
+.chat-list-body b,.chat-thread-title b,.chat-message p,.command-result-copy b,
+.upcoming-info b,.visit-today-item b,.visit-detail-field b,.calendar-detail-field b,
+.stat-value,.stat-card strong){color:#263548!important}
+body :is(p,small,.muted,.text-muted,.helper-text,.form-hint,.empty-state,
+.settings-nav-item small,.settings-preference-row p,.settings-integration-card p,
+.settings-info-note,.reference-empty,.help-welcome-card p,.help-topic-card p,
+.help-faq-item p,.chat-list-body small,.chat-message time,.visit-today-location,
+.visit-today-empty,.visit-detail-placeholder,.calendar-agenda-empty,
+.calendar-planner-footnote,.page-wrap>.muted,.updated-label,.stat-label,.stat-foot,
+.page-footer,.command-group-label){color:#8492a6!important}
+body .eyebrow,body .form-breadcrumb b,body .text-link,
+body .notification-heading button,body .all-notifications,
+body .visit-actions button,body .visit-kicker,body .visit-today-time,
+body .visit-today-select{color:#159d91!important}
+body :is(.primary-btn,.btn-primary,.submit-btn,.save-btn,button[type=submit],.primary-button){
+  background:#f28c38!important;border-color:#f28c38!important;color:#fff!important;
+  box-shadow:0 5px 13px rgba(242,140,56,.15)!important;
+}
+body :is(.secondary-btn,.filter-reset-btn,.content-modal-close,.calendar-item-cancel,
+.calendar-item-actions button,.visit-page-btn,.visit-month-nav button,
+.visit-calendar-header button,.visit-view-toggle button:not(.active),
+.reference-item-actions button,.settings-file-btn,.settings-data-actions .secondary-btn,
+.notification-btn,.command-launcher,.calendar-planner-controls button,
+.calendar-view-switch button:not(.active),.calendar-item-dialog-head>button,
+.calendar-demo-event-actions button){
+  background:#fff!important;color:#738297!important;border-color:#e1e9ef!important;
+}
+body .status-chip,body .approved-pill{background:#e4f7f4!important;color:#159d91!important}
+body .pending-pill{background:#fff1e5!important;color:#bd6d27!important}
+body .platform-cell{color:#159d91!important}
+body .unread-dot{background:#f28c38!important}
+
+/* Calendar keeps the original orange, turquoise and soft green format coding */
+body #calendarPage :is(.calendar-insight-card,.calendar-planner-panel,.calendar-main-panel,
+.calendar-agenda-panel,.calendar-item-dialog,.calendar-demo,.calendar-demo-form,
+.calendar-demo-list-panel,.calendar-demo-history,.calendar-detail-section){
+  background:#fff!important;color:#263548!important;border-color:#e9eef3!important;
+}
+body #calendarPage :is(.calendar-toolbar,.calendar-planner-controls,.calendar-view-switch,
+.calendar-agenda-item,.calendar-day-cell,.calendar-weekday,.calendar-planner-legend){
+  background:#fff!important;color:#475569!important;border-color:#e9eef3!important;
+}
+body #calendarPage .calendar-view-switch button.active{background:#20b6a6!important;color:#fff!important}
+body #calendarPage .calendar-day-cell.today,body #calendarPage .calendar-day-cell.is-today{
+  background:#e4f7f4!important;outline:1px solid #8ed8ce!important;
+}
+body #calendarPage .calendar-event-chip.reels{background:#fff1e5!important;color:#bd6d27!important;border-color:#f5d7bd!important}
+body #calendarPage .calendar-event-chip.carousel{background:#e4f7f4!important;color:#159d91!important;border-color:#bce9e2!important}
+body #calendarPage .calendar-event-chip.feed{background:#edf8ef!important;color:#39824a!important;border-color:#c5e6cb!important}
+body #calendarPage .calendar-event-chip.other{background:#f1f5f9!important;color:#64748b!important;border-color:#e1e9ef!important}
+
+/* Content and tables */
+body #contentPage :is(.content-filter-panel,.content-list-panel,.content-table){background:#fff!important;color:#263548!important;border-color:#e9eef3!important}
+body #contentPage .content-table th{background:#f3faf8!important;color:#718a87!important;border-color:#e9eef3!important}
+body #contentPage .content-table td{background:#fff!important;color:#475569!important;border-color:#edf2f3!important}
+body #contentPage .content-table tbody tr:hover>td{background:#f3fbfa!important}
+body #contentPage .filter-reset-btn{background:#fff!important;color:#159d91!important;border-color:#bce9e2!important}
+
+/* Kanban */
+body #kanbanPage .kanban-column{background:#f0f8f6!important;border:1px solid #e1f0ed!important}
+body #kanbanPage .kanban-column>header h2{color:#159d91!important}
+body #kanbanPage .stage-count{background:#dff3ef!important;color:#25877e!important;border-color:#c9e9e3!important}
+body #kanbanPage .kanban-card{background:#fff!important;color:#263548!important;border-color:#e9eef3!important;box-shadow:0 3px 12px rgba(28,74,50,.035)!important}
+body #kanbanPage .kanban-card-top b{color:#263548!important}
+body #kanbanPage .kanban-card-actions button:hover{background:#e4f7f4!important;color:#159d91!important;border-color:#bce9e2!important}
+body #kanbanPage .kanban-column.drop-target{background:#e4f7f4!important;border-color:#8ed8ce!important}
+body #kanbanPage .kanban-add-slot:hover{background:#e4f7f4!important;color:#159d91!important;border-color:#71cfc3!important}
+
+/* Visit */
+body #visitPage :is(.visit-card,.visit-table-panel,.visit-editor,.visit-table-toolbar,
+.visit-table-wrap,.visit-grid-panel,.visit-table){background:#fff!important;color:#263548!important;border-color:#e9eef3!important}
+body #visitPage .visit-metric-card{background:#fff1e5!important;color:#263548!important;border-color:#f5dfca!important}
+body #visitPage .visit-metric-card:nth-child(even){background:#e4f7f4!important;border-color:#ccece7!important}
+body #visitPage .visit-view-toggle{background:#f1f5f9!important;border-color:#e1e9ef!important}
+body #visitPage .visit-view-toggle button.active{background:#20b6a6!important;color:#fff!important;border-color:#20b6a6!important}
+body #visitPage .visit-table th{background:#f3faf8!important;color:#718a87!important;border-color:#e9eef3!important}
+body #visitPage .visit-table td{background:#fff!important;color:#475569!important;border-color:#edf2f3!important}
+body #visitPage .visit-table tbody tr:hover>td{background:#f3fbfa!important}
+body #visitPage .visit-table tbody tr.selected>td{background:#e4f7f4!important}
+body #visitPage .visit-calendar-day-cell{background:#fff!important;color:#334155!important;border-color:#edf2f3!important}
+body #visitPage .visit-calendar-day-cell.is-today{background:#e4f7f4!important;box-shadow:inset 0 0 0 1px #8ed8ce!important}
+body #visitPage .visit-calendar-event-chip.progress{background:#fff1e5!important;border-color:#f5d7bd!important;border-left-color:#f28c38!important;color:#bd6d27!important}
+body #visitPage .visit-calendar-event-chip.done{background:#edf8ef!important;border-color:#c5e6cb!important;border-left-color:#86c98e!important;color:#39824a!important}
+body #visitPage .visit-calendar-event-chip.cancelled{background:#fff0f1!important;border-color:#f0c5c9!important;border-left-color:#d68b91!important;color:#a64d56!important}
+body #visitPage .visit-calendar-event-chip.planned{background:#e4f7f4!important;border-color:#bce9e2!important;border-left-color:#20b6a6!important;color:#159d91!important}
+body #visitPage .visit-status-dot.planned{background:#20b6a6!important}
+body #visitPage .visit-status-dot.progress{background:#f28c38!important}
+body #visitPage .visit-status-dot.done{background:#86c98e!important}
+body #visitPage .visit-status-dot.cancelled{background:#d68b91!important}

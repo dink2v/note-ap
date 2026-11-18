@@ -265,7 +265,9 @@
     document.querySelectorAll('[data-calendar-view]').forEach(button=>{const active=button.dataset.calendarView===calendarViewMode;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
     const hint=document.getElementById('calendarViewHint');if(hint)hint.textContent=calendarViewMode==='month'?'Ringkasan satu bulan. Seret kartu ke tanggal lain untuk menjadwalkan ulang.':calendarViewMode==='week'?'Fokus jadwal satu minggu dengan ruang lebih lega.':'Fokus satu hari dan seluruh konten yang dijadwalkan.';
   }
+  let selectedCalendarContent=null;
   function openCalendarContentDetail(item){
+    selectedCalendarContent=item;
     const modal=document.getElementById('calendarContentDetailModal');
     const body=document.getElementById('calendarContentDetailBody');
     if(!modal||!body||!item)return;
@@ -298,6 +300,12 @@
   }
   document.getElementById('calendarContentDetailClose')?.addEventListener('click',closeCalendarContentDetail);
   document.getElementById('calendarContentDetailDone')?.addEventListener('click',closeCalendarContentDetail);
+  document.getElementById('calendarContentDetailEdit')?.addEventListener('click',()=>{
+    if(!selectedCalendarContent)return;
+    const item=selectedCalendarContent;
+    closeCalendarContentDetail();
+    openContentDetail(item);
+  });
   document.getElementById('calendarContentDetailModal')?.addEventListener('click',event=>{if(event.target.id==='calendarContentDetailModal')closeCalendarContentDetail();});
   function openCalendarItemModal(item,dateValue){
     if(!calendarItemModal||!calendarItemForm)return;

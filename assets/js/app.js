@@ -602,7 +602,88 @@ tr.append(number);
     if(visitViewMode==='grid')renderVisitCalendar(allVisits);
     renderSettingsVisitTable(allVisits);
   }
-  function renderVisitCalendar(visits){
+  
+  // Pengaturan ukuran tabel Visit: tarik batas header untuk lebar kolom,
+  // tarik tepi bawah baris untuk tinggi baris. Preferensi disimpan di browser.
+  (function enableVisitTableResizing(){
+    const table=document.querySelector('.visit-main-table');
+    if(!table)return;
+    const storageKey='noteAp.visitTableDimensions.v1';
+    let prefs={};
+    try{prefs=JSON.parse(localStorage.getItem(storageKey)||'{}')||{};}catch(_){prefs={};}
+    const header=table.tHead?.rows?.[0];
+    if(!header)return;
+    const ensureCols=()=>{
+      let group=table.querySelector('colgroup[data-visit-resize-cols]');
+      if(!group){
+        group=document.createElement('colgroup');group.dataset.visitResizeCols='true';
+        Array.from(header.cells).forEach((th,index)=>{
+          const col=document.createElement('col');
+          const saved=Number(prefs.widths?.[index]);
+          if(saved>35)col.style.width=saved+'px';
+          group.append(col);
+        });
+        table.insertBefore(group,table.firstChild);
+      }
+      return group;
+    };
+    const applyRowHeights=()=>{
+      table.querySelectorAll('tbody tr').forEach((tr,index)=>{
+        const key=tr.dataset.visitId||tr.dataset.extraVisitRow||('row-'+index);
+        const height=Number(prefs.heights?.[key]);
+        if(height>=42)tr.style.height=height+'px';
+      });
+    };
+    ensureCols();applyRowHeights();
+    let drag=null;
+    table.addEventListener('pointerdown',event=>{
+      if(event.button!==0)return;
+      const th=event.target.closest('th');
+      if(th&&th.parentElement===header){
+        const rect=th.getBoundingClientRect();
+        if(rect.right-event.clientX>9)return;
+        const index=th.cellIndex,cols=ensureCols(),col=cols.children[index];
+        drag={type:'col',index,startX:event.clientX,startWidth:rect.width,col};
+      }else{
+        const td=event.target.closest('td');
+        const tr=td?.parentElement;
+        if(!td||!tr||td.cellIndex!==tr.cells.length-1)return;
+        const rect=tr.getBoundingClientRect();
+        if(rect.bottom-event.clientY>8)return;
+        drag={type:'row',tr,startY:event.clientY,startHeight:rect.height,key:tr.dataset.visitId||tr.dataset.extraVisitRow||('row-'+Array.from(tr.parentElement.children).indexOf(tr))};
+      }
+      if(!drag)return;
+      table.classList.add(drag.type==='col'?'is-resizing-col':'is-resizing-row');
+      event.preventDefault();
+    });
+    document.addEventListener('pointermove',event=>{
+      if(!drag)return;
+      if(drag.type==='col'){
+        const width=Math.max(54,Math.min(720,drag.startWidth+event.clientX-drag.startX));
+        drag.col.style.width=width+'px';
+        table.style.tableLayout='fixed';
+        table.style.width='max-content';
+        table.style.minWidth='100%';
+        prefs.widths=prefs.widths||{};prefs.widths[drag.index]=Math.round(width);
+      }else{
+        const height=Math.max(42,Math.min(420,drag.startHeight+event.clientY-drag.startY));
+        drag.tr.style.height=height+'px';
+        prefs.heights=prefs.heights||{};prefs.heights[drag.key]=Math.round(height);
+      }
+    });
+    const finish=()=>{
+      if(!drag)return;
+      table.classList.remove('is-resizing-col','is-resizing-row');
+      try{localStorage.setItem(storageKey,JSON.stringify(prefs));}catch(_){}
+      drag=null;
+    };
+    document.addEventListener('pointerup',finish);
+    document.addEventListener('pointercancel',finish);
+    const observer=new MutationObserver(applyRowHeights);
+    if(table.tBodies[0])observer.observe(table.tBodies[0],{childList:true});
+  })();
+
+function renderVisitCalendar(visits){
     const root=document.getElementById('visitCalendar');if(!root)return;
     root.replaceChildren();
     const year=visitCalendarMonth.getFullYear(),month=visitCalendarMonth.getMonth();

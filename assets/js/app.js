@@ -336,7 +336,7 @@
   document.querySelectorAll('[data-calendar-view]').forEach(button=>button.addEventListener('click',()=>{calendarViewMode=button.dataset.calendarView||'month';renderCalendarPlanner();}));
   document.getElementById('noteApCalendarPrev')?.addEventListener('click',()=>{if(calendarViewMode==='month')calendarCursor.setMonth(calendarCursor.getMonth()-1);else if(calendarViewMode==='week')calendarCursor.setDate(calendarCursor.getDate()-7);else calendarCursor.setDate(calendarCursor.getDate()-1);renderCalendarPlanner();});
   document.getElementById('noteApCalendarNext')?.addEventListener('click',()=>{if(calendarViewMode==='month')calendarCursor.setMonth(calendarCursor.getMonth()+1);else if(calendarViewMode==='week')calendarCursor.setDate(calendarCursor.getDate()+7);else calendarCursor.setDate(calendarCursor.getDate()+1);renderCalendarPlanner();});
-  document.getElementById('noteApCalendarToday')?.addEventListener('click',()=>{calendarCursor=new Date();calendarCursor.setDate(1);renderCalendarPlanner();});
+  document.getElementById('noteApCalendarToday')?.addEventListener('click',()=>{calendarCursor=new Date();renderCalendarPlanner();});
   renderCalendarPlanner();
   window.addEventListener('storage',event=>{if(event.key==='noteAp.contents'){renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();}});
 

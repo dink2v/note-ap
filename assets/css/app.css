@@ -4014,3 +4014,56 @@ button,a{touch-action:manipulation}
   #calendarPage .calendar-agenda-copy b{font-size:11px!important}
   #calendarPage .calendar-agenda-copy small{font-size:10px!important}
 }
+
+
+/* CONTENT PAGE — readable typography and dark-mode contrast */
+#contentPage .content-page-heading h1{font-size:28px!important;line-height:1.25!important}
+#contentPage .content-page-heading .muted{font-size:14px!important;line-height:1.6!important}
+#contentPage .content-filter-panel{gap:12px!important;padding:19px!important}
+#contentPage .content-filter>span{font-size:12px!important;line-height:1.4!important}
+#contentPage .content-search input,
+#contentPage .content-filter select,
+#contentPage .content-filter input{height:42px!important;font-size:13px!important}
+#contentPage .filter-reset-btn{height:42px!important;font-size:12px!important}
+#contentPage .content-list-heading{padding:20px 22px!important}
+#contentPage .content-list-heading h2{font-size:18px!important;line-height:1.35!important}
+#contentPage .content-list-heading .muted{font-size:12px!important}
+#contentPage .content-table th{font-size:11px!important;letter-spacing:.45px!important;padding:15px 17px!important}
+#contentPage .content-table td{font-size:13px!important;line-height:1.5!important;padding:16px 17px!important}
+#contentPage .content-table td:first-child{font-size:13px!important}
+#contentPage .content-table .status-chip{font-size:11px!important;padding:6px 10px!important}
+#contentPage .content-empty{padding:58px 20px!important}
+#contentPage .content-empty b{font-size:15px!important}
+#contentPage .content-empty p{font-size:13px!important;line-height:1.55!important}
+:root[data-theme="dark"] body #contentPage .content-filter-panel,
+:root[data-theme="dark"] body #contentPage .content-list-panel{background:#18271f!important;border-color:#3b5143!important;color:#e8f1eb!important}
+:root[data-theme="dark"] body #contentPage .content-list-heading{border-color:#35483b!important}
+:root[data-theme="dark"] body #contentPage .content-list-heading h2,
+:root[data-theme="dark"] body #contentPage .content-table td:first-child{color:#f0f6f1!important}
+:root[data-theme="dark"] body #contentPage .content-list-heading .muted,
+:root[data-theme="dark"] body #contentPage .content-filter>span{color:#b9c9be!important}
+:root[data-theme="dark"] body #contentPage .content-table th{background:#223329!important;color:#cbd9cf!important;border-color:#405746!important}
+:root[data-theme="dark"] body #contentPage .content-table td{color:#dce9e0!important;border-color:#35483b!important}
+:root[data-theme="dark"] body #contentPage .content-table tbody tr:hover>td{background:#263b2e!important}
+:root[data-theme="dark"] body #contentPage .content-search input,
+:root[data-theme="dark"] body #contentPage .content-filter select,
+:root[data-theme="dark"] body #contentPage .content-filter input{background:#111d16!important;border-color:#405746!important;color:#f0f6f1!important}
+:root[data-theme="dark"] body #contentPage .content-search input::placeholder{color:#9aada0!important;opacity:1!important}
+:root[data-theme="dark"] body #contentPage .filter-reset-btn{background:#26382d!important;border-color:#405746!important;color:#e7f1e9!important}
+:root[data-theme="dark"] body #contentPage .content-empty{color:#b9c9be!important}
+:root[data-theme="dark"] body #contentPage .content-empty b{color:#f0f6f1!important}
+:root[data-theme="dark"] body #contentPage .content-empty p{color:#b9c9be!important}
+@media(max-width:700px){
+  #contentPage .content-page-heading h1{font-size:24px!important}
+  #contentPage .content-page-heading .muted{font-size:13px!important}
+  #contentPage .content-filter-panel{padding:14px!important;gap:10px!important}
+  #contentPage .content-filter>span{font-size:11px!important}
+  #contentPage .content-search input,
+  #contentPage .content-filter select,
+  #contentPage .content-filter input{font-size:12px!important}
+  #contentPage .content-list-heading h2{font-size:16px!important}
+  #contentPage .content-table th{font-size:10px!important;padding:12px 11px!important}
+  #contentPage .content-table td{font-size:12px!important;padding:13px 11px!important}
+  #contentPage .content-table td:first-child{font-size:12px!important}
+  #contentPage .content-table .status-chip{font-size:10px!important}
+}

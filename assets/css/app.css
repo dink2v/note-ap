@@ -3671,3 +3671,94 @@ button,a{touch-action:manipulation}
 :root[data-theme="dark"] body .command-result-arrow {
   color:#b7c6bb !important;
 }
+
+
+/* DARK MODE — dashboard-only contrast repair: cards, chart, schedule and quick actions */
+:root[data-theme="dark"] #dashboardPage .stat-top,
+:root[data-theme="dark"] #dashboardPage .stat-card small,
+:root[data-theme="dark"] #dashboardPage .panel-heading .muted,
+:root[data-theme="dark"] #dashboardPage .chart-legend,
+:root[data-theme="dark"] #dashboardPage .chart-y,
+:root[data-theme="dark"] #dashboardPage .chart-x,
+:root[data-theme="dark"] #dashboardPage .chart-note,
+:root[data-theme="dark"] #dashboardPage .upcoming-info small,
+:root[data-theme="dark"] #dashboardPage .time,
+:root[data-theme="dark"] #dashboardPage .quick-actions-heading small,
+:root[data-theme="dark"] #dashboardPage .quick-action small,
+:root[data-theme="dark"] #dashboardPage .quick-action i,
+:root[data-theme="dark"] #dashboardPage .page-footer {
+  color:#b9c9be !important;
+}
+:root[data-theme="dark"] #dashboardPage .eyebrow {
+  color:#ffb477 !important;
+}
+:root[data-theme="dark"] #dashboardPage .text-link {
+  color:#75d8c8 !important;
+}
+:root[data-theme="dark"] #dashboardPage .date-box,
+:root[data-theme="dark"] #dashboardPage .upcoming-item:nth-child(2) .date-box,
+:root[data-theme="dark"] #dashboardPage .upcoming-item:nth-child(3) .date-box {
+  background:#26382d !important;
+  color:#f0f6f1 !important;
+  border:1px solid #405746 !important;
+}
+:root[data-theme="dark"] #dashboardPage .date-box b,
+:root[data-theme="dark"] #dashboardPage .date-box small {
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] #dashboardPage .stat-icon.lilac,
+:root[data-theme="dark"] #dashboardPage .quick-purple .quick-action-icon {
+  background:#382d50 !important;
+  color:#d5baff !important;
+}
+:root[data-theme="dark"] #dashboardPage .stat-icon.blue,
+:root[data-theme="dark"] #dashboardPage .quick-blue .quick-action-icon {
+  background:#253b56 !important;
+  color:#a9ccff !important;
+}
+:root[data-theme="dark"] #dashboardPage .stat-icon.orange,
+:root[data-theme="dark"] #dashboardPage .quick-orange .quick-action-icon {
+  background:#4a3525 !important;
+  color:#ffc58e !important;
+}
+:root[data-theme="dark"] #dashboardPage .stat-icon.green {
+  background:#244534 !important;
+  color:#9be0b7 !important;
+}
+:root[data-theme="dark"] #dashboardPage .stat-icon.teal,
+:root[data-theme="dark"] #dashboardPage .quick-teal .quick-action-icon {
+  background:#1e4140 !important;
+  color:#8fe2d6 !important;
+}
+:root[data-theme="dark"] #dashboardPage .quick-action:hover {
+  background:#22342a !important;
+  border-color:#54745e !important;
+}
+:root[data-theme="dark"] #dashboardPage .notification-popover {
+  background:#1a2820 !important;
+  border-color:#405746 !important;
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] #dashboardPage .notification-heading b,
+:root[data-theme="dark"] #dashboardPage .notification-item b {
+  color:#edf5ef !important;
+}
+:root[data-theme="dark"] #dashboardPage .notification-heading small,
+:root[data-theme="dark"] #dashboardPage .notification-item p,
+:root[data-theme="dark"] #dashboardPage .notification-item small,
+:root[data-theme="dark"] #dashboardPage .notification-empty {
+  color:#b9c9be !important;
+}
+:root[data-theme="dark"] #dashboardPage .notification-item {
+  background:#202f26 !important;
+  border-color:#35483b !important;
+}
+:root[data-theme="dark"] #dashboardPage .all-notifications {
+  color:#8edacb !important;
+  border-color:#35483b !important;
+}
+:root[data-theme="dark"] #dashboardPage .page-footer .demo-tag {
+  background:#3d3325 !important;
+  color:#ffd29f !important;
+  border-color:#67543a !important;
+}

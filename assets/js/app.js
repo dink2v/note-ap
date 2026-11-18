@@ -183,6 +183,7 @@
   const calendarItemModal=document.getElementById('calendarItemModal');
   const calendarItemForm=document.getElementById('calendarItemForm');
   let calendarCursor=new Date();calendarCursor.setDate(1);
+  let calendarViewMode='month';
   const calendarDateKey=date=>[date.getFullYear(),String(date.getMonth()+1).padStart(2,'0'),String(date.getDate()).padStart(2,'0')].join('-');
   const calendarReadItems=()=>{try{const rows=JSON.parse(localStorage.getItem('noteAp.contents')||'[]');return Array.isArray(rows)?rows.filter(item=>item&&typeof item==='object'):[];}catch(error){return[];}};
   const calendarFormatClass=format=>{const value=String(format||'').toLowerCase();return value==='reels'?'reels':value==='carousel'?'carousel':value==='feed'?'feed':'other';};
@@ -195,27 +196,62 @@
     try{localStorage.setItem('noteAp.contents',JSON.stringify(items));calendarSuppressClickUntil=Date.now()+700;renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();showToast('Jadwal berhasil dipindahkan ke '+formatContentDate(targetDate)+'.');}
     catch(error){showToast('Jadwal gagal dipindahkan. Penyimpanan browser tidak dapat diperbarui.');}
   }
+  function renderCalendarAgenda(items){
+    const host=document.getElementById('calendarAgendaList');if(!host)return;
+    const today=calendarDateKey(new Date());
+    const upcoming=items.filter(item=>item.postingDate&&String(item.postingDate)>=today).sort((a,b)=>String(a.postingDate).localeCompare(String(b.postingDate))||String(a.postingTime||'').localeCompare(String(b.postingTime||''))).slice(0,6);
+    host.replaceChildren();
+    if(!upcoming.length){const empty=document.createElement('p');empty.className='calendar-agenda-empty';empty.textContent='Belum ada jadwal mendatang.';host.append(empty);return;}
+    upcoming.forEach(item=>{
+      const row=document.createElement('button');row.type='button';row.className='calendar-agenda-item';
+      const date=new Date(String(item.postingDate)+'T00:00:00');
+      const dateBox=document.createElement('span');dateBox.className='calendar-agenda-date';dateBox.innerHTML='<b>'+String(date.getDate()).padStart(2,'0')+'</b><small>'+new Intl.DateTimeFormat('id-ID',{month:'short'}).format(date).toUpperCase()+'</small>';
+      const copy=document.createElement('span');copy.className='calendar-agenda-copy';
+      const title=document.createElement('b');title.textContent=item.title||'Tanpa judul';
+      const meta=document.createElement('small');meta.textContent=[item.postingTime||'Jam belum diatur',item.platform||'',item.format||''].filter(Boolean).join(' · ');
+      copy.append(title,meta);row.append(dateBox,copy);row.addEventListener('click',()=>openCalendarContentDetail(item));host.append(row);
+    });
+  }
   function renderCalendarPlanner(){
     if(!calendarGrid||!calendarMonthLabel)return;
     const year=calendarCursor.getFullYear(),month=calendarCursor.getMonth();
-    calendarMonthLabel.textContent=new Intl.DateTimeFormat('id-ID',{month:'long',year:'numeric'}).format(calendarCursor);
-    calendarGrid.replaceChildren();
-    ['Sen','Sel','Rab','Kam','Jum','Sab','Min'].forEach(day=>{const label=document.createElement('div');label.className='calendar-weekday';label.textContent=day;calendarGrid.append(label);});
-    const first=new Date(year,month,1),offset=(first.getDay()+6)%7;
-    const start=new Date(year,month,1-offset);
     const items=calendarReadItems();
-    for(let index=0;index<42;index++){
-      const date=new Date(start.getFullYear(),start.getMonth(),start.getDate()+index),key=calendarDateKey(date);
-      const cell=document.createElement('section');cell.className='calendar-day-cell'+(date.getMonth()!==month?' outside-month':'');
+    const monthCount=items.filter(item=>String(item.postingDate||'').startsWith(year+'-'+String(month+1).padStart(2,'0'))).length;
+    const todayKey=calendarDateKey(new Date());
+    const upcomingCount=items.filter(item=>item.postingDate&&String(item.postingDate)>=todayKey&&item.status!=='Published').length;
+    const publishedCount=items.filter(item=>item.status==='Published'&&String(item.postingDate||'').startsWith(year+'-'+String(month+1).padStart(2,'0'))).length;
+    const statMonth=document.getElementById('calendarStatMonth'),statUpcoming=document.getElementById('calendarStatUpcoming'),statPublished=document.getElementById('calendarStatPublished');
+    if(statMonth)statMonth.textContent=String(monthCount);
+    if(statUpcoming)statUpcoming.textContent=String(upcomingCount);
+    if(statPublished)statPublished.textContent=String(publishedCount);
+    renderCalendarAgenda(items);
+    const monthName=new Intl.DateTimeFormat('id-ID',{month:'long',year:'numeric'});
+    if(calendarViewMode==='month')calendarMonthLabel.textContent=monthName.format(calendarCursor);
+    else if(calendarViewMode==='week'){
+      const weekStart=new Date(calendarCursor);weekStart.setDate(weekStart.getDate()-((weekStart.getDay()+6)%7));
+      const weekEnd=new Date(weekStart);weekEnd.setDate(weekEnd.getDate()+6);
+      calendarMonthLabel.textContent=new Intl.DateTimeFormat('id-ID',{day:'numeric',month:'short'}).format(weekStart)+' – '+new Intl.DateTimeFormat('id-ID',{day:'numeric',month:'short',year:'numeric'}).format(weekEnd);
+    }else calendarMonthLabel.textContent=new Intl.DateTimeFormat('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(calendarCursor);
+    calendarGrid.className='note-ap-calendar-grid view-'+calendarViewMode;
+    calendarGrid.replaceChildren();
+    ['Sen','Sel','Rab','Kam','Jum','Sab','Min'].slice(0,calendarViewMode==='day'?1:7).forEach(day=>{const label=document.createElement('div');label.className='calendar-weekday';label.textContent=day;calendarGrid.append(label);});
+    let startDate,dayCount;
+    if(calendarViewMode==='month'){const first=new Date(year,month,1),offset=(first.getDay()+6)%7;startDate=new Date(year,month,1-offset);dayCount=42;}
+    else if(calendarViewMode==='week'){startDate=new Date(calendarCursor);startDate.setDate(startDate.getDate()-((startDate.getDay()+6)%7));dayCount=7;}
+    else{startDate=new Date(calendarCursor);dayCount=1;}
+    for(let index=0;index<dayCount;index++){
+      const date=new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate()+index),key=calendarDateKey(date);
+      const cell=document.createElement('section');cell.className='calendar-day-cell'+(calendarViewMode==='month'&&date.getMonth()!==month?' outside-month':'');
       cell.dataset.calendarDate=key;
       cell.addEventListener('dragover',event=>{if(event.dataTransfer?.types.includes('text/noteap-content-id')){event.preventDefault();event.dataTransfer.dropEffect='move';cell.classList.add('is-drop-target');}});
       cell.addEventListener('dragleave',event=>{if(!cell.contains(event.relatedTarget))cell.classList.remove('is-drop-target');});
       cell.addEventListener('drop',event=>{event.preventDefault();cell.classList.remove('is-drop-target');const id=event.dataTransfer?.getData('text/noteap-content-id');if(id)moveCalendarContent(id,key);});
-      if(key===calendarDateKey(new Date()))cell.classList.add('is-today');
+      if(key===todayKey)cell.classList.add('is-today');
       const head=document.createElement('div');head.className='calendar-day-head';
       const number=document.createElement('span');number.className='calendar-day-number';number.textContent=String(date.getDate());head.append(number);
       const add=document.createElement('button');add.type='button';add.className='calendar-day-add';add.textContent='+';add.title='Tambah jadwal pada '+key;add.setAttribute('aria-label','Tambah jadwal '+key);add.addEventListener('click',()=>openCalendarItemModal(null,key));head.append(add);cell.append(head);
-      items.filter(item=>String(item.postingDate||'')===key).sort((a,b)=>String(a.postingTime||'').localeCompare(String(b.postingTime||''))).forEach(item=>{
+      const dayItems=items.filter(item=>String(item.postingDate||'')===key).sort((a,b)=>String(a.postingTime||'').localeCompare(String(b.postingTime||'')));
+      dayItems.forEach(item=>{
         const event=document.createElement('button');event.type='button';event.draggable=true;event.className='calendar-event-chip '+calendarFormatClass(item.format);event.title='Seret ke tanggal lain untuk memindahkan jadwal. Klik untuk melihat detail: '+(item.title||'Tanpa judul');
         const title=document.createElement('b');title.textContent=item.title||'Tanpa judul';
         const meta=document.createElement('small');meta.textContent=[item.postingTime||'',item.format||item.platform||''].filter(Boolean).join(' · ');
@@ -226,6 +262,8 @@
       cell.addEventListener('dblclick',event=>{if(event.target===cell||event.target===head||event.target===number)openCalendarItemModal(null,key);});
       calendarGrid.append(cell);
     }
+    document.querySelectorAll('[data-calendar-view]').forEach(button=>{const active=button.dataset.calendarView===calendarViewMode;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
+    const hint=document.getElementById('calendarViewHint');if(hint)hint.textContent=calendarViewMode==='month'?'Ringkasan satu bulan. Seret kartu ke tanggal lain untuk menjadwalkan ulang.':calendarViewMode==='week'?'Fokus jadwal satu minggu dengan ruang lebih lega.':'Fokus satu hari dan seluruh konten yang dijadwalkan.';
   }
   function openCalendarContentDetail(item){
     const modal=document.getElementById('calendarContentDetailModal');
@@ -295,8 +333,9 @@
     try{localStorage.setItem('noteAp.contents',JSON.stringify(items));closeCalendarItemModal();renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();showToast(existingIndex>=0?'Jadwal konten berhasil diperbarui.':'Jadwal konten berhasil ditambahkan.');}
     catch(error){showToast('Jadwal gagal disimpan. Penyimpanan browser mungkin penuh.');}
   });
-  document.getElementById('noteApCalendarPrev')?.addEventListener('click',()=>{calendarCursor.setMonth(calendarCursor.getMonth()-1);renderCalendarPlanner();});
-  document.getElementById('noteApCalendarNext')?.addEventListener('click',()=>{calendarCursor.setMonth(calendarCursor.getMonth()+1);renderCalendarPlanner();});
+  document.querySelectorAll('[data-calendar-view]').forEach(button=>button.addEventListener('click',()=>{calendarViewMode=button.dataset.calendarView||'month';renderCalendarPlanner();}));
+  document.getElementById('noteApCalendarPrev')?.addEventListener('click',()=>{if(calendarViewMode==='month')calendarCursor.setMonth(calendarCursor.getMonth()-1);else if(calendarViewMode==='week')calendarCursor.setDate(calendarCursor.getDate()-7);else calendarCursor.setDate(calendarCursor.getDate()-1);renderCalendarPlanner();});
+  document.getElementById('noteApCalendarNext')?.addEventListener('click',()=>{if(calendarViewMode==='month')calendarCursor.setMonth(calendarCursor.getMonth()+1);else if(calendarViewMode==='week')calendarCursor.setDate(calendarCursor.getDate()+7);else calendarCursor.setDate(calendarCursor.getDate()+1);renderCalendarPlanner();});
   document.getElementById('noteApCalendarToday')?.addEventListener('click',()=>{calendarCursor=new Date();calendarCursor.setDate(1);renderCalendarPlanner();});
   renderCalendarPlanner();
   window.addEventListener('storage',event=>{if(event.key==='noteAp.contents'){renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();}});

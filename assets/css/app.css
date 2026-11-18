@@ -3534,33 +3534,80 @@ button,a{touch-action:manipulation}
 }
 
 
-/* DARK MODE — global readable text safety net across every workspace page */
-:root[data-theme="dark"] body :not(svg):not(path):not(img):not(video):not(canvas):not(script):not(style) {
+/* DARK MODE — readable text fallback without overriding component colors */
+:root[data-theme="dark"] body {
+  color:#e8f1eb;
+}
+:root[data-theme="dark"] body :is(
+  h1,h2,h3,h4,h5,h6,p,li,td,th,label,small,figcaption,caption,
+  legend,dt,dd,span,b,strong,em,
+  .muted,.text-muted,.subtle,.hint,.helper-text,.field-help,.field-hint,
+  .form-hint,.form-help,.description,.subtitle,.eyebrow,.kicker,
+  .page-footer,.footnote,.settings-footnote,.settings-info-note,
+  .calendar-planner-footnote,.calendar-agenda-live,.calendar-demo-notice,
+  .empty-description,.placeholder-text
+):not(button):not(button *):not(a):not(a *)
+ :not(.primary-btn):not(.primary-btn *):not(.secondary-btn):not(.secondary-btn *)
+ :not(.approve-btn):not(.approve-btn *):not(.filter-reset-btn):not(.filter-reset-btn *)
+ :not(.status-chip):not(.status-chip *):not([class*="status-"]):not([class*="status-"] *)
+ :not(.format-chip):not(.format-chip *):not(.pending-pill):not(.pending-pill *)
+ :not(.approved-pill):not(.approved-pill *):not(.kanban-tag):not(.kanban-tag *)
+ :not(.demo-tag):not(.demo-tag *):not(.chat-mode-tag):not(.chat-mode-tag *)
+ :not(.calendar-event-chip):not(.calendar-event-chip *)
+ :not(.visit-calendar-event-chip):not(.visit-calendar-event-chip *)
+ :not(.stage-color-0):not(.stage-color-1):not(.stage-color-2)
+ :not(.stage-color-3):not(.stage-color-4):not(.stage-color-5):not(.stage-color-6) {
   color:#e8f1eb !important;
 }
 :root[data-theme="dark"] body :is(
-  p,small,caption,figcaption,.muted,.text-muted,.subtle,.hint,.helper-text,
+  p,small,figcaption,caption,.muted,.text-muted,.subtle,.hint,.helper-text,
   .field-help,.field-hint,.form-hint,.form-help,.description,.subtitle,
-  .eyebrow,.kicker,.page-footer,.footnote,.settings-footnote,.settings-info-note,
+  .page-footer,.footnote,.settings-footnote,.settings-info-note,
   .calendar-planner-footnote,.calendar-agenda-live,.calendar-demo-notice,
-  .empty-description,.empty-state p,.placeholder-text
-) {
+  .empty-description,.placeholder-text
+):not(button):not(button *):not(a):not(a *)
+ :not(.status-chip):not(.status-chip *):not([class*="status-"]):not([class*="status-"] *)
+ :not(.format-chip):not(.format-chip *):not(.pending-pill):not(.pending-pill *)
+ :not(.approved-pill):not(.approved-pill *):not(.kanban-tag):not(.kanban-tag *)
+ :not(.demo-tag):not(.demo-tag *):not(.chat-mode-tag):not(.chat-mode-tag *)
+ :not(.calendar-event-chip):not(.calendar-event-chip *)
+ :not(.visit-calendar-event-chip):not(.visit-calendar-event-chip *) {
   color:#b7c6bb !important;
 }
 :root[data-theme="dark"] body :is(input,textarea,select,option) {
   color:#f0f6f1 !important;
   background-color:#17251c !important;
   border-color:#405746 !important;
+  color-scheme:dark;
 }
 :root[data-theme="dark"] body :is(input,textarea)::placeholder {
   color:#9aada0 !important;
   opacity:1 !important;
 }
-:root[data-theme="dark"] body :is(button,a,[role="button"],summary) {
-  text-decoration-color:currentColor;
-}
-:root[data-theme="dark"] body :is(button,a,[role="button"]):disabled,
 :root[data-theme="dark"] body :is(input,textarea,select):disabled {
   color:#aebdb2 !important;
   opacity:.85;
+}
+
+/* Preserve semantic contrast for colored labels and workflow states */
+:root[data-theme="dark"] body .status-chip,
+:root[data-theme="dark"] body [class*="status-"],
+:root[data-theme="dark"] body .pending-pill,
+:root[data-theme="dark"] body .approved-pill,
+:root[data-theme="dark"] body .format-chip,
+:root[data-theme="dark"] body .kanban-tag,
+:root[data-theme="dark"] body .demo-tag,
+:root[data-theme="dark"] body .optional-section-tag {
+  filter:brightness(.88) saturate(.95);
+}
+:root[data-theme="dark"] body .primary-btn,
+:root[data-theme="dark"] body .approve-btn {
+  color:#ffffff !important;
+}
+:root[data-theme="dark"] body .secondary-btn,
+:root[data-theme="dark"] body .filter-reset-btn,
+:root[data-theme="dark"] body .content-modal-close {
+  background:#24352a !important;
+  border-color:#405746 !important;
+  color:#e7f1e9 !important;
 }

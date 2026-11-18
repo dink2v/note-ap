@@ -106,6 +106,7 @@
       :page==='visit'?'Catat dan pantau jadwal kunjungan produksi, lokasi, talent, serta status pengerjaan.'
       :page==='konten'?'Kelola seluruh ide, proses, dan publikasi konten Instagram dan TikTok.'
       :'Ringkasan aktivitas konten Apotek Prapatan';
+    if(page==='dashboard')renderDashboard();
     if(page==='konten')renderContentList();
     if(page==='kanban')renderKanban();
     if((page==='visit'||page==='setelan')&&visitDataReady)renderVisitTables();
@@ -178,6 +179,108 @@
     document.querySelector('.content-table').hidden=filtered.length===0;
   }
   function formatContentDate(value){if(!value)return'—';const date=new Date(value+'T00:00:00');return Number.isNaN(date.getTime())?value:new Intl.DateTimeFormat('id-ID',{day:'2-digit',month:'short',year:'numeric'}).format(date);}
+
+  function readDashboardItems(){
+    try{const rows=JSON.parse(localStorage.getItem('noteAp.contents')||'[]');return Array.isArray(rows)?rows.filter(item=>item&&typeof item==='object'):[];}
+    catch(error){return[];}
+  }
+  function renderDashboard(){
+    const items=readDashboardItems();
+    const today=new Date();today.setHours(0,0,0,0);
+    const todayKey=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
+    const normalized=value=>String(value||'').trim().toLocaleLowerCase('id');
+    const formatCount=(...formats)=>items.filter(item=>formats.includes(normalized(item.format))).length;
+    const upcoming=items.filter(item=>item.postingDate&&String(item.postingDate)>=todayKey&&normalized(item.status)!=='published')
+      .sort((a,b)=>String(a.postingDate).localeCompare(String(b.postingDate))||String(a.postingTime||'').localeCompare(String(b.postingTime||'')));
+    const counts={
+      reels:formatCount('reels','video'),
+      feed:formatCount('feed'),
+      carousel:formatCount('carousel'),
+      published:items.filter(item=>normalized(item.status)==='published').length,
+      scheduled:upcoming.length
+    };
+    [['reelsCount',counts.reels],['feedCount',counts.feed],['carouselCount',counts.carousel],['publishedCount',counts.published],['scheduledCount',counts.scheduled]]
+      .forEach(([id,value])=>{const node=document.getElementById(id);if(node)node.textContent=String(value);});
+    const totalLabel=document.getElementById('dashboardTotalLabel');
+    if(totalLabel)totalLabel.textContent=items.length+' konten';
+    const statusChart=document.getElementById('dashboardStatusChart');
+    if(statusChart){
+      const stages=['Ideation','Planning','Production','Editing','Review','Ready to Publish','Published'];
+      statusChart.replaceChildren();
+      if(!items.length){
+        const empty=document.createElement('p');empty.className='dashboard-empty';empty.textContent='Belum ada data konten. Tambahkan konten untuk melihat ringkasan.';statusChart.append(empty);
+      }else{
+        stages.forEach(stage=>{
+          const count=items.filter(item=>normalized(item.status)===normalized(stage)).length;
+          const row=document.createElement('div');row.className='dashboard-stage-row';
+          const label=document.createElement('div');label.className='dashboard-stage-label';
+          const name=document.createElement('span');name.textContent=stage;
+          const number=document.createElement('b');number.textContent=String(count);label.append(name,number);
+          const track=document.createElement('div');track.className='dashboard-stage-track';
+          const fill=document.createElement('span');fill.style.width=(count/items.length*100)+'%';fill.setAttribute('aria-label',count+' dari '+items.length+' konten');track.append(fill);
+          row.append(label,track);statusChart.append(row);
+        });
+      }
+    }
+    const upcomingHost=document.getElementById('upcomingList');
+    if(upcomingHost){
+      upcomingHost.replaceChildren();
+      if(!upcoming.length){
+        const empty=document.createElement('p');empty.className='dashboard-empty';empty.textContent='Belum ada jadwal publikasi mendatang.';upcomingHost.append(empty);
+      }else{
+        upcoming.slice(0,5).forEach(item=>{
+          const row=document.createElement('button');row.type='button';row.className='upcoming-item dashboard-upcoming-button';
+          const date=new Date(String(item.postingDate)+'T00:00:00');
+          const dateBox=document.createElement('span');dateBox.className='date-box';
+          const day=document.createElement('b');day.textContent=String(date.getDate()).padStart(2,'0');
+          const month=document.createElement('small');month.textContent=new Intl.DateTimeFormat('id-ID',{month:'short'}).format(date).toUpperCase();
+          dateBox.append(day,month);
+          const info=document.createElement('span');info.className='upcoming-info';
+          const title=document.createElement('b');title.textContent=item.title||'Tanpa judul';
+          const meta=document.createElement('small');meta.textContent=[item.platform,item.format,item.status].filter(Boolean).join(' · ');
+          info.append(title,meta);
+          const time=document.createElement('span');time.className='time';time.textContent=item.postingTime||'—';
+          row.append(dateBox,info,time);row.addEventListener('click',()=>openContentDetail(item));upcomingHost.append(row);
+        });
+      }
+    }
+    renderDashboardNotifications(items,upcoming);
+  }
+  function renderDashboardNotifications(items,upcoming){
+    const list=document.getElementById('notificationList'),dot=document.querySelector('#notificationBtn .notification-dot'),empty=document.getElementById('notificationEmpty');
+    if(!list||!dot)return;
+    let read=[];try{const value=JSON.parse(localStorage.getItem('noteAp.dashboard.readNotifications')||'[]');if(Array.isArray(value))read=value.map(String);}catch(error){}
+    const notifications=[];
+    const now=Date.now();
+    items.filter(item=>['review','ready to publish'].includes(String(item.status||'').toLowerCase()))
+      .slice(0,4).forEach(item=>notifications.push({
+        id:'status:'+item.id,title:item.status==='Review'?'Konten menunggu review':'Konten siap dipublikasikan',
+        detail:item.title||'Konten tanpa judul',meta:item.postingDate?formatContentDate(item.postingDate):'Perlu tindak lanjut',tone:item.status==='Review'?'amber':'green',item:item
+      }));
+    upcoming.slice(0,4).forEach(item=>{
+      const days=Math.floor((new Date(String(item.postingDate)+'T00:00:00').getTime()-new Date(new Date().toDateString()).getTime())/86400000);
+      if(days<=3)notifications.push({id:'due:'+item.id,title:days===0?'Konten dijadwalkan hari ini':'Jadwal publikasi mendekat',detail:item.title||'Konten tanpa judul',meta:formatContentDate(item.postingDate)+' · '+(item.postingTime||'Jam belum diatur'),tone:'teal',item:item});
+    });
+    notifications.sort((a,b)=>a.id.localeCompare(b.id));
+    list.replaceChildren();
+    if(!notifications.length){
+      const message=document.createElement('article');message.className='notification-empty';message.textContent='Belum ada notifikasi. Semua aktivitas terpantau.';list.append(message);
+      dot.style.display='none';if(empty)empty.hidden=true;return;
+    }
+    notifications.forEach(notice=>{
+      const article=document.createElement('article');article.className='notification-item'+(read.includes(notice.id)?'':' unread');
+      const icon=document.createElement('span');icon.className='notification-icon '+notice.tone;icon.textContent=notice.tone==='amber'?'◷':notice.tone==='green'?'✓':'▣';
+      const copy=document.createElement('div');const title=document.createElement('b');title.textContent=notice.title;
+      const detail=document.createElement('p');detail.textContent=notice.detail;
+      const meta=document.createElement('small');meta.textContent=notice.meta;copy.append(title,detail,meta);
+      article.append(icon,copy);
+      if(!read.includes(notice.id)){const unread=document.createElement('span');unread.className='unread-dot';article.append(unread);}
+      article.tabIndex=0;article.setAttribute('role','button');article.addEventListener('click',()=>openContentDetail(notice.item));
+      list.append(article);
+    });
+    dot.style.display=notifications.some(notice=>!read.includes(notice.id))?'block':'none';
+    if(empty)empty.hidden=true;
+  }
 
 
   // NOTE AP CALENDAR PLANNER — shared noteAp.contents storage
@@ -361,7 +464,7 @@
   document.getElementById('noteApCalendarNext')?.addEventListener('click',()=>{if(calendarViewMode==='month')calendarCursor.setMonth(calendarCursor.getMonth()+1);else if(calendarViewMode==='week')calendarCursor.setDate(calendarCursor.getDate()+7);else calendarCursor.setDate(calendarCursor.getDate()+1);renderCalendarPlanner();});
   document.getElementById('noteApCalendarToday')?.addEventListener('click',()=>{calendarCursor=new Date();renderCalendarPlanner();});
   renderCalendarPlanner();
-  window.addEventListener('storage',event=>{if(event.key==='noteAp.contents'){renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();}});
+  window.addEventListener('storage',event=>{if(event.key==='noteAp.contents'){renderDashboard();renderCalendarPlanner();if(!contentPage.hidden)renderContentList();if(!kanbanPage.hidden)renderKanban();}});
 
 
   const visitKey='noteAp.visits';
@@ -1177,9 +1280,6 @@ function renderVisitCalendar(visits){
 
   const notificationBtn=document.getElementById('notificationBtn');
   const notificationPopover=document.getElementById('notificationPopover');
-  const notificationList=document.getElementById('notificationList');
-  const notificationDot=notificationBtn.querySelector('.notification-dot');
-  const emptyNotice=document.getElementById('notificationEmpty');
   notificationBtn.addEventListener('click',event=>{
     event.stopPropagation();
     const isOpen=notificationBtn.getAttribute('aria-expanded')==='true';
@@ -1193,20 +1293,19 @@ function renderVisitCalendar(visits){
     }
   });
   document.getElementById('markAllRead').addEventListener('click',()=>{
-    notificationList.querySelectorAll('.notification-item').forEach(item=>{
-      item.classList.remove('unread');
-      const dot=item.querySelector('.unread-dot');
-      if(dot) dot.remove();
-    });
-    notificationDot.style.display='none';
-    emptyNotice.hidden=false;
-    showToast('Semua notifikasi ditandai sudah dibaca.');
+    const ids=[...document.querySelectorAll('#notificationList .notification-item')].map(item=>{
+      const title=item.querySelector('b')?.textContent||'';
+      const detail=item.querySelector('p')?.textContent||'';
+      const data=readDashboardItems().find(row=>(row.title||'Konten tanpa judul')===detail);
+      if(!data)return '';
+      return title.includes('menunggu review')||title.includes('siap dipublikasikan')?'status:'+data.id:'due:'+data.id;
+    }).filter(Boolean);
+    let read=[];try{read=JSON.parse(localStorage.getItem('noteAp.dashboard.readNotifications')||'[]');}catch(error){}
+    localStorage.setItem('noteAp.dashboard.readNotifications',JSON.stringify([...new Set([...read,...ids])]));
+    renderDashboard();showToast('Notifikasi ditandai sudah dibaca.');
   });
   document.getElementById('allNotifications').addEventListener('click',event=>{
-    event.preventDefault();
-    notificationPopover.hidden=true;
-    notificationBtn.setAttribute('aria-expanded','false');
-    showToast('Halaman Notifikasi akan dibuat pada tahap berikutnya.');
+    event.preventDefault();notificationPopover.hidden=true;notificationBtn.setAttribute('aria-expanded','false');showPage('konten');
   });
 
   // NOTE AP COMMAND CENTER — pencarian dan aksi lintas halaman

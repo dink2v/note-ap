@@ -1412,3 +1412,49 @@ body.calendar-item-open{overflow:hidden}
 @media(max-width:1120px){.calendar-workspace{grid-template-columns:minmax(0,1fr) 245px}.calendar-main-panel{padding:14px}.calendar-toolbar{flex-direction:column}.calendar-toolbar-tools{width:100%;justify-content:space-between}}
 @media(max-width:850px){.calendar-workspace{grid-template-columns:1fr}.calendar-agenda-panel{position:static}.calendar-agenda-list{grid-template-columns:repeat(2,minmax(0,1fr))}.calendar-agenda-tip{margin-top:12px}}
 @media(max-width:600px){.creative-calendar-page{padding:24px 14px}.creative-calendar-hero h1{font-size:24px!important}.calendar-insight-strip{gap:7px}.calendar-insight-card{gap:7px;padding:10px 8px}.calendar-insight-icon{width:29px;height:29px;flex-basis:29px;font-size:14px}.calendar-insight-card small{font-size:6px;letter-spacing:0}.calendar-insight-card b{font-size:17px}.calendar-main-panel,.calendar-agenda-panel{padding:11px;border-radius:14px}.calendar-toolbar-tools{align-items:stretch;flex-direction:column}.calendar-planner-controls{justify-content:space-between}.calendar-planner-controls strong{flex:1}.calendar-view-switch{align-self:flex-start}.calendar-day-cell{min-height:91px;padding:4px}.calendar-day-number,.calendar-day-add{width:21px;height:21px}.calendar-event-chip{padding:5px 4px;margin:3px 0}.calendar-event-chip b{font-size:7px}.calendar-event-chip small{font-size:6px}.note-ap-calendar-grid.view-week{min-width:620px}.note-ap-calendar-grid.view-day .calendar-day-cell{min-height:300px}.calendar-agenda-list{grid-template-columns:1fr}}
+
+
+/* VISIT — dua kolom ringkasan di ruang kanan header Jadwal Visiting */
+.visit-main-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+.visit-main-heading .visit-metrics{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(112px,1fr));
+  gap:10px;
+  width:min(100%,280px);
+  margin-left:auto;
+}
+.visit-metric-card{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:7px;
+  min-height:62px;
+  padding:10px 14px;
+  border:1px solid #e2eeea;
+  border-radius:12px;
+  background:linear-gradient(145deg,#fbfefd,#f3faf7);
+}
+.visit-metric-card span{
+  color:#82958e;
+  font:700 9px "DM Sans",sans-serif;
+  letter-spacing:.35px;
+}
+.visit-metric-card strong{
+  color:#287e70;
+  font:800 20px "Plus Jakarta Sans",sans-serif;
+  line-height:1;
+}
+@media(max-width:760px){
+  .visit-main-heading{align-items:stretch;flex-wrap:wrap}
+  .visit-main-heading .visit-metrics{
+    width:100%;
+    margin-left:0;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .visit-metric-card{min-height:56px}
+}

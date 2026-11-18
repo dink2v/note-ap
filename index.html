@@ -82,20 +82,34 @@
       </section>
       <footer class="page-footer">Note AP <span>•</span> Content Planning & Management System <span class="demo-tag">MODE PREVIEW</span></footer>
     </div>
-    <section class="calendar-page" id="calendarPage" hidden>
-      <div class="calendar-page-heading">
-        <div><div class="eyebrow">CONTENT SCHEDULING</div><h1>Kalender Konten</h1><p class="muted">Lihat dan atur jadwal dari data konten yang sama. Kalender ini terhubung langsung dengan menu Konten dan Kanban.</p></div>
+    <section class="calendar-page creative-calendar-page" id="calendarPage" hidden>
+      <div class="calendar-page-heading creative-calendar-hero">
+        <div><div class="eyebrow">APOTEK PRAPATAN · CONTENT STUDIO</div><h1>Content Calendar</h1><p class="muted">Atur ritme publikasi, pindahkan jadwal, dan pantau semua konten dalam satu ruang.</p></div>
         <div class="calendar-page-actions"><button class="primary-btn" id="newContentCalendarBtn" type="button"><span>＋</span> Konten Baru</button></div>
       </div>
-      
-      <section class="calendar-planner-panel" aria-labelledby="noteApCalendarTitle">
-        <div class="calendar-planner-heading">
-          <div><span class="calendar-planner-kicker">NOTE AP CONTENT PLANNER</span><h2 id="noteApCalendarTitle">Jadwal Konten Note AP</h2><p>Tambah atau ubah jadwal langsung dari tanggal kalender. Data terhubung dengan menu Konten dan Kanban.</p></div>
-          <div class="calendar-planner-controls"><button type="button" id="noteApCalendarToday">Hari Ini</button><button type="button" id="noteApCalendarPrev" aria-label="Bulan sebelumnya">‹</button><strong id="noteApCalendarMonth">November 2026</strong><button type="button" id="noteApCalendarNext" aria-label="Bulan berikutnya">›</button></div>
+      <div class="calendar-insight-strip" aria-label="Ringkasan jadwal">
+        <article class="calendar-insight-card"><span class="calendar-insight-icon mint">✦</span><div><small>TERJADWAL BULAN INI</small><b id="calendarStatMonth">0</b></div></article>
+        <article class="calendar-insight-card"><span class="calendar-insight-icon peach">◷</span><div><small>JADWAL MENDATANG</small><b id="calendarStatUpcoming">0</b></div></article>
+        <article class="calendar-insight-card"><span class="calendar-insight-icon lilac">✓</span><div><small>SUDAH DIPUBLIKASIKAN</small><b id="calendarStatPublished">0</b></div></article>
+      </div>
+      <section class="calendar-workspace" aria-labelledby="noteApCalendarTitle">
+        <div class="calendar-main-panel">
+          <div class="calendar-toolbar">
+            <div class="calendar-toolbar-title"><span class="calendar-planner-kicker">CONTENT PLANNER</span><h2 id="noteApCalendarTitle">Jadwal Publikasi</h2><p id="calendarViewHint">Geser kartu konten ke tanggal lain untuk mengubah jadwal.</p></div>
+            <div class="calendar-toolbar-tools">
+              <div class="calendar-view-switch" role="group" aria-label="Tampilan kalender"><button type="button" data-calendar-view="month" class="active" aria-pressed="true">Bulan</button><button type="button" data-calendar-view="week" aria-pressed="false">Minggu</button><button type="button" data-calendar-view="day" aria-pressed="false">Hari</button></div>
+              <div class="calendar-planner-controls"><button type="button" id="noteApCalendarToday">Hari Ini</button><button type="button" id="noteApCalendarPrev" aria-label="Periode sebelumnya">‹</button><strong id="noteApCalendarMonth">November 2026</strong><button type="button" id="noteApCalendarNext" aria-label="Periode berikutnya">›</button></div>
+            </div>
+          </div>
+          <div class="calendar-planner-legend" aria-label="Legenda format konten"><span><i class="format-dot reels"></i>Reels</span><span><i class="format-dot carousel"></i>Carousel</span><span><i class="format-dot feed"></i>Feed</span><span><i class="calendar-dot other"></i>Lainnya</span></div>
+          <div class="note-ap-calendar-grid" id="noteApCalendarGrid" aria-live="polite"></div>
+          <p class="calendar-planner-footnote"><span>↔</span> Seret kartu untuk mengubah tanggal. Klik kartu untuk melihat detail konten.</p>
         </div>
-        <div class="calendar-planner-legend" aria-label="Legenda format konten"><span><i class="format-dot reels"></i>Reels</span><span><i class="format-dot carousel"></i>Carousel</span><span><i class="format-dot feed"></i>Feed</span><span><i class="calendar-dot other"></i>Format lain</span></div>
-        <div class="note-ap-calendar-grid" id="noteApCalendarGrid" aria-live="polite"></div>
-        <p class="calendar-planner-footnote">Klik tanggal kosong untuk membuat jadwal. Klik kartu konten untuk mengedit detailnya. Perubahan disimpan pada data konten Note AP di browser ini.</p>
+        <aside class="calendar-agenda-panel">
+          <div class="calendar-agenda-heading"><div><span class="calendar-planner-kicker">UP NEXT</span><h3>Agenda Terdekat</h3></div><span class="calendar-agenda-live">LIVE</span></div>
+          <div id="calendarAgendaList" class="calendar-agenda-list"><p class="calendar-agenda-empty">Belum ada jadwal mendatang.</p></div>
+          <div class="calendar-agenda-tip"><span>✧</span><p><b>Tips cepat</b> Geser konten ke tanggal lain untuk menjadwalkan ulang tanpa membuka formulir.</p></div>
+        </aside>
       </section>
     </section>
     <section class="content-page" id="contentPage" hidden>
@@ -304,5 +318,5 @@
 </section>
 <button class="command-launcher" id="commandLauncher" type="button" aria-label="Buka Command Center"><span>✳</span><span class="launcher-label">Command Center</span><kbd>Ctrl K</kbd></button>
 <div class="toast" id="toast" role="status"></div>
-<script src="assets/js/app.js?v=20261118-calendar-drag-drop"></script>
+<script src="assets/js/app.js?v=20261118-creative-calendar"></script>
 </body></html>

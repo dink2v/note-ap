@@ -1768,8 +1768,10 @@ body.calendar-item-open{overflow:hidden}
 }
 
 
-/* VISIT — teks Judul Konten dan Keterangan rata kiri agar rapi */
-#visitTableBody > tr > td:nth-child(5) > input.visit-inline-input,
+
+
+/* VISIT — input Judul Konten dan Keterangan rata kiri */
+#visitTableBody > tr > td:nth-child(5) > textarea.visit-inline-textarea,
 #visitTableBody > tr > td:nth-child(9) > textarea.visit-inline-textarea {
   text-align: left !important;
   text-align-last: left !important;

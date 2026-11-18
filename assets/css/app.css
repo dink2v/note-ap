@@ -4109,3 +4109,144 @@ button,a{touch-action:manipulation}
 :root[data-theme="dark"] body #contentPage .content-table tbody tr:hover>td{background:#263b2e!important}
 :root[data-theme="dark"] body #contentPage .content-table .status-chip{background:#244b3a!important;color:#b5ead4!important}
 :root[data-theme="dark"] body #contentPage .content-empty>span{background:#244b3a!important;color:#9be0c8!important}
+
+
+/* FINAL APP-WIDE THEME AUDIT — consistent contrast across every workspace */
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ink:#edf5ef;
+  --muted:#b7c6bb;
+  --line:#35483b;
+  --bg:#111a15;
+  --panel:#1a2820;
+  --form-panel-bg:#1a2820;
+}
+:root[data-theme="dark"] body :is(h1,h2,h3,h4){
+  color:#f0f6f1;
+}
+:root[data-theme="dark"] body :is(p,.muted,.field-help,.field-hint,.settings-footnote,.help-topic-card p,.help-faq-item p,.chat-list-body small,.chat-message time,.page-footer){
+  color:#b9c9be;
+}
+:root[data-theme="dark"] body :is(label,.field>span,.settings-field>span,.content-filter>span,.visit-detail-field>span,.calendar-detail-field>span){
+  color:#cbd9cf;
+}
+:root[data-theme="dark"] body :is(.app-shell,.main-area,.page-wrap,.content-form-wrap,.content-page,.visit-page,.settings-page,.help-page,.chat-page){
+  background:#111a15;
+  color:#e8f1eb;
+}
+:root[data-theme="dark"] body :is(
+  .panel,.stat-card,.form-panel,.content-filter-panel,.content-list-panel,
+  .kanban-column,.kanban-card,.visit-card,.visit-editor,.visit-table-panel,
+  .visit-table-toolbar,.visit-table-wrap,.settings-card,.settings-panel,
+  .settings-nav,.settings-content,.settings-preference-row,.settings-mini-card,
+  .reference-category-card,.help-topic-card,.help-faq-item,.chat-workspace,
+  .chat-thread,.chat-composer,.notification-popover,.command-dialog,
+  .command-result,.calendar-planner-panel,.calendar-main-panel,
+  .calendar-agenda-panel,.calendar-insight-card,.calendar-item-dialog,
+  .calendar-detail-section,.calendar-demo,.calendar-demo-form,
+  .calendar-demo-list-panel,.calendar-demo-history,.expand-dialog,
+  .content-modal-dialog
+){
+  background-color:#1a2820;
+  border-color:#35483b;
+  color:#e8f1eb;
+}
+:root[data-theme="dark"] body :is(
+  .content-search input,.content-filter select,.content-filter input,
+  .field input,.field select,.field textarea,.visit-form input,
+  .visit-form select,.visit-form textarea,.visit-inline-input,
+  .visit-inline-textarea,.settings-field input,.settings-field select,
+  .settings-field textarea,.settings-preference-row select,
+  .calendar-item-field input,.calendar-item-field select,
+  .calendar-demo-form input,.command-input-wrap input,
+  .chat-composer textarea,.expand-dialog textarea,
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,textarea,[contenteditable="true"]
+){
+  background-color:#111a15;
+  border-color:#405746;
+  color:#f0f6f1;
+  caret-color:#f0f6f1;
+  color-scheme:dark;
+}
+:root[data-theme="dark"] body :is(input,textarea)::placeholder{
+  color:#aebfb2;
+  opacity:1;
+}
+:root[data-theme="dark"] body :is(
+  .content-table th,.visit-main-table th,.visit-table th
+){
+  background:#293d30;
+  border-color:#405746;
+  color:#f0f6f1;
+}
+:root[data-theme="dark"] body :is(
+  .content-table td,.visit-main-table td,.visit-table td
+){
+  background:#1a2820;
+  border-color:#35483b;
+  color:#e8f1eb;
+}
+:root[data-theme="dark"] body :is(
+  .content-table tbody tr:hover>td,.visit-main-table tbody tr:hover>td
+){
+  background:#223329;
+}
+:root[data-theme="dark"] body :is(
+  .secondary-btn,.filter-reset-btn,.content-modal-close,
+  .calendar-item-cancel,.calendar-item-actions button,
+  .visit-page-btn,.visit-month-nav button,.visit-calendar-header button,
+  .visit-view-toggle button:not(.active),.visit-selection-controls button,
+  .reference-item-actions button,.settings-file-btn,
+  .settings-data-actions .secondary-btn,.notification-btn,
+  .command-launcher,.calendar-planner-controls button,
+  .calendar-view-switch button:not(.active)
+){
+  background:#24352a;
+  border-color:#405746;
+  color:#e7f1e9;
+}
+:root[data-theme="dark"] body :is(
+  .visit-view-toggle button.active,.calendar-view-switch button.active,
+  .settings-nav-item.active,.nav-link.active
+){
+  background:#31563d;
+  border-color:#5c8966;
+  color:#ffffff;
+}
+:root[data-theme="dark"] body :is(
+  .settings-nav-item,.reference-item,.notification-item,.upcoming-item,
+  .calendar-agenda-item,.chat-list-item,.chat-tabs,.visit-today-entry,
+  .visit-calendar-selected,.visit-today-item,.visit-today-line,
+  .visit-multiselect>summary,.visit-multiselect-menu
+){
+  background:#202f26;
+  border-color:#3b5041;
+  color:#e4eee7;
+}
+:root[data-theme="dark"] body :is(
+  .settings-nav-item b,.settings-preference-row b,.settings-content h2,
+  .settings-content h3,.reference-category-card>header b,
+  .reference-item>span,.settings-mini-card b,.help-topic-card b,
+  .help-faq-item summary,.chat-list-body b,.chat-thread-title b,
+  .chat-message p,.command-result-copy b,.upcoming-info b,
+  .visit-today-item b,.visit-detail-field b,.calendar-detail-field b
+){
+  color:#f0f6f1;
+}
+:root[data-theme="dark"] body :is(
+  .settings-nav-item small,.settings-preference-row p,
+  .settings-integration-card p,.settings-info-note,
+  .reference-empty,.help-welcome-card p,.help-topic-card p,
+  .help-faq-item p,.chat-list-body small,.chat-message time,
+  .visit-today-location,.visit-today-empty,.visit-detail-placeholder,
+  .calendar-agenda-empty,.calendar-planner-footnote
+){
+  color:#b9c9be;
+}
+:root[data-theme="dark"] body :is(
+  .status-chip,.settings-status,.approved-pill,.pending-pill,
+  .calendar-agenda-live,.kanban-tag
+){
+  filter:brightness(.9);
+}

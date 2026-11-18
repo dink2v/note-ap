@@ -555,7 +555,7 @@ tr.append(number);
     if(cancelBtn)cancelBtn.hidden=!visitSelectMode;
     const pageInfo=document.getElementById('visitPageInfo');if(pageInfo)pageInfo.textContent='Halaman '+(visitCurrentPage+1)+' dari '+pageCount;
     const today=new Date(),todayKey=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
-    const todayDate=document.getElementById('visitTodayDate');if(todayDate)todayDate.textContent='Today · '+new Intl.DateTimeFormat('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(today);
+    const todayDate=document.getElementById('visitTodayDate');if(todayDate)todayDate.textContent=new Intl.DateTimeFormat('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(today);
     const todayVisits=visits.filter(v=>v.visitDate===todayKey);
     const todayList=document.getElementById('visitTodayList');if(!todayList)return;todayList.replaceChildren();
     const todayLabel=document.createElement('div');todayLabel.className='visit-today-label';todayLabel.textContent='Jadwal visit :';todayList.append(todayLabel);

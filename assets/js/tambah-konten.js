@@ -79,7 +79,10 @@ function makeItemFromForm(){
  return {title:values.title,platform:values.platform,format:values.format,duration:values.duration,pillar:values.pillar,status:values.status,postingDate:postDateTime.split('T')[0],postingTime:postDateTime.split('T')[1]||'',reference:values.reference,hook:values.hook||'',visualHook:values.visualHook||'',body:values.body||'',visualBody:values.visualBody||'',cta:values.cta||'',visualCTA:values.visualCta||'',caption:values.caption||'',notes:values.notes||''};
 }
 function postSaved(id,storage){if(window.parent&&window.parent!==window)window.parent.postMessage({type:'NOTE_AP_CONTENT_SAVED',id,storage},'*');}
-form.addEventListener('submit',async event=>{
+const initialCalendarDate=pageParams.get('date');
+ if(initialCalendarDate&&/^\\d{4}-\\d{2}-\\d{2}$/.test(initialCalendarDate)&&form.elements.postDateTime&&!form.elements.postDateTime.value)form.elements.postDateTime.value=initialCalendarDate;
+ window.addEventListener('message',event=>{if(event.data?.type==='NOTE_AP_SET_POSTING_DATE'&&/^\\d{4}-\\d{2}-\\d{2}$/.test(String(event.data.date||''))&&form.elements.postDateTime&&!detailMode)form.elements.postDateTime.value=event.data.date;});
+ form.addEventListener('submit',async event=>{
  event.preventDefault();
  
  if(!form.reportValidity())return;

@@ -4,7 +4,8 @@ This folder contains the Google Apps Script backend used by the Note AP GitHub P
 
 ## What it does
 
-- Uses the Apotek Prapatan Google Sheet as the sync database.
+- Uses the Apotek Prapatan Google Sheet as the sync database, preserving full content objects in a JSON column and exposing schedule fields in separate columns.
+- Tracks manual edits made in the NoteAP_Contents sheet so the timestamp conflict rule can detect them.
 - Creates and updates matching Google Calendar events.
 - Imports events created directly in the configured calendar into Note AP.
 - Uses **C — Last Saved Change Wins** when a Note AP record and its linked Calendar event both changed.
@@ -52,4 +53,4 @@ The URL and token are stored in local storage on the browser/device used to conf
 - Use the same shared Google account/calendar and the same Note AP workspace data when testing from multiple devices.
 - The Web App is configured for public endpoint access and relies on the shared API token. Anyone who can inspect a browser where the token is stored can retrieve it. Do not use this token-based setup for a public app with untrusted users; use a proper authenticated backend for that case.
 - The app supports manual sync plus an automatic sync every 5 minutes while the Note AP page is open, and a sync when the tab becomes visible again.
-- Complete deletion/tombstone propagation is not enabled yet; do not assume deleting a Note AP item automatically removes its linked Calendar event.
+- A Note AP item removed from the local list after at least one successful sync is sent as a deletion tombstone on the next sync. Deleting a linked Google Calendar event clears its posting date/time in Note AP but keeps the content record. The current Note AP UI does not yet expose a dedicated delete-content action.

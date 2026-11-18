@@ -80,8 +80,8 @@ function makeItemFromForm(){
 }
 function postSaved(id,storage){if(window.parent&&window.parent!==window)window.parent.postMessage({type:'NOTE_AP_CONTENT_SAVED',id,storage},'*');}
 const initialCalendarDate=pageParams.get('date');
- if(initialCalendarDate&&/^\\d{4}-\\d{2}-\\d{2}$/.test(initialCalendarDate)&&form.elements.postDateTime&&!form.elements.postDateTime.value)form.elements.postDateTime.value=initialCalendarDate;
- window.addEventListener('message',event=>{if(event.data?.type==='NOTE_AP_SET_POSTING_DATE'&&/^\\d{4}-\\d{2}-\\d{2}$/.test(String(event.data.date||''))&&form.elements.postDateTime&&!detailMode)form.elements.postDateTime.value=event.data.date;});
+ if(initialCalendarDate&&/^\d{4}-\d{2}-\d{2}$/.test(initialCalendarDate)&&form.elements.postDateTime&&!form.elements.postDateTime.value)form.elements.postDateTime.value=initialCalendarDate;
+ window.addEventListener('message',event=>{if(event.data?.type==='NOTE_AP_SET_POSTING_DATE'&&/^\d{4}-\d{2}-\d{2}$/.test(String(event.data.date||''))&&form.elements.postDateTime&&!detailMode)form.elements.postDateTime.value=event.data.date;});
  form.addEventListener('submit',async event=>{
  event.preventDefault();
  

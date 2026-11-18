@@ -5510,3 +5510,45 @@ body #calendarPage .note-ap-calendar-grid.view-day .calendar-day-cell{
   body #calendarPage .calendar-event-chip b{-webkit-line-clamp:3;font-size:9px!important}
   body #calendarPage .calendar-event-chip small{font-size:8px!important}
 }
+
+
+/* CALENDAR EVENT TEXT VISIBILITY — explicit contrast in every theme */
+html body #calendarPage .calendar-event-chip b,
+html body #calendarPage .calendar-event-chip small{
+  display:block!important;
+  opacity:1!important;
+  visibility:visible!important;
+  text-shadow:none!important;
+  -webkit-text-fill-color:currentColor!important;
+}
+html body #calendarPage .calendar-event-chip b{
+  color:#385b56!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  line-height:1.4!important;
+}
+html body #calendarPage .calendar-event-chip small{
+  color:#607b75!important;
+  font-size:9px!important;
+  font-weight:600!important;
+  line-height:1.35!important;
+}
+html body #calendarPage .calendar-event-chip.reels b,
+html body #calendarPage .calendar-event-chip.reels small{color:#a85d20!important}
+html body #calendarPage .calendar-event-chip.carousel b,
+html body #calendarPage .calendar-event-chip.carousel small{color:#087f74!important}
+html body #calendarPage .calendar-event-chip.feed b,
+html body #calendarPage .calendar-event-chip.feed small{color:#28796f!important}
+html body #calendarPage .calendar-event-chip.other b,
+html body #calendarPage .calendar-event-chip.other small{color:#526477!important}
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip b,
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip small{
+  color:#f0f6f1!important;
+  -webkit-text-fill-color:#f0f6f1!important;
+}
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip.reels b,
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip.reels small{color:#ffd0a7!important;-webkit-text-fill-color:#ffd0a7!important}
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip.carousel b,
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip.carousel small{color:#b8eee8!important;-webkit-text-fill-color:#b8eee8!important}
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip.feed b,
+:root[data-theme="dark"] body #calendarPage .calendar-event-chip.feed small{color:#d1ead3!important;-webkit-text-fill-color:#d1ead3!important}

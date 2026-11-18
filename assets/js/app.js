@@ -1324,6 +1324,9 @@ function renderVisitCalendar(visits){
       document.body.append(form);setStatus('Sinkronisasi dua arah sedang berjalan…',false);form.submit();form.remove();
     });
     if(config.endpoint&&config.token)setStatus('Konfigurasi tersimpan. Tekan Tes Koneksi untuk memeriksa akses.',false);
+    // Background refresh while the workspace is open; users can always sync manually.
+    setInterval(()=>{const saved=readConfig();if(!document.hidden&&saved.endpoint&&saved.token)document.getElementById('gcalSyncNow').click();},5*60*1000);
+    document.addEventListener('visibilitychange',()=>{const saved=readConfig();if(!document.hidden&&saved.endpoint&&saved.token)document.getElementById('gcalSyncNow').click();});
   })();
 
 })();

@@ -408,11 +408,17 @@
     const fromVisits=readVisits().flatMap(item=>splitTalentNames(item.talent));
     return [...new Set([...configured,'Kak Edi','Kak Sofia','Kak Dayu',...fromVisits].map(name=>String(name).trim()).filter(Boolean))];
   }
+  function rememberTalentOptions(names){
+    let saved=[];
+    try{const current=JSON.parse(localStorage.getItem('noteAp.talents')||'[]');if(Array.isArray(current))saved=current.map(item=>typeof item==='string'?item:item?.name).filter(Boolean);}catch(error){}
+    const merged=[...new Set([...saved,...names].map(name=>String(name||'').trim()).filter(Boolean))];
+    try{localStorage.setItem('noteAp.talents',JSON.stringify(merged));}catch(error){}
+  }
   function makeTalentSelect(value,id,isNew=false){
     const selected=splitTalentNames(value),options=getTalentOptions();
     const dataAttrs=isNew?'data-new-visit-field="talent"':'data-visit-id="'+escapeVisit(id)+'" data-visit-field="talent"';
     const summary=selected.length?selected.join(', '):'Pilih Talent';
-    return '<details class="visit-multiselect"><summary>'+escapeVisit(summary)+'</summary><div class="visit-multiselect-menu">'+options.map(name=>'<label><input type="checkbox" '+dataAttrs+' value="'+escapeVisit(name)+'" '+(selected.includes(name)?'checked':'')+'><span>'+escapeVisit(name)+'</span></label>').join('')+'</div></details>';
+    return '<details class="visit-multiselect"><summary aria-label="Edit pilihan talent" title="Klik untuk mengubah pilihan talent"><span class="visit-talent-summary">'+escapeVisit(summary)+'</span><small class="visit-talent-edit">Ubah</small></summary><div class="visit-multiselect-menu">'+options.map(name=>'<label><input type="checkbox" '+dataAttrs+' value="'+escapeVisit(name)+'" '+(selected.includes(name)?'checked':'')+'><span>'+escapeVisit(name)+'</span></label>').join('')+'</div></details>';
   }
   function makeVisitInput(field,value,id){
     const safe=escapeVisit(value||'');
@@ -695,6 +701,7 @@ tr.append(number);
       const wrapper=talentInput.closest('.visit-multiselect');
       const row=talentInput.closest('tr');
       const selected=[...wrapper.querySelectorAll('input[type="checkbox"]:checked')].map(item=>item.value);
+      rememberTalentOptions(selected);
       let visitId=talentInput.dataset.visitId;
       if(!visitId){
         const record={id:'VIS-'+Date.now().toString(36).toUpperCase(),visitDate:'',time:'',location:'',title:'',publishDate:'',talent:selected,props:'',status:'',notes:'',createdAt:new Date().toISOString()};
@@ -713,9 +720,9 @@ tr.append(number);
         const all=readVisits(),record=all.find(item=>item.id===visitId);
         if(record){record.talent=selected;record.updatedAt=new Date().toISOString();writeVisits(all);}
       }
-      const summary=wrapper.querySelector('summary');
+      const summary=wrapper.querySelector('.visit-talent-summary');
       if(summary)summary.textContent=selected.length?selected.join(', '):'Pilih Talent';
-      showToast('Pilihan talent tersimpan.');
+      showToast('Pilihan talent berhasil diperbarui.');
       return;
     }
     const input=event.target.closest('[data-new-visit-field]');

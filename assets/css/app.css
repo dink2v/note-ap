@@ -4250,3 +4250,61 @@ button,a{touch-action:manipulation}
 ){
   filter:brightness(.9);
 }
+
+
+/* GLOBAL BACKGROUND PALETTE — soft neutral surfaces in both themes */
+:root[data-theme="light"]{
+  --bg:#f1f3f6;
+  --panel:#ffffff;
+  --line:#e2e7ee;
+  --ink:#172033;
+  --muted:#667085;
+  --form-panel-bg:#ffffff;
+  color-scheme:light;
+}
+:root[data-theme="light"] body,
+:root[data-theme="light"] body :is(.app-shell,.main-area,.page-wrap,.content-form-wrap,.content-page,.visit-page,.settings-page,.help-page,.chat-page){
+  background-color:#f1f3f6;
+}
+:root[data-theme="light"] body :is(
+  .panel,.stat-card,.form-panel,.content-filter-panel,.content-list-panel,
+  .kanban-column,.kanban-card,.visit-card,.visit-editor,.visit-table-panel,
+  .visit-table-toolbar,.visit-table-wrap,.settings-card,.settings-panel,
+  .settings-nav,.settings-content,.settings-preference-row,.settings-mini-card,
+  .reference-category-card,.help-topic-card,.help-faq-item,.chat-workspace,
+  .chat-thread,.chat-composer,.notification-popover,.command-dialog,
+  .command-result,.calendar-planner-panel,.calendar-main-panel,
+  .calendar-agenda-panel,.calendar-insight-card,.calendar-item-dialog,
+  .calendar-detail-section,.calendar-demo,.calendar-demo-form,
+  .calendar-demo-list-panel,.calendar-demo-history,.expand-dialog,
+  .content-modal-dialog
+){
+  background-color:#ffffff;
+  border-color:#e2e7ee;
+}
+:root[data-theme="dark"]{
+  --bg:#171c26;
+  --panel:#222b3a;
+  --line:#39465a;
+  --form-panel-bg:#222b3a;
+}
+:root[data-theme="dark"] body,
+:root[data-theme="dark"] body :is(.app-shell,.main-area,.page-wrap,.content-form-wrap,.content-page,.visit-page,.settings-page,.help-page,.chat-page){
+  background-color:#171c26;
+}
+:root[data-theme="dark"] body :is(
+  .panel,.stat-card,.form-panel,.content-filter-panel,.content-list-panel,
+  .kanban-column,.kanban-card,.visit-card,.visit-editor,.visit-table-panel,
+  .visit-table-toolbar,.visit-table-wrap,.settings-card,.settings-panel,
+  .settings-nav,.settings-content,.settings-preference-row,.settings-mini-card,
+  .reference-category-card,.help-topic-card,.help-faq-item,.chat-workspace,
+  .chat-thread,.chat-composer,.notification-popover,.command-dialog,
+  .command-result,.calendar-planner-panel,.calendar-main-panel,
+  .calendar-agenda-panel,.calendar-insight-card,.calendar-item-dialog,
+  .calendar-detail-section,.calendar-demo,.calendar-demo-form,
+  .calendar-demo-list-panel,.calendar-demo-history,.expand-dialog,
+  .content-modal-dialog
+){
+  background-color:#222b3a;
+  border-color:#39465a;
+}

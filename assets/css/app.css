@@ -3640,3 +3640,34 @@ button,a{touch-action:manipulation}
 :root[data-theme="dark"] body .mobile-top button {
   color:#e8f1eb !important;
 }
+
+
+/* DARK MODE — missed light surfaces found in the full contrast audit */
+:root[data-theme="dark"] body .section-number {
+  background:#294b36 !important;
+  color:#dff5e6 !important;
+}
+:root[data-theme="dark"] body .visit-today-item,
+:root[data-theme="dark"] body .visit-today-item:hover {
+  background:#1a2820 !important;
+  border-color:#35483b !important;
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] body .reference-add-form {
+  background:#1a2820 !important;
+  border-color:#35483b !important;
+  color:#e8f1eb !important;
+}
+:root[data-theme="dark"] body #visitTableBody tr.is-visit-checked>td {
+  background:#1d3328 !important;
+  color:#e8f1eb !important;
+  border-color:#35483b !important;
+}
+:root[data-theme="dark"] body .settings-version {
+  background:#26382d !important;
+  border-color:#405746 !important;
+  color:#cbd9cf !important;
+}
+:root[data-theme="dark"] body .command-result-arrow {
+  color:#b7c6bb !important;
+}

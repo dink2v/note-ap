@@ -26,13 +26,16 @@
       ? 'Konten tersimpan di browser ini (mode lokal).'
       : 'Konten berhasil dikirim ke Note AP.');
   });
-  function openContentModal(event){
+  function openContentModal(event,postingDate){
     if(event)event.preventDefault();
     contentModal.classList.add('open');
     contentModal.setAttribute('aria-hidden','false');
     document.body.classList.add('modal-open');
-    const createUrl=new URL('./tambah-konten.html',document.baseURI).href;
-    if(!contentModalFrame.getAttribute('src')||contentModalFrame.src!==createUrl)contentModalFrame.src=createUrl;
+    const createUrl=new URL('./tambah-konten.html',document.baseURI);
+    if(postingDate)createUrl.searchParams.set('date',postingDate);
+    const target=createUrl.href;
+    if(!contentModalFrame.getAttribute('src')||contentModalFrame.src!==target)contentModalFrame.src=target;
+    else if(postingDate){try{contentModalFrame.contentWindow.postMessage({type:'NOTE_AP_SET_POSTING_DATE',date:postingDate},'*');}catch(error){}}
   }
   function openContentDetail(item){
     if(!item)return;
@@ -249,7 +252,7 @@
       if(key===todayKey)cell.classList.add('is-today');
       const head=document.createElement('div');head.className='calendar-day-head';
       const number=document.createElement('span');number.className='calendar-day-number';number.textContent=String(date.getDate());head.append(number);
-      const add=document.createElement('button');add.type='button';add.className='calendar-day-add';add.textContent='+';add.title='Tambah jadwal pada '+key;add.setAttribute('aria-label','Tambah jadwal '+key);add.addEventListener('click',()=>openCalendarItemModal(null,key));head.append(add);cell.append(head);
+      const add=document.createElement('button');add.type='button';add.className='calendar-day-add';add.textContent='+';add.title='Tambah jadwal pada '+key;add.setAttribute('aria-label','Tambah jadwal '+key);add.addEventListener('click',()=>openContentModal(null,key));head.append(add);cell.append(head);
       const dayItems=items.filter(item=>String(item.postingDate||'')===key).sort((a,b)=>String(a.postingTime||'').localeCompare(String(b.postingTime||'')));
       dayItems.forEach(item=>{
         const event=document.createElement('button');event.type='button';event.draggable=true;event.className='calendar-event-chip '+calendarFormatClass(item.format);event.title='Seret ke tanggal lain untuk memindahkan jadwal. Klik untuk melihat detail: '+(item.title||'Tanpa judul');
@@ -259,7 +262,7 @@
         event.addEventListener('dragend',()=>{event.classList.remove('is-dragging');calendarGrid.querySelectorAll('.is-drop-target').forEach(target=>target.classList.remove('is-drop-target'));});
         event.append(title,meta);event.addEventListener('click',()=>{if(Date.now()<calendarSuppressClickUntil)return;openCalendarContentDetail(item);});cell.append(event);
       });
-      cell.addEventListener('dblclick',event=>{if(event.target===cell||event.target===head||event.target===number)openCalendarItemModal(null,key);});
+      cell.addEventListener('dblclick',event=>{if(event.target===cell||event.target===head||event.target===number)openContentModal(null,key);});
       calendarGrid.append(cell);
     }
     document.querySelectorAll('[data-calendar-view]').forEach(button=>{const active=button.dataset.calendarView===calendarViewMode;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});

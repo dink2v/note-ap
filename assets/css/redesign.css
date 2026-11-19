@@ -923,3 +923,81 @@ html body #settingsPage .settings-actions .primary-btn{
   color:#ffffff!important;
   border-color:#f28c38!important;
 }
+
+
+/* FINAL HELP PAGE LIGHT PALETTE — remove legacy navy surfaces */
+html body #helpPage .help-welcome-card{
+  background:linear-gradient(115deg,#e4f7f2 0%,#eaf2ff 55%,#fff0e1 100%)!important;
+  background-color:#eaf8f5!important;color:#263548!important;
+  border:1px solid #dceaeF!important;
+}
+html body #helpPage .help-topic-card,
+html body #helpPage .help-chat-block,
+html body #helpPage .help-faq-section,
+html body #helpPage .help-note{
+  background:#ffffff!important;background-color:#ffffff!important;
+  color:#263548!important;border-color:#e4eaf1!important;
+  box-shadow:0 7px 20px rgba(35,50,71,.045)!important;
+}
+html body #helpPage .help-topic-card:nth-child(6n+1){background:linear-gradient(145deg,#fff 55%,#fff2e5)!important}
+html body #helpPage .help-topic-card:nth-child(6n+2){background:linear-gradient(145deg,#fff 55%,#eaf8f5)!important}
+html body #helpPage .help-topic-card:nth-child(6n+3){background:linear-gradient(145deg,#fff 55%,#f1edff)!important}
+html body #helpPage .help-topic-card:nth-child(6n+4){background:linear-gradient(145deg,#fff 55%,#eaf2ff)!important}
+html body #helpPage .help-topic-card:nth-child(6n+5){background:linear-gradient(145deg,#fff 55%,#fcebf2)!important}
+html body #helpPage .help-topic-card:nth-child(6n){background:linear-gradient(145deg,#fff 55%,#fff8e6)!important}
+html body #helpPage .help-welcome-card h2,
+html body #helpPage .help-topic-card b,
+html body #helpPage .help-chat-summary-copy strong,
+html body #helpPage .help-section-heading h2,
+html body #helpPage .help-faq-item summary{
+  color:#263548!important;-webkit-text-fill-color:#263548!important;
+}
+html body #helpPage .help-welcome-card p,
+html body #helpPage .help-topic-card p,
+html body #helpPage .help-chat-summary-copy .muted,
+html body #helpPage .help-faq-item p,
+html body #helpPage .help-note p{
+  color:#64748b!important;-webkit-text-fill-color:#64748b!important;
+}
+html body #helpPage .help-kicker,
+html body #helpPage .help-chat-summary-copy .eyebrow{
+  color:#168f83!important;-webkit-text-fill-color:#168f83!important;
+}
+html body #helpPage .help-topic-card>span,
+html body #helpPage .help-chat-chevron{
+  background:#e8f8f5!important;color:#168f83!important;
+  border-color:#cde9e3!important;
+}
+html body #helpPage .help-topic-card:nth-child(3n+1)>span{
+  background:#fff0e1!important;color:#c8752b!important;border-color:#f7d8be!important;
+}
+html body #helpPage .help-topic-card:nth-child(3n)>span{
+  background:#eaf2ff!important;color:#5485d7!important;border-color:#d4e3fa!important;
+}
+html body #helpPage .help-faq-item{
+  background:#ffffff!important;background-color:#ffffff!important;
+  border-color:#e9eef3!important;
+}
+html body #helpPage .help-note{
+  background:#fff8ee!important;background-color:#fff8ee!important;
+  border-color:#f5e7d8!important;
+}
+html body #helpPage .help-note b{color:#bd762f!important}
+html body #helpPage .help-chat-block .chat-workspace,
+html body #helpPage .help-chat-block .chat-sidebar,
+html body #helpPage .help-chat-block .chat-thread,
+html body #helpPage .help-chat-block .chat-composer{
+  background:#ffffff!important;background-color:#ffffff!important;
+  color:#263548!important;border-color:#e5ebf2!important;
+}
+html body #helpPage .help-chat-block .chat-sidebar,
+html body #helpPage .help-chat-block .chat-list-item,
+html body #helpPage .help-chat-block .chat-tabs{
+  background:#f8fafc!important;background-color:#f8fafc!important;
+  color:#475569!important;border-color:#e5ebf2!important;
+}
+html body #helpPage .help-chat-block .chat-thread-title,
+html body #helpPage .help-chat-block .chat-thread-title b,
+html body #helpPage .help-chat-block .chat-message p{
+  color:#263548!important;-webkit-text-fill-color:#263548!important;
+}

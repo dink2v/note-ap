@@ -536,3 +536,52 @@ html body #visitPage #visitTableBody>tr.visit-placeholder-row.selected>td{
   border-color:#DCE8EF!important;
   box-shadow:none!important;
 }
+
+
+/* NOTE AP — approved FULL GLASS content popup, half-screen layout */
+.content-modal{
+  padding:24px!important;
+  background:rgba(226,235,244,.24)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(145%)!important;
+  backdrop-filter:blur(16px) saturate(145%)!important;
+}
+.content-modal-dialog{
+  width:min(50vw,760px)!important;
+  min-width:min(560px,calc(100vw - 48px))!important;
+  height:min(900px,calc(100dvh - 48px))!important;
+  max-height:calc(100dvh - 48px)!important;
+  background:rgba(255,255,255,.30)!important;
+  background-color:rgba(255,255,255,.30)!important;
+  background-image:none!important;
+  border:1px solid rgba(255,255,255,.72)!important;
+  border-radius:24px!important;
+  box-shadow:0 30px 100px rgba(31,52,76,.18),inset 0 1px 0 rgba(255,255,255,.68)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(165%)!important;
+  backdrop-filter:blur(28px) saturate(165%)!important;
+  overflow:hidden!important;
+}
+.content-modal-dialog iframe{
+  width:100%!important;height:100%!important;min-height:0!important;
+  background:transparent!important;border:0!important;
+}
+.content-modal-close{
+  background:rgba(255,255,255,.62)!important;
+  border:1px solid rgba(255,255,255,.78)!important;color:#526176!important;
+  box-shadow:0 5px 18px rgba(31,52,76,.10)!important;
+  -webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important;
+}
+@media(max-width:900px){
+  .content-modal{padding:16px!important}
+  .content-modal-dialog{
+    width:min(78vw,760px)!important;min-width:0!important;
+    max-height:calc(100dvh - 32px)!important;height:min(900px,calc(100dvh - 32px))!important;
+  }
+}
+@media(max-width:650px){
+  .content-modal{padding:8px!important}
+  .content-modal-dialog{
+    width:calc(100vw - 16px)!important;min-width:0!important;
+    height:calc(100dvh - 16px)!important;max-height:calc(100dvh - 16px)!important;
+    border-radius:20px!important;
+  }
+}

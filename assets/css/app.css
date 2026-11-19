@@ -4812,24 +4812,30 @@ body #calendarPage .calendar-agenda-tip{background:#14352e!important;color:#dce8
 body #calendarPage .calendar-agenda-tip p{color:#b8c9c0!important}
 body #calendarPage .calendar-agenda-live{background:#1d4034!important;color:#a7cda9!important}
 
-/* CONTENT */
-body #contentPage .content-filter-panel,body #contentPage .content-list-panel,body #contentPage .content-table-wrap{background:#102f2a!important;color:#dce8e2!important;border-color:#294b41!important;box-shadow:none!important}
-body #contentPage .content-filter-panel{border:1px solid #294b41!important}
-body #contentPage .content-list-heading{background:#102f2a!important;border-color:#294b41!important}
-body #contentPage .content-list-heading h2,body #contentPage .content-table td:first-child{color:#e1ebe5!important}
-body #contentPage .content-list-heading .muted,body #contentPage .content-filter>span{color:#a5b8ae!important}
-body #contentPage .content-search input,body #contentPage .content-filter input,body #contentPage .content-filter select{background:#0a2621!important;color:#dce8e2!important;border-color:#31564b!important;box-shadow:none!important}
-body #contentPage .content-search input::placeholder{color:#81978c!important}
-body #contentPage .content-table{background:#102f2a!important;border-color:#294b41!important}
-body #contentPage .content-table th{background:#17382f!important;color:#c3d2c9!important;border-color:#31564b!important}
-body #contentPage .content-table td{background:#102f2a!important;color:#cbd9d1!important;border-color:#294b41!important}
-body #contentPage .content-table tbody tr:hover>td{background:#173d34!important}
-body #contentPage .content-empty{background:#102f2a!important;color:#a5b8ae!important}
-body #contentPage .content-empty b{color:#e1ebe5!important}
-body #contentPage .content-empty p{color:#91a79e!important}
-body #contentPage .filter-reset-btn{background:#17382f!important;color:#dce8e2!important;border-color:#31564b!important}
-body #contentPage .status-chip{filter:saturate(.7) brightness(.82)!important}
-body #contentPage .platform-cell{color:#a9c7b8!important}
+/* CONTENT — dark palette only when dark theme is active */
+:root[data-theme="dark"] body #contentPage .content-filter-panel,
+:root[data-theme="dark"] body #contentPage .content-list-panel,
+:root[data-theme="dark"] body #contentPage .content-table-wrap{background:#102f2a!important;color:#dce8e2!important;border-color:#294b41!important;box-shadow:none!important}
+:root[data-theme="dark"] body #contentPage .content-filter-panel{border:1px solid #294b41!important}
+:root[data-theme="dark"] body #contentPage .content-list-heading{background:#102f2a!important;border-color:#294b41!important}
+:root[data-theme="dark"] body #contentPage .content-list-heading h2,
+:root[data-theme="dark"] body #contentPage .content-table td:first-child{color:#e1ebe5!important}
+:root[data-theme="dark"] body #contentPage .content-list-heading .muted,
+:root[data-theme="dark"] body #contentPage .content-filter>span{color:#a5b8ae!important}
+:root[data-theme="dark"] body #contentPage .content-search input,
+:root[data-theme="dark"] body #contentPage .content-filter input,
+:root[data-theme="dark"] body #contentPage .content-filter select{background:#0a2621!important;color:#dce8e2!important;border-color:#31564b!important;box-shadow:none!important}
+:root[data-theme="dark"] body #contentPage .content-search input::placeholder{color:#81978c!important}
+:root[data-theme="dark"] body #contentPage .content-table{background:#102f2a!important;border-color:#294b41!important}
+:root[data-theme="dark"] body #contentPage .content-table th{background:#17382f!important;color:#c3d2c9!important;border-color:#31564b!important}
+:root[data-theme="dark"] body #contentPage .content-table td{background:#102f2a!important;color:#cbd9d1!important;border-color:#294b41!important}
+:root[data-theme="dark"] body #contentPage .content-table tbody tr:hover>td{background:#173d34!important}
+:root[data-theme="dark"] body #contentPage .content-empty{background:#102f2a!important;color:#a5b8ae!important}
+:root[data-theme="dark"] body #contentPage .content-empty b{color:#e1ebe5!important}
+:root[data-theme="dark"] body #contentPage .content-empty p{color:#91a79e!important}
+:root[data-theme="dark"] body #contentPage .filter-reset-btn{background:#17382f!important;color:#dce8e2!important;border-color:#31564b!important}
+:root[data-theme="dark"] body #contentPage .status-chip{filter:saturate(.7) brightness(.82)!important}
+:root[data-theme="dark"] body #contentPage .platform-cell{color:#a9c7b8!important}
 
 /* KANBAN */
 body #kanbanPage .kanban-board{background:transparent!important}
@@ -6890,3 +6896,7 @@ html.embedded-content-form .content-form-wrap .form-bottom-actions .primary-btn{
 :root[data-theme="dark"] #contentPage #resetContentFilters{background:#111d16!important;border-color:#405746!important;color:#edf5ef!important}
 :root[data-theme="dark"] #contentPage .content-table th{background:#223329!important;color:#cbd9cf!important;border-color:#405746!important}
 :root[data-theme="dark"] #contentPage .content-table td{color:#dce9e0!important}
+
+
+/* Keep the empty state hidden whenever filtered rows exist. */
+#contentPage .content-empty[hidden]{display:none!important}

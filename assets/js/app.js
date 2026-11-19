@@ -135,6 +135,27 @@ html,body{background:transparent!important;background-color:transparent!importan
   #contentForm .materi-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px 12px!important}
   #contentForm .materi-grid>.field{grid-column:auto!important}
 }
+
+/* Keep Caption & Catatan paired like the sections above, including compact screens. */
+#contentForm>section.form-panel:nth-child(3) .caption-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  align-items:start!important;
+  gap:20px 26px!important;
+}
+#contentForm>section.form-panel:nth-child(3) .caption-grid>.field{
+  grid-column:span 1!important;
+  min-width:0!important;
+}
+@media(max-width:760px){
+  #contentForm>section.form-panel:nth-child(3) .caption-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:14px 12px!important;
+  }
+  #contentForm>section.form-panel:nth-child(3) .caption-grid>.field{
+    grid-column:span 1!important;
+  }
+}
 `;
        
 doc.head.append(style);

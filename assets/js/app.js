@@ -380,6 +380,12 @@ html.embedded-content-form body .content-form-wrap > section.approval-panel .app
 html.embedded-content-form body .content-form-wrap > section.approval-panel .comment-actions .primary-btn{
   color:#fff!important;-webkit-text-fill-color:#fff!important;
 }
+/* Subtle outline for the transparent Approval & History wrapper */
+html.embedded-content-form body .content-form-wrap > section.approval-panel,
+html body .content-form-wrap > section.approval-panel{
+  border:1px solid rgba(148,163,184,.42)!important;
+  border-radius:18px!important;
+}
 `;
        
 doc.head.append(style);

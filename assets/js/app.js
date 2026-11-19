@@ -133,6 +133,43 @@ html.embedded-content-form .expand-dialog{background:#fff!important;color:#26354
  html.embedded-content-form .form-bottom-actions>div .primary-btn{grid-column:1/-1!important}
 }
 `;
+       style.textContent += `
+/* Embedded Add Content: fully transparent canvas; keep fields readable */
+html.embedded-content-form,
+html.embedded-content-form body,
+html.embedded-content-form .app-shell,
+html.embedded-content-form .main-area,
+html.embedded-content-form .page-wrap.content-form-wrap,
+html.embedded-content-form #contentForm,
+html.embedded-content-form .form-panel,
+html.embedded-content-form .approval-panel,
+html.embedded-content-form .form-section-heading,
+html.embedded-content-form .form-grid,
+html.embedded-content-form .field,
+html.embedded-content-form .approval-status-row,
+html.embedded-content-form .comments-block,
+html.embedded-content-form .history-block,
+html.embedded-content-form .form-bottom-actions{
+ background:transparent!important;
+ background-color:transparent!important;
+ background-image:none!important;
+ box-shadow:none!important;
+}
+html.embedded-content-form .form-panel,
+html.embedded-content-form .approval-panel{
+ border:0!important;
+ border-radius:0!important;
+ border-bottom:1px solid rgba(100,116,139,.20)!important;
+}
+html.embedded-content-form .field input,
+html.embedded-content-form .field select,
+html.embedded-content-form .field textarea,
+html.embedded-content-form .expand-dialog textarea{
+ background:rgba(255,255,255,.96)!important;
+ background-color:rgba(255,255,255,.96)!important;
+ color:#263548!important;
+}
+`;
        doc.head.append(style);
       }
       if(!child.__noteApEscapeBound){

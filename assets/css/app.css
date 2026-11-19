@@ -7151,3 +7151,237 @@ html.embedded-content-form .content-form-wrap .field select,
 html.embedded-content-form .content-form-wrap .field textarea{
   background:#fbfcfd!important;
 }
+
+
+/* =========================================================
+   NOTE AP — TRANSPARENT CONTENT MODAL, FULL FORM RESTYLE
+   The entire iframe canvas and section surfaces stay clear.
+   Only actual controls retain a readable solid surface.
+   ========================================================= */
+.content-modal{
+  background:rgba(12,25,28,.16)!important;
+  -webkit-backdrop-filter:blur(1px)!important;
+  backdrop-filter:blur(1px)!important;
+}
+.content-modal-dialog{
+  width:min(1160px,calc(100vw - 48px))!important;
+  height:min(920px,calc(100dvh - 48px))!important;
+  max-height:calc(100dvh - 48px)!important;
+  overflow:hidden!important;
+  border:1px solid rgba(255,255,255,.32)!important;
+  border-radius:20px!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  box-shadow:0 22px 70px rgba(10,25,30,.18)!important;
+}
+.content-modal-dialog iframe{
+  display:block!important;width:100%!important;height:100%!important;
+  min-height:0!important;border:0!important;
+  background:transparent!important;background-color:transparent!important;
+}
+html.embedded-content-form,
+html.embedded-content-form body,
+html.embedded-content-form body::before,
+html.embedded-content-form body::after,
+html.embedded-content-form .app-shell,
+html.embedded-content-form .main-area,
+html.embedded-content-form .main-area::before,
+html.embedded-content-form .page-wrap,
+html.embedded-content-form .page-wrap::before,
+html.embedded-content-form .content-form-wrap,
+html.embedded-content-form #contentForm,
+html.embedded-content-form .form-title-row,
+html.embedded-content-form .form-panel,
+html.embedded-content-form .form-section-heading,
+html.embedded-content-form .form-bottom-actions,
+html.embedded-content-form .page-footer{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+html.embedded-content-form body,
+html.embedded-content-form .app-shell,
+html.embedded-content-form .main-area,
+html.embedded-content-form .page-wrap.content-form-wrap{
+  border:0!important;outline:0!important;
+}
+html.embedded-content-form .sidebar,
+html.embedded-content-form .mobile-top,
+html.embedded-content-form .form-breadcrumb,
+html.embedded-content-form .form-title-row .eyebrow,
+html.embedded-content-form .form-title-row .muted,
+html.embedded-content-form .form-title-row>div>.eyebrow{
+  display:none!important;
+}
+html.embedded-content-form .main-area{
+  margin:0!important;min-height:0!important;width:100%!important;
+}
+html.embedded-content-form .page-wrap.content-form-wrap{
+  width:100%!important;max-width:none!important;height:100%!important;
+  margin:0!important;padding:26px 30px 30px!important;
+  overflow-y:auto!important;overflow-x:hidden!important;
+  scrollbar-width:thin!important;scrollbar-color:rgba(255,255,255,.45) transparent!important;
+}
+html.embedded-content-form .form-title-row{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  gap:16px!important;margin:0 0 22px!important;padding:0 48px 0 0!important;
+}
+html.embedded-content-form .form-title-row h1{
+  color:#fff!important;text-shadow:0 1px 8px rgba(0,0,0,.14)!important;
+  font:800 27px/1.2 "Plus Jakarta Sans",sans-serif!important;
+  letter-spacing:-.7px!important;
+}
+html.embedded-content-form .form-title-row .secondary-btn,
+html.embedded-content-form #detailEditTop{
+  min-height:40px!important;padding:0 16px!important;border-radius:11px!important;
+  border:1px solid rgba(255,255,255,.72)!important;
+  background:rgba(255,255,255,.94)!important;color:#168f86!important;
+  font:750 10px "DM Sans",sans-serif!important;
+  box-shadow:0 5px 16px rgba(0,0,0,.08)!important;
+}
+html.embedded-content-form #contentForm{
+  display:grid!important;gap:17px!important;
+}
+html.embedded-content-form .form-panel{
+  min-width:0!important;margin:0!important;padding:22px 25px 24px!important;
+  border:1px solid rgba(255,255,255,.25)!important;
+  border-radius:17px!important;
+  background:rgba(255,255,255,.035)!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+html.embedded-content-form .form-section-heading{
+  display:flex!important;align-items:center!important;gap:13px!important;
+  margin:0 0 18px!important;padding:0 0 16px!important;
+  border:0!important;border-bottom:1px solid rgba(255,255,255,.34)!important;
+}
+html.embedded-content-form .form-section-heading .section-number{
+  display:grid!important;place-items:center!important;flex:0 0 36px!important;
+  width:36px!important;height:36px!important;border-radius:11px!important;
+  background:#fff0e4!important;color:#d97726!important;
+  font:800 11px "Plus Jakarta Sans",sans-serif!important;
+}
+html.embedded-content-form .form-section-heading h2{
+  margin:0!important;color:#fff!important;
+  font:800 14px "Plus Jakarta Sans",sans-serif!important;
+}
+html.embedded-content-form .form-section-heading p{
+  margin:5px 0 0!important;color:rgba(255,255,255,.72)!important;
+  font:10px/1.55 "DM Sans",sans-serif!important;
+}
+html.embedded-content-form .form-grid{
+  display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:17px 19px!important;
+}
+html.embedded-content-form .field{
+  display:flex!important;flex-direction:column!important;gap:8px!important;min-width:0!important;
+}
+html.embedded-content-form .field.full{grid-column:1/-1!important}
+html.embedded-content-form .field>span{
+  color:rgba(255,255,255,.88)!important;
+  font:750 10px "DM Sans",sans-serif!important;letter-spacing:.12px!important;
+}
+html.embedded-content-form .field>span i{color:#ffb16d!important}
+html.embedded-content-form .field input,
+html.embedded-content-form .field select,
+html.embedded-content-form .field textarea{
+  width:100%!important;min-width:0!important;max-width:100%!important;
+  border:1px solid rgba(255,255,255,.78)!important;border-radius:10px!important;
+  background:rgba(255,255,255,.96)!important;background-color:rgba(255,255,255,.96)!important;
+  color:#304456!important;-webkit-text-fill-color:#304456!important;
+  font:11px/1.6 "DM Sans",sans-serif!important;
+  box-shadow:0 2px 8px rgba(0,0,0,.035)!important;
+}
+html.embedded-content-form .field input,
+html.embedded-content-form .field select{height:43px!important;padding:0 12px!important}
+html.embedded-content-form .field textarea{
+  min-height:116px!important;padding:11px 12px!important;resize:vertical!important;
+}
+html.embedded-content-form .field textarea[name="body"],
+html.embedded-content-form .field textarea[name="visualBody"]{min-height:165px!important}
+html.embedded-content-form .field textarea[name="caption"]{min-height:145px!important}
+html.embedded-content-form .field input:focus,
+html.embedded-content-form .field select:focus,
+html.embedded-content-form .field textarea:focus{
+  outline:none!important;border-color:#75d2c5!important;
+  box-shadow:0 0 0 3px rgba(32,182,166,.22)!important;
+}
+html.embedded-content-form .field input::placeholder,
+html.embedded-content-form .field textarea::placeholder{color:#96a5ae!important}
+html.embedded-content-form .field-help{
+  color:rgba(255,255,255,.68)!important;font-size:9px!important;line-height:1.55!important;
+}
+html.embedded-content-form .maximize-btn{
+  align-self:flex-start!important;border:0!important;padding:3px 0!important;
+  background:transparent!important;color:#a5eee3!important;
+  font:750 9px "DM Sans",sans-serif!important;cursor:pointer!important;
+}
+html.embedded-content-form .approval-panel .approval-status-row{
+  padding:14px 16px!important;border:1px solid rgba(255,255,255,.28)!important;
+  border-radius:12px!important;background:rgba(255,255,255,.08)!important;
+}
+html.embedded-content-form .approval-panel .approval-status-row small,
+html.embedded-content-form .approval-panel .approval-status-row b,
+html.embedded-content-form .approval-panel h3,
+html.embedded-content-form .approval-panel .no-comments,
+html.embedded-content-form .approval-panel #historyEmpty,
+html.embedded-content-form .approval-panel #historyList{
+  color:#fff!important;
+}
+html.embedded-content-form .approval-panel .comments-block,
+html.embedded-content-form .approval-panel .history-block{
+  border-top:1px solid rgba(255,255,255,.25)!important;
+}
+html.embedded-content-form .form-bottom-actions{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  gap:12px!important;padding:4px 0 18px!important;
+}
+html.embedded-content-form .form-bottom-actions>div{
+  display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:9px!important;
+}
+html.embedded-content-form .form-bottom-actions .primary-btn,
+html.embedded-content-form .form-bottom-actions .secondary-btn{
+  min-height:41px!important;padding:0 17px!important;border-radius:10px!important;
+  font:750 10px "DM Sans",sans-serif!important;
+}
+html.embedded-content-form .form-bottom-actions .primary-btn{
+  border:0!important;background:#f28c38!important;color:#fff!important;
+  box-shadow:0 6px 17px rgba(242,140,56,.23)!important;
+}
+html.embedded-content-form .form-bottom-actions .secondary-btn{
+  border:1px solid rgba(255,255,255,.6)!important;
+  background:rgba(255,255,255,.92)!important;color:#168f86!important;
+}
+html.embedded-content-form #contentForm[data-editable="false"] .field input:disabled,
+html.embedded-content-form #contentForm[data-editable="false"] .field select:disabled,
+html.embedded-content-form #contentForm[data-editable="false"] .field textarea:disabled{
+  opacity:1!important;background:rgba(255,255,255,.92)!important;
+  color:#405765!important;-webkit-text-fill-color:#405765!important;
+  cursor:default!important;
+}
+html.embedded-content-form .expand-overlay{
+  background:rgba(10,24,27,.28)!important;backdrop-filter:blur(2px)!important;
+}
+html.embedded-content-form .expand-dialog{
+  background:#fff!important;color:#304456!important;
+  border:1px solid #e5edf0!important;border-radius:17px!important;
+}
+html.embedded-content-form .expand-dialog textarea{
+  background:#fbfcfd!important;color:#304456!important;
+}
+@media(max-width:760px){
+  .content-modal-dialog{
+    width:100vw!important;height:100dvh!important;max-height:100dvh!important;
+    border:0!important;border-radius:0!important;
+  }
+  html.embedded-content-form .page-wrap.content-form-wrap{padding:22px 14px 24px!important}
+  html.embedded-content-form .form-title-row{padding-right:42px!important}
+  html.embedded-content-form .form-title-row h1{font-size:22px!important}
+  html.embedded-content-form .form-panel{padding:18px 15px 20px!important;border-radius:14px!important}
+  html.embedded-content-form .form-grid{grid-template-columns:1fr!important;gap:14px!important}
+  html.embedded-content-form .field.full{grid-column:auto!important}
+  html.embedded-content-form .form-bottom-actions{align-items:stretch!important;flex-direction:column!important}
+  html.embedded-content-form .form-bottom-actions>div{display:grid!important;grid-template-columns:1fr 1fr!important;width:100%!important}
+  html.embedded-content-form .form-bottom-actions>div .primary-btn{grid-column:1/-1!important}
+}

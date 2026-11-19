@@ -6900,3 +6900,215 @@ html.embedded-content-form .content-form-wrap .form-bottom-actions .primary-btn{
 
 /* Keep the empty state hidden whenever filtered rows exist. */
 #contentPage .content-empty[hidden]{display:none!important}
+
+
+/* NOTE AP — Content create/detail experience refinement */
+.content-form-wrap{
+  max-width:1120px!important;
+  padding:30px 34px 30px!important;
+}
+.content-form-wrap .form-title-row{
+  align-items:center!important;justify-content:space-between!important;
+  gap:18px!important;margin:0 0 22px!important;
+}
+.content-form-wrap .form-title-row h1{
+  color:#293d50!important;font:800 27px/1.25 "Plus Jakarta Sans",sans-serif!important;
+  letter-spacing:-.75px!important;
+}
+.content-form-wrap .form-title-row .detail-edit-top{
+  flex:0 0 auto!important;margin-left:auto!important;min-height:40px!important;
+  padding:0 16px!important;border-radius:10px!important;
+  background:#fff!important;border:1px solid #dce9e8!important;
+  color:#168f86!important;font:750 11px "DM Sans",sans-serif!important;
+  box-shadow:0 3px 10px rgba(34,72,82,.04)!important;
+}
+.content-form-wrap .form-title-row .detail-edit-top:hover{
+  border-color:#9edbd3!important;background:#f2fbf9!important;
+}
+.content-form-wrap .form-title-row .detail-edit-top.is-editing{
+  background:#fff5e9!important;border-color:#f4d7b8!important;color:#bd762f!important;
+}
+.content-form-wrap .form-panel{
+  padding:25px 27px!important;margin:0 0 17px!important;
+  border:1px solid #e5edf0!important;border-radius:17px!important;
+  background:#fff!important;box-shadow:0 7px 24px rgba(38,60,76,.045)!important;
+}
+.content-form-wrap .form-section-heading{
+  display:flex!important;align-items:center!important;gap:13px!important;
+  padding:0 0 17px!important;margin:0 0 20px!important;
+  border-bottom:1px solid #edf2f3!important;
+}
+.content-form-wrap .form-section-heading .section-number{
+  display:grid!important;place-items:center!important;flex:0 0 36px!important;
+  width:36px!important;height:36px!important;border-radius:11px!important;
+  background:#fff1e5!important;color:#d97726!important;
+  font:800 11px "DM Sans",sans-serif!important;
+}
+.content-form-wrap .form-section-heading h2{
+  margin:0!important;color:#304456!important;
+  font:800 15px "Plus Jakarta Sans",sans-serif!important;letter-spacing:-.2px!important;
+}
+.content-form-wrap .form-section-heading p{
+  margin:5px 0 0!important;color:#8a9aa5!important;
+  font:10px/1.55 "DM Sans",sans-serif!important;
+}
+.content-form-wrap .form-grid{
+  display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:18px 20px!important;
+}
+.content-form-wrap .field{display:flex!important;flex-direction:column!important;gap:8px!important;min-width:0!important}
+.content-form-wrap .field>span{
+  color:#52697a!important;font:750 10px "DM Sans",sans-serif!important;
+  letter-spacing:.08px!important;
+}
+.content-form-wrap .field>span i{color:#ed8b43!important;font-style:normal!important}
+.content-form-wrap .field input,
+.content-form-wrap .field select,
+.content-form-wrap .field textarea{
+  width:100%!important;min-width:0!important;max-width:100%!important;
+  border:1px solid #e1e9ed!important;border-radius:10px!important;
+  background:#fbfcfd!important;color:#34495a!important;
+  font:11px/1.6 "DM Sans",sans-serif!important;
+  box-shadow:none!important;transition:border-color .18s,box-shadow .18s,background .18s!important;
+}
+.content-form-wrap .field input,.content-form-wrap .field select{
+  height:43px!important;padding:0 12px!important;
+}
+.content-form-wrap .field textarea{
+  min-height:105px!important;padding:11px 12px!important;resize:vertical!important;
+}
+.content-form-wrap .field textarea[name="body"],
+.content-form-wrap .field textarea[name="visualBody"]{min-height:158px!important}
+.content-form-wrap .field textarea[name="caption"]{min-height:135px!important}
+.content-form-wrap .field input:focus,
+.content-form-wrap .field select:focus,
+.content-form-wrap .field textarea:focus{
+  outline:none!important;border-color:#77cfc4!important;background:#fff!important;
+  box-shadow:0 0 0 3px rgba(32,182,166,.11)!important;
+}
+.content-form-wrap .field input::placeholder,
+.content-form-wrap .field textarea::placeholder{color:#a0adb6!important}
+.content-form-wrap .field.full{grid-column:1/-1!important}
+.content-form-wrap .field-help{color:#91a0aa!important;font-size:9px!important;line-height:1.55!important}
+.content-form-wrap .maximize-btn{
+  align-self:flex-start!important;display:inline-flex!important;align-items:center!important;gap:5px!important;
+  padding:3px 0!important;border:0!important;background:transparent!important;
+  color:#168f86!important;font:750 9px "DM Sans",sans-serif!important;cursor:pointer!important;
+}
+.content-form-wrap .maximize-btn:hover{text-decoration:underline!important}
+.content-form-wrap .approval-panel .approval-status-row{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  gap:14px!important;padding:15px 17px!important;
+  border:1px solid #e4eeeb!important;border-radius:12px!important;background:#f7fbfa!important;
+}
+.content-form-wrap .approval-panel .approval-status-row small{
+  display:block!important;margin-bottom:5px!important;color:#82969a!important;
+  font:800 8px "DM Sans",sans-serif!important;letter-spacing:.8px!important;
+}
+.content-form-wrap .approval-panel .approval-status-row b{
+  color:#304b59!important;font:800 12px "Plus Jakarta Sans",sans-serif!important;
+}
+.content-form-wrap .approval-panel .phase-track{margin:20px 0 9px!important}
+.content-form-wrap .approval-panel .phase-labels{
+  display:flex!important;justify-content:space-between!important;gap:7px!important;
+  color:#82939c!important;font:650 9px "DM Sans",sans-serif!important;
+}
+.content-form-wrap .approval-panel .approve-btn{
+  min-height:38px!important;margin-top:16px!important;padding:0 14px!important;
+  border:1px solid #cfece6!important;border-radius:9px!important;
+  background:#eff9f7!important;color:#168f86!important;
+  font:750 10px "DM Sans",sans-serif!important;
+}
+.content-form-wrap .approval-panel .comments-block,
+.content-form-wrap .approval-panel .history-block{
+  margin-top:22px!important;padding-top:19px!important;border-top:1px solid #edf2f3!important;
+}
+.content-form-wrap .approval-panel h3{
+  margin:0 0 12px!important;color:#718794!important;
+  font:800 9px "DM Sans",sans-serif!important;letter-spacing:1px!important;
+}
+.content-form-wrap .approval-panel .no-comments,
+.content-form-wrap .approval-panel #historyEmpty{
+  color:#96a4ad!important;font:10px/1.6 "DM Sans",sans-serif!important;
+}
+.content-form-wrap .approval-panel #commentList,
+.content-form-wrap .approval-panel #historyList{display:grid!important;gap:8px!important}
+.content-form-wrap .approval-panel #historyList{padding-left:18px!important;color:#718491!important;font-size:10px!important;line-height:1.6!important}
+.content-form-wrap .form-bottom-actions{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  gap:12px!important;padding:7px 0 15px!important;
+}
+.content-form-wrap .form-bottom-actions>div{
+  display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:9px!important;
+}
+.content-form-wrap .form-bottom-actions .primary-btn,
+.content-form-wrap .form-bottom-actions .secondary-btn{
+  min-height:41px!important;padding:0 16px!important;border-radius:10px!important;
+  font:750 10px "DM Sans",sans-serif!important;
+}
+.content-form-wrap .form-bottom-actions .primary-btn{
+  border:0!important;background:#f28c38!important;color:#fff!important;
+  box-shadow:0 5px 14px rgba(242,140,56,.17)!important;
+}
+.content-form-wrap .form-bottom-actions .primary-btn:hover{background:#df792b!important}
+.content-form-wrap .form-bottom-actions .secondary-btn{
+  border:1px solid #dce9e8!important;background:#fff!important;color:#168f86!important;
+}
+.content-form-wrap .form-bottom-actions .secondary-btn:hover{background:#f2fbf9!important}
+.content-form-wrap #contentForm[data-editable="false"] .field input:disabled,
+.content-form-wrap #contentForm[data-editable="false"] .field select:disabled,
+.content-form-wrap #contentForm[data-editable="false"] .field textarea:disabled{
+  opacity:1!important;background:#f5f8f9!important;border-color:#e7edef!important;
+  color:#526675!important;-webkit-text-fill-color:#526675!important;cursor:default!important;
+}
+.content-form-wrap #contentForm[data-editable="false"] .maximize-btn:disabled{opacity:.65!important;cursor:default!important}
+.expand-overlay{z-index:100!important;padding:18px!important}
+.expand-dialog{
+  width:min(820px,100%)!important;max-height:min(82vh,780px)!important;
+  padding:20px!important;border:1px solid #e4ecef!important;border-radius:17px!important;
+  background:#fff!important;box-shadow:0 22px 70px rgba(22,43,55,.2)!important;
+}
+.expand-dialog>div{display:flex!important;align-items:center!important;justify-content:space-between!important;margin-bottom:13px!important}
+.expand-dialog>div b{color:#304456!important;font:800 13px "Plus Jakarta Sans",sans-serif!important}
+.expand-dialog textarea{
+  width:100%!important;min-height:300px!important;resize:vertical!important;
+  border:1px solid #e1e9ed!important;border-radius:11px!important;
+  padding:13px!important;background:#fbfcfd!important;color:#34495a!important;
+  font:12px/1.7 "DM Sans",sans-serif!important;
+}
+.expand-dialog>.primary-btn{margin-top:12px!important;min-height:40px!important;padding:0 18px!important}
+html.embedded-content-form .page-wrap.content-form-wrap{max-width:none!important}
+html.embedded-content-form .content-form-wrap .form-title-row{padding-right:48px!important}
+html.embedded-content-form .content-form-wrap .form-panel{background:#fff!important}
+@media(max-width:760px){
+ .content-form-wrap{padding:20px 14px 22px!important}
+ .content-form-wrap .form-title-row{align-items:flex-start!important;flex-wrap:wrap!important}
+ .content-form-wrap .form-title-row h1{font-size:22px!important}
+ .content-form-wrap .form-title-row .detail-edit-top{margin-left:0!important}
+ .content-form-wrap .form-panel{padding:19px 15px!important;border-radius:14px!important}
+ .content-form-wrap .form-grid{grid-template-columns:1fr!important;gap:15px!important}
+ .content-form-wrap .field.full{grid-column:auto!important}
+ .content-form-wrap .form-bottom-actions{align-items:stretch!important;flex-direction:column!important}
+ .content-form-wrap .form-bottom-actions>div{display:grid!important;grid-template-columns:1fr 1fr!important;width:100%!important}
+ .content-form-wrap .form-bottom-actions>div .primary-btn{grid-column:1/-1!important}
+ .content-form-wrap .approval-panel .phase-labels{font-size:8px!important}
+ .expand-dialog textarea{min-height:45vh!important}
+}
+:root[data-theme="dark"] .content-form-wrap .form-panel{background:#1b2921!important;border-color:#34483a!important}
+:root[data-theme="dark"] .content-form-wrap .form-title-row h1,
+:root[data-theme="dark"] .content-form-wrap .form-section-heading h2,
+:root[data-theme="dark"] .content-form-wrap .approval-status-row b{color:#edf5ef!important}
+:root[data-theme="dark"] .content-form-wrap .form-section-heading p,
+:root[data-theme="dark"] .content-form-wrap .form-title-row .muted{color:#a8b9ae!important}
+:root[data-theme="dark"] .content-form-wrap .field>span{color:#c3d2c8!important}
+:root[data-theme="dark"] .content-form-wrap .field input,
+:root[data-theme="dark"] .content-form-wrap .field select,
+:root[data-theme="dark"] .content-form-wrap .field textarea{background:#142119!important;color:#edf5ef!important;border-color:#405348!important}
+:root[data-theme="dark"] .content-form-wrap #contentForm[data-editable="false"] .field input:disabled,
+:root[data-theme="dark"] .content-form-wrap #contentForm[data-editable="false"] .field select:disabled,
+:root[data-theme="dark"] .content-form-wrap #contentForm[data-editable="false"] .field textarea:disabled{background:#202f26!important;color:#d2dfd6!important;-webkit-text-fill-color:#d2dfd6!important;border-color:#405348!important}
+:root[data-theme="dark"] .content-form-wrap .approval-panel .approval-status-row{background:#202f26!important;border-color:#405348!important}
+:root[data-theme="dark"] .content-form-wrap .form-bottom-actions .secondary-btn{background:#1b2921!important;color:#a7e2d8!important;border-color:#405348!important}
+:root[data-theme="dark"] .expand-dialog{background:#1b2921!important;border-color:#405348!important}
+:root[data-theme="dark"] .expand-dialog>div b{color:#edf5ef!important}
+:root[data-theme="dark"] .expand-dialog textarea{background:#142119!important;color:#edf5ef!important;border-color:#405348!important}

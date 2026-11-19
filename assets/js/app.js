@@ -380,10 +380,9 @@ html.embedded-content-form body .content-form-wrap > section.approval-panel .app
 html.embedded-content-form body .content-form-wrap > section.approval-panel .comment-actions .primary-btn{
   color:#fff!important;-webkit-text-fill-color:#fff!important;
 }
-/* Subtle outline for the transparent Approval & History wrapper */
-html.embedded-content-form body .content-form-wrap > section.approval-panel,
-html body .content-form-wrap > section.approval-panel{
-  border:1px solid #E2EAF1!important;
+/* FINAL BORDER OVERRIDE: same specificity as the earlier transparent-border reset */
+html.embedded-content-form body .content-form-wrap > section.approval-panel{
+  border:1px solid #263548!important;
   border-radius:18px!important;
 }
 `;

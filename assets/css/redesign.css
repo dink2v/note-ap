@@ -846,3 +846,80 @@ html body #contentModal.content-modal .content-modal-dialog iframe{
  #helpPage .help-topic-card{min-height:130px!important;padding:14px!important}
  #helpPage .help-faq-section{padding:15px!important}
 }
+
+
+/* FINAL SETTINGS LIGHT SURFACE — explicitly isolate Setelan from legacy dark palette */
+html body #settingsPage .settings-nav,
+html body #settingsPage .settings-content,
+html body #settingsPage .settings-panel{
+  background:#ffffff!important;
+  background-color:#ffffff!important;
+  color:#263548!important;
+  border-color:#e7ecf2!important;
+  box-shadow:0 8px 24px rgba(35,50,71,.055)!important;
+}
+html body #settingsPage .settings-nav-item{
+  background:transparent!important;
+  color:#64748b!important;
+  border-color:transparent!important;
+}
+html body #settingsPage .settings-nav-item b,
+html body #settingsPage .settings-panel-head h2,
+html body #settingsPage .settings-preference-row b{
+  color:#263548!important;
+  -webkit-text-fill-color:#263548!important;
+}
+html body #settingsPage .settings-nav-item small,
+html body #settingsPage .settings-panel-head p,
+html body #settingsPage .settings-field,
+html body #settingsPage .settings-preference-row p,
+html body #settingsPage .settings-footnote{
+  color:#748196!important;
+  -webkit-text-fill-color:#748196!important;
+}
+html body #settingsPage .settings-nav-item:hover{
+  background:#f7fafc!important;
+  border-color:#e7ecf2!important;
+}
+html body #settingsPage .settings-nav-item.active{
+  background:#e8f8f5!important;
+  border-color:#cde9e3!important;
+  color:#168f83!important;
+  box-shadow:inset 3px 0 #20b6a6!important;
+}
+html body #settingsPage .settings-nav-item.active b{
+  color:#087f75!important;
+  -webkit-text-fill-color:#087f75!important;
+}
+html body #settingsPage .settings-field input,
+html body #settingsPage .settings-field select,
+html body #settingsPage .settings-field textarea,
+html body #settingsPage .settings-preference-row select{
+  background:#fbfcfe!important;
+  background-color:#fbfcfe!important;
+  color:#263548!important;
+  -webkit-text-fill-color:#263548!important;
+  border-color:#dce5ed!important;
+  color-scheme:light!important;
+}
+html body #settingsPage .settings-info-note{
+  background:#eaf8f5!important;
+  background-color:#eaf8f5!important;
+  color:#426f69!important;
+  border-color:#d1eee7!important;
+}
+html body #settingsPage .settings-integration-card,
+html body #settingsPage .settings-data-actions article,
+html body #settingsPage .settings-team-placeholder,
+html body #settingsPage .reference-category-card{
+  background:#fbfcfe!important;
+  background-color:#fbfcfe!important;
+  color:#263548!important;
+  border-color:#e5ebf2!important;
+}
+html body #settingsPage .settings-actions .primary-btn{
+  background:#f28c38!important;
+  background-color:#f28c38!important;
+  color:#ffffff!important;
+  border-color:#f28c38!important;
+}

@@ -4628,9 +4628,14 @@ body .command-launcher{
   background:rgba(16,47,42,.96)!important;
   border-color:#31564b!important;color:#c4d3cb!important;
 }
-body .command-dialog,body .calendar-item-dialog,body .expand-dialog,
-body .content-modal-dialog{
+body .command-dialog,body .calendar-item-dialog,body .expand-dialog{
   background:#102f2a!important;border-color:#31564b!important;
+}
+/* Content popup must not inherit the global dark-green dialog surface. */
+body .content-modal-dialog{
+  background:transparent!important;
+  background-color:transparent!important;
+  border-color:rgba(255,255,255,.32)!important;
 }
 body .command-overlay,body .calendar-item-modal,body .content-modal,
 body .expand-overlay{background:rgba(3,15,13,.78)!important}
@@ -7455,4 +7460,22 @@ html.embedded-content-form .form-bottom-actions .primary-btn{
 .content-modal-dialog,
 .content-modal-dialog iframe{
   background:transparent!important;background-color:transparent!important;
+}
+
+
+/* FINAL FIX — popup wrapper was explicitly painted dark green by global theme rules */
+body .content-modal-dialog,
+:root[data-theme="dark"] .content-modal-dialog,
+:root[data-theme="system"] .content-modal-dialog,
+:root[data-theme="dark"] body .content-modal-dialog,
+:root[data-theme="system"] body .content-modal-dialog{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+}
+body .content-modal-dialog iframe,
+:root[data-theme="dark"] .content-modal-dialog iframe,
+:root[data-theme="system"] .content-modal-dialog iframe{
+  background:transparent!important;
+  background-color:transparent!important;
 }

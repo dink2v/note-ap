@@ -7684,3 +7684,21 @@ html[data-theme="dark"] body .content-modal-dialog {
   background: transparent !important;
   background-color: transparent !important;
 }
+
+
+/* ROOT FIX — remove the green tint from the modal OVERLAY */
+.content-modal,
+.content-modal.open,
+body .content-modal,
+:root[data-theme="dark"] .content-modal,
+:root[data-theme="system"] .content-modal {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  -webkit-backdrop-filter: blur(1px) !important;
+  backdrop-filter: blur(1px) !important;
+}
+.content-modal-dialog {
+  background: transparent !important;
+  background-color: transparent !important;
+}

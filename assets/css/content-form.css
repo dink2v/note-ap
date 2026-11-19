@@ -433,3 +433,52 @@ html.embedded-content-form body .content-form-wrap > section.approval-panel{
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
 }
+
+
+/* FINAL READABILITY PASS — Approval & History only */
+html.embedded-content-form body .content-form-wrap > section.approval-panel,
+html.embedded-content-form body .content-form-wrap > section.approval-panel *{
+  text-shadow:none!important;
+}
+html.embedded-content-form body .content-form-wrap > section.approval-panel .form-section-heading h2,
+html.embedded-content-form body .content-form-wrap > section.approval-panel .approval-status-row b,
+html.embedded-content-form body .content-form-wrap > section.approval-panel h3{
+  color:#263548!important;-webkit-text-fill-color:#263548!important;
+}
+html.embedded-content-form body .content-form-wrap > section.approval-panel .form-section-heading p,
+html.embedded-content-form body .content-form-wrap > section.approval-panel .approval-status-row small,
+html.embedded-content-form body .content-form-wrap > section.approval-panel .phase-labels,
+html.embedded-content-form body .content-form-wrap > section.approval-panel .no-comments,
+html.embedded-content-form body .content-form-wrap > section.approval-panel #historyEmpty,
+html.embedded-content-form body .content-form-wrap > section.approval-panel #historyList,
+html.embedded-content-form body .content-form-wrap > section.approval-panel #commentList,
+html.embedded-content-form body .content-form-wrap > section.approval-panel .team-comment,
+html.embedded-content-form body .content-form-wrap > section.approval-panel .team-comment *,
+html.embedded-content-form body .content-form-wrap > section.approval-panel .phase-labels *,
+html.embedded-content-form body .content-form-wrap > section.approval-panel label.field{
+  color:#475569!important;-webkit-text-fill-color:#475569!important;
+}
+html.embedded-content-form body .content-form-wrap > section.approval-panel .team-comment small,
+html.embedded-content-form body .content-form-wrap > section.approval-panel .team-comment time{
+  color:#64748b!important;-webkit-text-fill-color:#64748b!important;
+}
+html.embedded-content-form body .content-form-wrap > section.approval-panel #teamComment{
+  color:#263548!important;-webkit-text-fill-color:#263548!important;
+  background:rgba(255,255,255,.88)!important;
+}
+html.embedded-content-form body .content-form-wrap > section.approval-panel #teamComment::placeholder{
+  color:#64748b!important;-webkit-text-fill-color:#64748b!important;opacity:1!important;
+}
+html.embedded-content-form body .content-form-wrap > section.approval-panel .approve-btn{
+  color:#087f75!important;-webkit-text-fill-color:#087f75!important;
+}
+html.embedded-content-form body .content-form-wrap > section.approval-panel .pending-pill{
+  color:#a65312!important;-webkit-text-fill-color:#a65312!important;
+}
+html.embedded-content-form body .content-form-wrap > section.approval-panel .approved-pill{
+  color:#087f75!important;-webkit-text-fill-color:#087f75!important;
+}
+html.embedded-content-form body .content-form-wrap > section.approval-panel .comment-actions .primary-btn{
+  color:#fff!important;-webkit-text-fill-color:#fff!important;
+}
+

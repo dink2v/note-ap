@@ -7479,3 +7479,63 @@ body .content-modal-dialog iframe,
   background:transparent!important;
   background-color:transparent!important;
 }
+
+
+/* EMBEDDED FORM: outrank the dark-theme selectors on the document root */
+:root.embedded-content-form[data-theme="dark"] body,
+:root.embedded-content-form[data-theme="dark"] body .app-shell,
+:root.embedded-content-form[data-theme="dark"] body .main-area,
+:root.embedded-content-form[data-theme="dark"] body .page-wrap,
+:root.embedded-content-form[data-theme="dark"] body #contentForm,
+:root.embedded-content-form[data-theme="dark"] body .form-panel,
+:root.embedded-content-form[data-theme="dark"] body .form-section-heading,
+:root.embedded-content-form[data-theme="dark"] body .form-grid,
+:root.embedded-content-form[data-theme="dark"] body .field,
+:root.embedded-content-form[data-theme="dark"] body .form-bottom-actions,
+:root.embedded-content-form[data-theme="dark"] body .approval-status-row,
+:root.embedded-content-form[data-theme="dark"] body .comments-block,
+:root.embedded-content-form[data-theme="dark"] body .history-block,
+:root.embedded-content-form[data-theme="system"] body,
+:root.embedded-content-form[data-theme="system"] body .app-shell,
+:root.embedded-content-form[data-theme="system"] body .main-area,
+:root.embedded-content-form[data-theme="system"] body .page-wrap,
+:root.embedded-content-form[data-theme="system"] body #contentForm,
+:root.embedded-content-form[data-theme="system"] body .form-panel,
+:root.embedded-content-form[data-theme="system"] body .form-section-heading,
+:root.embedded-content-form[data-theme="system"] body .form-grid,
+:root.embedded-content-form[data-theme="system"] body .field,
+:root.embedded-content-form[data-theme="system"] body .form-bottom-actions,
+:root.embedded-content-form[data-theme="system"] body .approval-status-row,
+:root.embedded-content-form[data-theme="system"] body .comments-block,
+:root.embedded-content-form[data-theme="system"] body .history-block{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+:root.embedded-content-form[data-theme="dark"] body .field input,
+:root.embedded-content-form[data-theme="dark"] body .field select,
+:root.embedded-content-form[data-theme="dark"] body .field textarea,
+:root.embedded-content-form[data-theme="system"] body .field input,
+:root.embedded-content-form[data-theme="system"] body .field select,
+:root.embedded-content-form[data-theme="system"] body .field textarea{
+  background:#fff!important;
+  background-color:#fff!important;
+  color:#304456!important;
+  -webkit-text-fill-color:#304456!important;
+  border-color:#dce6e9!important;
+}
+:root.embedded-content-form[data-theme="dark"] body .form-title-row h1,
+:root.embedded-content-form[data-theme="dark"] body .form-section-heading h2,
+:root.embedded-content-form[data-theme="dark"] body .form-section-heading p,
+:root.embedded-content-form[data-theme="dark"] body .field>span,
+:root.embedded-content-form[data-theme="dark"] body .field-help,
+:root.embedded-content-form[data-theme="dark"] body .approval-panel *,
+:root.embedded-content-form[data-theme="system"] body .form-title-row h1,
+:root.embedded-content-form[data-theme="system"] body .form-section-heading h2,
+:root.embedded-content-form[data-theme="system"] body .form-section-heading p,
+:root.embedded-content-form[data-theme="system"] body .field>span,
+:root.embedded-content-form[data-theme="system"] body .field-help,
+:root.embedded-content-form[data-theme="system"] body .approval-panel *{
+  color:#fff!important;
+}

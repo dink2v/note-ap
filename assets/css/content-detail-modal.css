@@ -1,0 +1,37 @@
+/* Dedicated styles: Detail Content modal only. */
+#calendarContentDetailModal.calendar-item-modal{
+ position:fixed;inset:0;z-index:950;display:none;
+ align-items:center;justify-content:center;padding:20px;
+ background:rgba(255,255,255,.10)!important;
+ background-color:rgba(255,255,255,.10)!important;
+ background-image:none!important;
+ -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+}
+#calendarContentDetailModal.calendar-item-modal:not([hidden]){display:flex}
+#calendarContentDetailModal .calendar-item-dialog{
+ width:min(760px,calc(100vw - 40px));max-height:min(88vh,900px);
+ display:flex;flex-direction:column;overflow:hidden;
+ background:rgba(255,255,255,.96)!important;color:#26352f!important;
+ border:1px solid #e3ebe6!important;border-radius:16px;
+ box-shadow:0 18px 55px rgba(24,45,35,.12)!important;
+}
+#calendarContentDetailModal .calendar-item-dialog-head,
+#calendarContentDetailModal .calendar-item-actions{
+ flex:0 0 auto;background:#fff!important;color:#26352f!important;
+ border-color:#e6ece8!important;
+}
+#calendarContentDetailModal .calendar-content-detail-body{
+ flex:1 1 auto;min-height:0;overflow:auto;
+ background:transparent!important;color:#26352f!important;
+}
+#calendarContentDetailModal .calendar-item-dialog-head h2,
+#calendarContentDetailModal .calendar-item-dialog-head p,
+#calendarContentDetailModal .calendar-content-detail-body,
+#calendarContentDetailModal .calendar-content-detail-body *{color:inherit}
+#calendarContentDetailModal .calendar-item-dialog-head>button{
+ background:#fff!important;color:#53645d!important;border:1px solid #e1e9e4!important;
+}
+@media(max-width:600px){
+ #calendarContentDetailModal.calendar-item-modal{padding:8px}
+ #calendarContentDetailModal .calendar-item-dialog{width:calc(100vw - 16px);max-height:94dvh;border-radius:12px}
+}

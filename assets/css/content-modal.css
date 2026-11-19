@@ -2,8 +2,8 @@
 #contentModal.content-modal{
   position:fixed;inset:0;z-index:1000;display:none;
   align-items:center;justify-content:center;padding:22px;
-  background:rgba(255,255,255,.10)!important;
-  background-color:rgba(255,255,255,.10)!important;
+  background:rgba(255,255,255,.50)!important;
+  background-color:rgba(255,255,255,.50)!important;
   background-image:none!important;
   -webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);
 }

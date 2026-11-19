@@ -6114,10 +6114,10 @@ body #calendarPage{
 .calendar-item-dialog .primary-btn{background:#f28c38}
 .calendar-item-dialog .calendar-item-cancel{color:#138f86;border-color:#cdeee8}
 
-/* Add/edit content popup: translucent frame, solid readable form surface. */
+/* Add/edit content popup: transparent overlay, calendar remains clearly visible. */
 .content-modal{
   position:fixed;inset:0;z-index:70;display:none;align-items:center;justify-content:center;padding:24px;
-  background:rgba(21,37,30,.30)!important;-webkit-backdrop-filter:blur(12px) saturate(125%)!important;backdrop-filter:blur(12px) saturate(125%)!important
+  background:rgba(255,255,255,.06)!important;-webkit-backdrop-filter:blur(2px) saturate(105%)!important;backdrop-filter:blur(2px) saturate(105%)!important
 }
 .content-modal.open{display:flex}
 .content-modal-dialog{

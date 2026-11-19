@@ -1221,7 +1221,6 @@ function renderVisitCalendar(visits){
     }
   });
   renderReferences();
-  const themeSelect=document.getElementById('settingTheme');
   const languageSelect=document.getElementById('settingLanguage');
   const languageCodes='aa ab ae af ak am an ar as av ay az ba be bg bh bi bm bn bo br bs ca ce ch co cr cs cu cv cy da de dv dz ee el en eo es et eu fa ff fi fj fo fr fy ga gd gl gn gu gv ha he hi ho hr ht hu hy hz ia id ie ig ii ik io is it iu ja jv ka kg ki kj kk kl km kn ko kr ks ku kv kw ky la lb lg li ln lo lt lu lv mg mh mi mk ml mn mr ms mt my na nb nd ne ng nl nn no nr nv ny oc oj om or os pa pi pl ps pt qu rm rn ro ru rw sa sc sd se sg si sk sl sm sn so sq sr ss st su sv sw ta te tg th ti tk tl tn to tr ts tt tw ty ug uk ur uz ve vi vo wa wo xh yi yo za zh zu'.split(' ');
   if(languageSelect){
@@ -1235,24 +1234,18 @@ function renderVisitCalendar(visits){
     });
     languageSelect.replaceChildren(fragment);
   }
-  const systemThemeMedia=window.matchMedia('(prefers-color-scheme: dark)');
-  const applyTheme=theme=>{
-    const selected=theme==='system'?'system':theme==='dark'?'dark':'light';
-    const effective=selected==='system'?(systemThemeMedia.matches?'dark':'light'):selected;
-    document.documentElement.dataset.theme=effective;
-    document.documentElement.dataset.themePreference=selected;
+  const applyTheme=()=>{
+    document.documentElement.dataset.theme='light';
+    document.documentElement.dataset.themePreference='light';
     const meta=document.querySelector('meta[name="theme-color"]');
-    if(meta)meta.setAttribute('content',effective==='dark'?'#111a15':'#f7faf8');
+    if(meta)meta.setAttribute('content','#f7faf8');
   };
-  systemThemeMedia.addEventListener?.('change',()=>{
-    if((themeSelect?.value||savedSettings.theme||'light')==='system')applyTheme('system');
-  });
   const applyLanguage=language=>{
     const lang=language==='en'?'en':'id';
     document.documentElement.lang=lang;
     const translations={
-      id:{dashboard:'Dashboard',calendar:'Kalender',content:'Konten',kanban:'Kanban',visit:'Visit',settings:'Setelan',help:'Bantuan',workspace:'WORKSPACE',preferences:'PREFERENSI',welcome:'Halo, Apotek Prapatan 👋',overview:'WORKSPACE OVERVIEW',calendarTitle:'Kalender Konten',contentTitle:'Konten',settingsTitle:'Setelan',appearanceTitle:'Tampilan & Bahasa',appearanceDesc:'Atur kenyamanan tampilan workspace.',theme:'Tema aplikasi',language:'Bahasa aplikasi',save:'Simpan Preferensi'},
-      en:{dashboard:'Dashboard',calendar:'Calendar',content:'Content',kanban:'Kanban',visit:'Visits',settings:'Settings',help:'Help',workspace:'WORKSPACE',preferences:'PREFERENCES',welcome:'Hello, Apotek Prapatan 👋',overview:'WORKSPACE OVERVIEW',calendarTitle:'Content Calendar',contentTitle:'Content',settingsTitle:'Settings',appearanceTitle:'Appearance & Language',appearanceDesc:'Customize your workspace experience.',theme:'App theme',language:'App language',save:'Save Preferences'}
+      id:{dashboard:'Dashboard',calendar:'Kalender',content:'Konten',kanban:'Kanban',visit:'Visit',settings:'Setelan',help:'Bantuan',workspace:'WORKSPACE',preferences:'PREFERENSI',welcome:'Halo, Apotek Prapatan 👋',overview:'WORKSPACE OVERVIEW',calendarTitle:'Kalender Konten',contentTitle:'Konten',settingsTitle:'Setelan',appearanceTitle:'Tampilan & Bahasa',appearanceDesc:'Atur kenyamanan tampilan workspace.',language:'Bahasa aplikasi',save:'Simpan Preferensi'},
+      en:{dashboard:'Dashboard',calendar:'Calendar',content:'Content',kanban:'Kanban',visit:'Visits',settings:'Settings',help:'Help',workspace:'WORKSPACE',preferences:'PREFERENCES',welcome:'Hello, Apotek Prapatan 👋',overview:'WORKSPACE OVERVIEW',calendarTitle:'Content Calendar',contentTitle:'Content',settingsTitle:'Settings',appearanceTitle:'Appearance & Language',appearanceDesc:'Customize your workspace experience.',language:'App language',save:'Save Preferences'}
     };
     const t=translations[lang];
     const navMap={'dashboard':'dashboard','kalender':'calendar','konten':'content','kanban':'kanban','visit':'visit','setelan':'settings','bantuan':'help'};
@@ -1273,24 +1266,16 @@ function renderVisitCalendar(visits){
     document.querySelectorAll('.settings-nav-item').forEach(button=>{const key=button.dataset.settingsTab;if(key==='appearance'){const b=button.querySelector('b');if(b)b.textContent=lang==='en'?'Appearance & Language':'Tampilan & Bahasa';}});
   };
   const saveAppearancePreference=(theme,language)=>{
-    const value={...readSettings(),theme,language};
+    const value={...readSettings(),theme:'light',language};
     localStorage.setItem('noteAp.settings',JSON.stringify(value));
   };
-  if(themeSelect){
-    themeSelect.value=savedSettings.theme||'light';
-    applyTheme(themeSelect.value);
-    themeSelect.addEventListener('change',()=>{
-      applyTheme(themeSelect.value);
-      saveAppearancePreference(themeSelect.value,languageSelect?.value||'id');
-      showToast('Tema langsung diterapkan dan tersimpan di browser ini.');
-    });
-  }
+  applyTheme();
   if(languageSelect){
     languageSelect.value=savedSettings.language||'id';
     applyLanguage(languageSelect.value);
     languageSelect.addEventListener('change',()=>{
       applyLanguage(languageSelect.value);
-      saveAppearancePreference(themeSelect?.value||'light',languageSelect.value);
+      saveAppearancePreference('light',languageSelect.value);
       showToast(languageSelect.value==='en'
         ? 'Language changed and saved in this browser.'
         : (languageSelect.value==='id'

@@ -7624,3 +7624,45 @@ html.embedded-content-form .form-title-row .detail-edit-top {
   html.embedded-content-form .form-panel { padding: 18px 0 21px !important; }
   html.embedded-content-form .form-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
 }
+
+
+/* FINAL OVERRIDE — embedded Add Content canvas must reveal the page behind it */
+html.embedded-content-form body,
+html.embedded-content-form body .app-shell,
+html.embedded-content-form body .main-area,
+html.embedded-content-form body .page-wrap,
+html.embedded-content-form body .content-form-wrap,
+html.embedded-content-form body #contentForm,
+html.embedded-content-form body .form-panel,
+html.embedded-content-form body .form-section-heading,
+html.embedded-content-form body .form-grid,
+html.embedded-content-form body .field,
+html.embedded-content-form body .approval-panel,
+html.embedded-content-form body .approval-status-row,
+html.embedded-content-form body .comments-block,
+html.embedded-content-form body .history-block,
+html.embedded-content-form body .form-actions,
+html.embedded-content-form body .form-bottom-actions {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+html.embedded-content-form body .form-panel {
+  border-color: rgba(120,145,155,.30) !important;
+}
+html.embedded-content-form body .field input,
+html.embedded-content-form body .field select,
+html.embedded-content-form body .field textarea,
+html.embedded-content-form body .expand-dialog textarea {
+  background: #fff !important;
+  background-color: #fff !important;
+  color: #263b4b !important;
+  -webkit-text-fill-color: #263b4b !important;
+}
+html[data-theme] body .content-modal-dialog {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}

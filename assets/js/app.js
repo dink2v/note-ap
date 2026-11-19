@@ -56,6 +56,8 @@
         showToast('Form Konten tidak ditemukan. Coba buka halaman Tambah Konten secara langsung.');
         return;
       }
+      // Mark the iframe document so every embedded-form transparent/glass rule applies.
+      doc.documentElement.classList.add('embedded-content-form');
       child.noteApContentModalClose=closeContentModal;
       if(!doc.getElementById('noteap-modal-style')){
         const style=doc.createElement('style');

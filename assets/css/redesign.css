@@ -264,3 +264,80 @@ html body #visitPage .visit-select-row.selected,
 html body #visitPage .visit-select-row.selected td{background:#EAF8F5!important;color:#334155!important}
 html body #visitPage .visit-inline-input,
 html body #visitPage .visit-inline-textarea{background:#FFFFFF!important;color:#334155!important;border-color:#DCE5ED!important}
+
+
+/* NOTE AP COLORFUL WORKSPACE — soft, clear color coding */
+:root{
+  --ap-coral:#F28C38;
+  --ap-teal:#20B6A6;
+  --ap-blue:#5798E8;
+  --ap-purple:#9274D8;
+  --ap-pink:#E879A5;
+  --ap-yellow:#E8B64A;
+}
+
+/* CALENDAR: mint workspace, colorful insight cards and readable event colors */
+html body #calendarPage .calendar-planner-panel,
+html body #calendarPage .calendar-main-panel{background:linear-gradient(145deg,#F0FBF8 0%,#F3F7FF 58%,#FFF7F0 100%)!important;border-color:#DDEDEB!important}
+html body #calendarPage .calendar-insight-card:nth-child(1){background:linear-gradient(135deg,#DDF7F0,#C8F0E7)!important;border-color:#B9E8DC!important}
+html body #calendarPage .calendar-insight-card:nth-child(2){background:linear-gradient(135deg,#FFF0E2,#FFE2C8)!important;border-color:#F8D7B9!important}
+html body #calendarPage .calendar-insight-card:nth-child(3){background:linear-gradient(135deg,#EEE8FF,#E1D9FF)!important;border-color:#D8CCFF!important}
+html body #calendarPage .calendar-planner-legend{background:#FFFFFFD9!important;border-color:#DDEBE9!important}
+html body #calendarPage .calendar-weekday{background:#DDF4EF!important;color:#168F84!important;border-color:#CDEBE4!important}
+html body #calendarPage .calendar-day-cell{background:#FFFFFF!important;border-color:#E4ECEF!important}
+html body #calendarPage .calendar-day-cell.outside-month{background:#F0F3F7!important}
+html body #calendarPage .calendar-day-cell.is-today{background:#E9FAF5!important;box-shadow:inset 0 0 0 2px #20B6A6!important}
+html body #calendarPage .calendar-day-cell.is-today .calendar-day-number{background:#20B6A6!important;color:#FFFFFF!important}
+html body #calendarPage .calendar-day-cell.is-drop-target{background:#E6F8F4!important}
+html body #calendarPage .calendar-agenda-panel{background:linear-gradient(160deg,#FFFFFF,#F5F9FF)!important;border-color:#DFE8F3!important}
+html body #calendarPage .calendar-agenda-item{background:#EFF6FF!important;border-color:#D8E7FC!important}
+html body #calendarPage .calendar-agenda-tip{background:linear-gradient(130deg,#E4F8F2,#FFF0E2)!important;border-color:#DDEDE7!important}
+html body #calendarPage .calendar-planner-controls button:hover{background:#E4F8F3!important;color:#168F84!important;border-color:#BCE8DE!important}
+
+/* CONTENT: colorful filter panel and teal table header, soft status badges */
+html body #contentPage .content-filter-panel{background:linear-gradient(110deg,#EAF5FF,#EFFAF7 55%,#FFF5EA)!important;border-color:#DCEAF2!important}
+html body #contentPage .content-list-panel{background:#FFFFFF!important;border-color:#E2EAF1!important}
+html body #contentPage .content-list-heading{background:linear-gradient(90deg,#E7F8F4,#F0F6FF)!important}
+html body #contentPage .content-table th{background:#DDF4EF!important;color:#168F84!important;border-color:#CDEBE4!important}
+html body #contentPage .content-table td{background:#FFFFFF!important;color:#46556B!important}
+html body #contentPage .content-table tbody tr:nth-child(even) td{background:#FAFCFF!important}
+html body #contentPage .content-table tbody tr:hover td{background:#EFFAF7!important}
+html body #contentPage .content-search input,
+html body #contentPage .content-filter select,
+html body #contentPage .content-filter input{background:#FFFFFF!important;border-color:#D8E5EF!important}
+html body #contentPage .content-table .status-chip{background:#DDF7EF!important;color:#138575!important}
+
+/* KANBAN: each workflow stage has its own pastel color */
+html body #kanbanPage .kanban-column:nth-child(1){background:#FFF1E5!important;border-color:#F8DDC7!important}
+html body #kanbanPage .kanban-column:nth-child(2){background:#EAF3FF!important;border-color:#D6E6FB!important}
+html body #kanbanPage .kanban-column:nth-child(3){background:#E4F8F2!important;border-color:#CDEDE2!important}
+html body #kanbanPage .kanban-column:nth-child(4){background:#F1ECFF!important;border-color:#E0D8FA!important}
+html body #kanbanPage .kanban-column:nth-child(5){background:#FDECF3!important;border-color:#F6D8E5!important}
+html body #kanbanPage .kanban-column:nth-child(6){background:#FFF8E4!important;border-color:#F3E8BF!important}
+html body #kanbanPage .kanban-column>header h2{color:#34445B!important}
+html body #kanbanPage .kanban-column>header>span{background:#FFFFFFD9!important;color:#34445B!important;border-color:#FFFFFF!important}
+html body #kanbanPage .kanban-card{background:#FFFFFF!important;border-color:#FFFFFF!important;box-shadow:0 4px 12px rgba(47,65,90,.08)!important}
+html body #kanbanPage .kanban-card:hover{border-color:#A9DED5!important}
+html body #kanbanPage .kanban-add-slot{background:#FFFFFFB8!important;border-color:#C8D7E4!important;color:#53657C!important}
+html body #kanbanPage .kanban-column.drop-target{background:#DDF7EF!important;border-color:#20B6A6!important}
+
+/* VISIT: colorful daily summary, metrics, table and calendar selection */
+html body #visitPage .visit-card,
+html body #visitPage .visit-main-card,
+html body #visitPage .visit-table-panel{background:#FFFFFF!important;border-color:#E1EAF1!important}
+html body #visitPage .visit-today-card{background:linear-gradient(135deg,#EAF5FF,#F2EDFF)!important;border-color:#DCE6F7!important}
+html body #visitPage .visit-today-summary{background:linear-gradient(120deg,#E2F7F1,#EAF3FF)!important;border-color:#D6EAE9!important}
+html body #visitPage .visit-metric-card:nth-child(1){background:linear-gradient(135deg,#DDF7EF,#C9F0E4)!important;border-color:#BCE8D9!important}
+html body #visitPage .visit-metric-card:nth-child(2){background:linear-gradient(135deg,#FFF0DF,#FFE1C3)!important;border-color:#F6D8B9!important}
+html body #visitPage .visit-metric-card:nth-child(3){background:linear-gradient(135deg,#EDE8FF,#DED5FF)!important;border-color:#D7CCFA!important}
+html body #visitPage .visit-metric-card:nth-child(4){background:linear-gradient(135deg,#FDEBF3,#F9D8E7)!important;border-color:#F3D1E0!important}
+html body #visitPage .visit-table th{background:#DCEEFF!important;color:#3979B8!important;border-color:#CDE2F7!important}
+html body #visitPage .visit-table td{background:#FFFFFF!important}
+html body #visitPage .visit-table tbody tr:nth-child(even) td{background:#FAFCFF!important}
+html body #visitPage .visit-table tbody tr:hover td{background:#F0F8FF!important}
+html body #visitPage .visit-select-row.selected,
+html body #visitPage .visit-select-row.selected td{background:#DDF7EF!important}
+html body #visitPage .visit-inline-input,
+html body #visitPage .visit-inline-textarea{background:#FFFFFF!important;border-color:#D5E3EF!important}
+html body #visitPage .visit-inline-input:focus,
+html body #visitPage .visit-inline-textarea:focus{border-color:#20B6A6!important;box-shadow:0 0 0 3px rgba(32,182,166,.13)!important}

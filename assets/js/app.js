@@ -125,11 +125,11 @@ html.embedded-content-form .form-bottom-actions .primary-btn{background:#f28c38!
 html.embedded-content-form .form-bottom-actions .secondary-btn{background:rgba(255,255,255,.88)!important;color:#475569!important;border:1px solid #dbe3eb!important}
 html.embedded-content-form .expand-overlay{background:rgba(15,23,42,.34)!important;backdrop-filter:blur(5px)!important}
 html.embedded-content-form .expand-dialog{background:#fff!important;color:#263548!important;border:1px solid #e2e8f0!important;border-radius:16px!important}
-@media(max-width:760px){
+@media(max-width:620px){
  html.embedded-content-form .page-wrap.content-form-wrap{padding:22px 15px 24px!important}
  html.embedded-content-form .form-panel,html.embedded-content-form .approval-panel{padding:18px 15px 20px!important;border-radius:14px!important}
  html.embedded-content-form .form-grid{grid-template-columns:1fr!important;gap:14px!important}
- html.embedded-content-form .field.full{grid-column:auto!important}
+ html.embedded-content-form .field.full{grid-column:1/-1!important}
  html.embedded-content-form .form-bottom-actions{align-items:stretch!important;flex-direction:column!important}
  html.embedded-content-form .form-bottom-actions>div{display:grid!important;grid-template-columns:1fr 1fr!important;width:100%!important}
  html.embedded-content-form .form-bottom-actions>div .primary-btn{grid-column:1/-1!important}

@@ -123,27 +123,20 @@ html,body{background:transparent!important;background-color:transparent!importan
   .form-bottom-actions>div{display:grid!important;grid-template-columns:1fr 1fr!important;width:100%!important}
   .form-bottom-actions>div .primary-btn{grid-column:1/-1!important}
 }
-`;
-       
-/* Final paired layout for Materi: override the legacy mobile one-column rule above. */
+/* Final paired layout for Materi, applied inside the iframe style block. */
 #contentForm .materi-grid{
   display:grid!important;
   grid-template-columns:repeat(2,minmax(0,1fr))!important;
   align-items:start!important;
   gap:20px 26px!important;
 }
-#contentForm .materi-grid>.field{
-  grid-column:auto!important;
-  min-width:0!important;
-}
+#contentForm .materi-grid>.field{grid-column:auto!important;min-width:0!important}
 @media(max-width:760px){
-  #contentForm .materi-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr))!important;
-    gap:14px 12px!important;
-  }
+  #contentForm .materi-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px 12px!important}
   #contentForm .materi-grid>.field{grid-column:auto!important}
 }
-
+`;
+       
 doc.head.append(style);
       }
       if(!child.__noteApEscapeBound){

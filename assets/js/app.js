@@ -62,46 +62,77 @@
         style.id='noteap-modal-style';
         style.textContent='.sidebar,.mobile-top,.form-breadcrumb,.form-title-row > a.secondary-btn,.page-footer{display:none!important}.main-area{margin-left:0!important}.content-form-wrap{max-width:none!important;padding:34px 38px 24px!important}@media(max-width:700px){.content-form-wrap{padding:28px 15px 20px!important}}html,body{background:transparent!important;background-color:transparent!important}.content-form-wrap{background:transparent!important;background-color:transparent!important}:root{--green:#f28c38;--green-dark:#df792b;--ink:#26372f;--muted:#74847b;--line:#e8efea}.form-panel{background:transparent!important;background-color:transparent!important;background-image:none!important;border-color:rgba(120,145,155,.3)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important}.section-number{background:#fff0e4!important;color:#d9752b!important}.primary-btn{background:#f28c38!important;box-shadow:0 6px 16px rgba(242,140,56,.22)!important}.primary-btn:hover{background:#df792b!important}.secondary-btn{border-color:#cce9e5!important;color:#138f87!important}.secondary-btn:hover{background:#effaf8!important;border-color:#20b6a6!important}.maximize-btn{color:#159b91!important}.field input:focus,.field select:focus,.field textarea:focus{border-color:#f28c38!important;box-shadow:0 0 0 3px rgba(242,140,56,.13)!important}.form-title-row #detailEditTop{display:inline-flex!important;align-items:center;justify-content:center;order:2;margin-left:auto;flex:0 0 auto;position:relative;z-index:2}.form-title-row>div{order:1;min-width:0}.form-title-row{gap:14px;align-items:flex-start!important}'
         style.textContent += `
-html.embedded-content-form .form-panel,html.embedded-content-form :root .form-panel{background:transparent!important;background-color:transparent!important;background-image:none!important;box-shadow:none!important;border-color:rgba(120,145,155,.3)!important}
-
-/* ADD CONTENT ONLY — transparent form panels; keep controls readable */
+/* Note AP — clean translucent Add Content form */
 html.embedded-content-form,html.embedded-content-form body,
 html.embedded-content-form .app-shell,html.embedded-content-form .main-area,
 html.embedded-content-form .page-wrap.content-form-wrap,
-html.embedded-content-form #contentForm,
-html.embedded-content-form .form-panel,
-html.embedded-content-form .form-section-heading,
-html.embedded-content-form .form-grid,
-html.embedded-content-form .field,
-html.embedded-content-form .approval-panel,
-html.embedded-content-form .approval-status-row,
-html.embedded-content-form .comments-block,
-html.embedded-content-form .history-block,
-html.embedded-content-form .form-actions,
-html.embedded-content-form .form-bottom-actions {
+html.embedded-content-form #contentForm,html.embedded-content-form .form-section-heading,
+html.embedded-content-form .form-grid,html.embedded-content-form .field,
+html.embedded-content-form .approval-panel,html.embedded-content-form .comments-block,
+html.embedded-content-form .history-block,html.embedded-content-form .form-bottom-actions{
  background:transparent!important;background-color:transparent!important;
  background-image:none!important;box-shadow:none!important;
 }
-html.embedded-content-form .form-panel{
- border:0!important;border-bottom:1px solid rgba(120,145,155,.3)!important;
- border-radius:0!important;padding:22px 2px 25px!important;
+html.embedded-content-form .page-wrap.content-form-wrap{
+ width:100%!important;max-width:none!important;margin:0!important;padding:30px 34px 28px!important;
 }
-html.embedded-content-form .form-title-row h1,
-html.embedded-content-form .form-section-heading h2,
+html.embedded-content-form .form-title-row{margin:0 0 20px!important;gap:14px!important}
+html.embedded-content-form .form-title-row h1{color:#263548!important;font-weight:800!important}
+html.embedded-content-form .form-title-row .muted,
 html.embedded-content-form .form-section-heading p,
-html.embedded-content-form .field>span,
-html.embedded-content-form .field-help,
-html.embedded-content-form .approval-panel,
-html.embedded-content-form .comments-block,
-html.embedded-content-form .history-block{color:#344b59!important}
+html.embedded-content-form .field-help{color:#64748b!important}
+html.embedded-content-form .form-panel,
+html.embedded-content-form .approval-panel{
+ background:rgba(255,255,255,.48)!important;background-color:rgba(255,255,255,.48)!important;
+ border:1px solid rgba(255,255,255,.78)!important;border-radius:16px!important;
+ padding:22px 24px 24px!important;margin:0 0 16px!important;
+ box-shadow:0 8px 24px rgba(38,53,72,.055)!important;
+ -webkit-backdrop-filter:blur(10px)!important;backdrop-filter:blur(10px)!important;
+}
+html.embedded-content-form .form-section-heading{margin:0 0 18px!important;padding:0 0 14px!important;border-bottom:1px solid rgba(100,116,139,.16)!important}
+html.embedded-content-form .form-section-heading h2{color:#263548!important;font-weight:800!important}
+html.embedded-content-form .field>span{color:#475569!important;font-weight:700!important}
 html.embedded-content-form .field input,
 html.embedded-content-form .field select,
 html.embedded-content-form .field textarea,
 html.embedded-content-form .expand-dialog textarea{
- background:#fff!important;background-color:#fff!important;color:#263b4b!important;
- -webkit-text-fill-color:#263b4b!important;border:1px solid #d9e3e8!important;
+ background:rgba(255,255,255,.96)!important;background-color:rgba(255,255,255,.96)!important;
+ color:#263548!important;-webkit-text-fill-color:#263548!important;
+ border:1px solid #dbe3eb!important;border-radius:10px!important;
+ box-shadow:0 1px 3px rgba(38,53,72,.04)!important;
 }
-html.embedded-content-form .section-number{background:#fff0e4!important;color:#d9752b!important}
+html.embedded-content-form .field input::placeholder,
+html.embedded-content-form .field textarea::placeholder{color:#94a3b8!important;-webkit-text-fill-color:#94a3b8!important}
+html.embedded-content-form .field input:focus,
+html.embedded-content-form .field select:focus,
+html.embedded-content-form .field textarea:focus{
+ outline:none!important;border-color:#20b6a6!important;box-shadow:0 0 0 3px rgba(32,182,166,.13)!important;
+}
+html.embedded-content-form .section-number{background:#fff0e4!important;color:#d97726!important}
+html.embedded-content-form .maximize-btn{color:#159d91!important;background:rgba(32,182,166,.08)!important;border:1px solid rgba(32,182,166,.18)!important;border-radius:7px!important;padding:5px 9px!important}
+html.embedded-content-form .approval-status-row{background:rgba(255,255,255,.56)!important;border:1px solid rgba(100,116,139,.16)!important;border-radius:12px!important}
+html.embedded-content-form .approval-status-row small,
+html.embedded-content-form .approval-status-row b,
+html.embedded-content-form .approval-panel h3,
+html.embedded-content-form .approval-panel .no-comments,
+html.embedded-content-form .approval-panel #historyEmpty,
+html.embedded-content-form .approval-panel #historyList{color:#475569!important}
+html.embedded-content-form .comments-block,
+html.embedded-content-form .history-block{border-top:1px solid rgba(100,116,139,.16)!important}
+html.embedded-content-form .form-bottom-actions{padding:8px 0 14px!important}
+html.embedded-content-form .form-bottom-actions .primary-btn{background:#f28c38!important;color:#fff!important;border:1px solid #f28c38!important}
+html.embedded-content-form .form-bottom-actions .secondary-btn{background:rgba(255,255,255,.88)!important;color:#475569!important;border:1px solid #dbe3eb!important}
+html.embedded-content-form .expand-overlay{background:rgba(15,23,42,.34)!important;backdrop-filter:blur(5px)!important}
+html.embedded-content-form .expand-dialog{background:#fff!important;color:#263548!important;border:1px solid #e2e8f0!important;border-radius:16px!important}
+@media(max-width:760px){
+ html.embedded-content-form .page-wrap.content-form-wrap{padding:22px 15px 24px!important}
+ html.embedded-content-form .form-panel,html.embedded-content-form .approval-panel{padding:18px 15px 20px!important;border-radius:14px!important}
+ html.embedded-content-form .form-grid{grid-template-columns:1fr!important;gap:14px!important}
+ html.embedded-content-form .field.full{grid-column:auto!important}
+ html.embedded-content-form .form-bottom-actions{align-items:stretch!important;flex-direction:column!important}
+ html.embedded-content-form .form-bottom-actions>div{display:grid!important;grid-template-columns:1fr 1fr!important;width:100%!important}
+ html.embedded-content-form .form-bottom-actions>div .primary-btn{grid-column:1/-1!important}
+}
 `;
        doc.head.append(style);
       }

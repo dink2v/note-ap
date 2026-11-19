@@ -383,7 +383,7 @@ html.embedded-content-form body .content-form-wrap > section.approval-panel .com
 /* Subtle outline for the transparent Approval & History wrapper */
 html.embedded-content-form body .content-form-wrap > section.approval-panel,
 html body .content-form-wrap > section.approval-panel{
-  border:1px solid rgba(148,163,184,.42)!important;
+  border:1px solid rgba(255,255,255,.76)!important;
   border-radius:18px!important;
 }
 `;

@@ -7548,3 +7548,79 @@ body .content-modal-dialog iframe,
   background-color:transparent!important;
   background-image:none!important;
 }
+
+
+/* NOTE AP — Tambah Konten Baru: transparent popup canvas, readable form controls */
+html.embedded-content-form,
+html.embedded-content-form body,
+html.embedded-content-form .app-shell,
+html.embedded-content-form .main-area,
+html.embedded-content-form .page-wrap.content-form-wrap,
+html.embedded-content-form .form-title-row,
+html.embedded-content-form #contentForm,
+html.embedded-content-form .form-panel,
+html.embedded-content-form .form-section-heading,
+html.embedded-content-form .form-grid,
+html.embedded-content-form .field,
+html.embedded-content-form .approval-panel,
+html.embedded-content-form .approval-status-row,
+html.embedded-content-form .comments-block,
+html.embedded-content-form .history-block,
+html.embedded-content-form .form-bottom-actions {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+html.embedded-content-form .page-wrap.content-form-wrap {
+  width: 100% !important; max-width: none !important; margin: 0 !important;
+  padding: 28px 30px 30px !important;
+}
+html.embedded-content-form .form-panel {
+  border: 0 !important; border-bottom: 1px solid rgba(120,145,155,.24) !important;
+  border-radius: 0 !important; padding: 22px 2px 25px !important;
+}
+html.embedded-content-form .form-title-row h1,
+html.embedded-content-form .form-section-heading h2,
+html.embedded-content-form .approval-status-row b { color: #263b4b !important; }
+html.embedded-content-form .form-section-heading p,
+html.embedded-content-form .field > span,
+html.embedded-content-form .field-help,
+html.embedded-content-form .approval-panel,
+html.embedded-content-form .comments-block,
+html.embedded-content-form .history-block { color: #526675 !important; }
+html.embedded-content-form .field input,
+html.embedded-content-form .field select,
+html.embedded-content-form .field textarea,
+html.embedded-content-form .expand-dialog textarea {
+  background: rgba(255,255,255,.94) !important;
+  background-color: rgba(255,255,255,.94) !important;
+  color: #263b4b !important; -webkit-text-fill-color: #263b4b !important;
+  border: 1px solid #d9e3e8 !important; border-radius: 10px !important;
+  box-shadow: 0 1px 2px rgba(25,45,55,.04) !important;
+}
+html.embedded-content-form .field input::placeholder,
+html.embedded-content-form .field textarea::placeholder {
+  color: #8a9aa4 !important; -webkit-text-fill-color: #8a9aa4 !important;
+}
+html.embedded-content-form .maximize-btn {
+  color: #397e78 !important; background: rgba(32,182,166,.09) !important;
+  border: 1px solid rgba(32,182,166,.22) !important;
+}
+html.embedded-content-form .form-bottom-actions { padding: 18px 0 10px !important; }
+html.embedded-content-form .form-bottom-actions .secondary-btn {
+  background: rgba(255,255,255,.82) !important; color: #395366 !important;
+  border: 1px solid #d8e2e7 !important;
+}
+html.embedded-content-form .form-bottom-actions .primary-btn {
+  background: #f28c38 !important; color: #fff !important; border: 1px solid #f28c38 !important;
+}
+html.embedded-content-form .approval-status-row { border: 1px solid rgba(120,145,155,.25) !important; }
+html.embedded-content-form .form-title-row .detail-edit-top {
+  background: rgba(255,255,255,.86) !important; color: #395366 !important;
+}
+@media (max-width:760px) {
+  html.embedded-content-form .page-wrap.content-form-wrap { padding: 20px 15px 24px !important; }
+  html.embedded-content-form .form-panel { padding: 18px 0 21px !important; }
+  html.embedded-content-form .form-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+}

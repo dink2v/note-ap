@@ -30,3 +30,21 @@ html.embedded-content-form body .content-form-wrap{max-width:none!important}
 html.embedded-content-form body .form-panel{padding:18px 0!important}
 html.embedded-content-form body .form-grid{gap:14px!important}
 @media(max-width:700px){html.embedded-content-form body .content-form-wrap{padding:28px 15px 20px!important}}
+
+/* Keep the first two required fields in one horizontal row. */
+html.embedded-content-form body #contentForm > .form-panel:first-of-type .form-grid{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+html.embedded-content-form body #contentForm > .form-panel:first-of-type .form-grid > .field:nth-child(1),
+html.embedded-content-form body #contentForm > .form-panel:first-of-type .form-grid > .field:nth-child(2){
+ grid-column:span 1!important;min-width:0;
+}
+@media(max-width:420px){
+ html.embedded-content-form body #contentForm > .form-panel:first-of-type .form-grid{
+  grid-template-columns:1fr!important;
+ }
+ html.embedded-content-form body #contentForm > .form-panel:first-of-type .form-grid > .field:nth-child(1),
+ html.embedded-content-form body #contentForm > .form-panel:first-of-type .form-grid > .field:nth-child(2){
+  grid-column:1/-1!important;
+ }
+}

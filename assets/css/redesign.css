@@ -667,3 +667,28 @@ html body .content-modal-dialog iframe {
     min-width: 0 !important;
   }
 }
+
+
+/* NOTE AP — remove navy from Add Content modal; keep only form fields filled */
+html body #contentModal.content-modal{
+  background:rgba(255,255,255,0)!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+  backdrop-filter:blur(12px)!important;
+}
+html body #contentModal.content-modal .content-modal-dialog{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:18px!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html body #contentModal.content-modal .content-modal-dialog iframe{
+  background:transparent!important;
+  background-color:transparent!important;
+  border:0!important;
+}

@@ -33,7 +33,7 @@
     contentModal.setAttribute('aria-hidden','false');
     document.body.classList.add('modal-open');
     const createUrl=new URL('./tambah-konten.html',document.baseURI);
-    createUrl.searchParams.set('noteapv','20261119-info-paired-force-6');
+    createUrl.searchParams.set('noteapv','20261119-materi-grid-source-fix-8');
     if(postingDate)createUrl.searchParams.set('date',postingDate);
     const target=createUrl.href;
     if(!contentModalFrame.getAttribute('src')||contentModalFrame.src!==target)contentModalFrame.src=target;
@@ -45,7 +45,7 @@
     contentModal.setAttribute('aria-hidden','false');
     document.body.classList.add('modal-open');
     const detailUrl=new URL('./tambah-konten.html',document.baseURI);
-    detailUrl.searchParams.set('noteapv','20261119-info-paired-force-6');
+    detailUrl.searchParams.set('noteapv','20261119-materi-grid-source-fix-8');
     detailUrl.searchParams.set('mode','detail');
     detailUrl.searchParams.set('id',String(item.id||''));
     contentModalFrame.src=detailUrl.href;
@@ -124,7 +124,27 @@ html,body{background:transparent!important;background-color:transparent!importan
   .form-bottom-actions>div .primary-btn{grid-column:1/-1!important}
 }
 `;
-       doc.head.append(style);
+       
+/* Final paired layout for Materi: override the legacy mobile one-column rule above. */
+#contentForm .materi-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  align-items:start!important;
+  gap:20px 26px!important;
+}
+#contentForm .materi-grid>.field{
+  grid-column:auto!important;
+  min-width:0!important;
+}
+@media(max-width:760px){
+  #contentForm .materi-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:14px 12px!important;
+  }
+  #contentForm .materi-grid>.field{grid-column:auto!important}
+}
+
+doc.head.append(style);
       }
       if(!child.__noteApEscapeBound){
         child.addEventListener('keydown',event=>{if(event.key==='Escape')closeContentModal();});

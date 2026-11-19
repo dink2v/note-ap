@@ -62,202 +62,65 @@
       if(!doc.getElementById('noteap-modal-style')){
         const style=doc.createElement('style');
         style.id='noteap-modal-style';
-        style.textContent='.sidebar,.mobile-top,.form-breadcrumb,.form-title-row > a.secondary-btn,.page-footer{display:none!important}.main-area{margin-left:0!important}.content-form-wrap{max-width:none!important;padding:34px 38px 24px!important}@media(max-width:700px){.content-form-wrap{padding:28px 15px 20px!important}}html,body{background:transparent!important;background-color:transparent!important}.content-form-wrap{background:transparent!important;background-color:transparent!important}:root{--green:#f28c38;--green-dark:#df792b;--ink:#26372f;--muted:#74847b;--line:#e8efea}.form-panel{background:transparent!important;background-color:transparent!important;background-image:none!important;border-color:rgba(120,145,155,.3)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important}.section-number{background:#fff0e4!important;color:#d9752b!important}.primary-btn{background:#f28c38!important;box-shadow:0 6px 16px rgba(242,140,56,.22)!important}.primary-btn:hover{background:#df792b!important}.secondary-btn{border-color:#cce9e5!important;color:#138f87!important}.secondary-btn:hover{background:#effaf8!important;border-color:#20b6a6!important}.maximize-btn{color:#159b91!important}.field input:focus,.field select:focus,.field textarea:focus{border-color:#f28c38!important;box-shadow:0 0 0 3px rgba(242,140,56,.13)!important}.form-title-row #detailEditTop{display:inline-flex!important;align-items:center;justify-content:center;order:2;margin-left:auto;flex:0 0 auto;position:relative;z-index:2}.form-title-row>div{order:1;min-width:0}.form-title-row{gap:14px;align-items:flex-start!important}'
-        style.textContent += `
-/* Note AP — clean translucent Add Content form */
-html.embedded-content-form,html.embedded-content-form body,
-html.embedded-content-form .app-shell,html.embedded-content-form .main-area,
-html.embedded-content-form .page-wrap.content-form-wrap,
-html.embedded-content-form #contentForm,html.embedded-content-form .form-section-heading,
-html.embedded-content-form .form-grid,html.embedded-content-form .field,
-html.embedded-content-form .approval-panel,html.embedded-content-form .comments-block,
-html.embedded-content-form .history-block,html.embedded-content-form .form-bottom-actions{
- background:transparent!important;background-color:transparent!important;
- background-image:none!important;box-shadow:none!important;
+        style.textContent = `
+.sidebar,.mobile-top,.form-breadcrumb,.form-title-row > a.secondary-btn,.page-footer{display:none!important}
+.main-area{margin-left:0!important}
+html,body{background:transparent!important;background-color:transparent!important}
+.content-form-wrap{width:100%!important;max-width:1440px!important;margin:0 auto!important;padding:30px clamp(22px,3.5vw,52px) 30px!important;box-sizing:border-box!important;background:transparent!important;display:block!important}
+#contentForm{display:block!important;width:100%!important}
+.form-title-row{display:flex!important;align-items:flex-start!important;gap:14px!important;margin:0 0 22px!important;padding-right:48px!important}
+.form-title-row h1{color:#263548!important;font-weight:800!important}
+.form-title-row .muted,.form-section-heading p,.field-help{color:#64748b!important}
+.form-panel,.approval-panel{
+  width:100%!important;min-width:0!important;box-sizing:border-box!important;
+  margin:0 0 20px!important;padding:25px 27px!important;
+  background:rgba(255,255,255,.43)!important;background-color:rgba(255,255,255,.43)!important;
+  background-image:none!important;border:1px solid rgba(255,255,255,.76)!important;
+  border-radius:18px!important;box-shadow:0 12px 32px rgba(31,55,78,.07),inset 0 1px 0 rgba(255,255,255,.6)!important;
+  -webkit-backdrop-filter:blur(9px) saturate(135%)!important;backdrop-filter:blur(9px) saturate(135%)!important;
 }
-html.embedded-content-form .page-wrap.content-form-wrap{
- width:100%!important;max-width:none!important;margin:0!important;padding:30px 34px 28px!important;
+.form-section-heading{display:flex!important;align-items:center!important;gap:12px!important;margin:0 0 20px!important;padding:0 0 14px!important;border-bottom:1px solid rgba(100,116,139,.18)!important;background:transparent!important}
+.form-section-heading h2,.approval-panel h3,.field>span{color:#263548!important;-webkit-text-fill-color:#263548!important}
+.form-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start!important;gap:20px 26px!important}
+.field{display:flex!important;flex-direction:column!important;gap:8px!important;min-width:0!important;width:100%!important}
+.field>span{font-size:11px!important;font-weight:750!important}
+.field input,.field select,.field textarea,.expand-dialog textarea{
+  width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;
+  background:rgba(255,255,255,.91)!important;background-color:rgba(255,255,255,.91)!important;
+  color:#263548!important;-webkit-text-fill-color:#263548!important;
+  border:1px solid rgba(203,213,225,.95)!important;border-radius:11px!important;
+  box-shadow:0 2px 8px rgba(31,55,78,.035)!important;
 }
-html.embedded-content-form .form-title-row{margin:0 0 20px!important;gap:14px!important}
-html.embedded-content-form .form-title-row h1{color:#263548!important;font-weight:800!important}
-html.embedded-content-form .form-title-row .muted,
-html.embedded-content-form .form-section-heading p,
-html.embedded-content-form .field-help{color:#64748b!important}
-html.embedded-content-form .form-panel,
-html.embedded-content-form .approval-panel{
- background:transparent!important;background-color:transparent!important;background-image:none!important;
- border:0!important;border-bottom:1px solid rgba(100,116,139,.18)!important;
- border-radius:0!important;padding:22px 2px 24px!important;margin:0 0 16px!important;
- box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;
-}
-html.embedded-content-form .form-section-heading{margin:0 0 18px!important;padding:0 0 14px!important;border-bottom:1px solid rgba(100,116,139,.16)!important}
-html.embedded-content-form .form-section-heading h2{color:#263548!important;font-weight:800!important}
-html.embedded-content-form .field>span{color:#475569!important;font-weight:700!important}
-html.embedded-content-form .field input,
-html.embedded-content-form .field select,
-html.embedded-content-form .field textarea,
-html.embedded-content-form .expand-dialog textarea{
- background:rgba(255,255,255,.96)!important;background-color:rgba(255,255,255,.96)!important;
- color:#263548!important;-webkit-text-fill-color:#263548!important;
- border:1px solid #dbe3eb!important;border-radius:10px!important;
- box-shadow:0 1px 3px rgba(38,53,72,.04)!important;
-}
-html.embedded-content-form .field input::placeholder,
-html.embedded-content-form .field textarea::placeholder{color:#94a3b8!important;-webkit-text-fill-color:#94a3b8!important}
-html.embedded-content-form .field input:focus,
-html.embedded-content-form .field select:focus,
-html.embedded-content-form .field textarea:focus{
- outline:none!important;border-color:#20b6a6!important;box-shadow:0 0 0 3px rgba(32,182,166,.13)!important;
-}
-html.embedded-content-form .section-number{background:#fff0e4!important;color:#d97726!important}
-html.embedded-content-form .maximize-btn{color:#159d91!important;background:rgba(32,182,166,.08)!important;border:1px solid rgba(32,182,166,.18)!important;border-radius:7px!important;padding:5px 9px!important}
-html.embedded-content-form .approval-status-row{background:transparent!important;background-color:transparent!important;border:1px solid rgba(100,116,139,.16)!important;border-radius:12px!important}
-html.embedded-content-form .approval-status-row small,
-html.embedded-content-form .approval-status-row b,
-html.embedded-content-form .approval-panel h3,
-html.embedded-content-form .approval-panel .no-comments,
-html.embedded-content-form .approval-panel #historyEmpty,
-html.embedded-content-form .approval-panel #historyList{color:#475569!important}
-html.embedded-content-form .comments-block,
-html.embedded-content-form .history-block{border-top:1px solid rgba(100,116,139,.16)!important}
-html.embedded-content-form .form-bottom-actions{padding:8px 0 14px!important}
-html.embedded-content-form .form-bottom-actions .primary-btn{background:#f28c38!important;color:#fff!important;border:1px solid #f28c38!important}
-html.embedded-content-form .form-bottom-actions .secondary-btn{background:rgba(255,255,255,.88)!important;color:#475569!important;border:1px solid #dbe3eb!important}
-html.embedded-content-form .expand-overlay{background:rgba(15,23,42,.34)!important;backdrop-filter:blur(5px)!important}
-html.embedded-content-form .expand-dialog{background:#fff!important;color:#263548!important;border:1px solid #e2e8f0!important;border-radius:16px!important}
-@media(max-width:620px){
- html.embedded-content-form .page-wrap.content-form-wrap{padding:22px 15px 24px!important}
- html.embedded-content-form .form-panel,html.embedded-content-form .approval-panel{padding:18px 15px 20px!important;border-radius:14px!important}
- html.embedded-content-form .form-grid{grid-template-columns:1fr!important;gap:14px!important}
- html.embedded-content-form .field.full{grid-column:1/-1!important}
- html.embedded-content-form .form-bottom-actions{align-items:stretch!important;flex-direction:column!important}
- html.embedded-content-form .form-bottom-actions>div{display:grid!important;grid-template-columns:1fr 1fr!important;width:100%!important}
- html.embedded-content-form .form-bottom-actions>div .primary-btn{grid-column:1/-1!important}
+.field input,.field select{height:46px!important;padding:0 14px!important}
+.field textarea{min-height:132px!important;padding:13px 14px!important;resize:vertical!important}
+.field textarea[name="body"],.field textarea[name="visualBody"]{min-height:190px!important}
+.field textarea[name="caption"],.field textarea[name="notes"]{min-height:165px!important}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none!important;border-color:#20b6a6!important;box-shadow:0 0 0 3px rgba(32,182,166,.14)!important}
+.field input::placeholder,.field textarea::placeholder{color:#94a3b8!important;-webkit-text-fill-color:#94a3b8!important}
+#contentForm>section.form-panel:first-child .field.full{grid-column:1/-1!important}
+#contentForm>section.form-panel:nth-of-type(2) .field.full,
+#contentForm>section.form-panel:nth-of-type(3) .field.full{grid-column:auto!important}
+.maximize-btn{align-self:flex-start!important;color:#159d91!important;background:rgba(32,182,166,.08)!important;border:1px solid rgba(32,182,166,.2)!important;border-radius:8px!important;padding:6px 10px!important;font-weight:750!important}
+.approval-status-row,.comments-block,.history-block{background:rgba(255,255,255,.27)!important;border:1px solid rgba(255,255,255,.62)!important;border-radius:13px!important;padding:14px!important}
+.approval-panel h3,.approval-panel .no-comments,.approval-panel #historyEmpty,.approval-panel #historyList{color:#475569!important}
+.form-bottom-actions{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:14px!important;width:100%!important;padding:8px 0 20px!important;background:transparent!important}
+.form-bottom-actions .primary-btn{background:#f28c38!important;color:#fff!important;border:1px solid #f28c38!important}
+.form-bottom-actions .secondary-btn{background:rgba(255,255,255,.86)!important;color:#475569!important;border:1px solid rgba(203,213,225,.9)!important}
+.expand-overlay{background:rgba(15,23,42,.36)!important;backdrop-filter:blur(5px)!important}
+.expand-dialog{background:#fff!important;color:#263548!important;border:1px solid #e2e8f0!important;border-radius:16px!important}
+.form-title-row #detailEditTop{display:inline-flex!important;align-items:center!important;justify-content:center!important;order:2!important;margin-left:auto!important;flex:0 0 auto!important;position:relative!important;z-index:2!important}
+.form-title-row>div{order:1!important;min-width:0!important}
+@media(max-width:760px){
+  .content-form-wrap{padding:22px 15px 24px!important}
+  .form-panel,.approval-panel{padding:19px 16px!important;margin-bottom:15px!important;border-radius:15px!important}
+  .form-grid{grid-template-columns:minmax(0,1fr)!important;gap:15px!important}
+  #contentForm>section.form-panel .field.full{grid-column:1!important}
+  .form-title-row{padding-right:42px!important}
+  .form-bottom-actions{align-items:stretch!important;flex-direction:column!important}
+  .form-bottom-actions>div{display:grid!important;grid-template-columns:1fr 1fr!important;width:100%!important}
+  .form-bottom-actions>div .primary-btn{grid-column:1/-1!important}
 }
 `;
-       style.textContent += `
-/* Embedded Add Content: fully transparent canvas; keep fields readable */
-html.embedded-content-form,
-html.embedded-content-form body,
-html.embedded-content-form .app-shell,
-html.embedded-content-form .main-area,
-html.embedded-content-form .page-wrap.content-form-wrap,
-html.embedded-content-form #contentForm,
-html.embedded-content-form .form-panel,
-html.embedded-content-form .approval-panel,
-html.embedded-content-form .form-section-heading,
-html.embedded-content-form .form-grid,
-html.embedded-content-form .field,
-html.embedded-content-form .approval-status-row,
-html.embedded-content-form .comments-block,
-html.embedded-content-form .history-block,
-html.embedded-content-form .form-bottom-actions{
- background:transparent!important;
- background-color:transparent!important;
- background-image:none!important;
- box-shadow:none!important;
-}
-html.embedded-content-form .form-panel,
-html.embedded-content-form .approval-panel{
- border:0!important;
- border-radius:0!important;
- border-bottom:1px solid rgba(100,116,139,.20)!important;
-}
-html.embedded-content-form .field input,
-html.embedded-content-form .field select,
-html.embedded-content-form .field textarea,
-html.embedded-content-form .expand-dialog textarea{
- background:rgba(255,255,255,.96)!important;
- background-color:rgba(255,255,255,.96)!important;
- color:#263548!important;
-}
-`;
-
-/* NOTE AP — rebuilt glassmorphism popup skin (visual only) */
-style.textContent += `
-html.embedded-content-form,
-html.embedded-content-form body,
-html.embedded-content-form body .app-shell,
-html.embedded-content-form body .main-area,
-html.embedded-content-form body .page-wrap,
-html.embedded-content-form body .content-form-wrap,
-html.embedded-content-form body #contentForm,
-html.embedded-content-form body .form-section-heading,
-html.embedded-content-form body .form-grid,
-html.embedded-content-form body .field,
-html.embedded-content-form body .form-bottom-actions,
-html.embedded-content-form body .comments-block,
-html.embedded-content-form body .history-block {
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-  box-shadow: none !important;
-  color: #263548 !important;
-}
-html.embedded-content-form body {
-  color-scheme: light !important;
-}
-html.embedded-content-form body .form-panel,
-html.embedded-content-form body .approval-panel {
-  background: rgba(255,255,255,.34) !important;
-  background-color: rgba(255,255,255,.34) !important;
-  background-image: none !important;
-  -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
-  backdrop-filter: blur(20px) saturate(150%) !important;
-  border: 1px solid rgba(255,255,255,.62) !important;
-  border-radius: 18px !important;
-  box-shadow: 0 12px 34px rgba(31,55,78,.08), inset 0 1px 0 rgba(255,255,255,.55) !important;
-  padding: 22px !important;
-  margin: 0 0 18px !important;
-}
-html.embedded-content-form body .form-title-row h1,
-html.embedded-content-form body .form-section-heading h2,
-html.embedded-content-form body .field > span,
-html.embedded-content-form body .approval-panel h3 {
-  color: #263548 !important;
-  -webkit-text-fill-color: #263548 !important;
-}
-html.embedded-content-form body .form-title-row .muted,
-html.embedded-content-form body .form-section-heading p,
-html.embedded-content-form body .field-help {
-  color: #64748b !important;
-  -webkit-text-fill-color: #64748b !important;
-}
-html.embedded-content-form body .field input,
-html.embedded-content-form body .field select,
-html.embedded-content-form body .field textarea,
-html.embedded-content-form body .expand-dialog textarea {
-  background: rgba(255,255,255,.88) !important;
-  background-color: rgba(255,255,255,.88) !important;
-  color: #263548 !important;
-  -webkit-text-fill-color: #263548 !important;
-  border: 1px solid rgba(203,213,225,.9) !important;
-  border-radius: 11px !important;
-  box-shadow: 0 3px 12px rgba(31,55,78,.045) !important;
-}
-html.embedded-content-form body .field input:focus,
-html.embedded-content-form body .field select:focus,
-html.embedded-content-form body .field textarea:focus {
-  border-color: #20b6a6 !important;
-  box-shadow: 0 0 0 3px rgba(32,182,166,.14) !important;
-}
-html.embedded-content-form body .form-section-heading {
-  border-bottom: 1px solid rgba(100,116,139,.18) !important;
-}
-html.embedded-content-form body .approval-status-row,
-html.embedded-content-form body .comments-block,
-html.embedded-content-form body .history-block {
-  background: rgba(255,255,255,.24) !important;
-  border: 1px solid rgba(255,255,255,.55) !important;
-  border-radius: 13px !important;
-}
-@media(max-width:760px) {
-  html.embedded-content-form body .form-panel,
-  html.embedded-content-form body .approval-panel { padding: 16px 13px !important; }
-}
-`;
-       style.textContent += "\n/* NOTE AP — final popup layout: transparent shell, two-column sections, colored fields only */\nhtml.embedded-content-form,\nhtml.embedded-content-form body,\nhtml.embedded-content-form body .app-shell,\nhtml.embedded-content-form body .main-area,\nhtml.embedded-content-form body .content-form-wrap,\nhtml.embedded-content-form body #contentForm,\nhtml.embedded-content-form body .form-section-heading,\nhtml.embedded-content-form body .form-grid,\nhtml.embedded-content-form body .field,\nhtml.embedded-content-form body .approval-status-row,\nhtml.embedded-content-form body .comments-block,\nhtml.embedded-content-form body .history-block,\nhtml.embedded-content-form body .form-bottom-actions {\n  background: transparent !important;\n  background-color: transparent !important;\n  background-image: none !important;\n  box-shadow: none !important;\n  -webkit-backdrop-filter: none !important;\n  backdrop-filter: none !important;\n}\nhtml.embedded-content-form body {\n  color-scheme: light !important;\n  color: #263548 !important;\n}\nhtml.embedded-content-form body .content-form-wrap {\n  display: grid !important;\n  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;\n  align-content: start !important;\n  align-items: start !important;\n  column-gap: 22px !important;\n  row-gap: 8px !important;\n  width: 100% !important;\n  max-width: none !important;\n  margin: 0 !important;\n  padding: 30px 28px 24px !important;\n}\nhtml.embedded-content-form body .form-title-row,\nhtml.embedded-content-form body #contentForm,\nhtml.embedded-content-form body .form-bottom-actions {\n  grid-column: 1 / -1 !important;\n}\nhtml.embedded-content-form body #contentForm { display: contents !important; }\nhtml.embedded-content-form body .form-title-row { margin: 0 0 12px !important; }\nhtml.embedded-content-form body .form-panel,\nhtml.embedded-content-form body .approval-panel {\n  min-width: 0 !important;\n  width: 100% !important;\n  margin: 0 0 14px !important;\n  padding: 12px 0 16px !important;\n  background: transparent !important;\n  background-color: transparent !important;\n  background-image: none !important;\n  border: 0 !important;\n  border-radius: 0 !important;\n  border-bottom: 1px solid rgba(100,116,139,.18) !important;\n  box-shadow: none !important;\n  -webkit-backdrop-filter: none !important;\n  backdrop-filter: none !important;\n}\nhtml.embedded-content-form body .form-section-heading {\n  padding: 0 0 12px !important;\n  margin: 0 0 15px !important;\n  border-bottom: 1px solid rgba(100,116,139,.16) !important;\n}\nhtml.embedded-content-form body .form-section-heading h2,\nhtml.embedded-content-form body .form-title-row h1,\nhtml.embedded-content-form body .field > span,\nhtml.embedded-content-form body .approval-panel h3,\nhtml.embedded-content-form body .approval-panel *,\nhtml.embedded-content-form body .form-title-row .eyebrow {\n  color: #263548 !important;\n  -webkit-text-fill-color: #263548 !important;\n}\nhtml.embedded-content-form body .form-section-heading p,\nhtml.embedded-content-form body .form-title-row .muted,\nhtml.embedded-content-form body .field-help,\nhtml.embedded-content-form body .no-comments,\nhtml.embedded-content-form body #historyEmpty {\n  color: #64748b !important;\n  -webkit-text-fill-color: #64748b !important;\n}\nhtml.embedded-content-form body .field input,\nhtml.embedded-content-form body .field select,\nhtml.embedded-content-form body .field textarea,\nhtml.embedded-content-form body .expand-dialog textarea {\n  background: #fff !important;\n  background-color: #fff !important;\n  color: #263548 !important;\n  -webkit-text-fill-color: #263548 !important;\n  border: 1px solid #dbe3eb !important;\n  border-radius: 9px !important;\n  box-shadow: none !important;\n}\nhtml.embedded-content-form body .field input::placeholder,\nhtml.embedded-content-form body .field textarea::placeholder {\n  color: #94a3b8 !important;\n  -webkit-text-fill-color: #94a3b8 !important;\n}\nhtml.embedded-content-form body .approval-status-row {\n  border: 0 !important;\n  border-radius: 0 !important;\n  padding: 4px 0 14px !important;\n}\nhtml.embedded-content-form body .form-bottom-actions {\n  padding: 12px 0 18px !important;\n}\nhtml.embedded-content-form body .form-bottom-actions .secondary-btn {\n  background: #fff !important;\n  border: 1px solid #dbe3eb !important;\n  color: #475569 !important;\n}\n@media (max-width: 760px) {\n  html.embedded-content-form body .content-form-wrap {\n    grid-template-columns: minmax(0,1fr) !important;\n    padding: 22px 15px 20px !important;\n    row-gap: 0 !important;\n  }\n  html.embedded-content-form body .form-title-row,\n  html.embedded-content-form body #contentForm,\n  html.embedded-content-form body .form-bottom-actions {\n    grid-column: 1 !important;\n  }\n  html.embedded-content-form body #contentForm { display: contents !important; }\n  html.embedded-content-form body .form-panel,\n  html.embedded-content-form body .approval-panel { padding: 12px 0 16px !important; }\n  html.embedded-content-form body .form-grid { grid-template-columns: 1fr !important; }\n  html.embedded-content-form body .field.full { grid-column: auto !important; }\n}\n";
-       style.textContent += "\n/* NOTE AP — specificity-safe final overrides for the embedded popup */\n:root.embedded-content-form[data-theme=\"dark\"] body .form-panel,\n:root.embedded-content-form[data-theme=\"dark\"] body .approval-panel,\n:root.embedded-content-form[data-theme=\"system\"] body .form-panel,\n:root.embedded-content-form[data-theme=\"system\"] body .approval-panel,\nhtml.embedded-content-form body .form-panel,\nhtml.embedded-content-form body .approval-panel {\n  background: transparent !important;\n  background-color: transparent !important;\n  background-image: none !important;\n  border: 0 !important;\n  border-radius: 0 !important;\n  border-bottom: 1px solid rgba(100,116,139,.18) !important;\n  box-shadow: none !important;\n  -webkit-backdrop-filter: none !important;\n  backdrop-filter: none !important;\n}\n:root.embedded-content-form[data-theme=\"dark\"] body .form-title-row h1,\n:root.embedded-content-form[data-theme=\"dark\"] body .form-section-heading h2,\n:root.embedded-content-form[data-theme=\"dark\"] body .form-section-heading p,\n:root.embedded-content-form[data-theme=\"dark\"] body .field > span,\n:root.embedded-content-form[data-theme=\"dark\"] body .field-help,\n:root.embedded-content-form[data-theme=\"dark\"] body .approval-panel *,\n:root.embedded-content-form[data-theme=\"system\"] body .form-title-row h1,\n:root.embedded-content-form[data-theme=\"system\"] body .form-section-heading h2,\n:root.embedded-content-form[data-theme=\"system\"] body .form-section-heading p,\n:root.embedded-content-form[data-theme=\"system\"] body .field > span,\n:root.embedded-content-form[data-theme=\"system\"] body .field-help,\n:root.embedded-content-form[data-theme=\"system\"] body .approval-panel * {\n  color: #263548 !important;\n  -webkit-text-fill-color: #263548 !important;\n}\nhtml.embedded-content-form body .form-grid {\n  display: grid !important;\n  grid-template-columns: minmax(0,1fr) !important;\n  gap: 14px !important;\n}\nhtml.embedded-content-form body .field.full { grid-column: 1 !important; }\nhtml.embedded-content-form body .approval-status-row,\nhtml.embedded-content-form body .comments-block,\nhtml.embedded-content-form body .history-block {\n  background: transparent !important;\n  background-color: transparent !important;\n  background-image: none !important;\n  box-shadow: none !important;\n}\nhtml.embedded-content-form body .field input,\nhtml.embedded-content-form body .field select,\nhtml.embedded-content-form body .field textarea,\n:root.embedded-content-form[data-theme=\"dark\"] body .field input,\n:root.embedded-content-form[data-theme=\"dark\"] body .field select,\n:root.embedded-content-form[data-theme=\"dark\"] body .field textarea,\n:root.embedded-content-form[data-theme=\"system\"] body .field input,\n:root.embedded-content-form[data-theme=\"system\"] body .field select,\n:root.embedded-content-form[data-theme=\"system\"] body .field textarea {\n  background: #fff !important;\n  background-color: #fff !important;\n  color: #263548 !important;\n  -webkit-text-fill-color: #263548 !important;\n  border: 1px solid #dbe3eb !important;\n}\n";
        doc.head.append(style);
       }
       if(!child.__noteApEscapeBound){

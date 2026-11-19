@@ -341,3 +341,178 @@ html body #visitPage .visit-inline-input,
 html body #visitPage .visit-inline-textarea{background:#FFFFFF!important;border-color:#D5E3EF!important}
 html body #visitPage .visit-inline-input:focus,
 html body #visitPage .visit-inline-textarea:focus{border-color:#20B6A6!important;box-shadow:0 0 0 3px rgba(32,182,166,.13)!important}
+
+
+/* VISIT ONLY — clearer hierarchy, balanced layout and colorful accents */
+html body #visitPage .visit-overview-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:18px!important;
+  align-items:stretch!important;
+}
+html body #visitPage .visit-today-card{
+  display:grid!important;
+  grid-template-columns:minmax(190px,.85fr) minmax(260px,1.5fr) minmax(250px,1fr)!important;
+  align-items:center!important;
+  gap:20px!important;
+  padding:22px!important;
+  background:linear-gradient(115deg,#EAF7FF 0%,#EAF9F4 52%,#FFF3E8 100%)!important;
+  border:1px solid #DCEBEF!important;
+  border-radius:18px!important;
+  box-shadow:0 8px 24px rgba(49,91,112,.07)!important;
+}
+html body #visitPage .visit-today-card>.visit-today-heading{
+  display:flex!important;
+  grid-column:1!important;grid-row:1!important;
+  align-items:flex-start!important;
+  min-height:100%!important;
+  margin:0!important;padding:4px 18px 4px 0!important;
+  border:0!important;border-right:1px solid #D2E6E8!important;
+}
+html body #visitPage .visit-today-card .visit-card-heading h2{
+  color:#263D56!important;font-size:16px!important;
+}
+html body #visitPage .visit-today-card .visit-card-heading h3{
+  color:#3979A7!important;font-size:19px!important;line-height:1.35!important;
+}
+html body #visitPage .visit-today-card>.visit-today-summary{
+  display:block!important;grid-column:2!important;grid-row:1!important;
+  min-width:0!important;margin:0!important;padding:15px 17px!important;
+  border:1px solid #D7EDE8!important;border-radius:13px!important;
+  background:rgba(255,255,255,.76)!important;
+}
+html body #visitPage .visit-today-label{
+  color:#168F84!important;border-color:#DDEEEA!important;
+  font-size:11px!important;font-weight:800!important;
+}
+html body #visitPage .visit-today-entry{
+  display:flex!important;flex-direction:column!important;gap:9px!important;
+  padding:0!important;border:0!important;background:transparent!important;
+}
+html body #visitPage .visit-today-line{
+  display:flex!important;flex-direction:row!important;align-items:baseline!important;
+  gap:8px!important;line-height:1.5!important;
+}
+html body #visitPage .visit-today-line b{min-width:78px;color:#7B8DA0!important}
+html body #visitPage .visit-today-line span{color:#344B62!important;font-weight:700!important}
+html body #visitPage .visit-today-card>.visit-metrics{
+  display:grid!important;grid-column:3!important;grid-row:1!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:11px!important;width:100%!important;margin:0!important;
+}
+html body #visitPage .visit-metric-card{
+  min-width:0!important;min-height:100px!important;padding:15px!important;
+  display:flex!important;flex-direction:column!important;justify-content:center!important;
+  gap:8px!important;border-radius:14px!important;
+  box-shadow:0 4px 12px rgba(49,91,112,.05)!important;
+}
+html body #visitPage .visit-metric-card:nth-child(1){
+  background:linear-gradient(145deg,#D7F5EA,#BFEBDD)!important;border:1px solid #B5E5D5!important;
+}
+html body #visitPage .visit-metric-card:nth-child(2){
+  background:linear-gradient(145deg,#FFE9D5,#FFD8B6)!important;border:1px solid #F5D0AE!important;
+}
+html body #visitPage .visit-metric-card span{color:#54786F!important;font-size:10px!important;font-weight:800!important}
+html body #visitPage .visit-metric-card:nth-child(2) span{color:#A46D3C!important}
+html body #visitPage .visit-metric-card strong{color:#263D56!important;font-size:25px!important}
+
+html body #visitPage .visit-main-card{
+  min-width:0!important;padding:21px!important;
+  background:#FFFFFF!important;border:1px solid #E1EAF1!important;
+  border-radius:18px!important;box-shadow:0 8px 24px rgba(35,55,80,.055)!important;
+}
+html body #visitPage .visit-main-heading{align-items:center!important}
+html body #visitPage .visit-kicker{color:#168F84!important}
+html body #visitPage .visit-card-heading h2{color:#263D56!important}
+html body #visitPage .visit-table-toolbar{
+  display:flex!important;flex-wrap:wrap!important;align-items:center!important;
+  gap:12px!important;padding:12px!important;margin:0 0 12px!important;
+  border:1px solid #DFEAF0!important;border-radius:13px!important;
+  background:linear-gradient(100deg,#EEF7FF,#EFFAF6)!important;
+}
+html body #visitPage .visit-selection-controls button,
+html body #visitPage .visit-month-nav button{
+  min-height:36px!important;border-radius:9px!important;
+  border:1px solid #D5E4ED!important;background:#FFFFFF!important;color:#47647D!important;
+}
+html body #visitPage #visitTodayMonth{
+  background:#263D56!important;color:#FFFFFF!important;border-color:#263D56!important;
+}
+html body #visitPage .visit-month-nav span{color:#263D56!important;font-weight:800!important}
+html body #visitPage .visit-view-toggle{
+  background:#E2F3EF!important;border-color:#D2EAE4!important;
+}
+html body #visitPage .visit-view-toggle button{color:#64877F!important}
+html body #visitPage .visit-view-toggle button.active{
+  background:#20B6A6!important;color:#FFFFFF!important;box-shadow:0 2px 7px rgba(32,182,166,.2)!important;
+}
+html body #visitPage .visit-table-wrap{
+  width:100%!important;max-width:100%!important;padding:0!important;
+  margin:0!important;border:1px solid #DCE8EF!important;
+  border-radius:13px!important;background:#FFFFFF!important;
+}
+html body #visitPage .visit-main-table{min-width:1420px!important;border-collapse:separate!important;border-spacing:0!important}
+html body #visitPage .visit-main-table th{
+  background:#DCEEFF!important;color:#3979B8!important;
+  border:1px solid #CFE3F5!important;border-bottom:2px solid #C7DDF1!important;
+  padding:13px 12px!important;font-size:9px!important;
+}
+html body #visitPage .visit-main-table td{
+  background:#FFFFFF!important;color:#465A70!important;
+  border:1px solid #E7EEF3!important;padding:12px!important;
+}
+html body #visitPage .visit-main-table tbody tr:nth-child(even) td{background:#F8FBFF!important}
+html body #visitPage .visit-main-table tbody tr:hover td{background:#EFF8FF!important}
+html body #visitPage .visit-main-table .visit-select-row.selected td,
+html body #visitPage .visit-main-table .visit-select-row.is-visit-checked td{
+  background:#DDF7EF!important;color:#285D55!important;
+}
+html body #visitPage .visit-main-table .visit-placeholder-row td{background:#FAFCFE!important;color:#A0ADBA!important}
+html body #visitPage .visit-inline-input,
+html body #visitPage .visit-inline-textarea,
+html body #visitPage .visit-multiselect>summary{
+  background:#FFFFFF!important;color:#344B62!important;border:1px solid #D6E3EC!important;border-radius:9px!important;
+}
+html body #visitPage .visit-inline-input:focus,
+html body #visitPage .visit-inline-textarea:focus,
+html body #visitPage .visit-multiselect[open]>summary{
+  border-color:#20B6A6!important;box-shadow:0 0 0 3px rgba(32,182,166,.12)!important;
+}
+html body #visitPage .visit-pagination{color:#74869A!important}
+html body #visitPage .visit-add-schedule-btn{
+  width:100%!important;margin-top:14px!important;
+  background:linear-gradient(110deg,#20B6A6,#49C5B2)!important;
+  color:#FFFFFF!important;border:0!important;border-radius:12px!important;
+  box-shadow:0 6px 15px rgba(32,182,166,.18)!important;
+}
+html body #visitPage .visit-add-schedule-btn:hover{filter:brightness(.97)!important}
+html body #visitPage .visit-grid-panel{padding:16px 0 4px!important}
+html body #visitPage .visit-calendar-legend{display:flex!important;flex-wrap:wrap!important;gap:14px!important;margin-bottom:14px!important}
+html body #visitPage .visit-calendar-weekday{color:#3979B8!important;font-weight:800!important}
+html body #visitPage .visit-calendar-day-cell{background:#FFFFFF!important;border-color:#E2EAF0!important;border-radius:9px!important}
+html body #visitPage .visit-calendar-day-cell.outside-month{background:#F3F6FA!important}
+html body #visitPage .visit-calendar-day-cell.is-today{background:#E6F8F3!important;box-shadow:inset 0 0 0 2px #20B6A6!important}
+html body #visitPage .visit-calendar-day-cell.is-selected{background:#FFF0E1!important;box-shadow:inset 0 0 0 2px #F28C38!important}
+html body #visitPage .visit-calendar-event-chip.planned{background:#EAF2FF!important;border-color:#CFE0FA!important;color:#3979B8!important}
+html body #visitPage .visit-calendar-event-chip.progress{background:#FFF0DF!important;border-color:#F5D8B9!important;color:#A66A32!important}
+html body #visitPage .visit-calendar-event-chip.done{background:#DDF7EF!important;border-color:#BFEBDD!important;color:#168F84!important}
+html body #visitPage .visit-calendar-event-chip.cancelled{background:#FCEAF0!important;border-color:#F4D1DF!important;color:#B45B7A!important}
+@media(max-width:1000px){
+  html body #visitPage .visit-today-card{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
+  html body #visitPage .visit-today-card>.visit-today-heading{grid-column:1!important;grid-row:1!important}
+  html body #visitPage .visit-today-card>.visit-today-summary{grid-column:2!important;grid-row:1!important}
+  html body #visitPage .visit-today-card>.visit-metrics{grid-column:1/-1!important;grid-row:2!important}
+}
+@media(max-width:650px){
+  html body #visitPage .visit-today-card{grid-template-columns:minmax(0,1fr)!important;gap:13px!important;padding:16px!important}
+  html body #visitPage .visit-today-card>.visit-today-heading,
+  html body #visitPage .visit-today-card>.visit-today-summary,
+  html body #visitPage .visit-today-card>.visit-metrics{grid-column:1!important;grid-row:auto!important}
+  html body #visitPage .visit-today-card>.visit-today-heading{border:0!important;padding:0 0 10px!important;border-bottom:1px solid #D2E6E8!important}
+  html body #visitPage .visit-today-card>.visit-today-summary{padding:12px!important}
+  html body #visitPage .visit-today-card>.visit-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  html body #visitPage .visit-main-card{padding:14px!important}
+  html body #visitPage .visit-table-toolbar{align-items:stretch!important}
+  html body #visitPage .visit-month-nav{margin-left:0!important;flex:1 1 100%!important;justify-content:space-between!important}
+  html body #visitPage .visit-display-control{margin-left:auto!important}
+}

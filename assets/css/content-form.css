@@ -398,3 +398,14 @@ html.embedded-content-form body #contentForm > section.form-panel.approval-panel
   -webkit-backdrop-filter:blur(9px) saturate(135%)!important;
   backdrop-filter:blur(9px) saturate(135%)!important;
 }
+
+/* Fully transparent Approval & History outer panel. */
+html.embedded-content-form body #contentForm > section.form-panel.approval-panel,
+html body #contentForm > section.form-panel.approval-panel{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  box-shadow:none!important;
+}

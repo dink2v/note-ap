@@ -403,7 +403,7 @@ body.modal-open{overflow:hidden;}
 :root[data-theme="dark"] .visit-calendar-day.has-visit,:root[data-theme="dark"] .visit-calendar-day.is-selected{background:#244331;border-color:#4c8c62}
 :root[data-theme="dark"] .visit-calendar-weekday,:root[data-theme="dark"] .visit-today-line b{color:#a4b3a8}
 :root[data-theme="dark"] .visit-today-line span{color:#e6eee8}
-:root[data-theme="dark"] .notification-popover,:root[data-theme="dark"] .content-modal-dialog{background:#18231c;border-color:#34463a;color:#e6eee8}
+
 :root[data-theme="dark"] .notification-item,:root[data-theme="dark"] .upcoming-item{border-color:#34463a}
 :root[data-theme="dark"] .settings-status{background:#244331;color:#a9d8b7}
 @media(prefers-color-scheme:dark){
@@ -2103,46 +2103,7 @@ button,a{touch-action:manipulation}
   background-color:#111a15;
   color:#e8f1eb;
 }
-:root[data-theme="dark"] .sidebar,
-:root[data-theme="dark"] .mobile-top,
-:root[data-theme="dark"] .panel,
-:root[data-theme="dark"] .stat-card,
-:root[data-theme="dark"] .settings-nav,
-:root[data-theme="dark"] .settings-content,
-:root[data-theme="dark"] .settings-mini-card,
-:root[data-theme="dark"] .reference-category-card,
-:root[data-theme="dark"] .visit-card,
-:root[data-theme="dark"] .content-list-panel,
-:root[data-theme="dark"] .dashboard-quick-actions,
-:root[data-theme="dark"] .quick-action,
-:root[data-theme="dark"] .calendar-planner-panel,
-:root[data-theme="dark"] .calendar-main-panel,
-:root[data-theme="dark"] .calendar-agenda-panel,
-:root[data-theme="dark"] .calendar-insight-card,
-:root[data-theme="dark"] .calendar-item-dialog,
-:root[data-theme="dark"] .calendar-demo,
-:root[data-theme="dark"] .calendar-demo-form,
-:root[data-theme="dark"] .calendar-demo-list-panel,
-:root[data-theme="dark"] .calendar-demo-history,
-:root[data-theme="dark"] .kanban-column,
-:root[data-theme="dark"] .kanban-card,
-:root[data-theme="dark"] .visit-today-card,
-:root[data-theme="dark"] .visit-metric-card,
-:root[data-theme="dark"] .visit-table-toolbar,
-:root[data-theme="dark"] .visit-table-wrap,
-:root[data-theme="dark"] .command-dialog,
-:root[data-theme="dark"] .command-result,
-:root[data-theme="dark"] .notification-popover,
-:root[data-theme="dark"] .content-modal-dialog,
-:root[data-theme="dark"] .help-topic-card,
-:root[data-theme="dark"] .help-faq-item,
-:root[data-theme="dark"] .chat-workspace,
-:root[data-theme="dark"] .chat-thread,
-:root[data-theme="dark"] .chat-composer{
-  background:#1a2820 !important;
-  border-color:#35483b !important;
-  color:#e8f1eb !important;
-}
+
 :root[data-theme="dark"] #dashboardPage .welcome-row{
   background:linear-gradient(115deg,#202e39 0%,#28283a 55%,#302b25 100%) !important;
   border-color:#3c4b54 !important;
@@ -4130,27 +4091,8 @@ button,a{touch-action:manipulation}
 :root[data-theme="dark"] body :is(label,.field>span,.settings-field>span,.content-filter>span,.visit-detail-field>span,.calendar-detail-field>span){
   color:#cbd9cf;
 }
-:root[data-theme="dark"] body :is(.app-shell,.main-area,.page-wrap,.content-form-wrap,.content-page,.visit-page,.settings-page,.help-page,.chat-page){
-  background:#111a15;
-  color:#e8f1eb;
-}
-:root[data-theme="dark"] body :is(
-  .panel,.stat-card,.form-panel,.content-filter-panel,.content-list-panel,
-  .kanban-column,.kanban-card,.visit-card,.visit-editor,.visit-table-panel,
-  .visit-table-toolbar,.visit-table-wrap,.settings-card,.settings-panel,
-  .settings-nav,.settings-content,.settings-preference-row,.settings-mini-card,
-  .reference-category-card,.help-topic-card,.help-faq-item,.chat-workspace,
-  .chat-thread,.chat-composer,.notification-popover,.command-dialog,
-  .command-result,.calendar-planner-panel,.calendar-main-panel,
-  .calendar-agenda-panel,.calendar-insight-card,.calendar-item-dialog,
-  .calendar-detail-section,.calendar-demo,.calendar-demo-form,
-  .calendar-demo-list-panel,.calendar-demo-history,.expand-dialog,
-  .content-modal-dialog
-){
-  background-color:#1a2820;
-  border-color:#35483b;
-  color:#e8f1eb;
-}
+
+
 :root[data-theme="dark"] body :is(
   .content-search input,.content-filter select,.content-filter input,
   .field input,.field select,.field textarea,.visit-form input,
@@ -5175,7 +5117,7 @@ body :is(.brand,.brand b,.brand small,.sidebar-footer,.sidebar-footer b,
 body .brand-mark,body .avatar{background:#fff1e5!important;color:#d97726!important}
 body .nav-link:hover,body .nav-link.active{background:#e4f7f4!important;color:#159d91!important;border-color:#bce9e2!important}
 body .nav-link.active{box-shadow:inset 3px 0 #20b6a6!important}
-body :is(.panel,.stat-card,.form-panel,.content-filter-panel,.content-list-panel,
+body :is(.panel,.stat-card,.content-filter-panel,.content-list-panel,
 .kanban-card,.visit-card,.visit-editor,.visit-table-panel,.visit-table-toolbar,
 .visit-table-wrap,.settings-card,.settings-panel,.settings-nav,.settings-content,
 .settings-preference-row,.settings-mini-card,.reference-category-card,.help-topic-card,
@@ -5591,14 +5533,7 @@ body .content-form-wrap #contentForm[data-editable="true"] .field textarea{
   cursor:text;
 }
 body .content-form-wrap #contentForm[data-editable="true"] .field select{cursor:pointer}
-:root[data-theme="dark"] body .content-form-wrap #contentForm[data-editable="false"] .field input:disabled,
-:root[data-theme="dark"] body .content-form-wrap #contentForm[data-editable="false"] .field select:disabled,
-:root[data-theme="dark"] body .content-form-wrap #contentForm[data-editable="false"] .field textarea:disabled{
-  color:#e5eee8!important;
-  -webkit-text-fill-color:#e5eee8!important;
-  background:#24352b!important;
-  border-color:#405747!important;
-}
+
 
 
 /* NOTE AP — single source of truth for calendar content detail */
@@ -5918,14 +5853,8 @@ body .content-form-wrap #contentForm[data-editable="true"] .field select{cursor:
   background:#effaf8!important;
   border-color:#20b6a6!important;
 }
-:root[data-theme="dark"] .content-modal-dialog,
-:root[data-theme="dark"] .content-modal-dialog iframe{
-  background:#18231c!important;
-}
-:root[data-theme="dark"] .content-form-wrap .form-panel{
-  background:#1b2921!important;
-  border-color:#34483a!important;
-}
+
+
 :root[data-theme="dark"] #calendarContentDetailModal .calendar-item-dialog,
 :root[data-theme="dark"] #calendarItemModal .calendar-item-dialog{
   background:rgba(25,39,31,.985)!important;
@@ -6176,9 +6105,8 @@ body #calendarPage{
 :root[data-theme="dark"] #calendarContentDetailModal .calendar-item-dialog-head,
 :root[data-theme="dark"] #calendarContentDetailModal .calendar-item-actions{background:#1b2921;border-color:#34483a}
 :root[data-theme="dark"] #calendarContentDetailModal .calendar-original-detail-section{background:#202f26;border-color:#34483a}
-:root[data-theme="dark"] .content-form-wrap .form-panel{background:#1b2921!important;border-color:#34483a!important}
-:root[data-theme="dark"] .content-form-wrap .field input,:root[data-theme="dark"] .content-form-wrap .field select,
-:root[data-theme="dark"] .content-form-wrap .field textarea{background:#18251e;color:#e6eee8;border-color:#405348}
+
+
 @media(max-width:1100px){
   #calendarPage .calendar-workspace{grid-template-columns:minmax(0,1fr) 260px}
   #calendarPage{padding:28px 22px}
@@ -6415,19 +6343,13 @@ html body #calendarPage .calendar-day-cell.is-drop-target:hover{
  .content-form-wrap .form-actions>div .primary-btn{grid-column:1/-1!important}
  .content-form-wrap .detail-edit-top{margin-left:0!important}
 }
-:root[data-theme="dark"] .content-form-wrap .form-panel{background:#1b2921!important;border-color:#34483a!important}
-:root[data-theme="dark"] .content-form-wrap .form-title-row h1,
-:root[data-theme="dark"] .content-form-wrap .form-section-heading h2{color:#edf5ef!important}
-:root[data-theme="dark"] .content-form-wrap .form-section-heading p,
-:root[data-theme="dark"] .content-form-wrap .form-title-row .muted{color:#a8b9ae!important}
-:root[data-theme="dark"] .content-form-wrap .field>span{color:#c3d2c8!important}
-:root[data-theme="dark"] .content-form-wrap .field input,
-:root[data-theme="dark"] .content-form-wrap .field select,
-:root[data-theme="dark"] .content-form-wrap .field textarea{background:#142119!important;color:#edf5ef!important;border-color:#405348!important}
-:root[data-theme="dark"] .content-form-wrap #contentForm[data-editable="false"] .field input:disabled,
-:root[data-theme="dark"] .content-form-wrap #contentForm[data-editable="false"] .field select:disabled,
-:root[data-theme="dark"] .content-form-wrap #contentForm[data-editable="false"] .field textarea:disabled{background:#202f26!important;color:#d2dfd6!important;border-color:#405348!important}
-:root[data-theme="dark"] .content-form-wrap .approval-panel .approval-status-row{background:#202f26!important;border-color:#405348!important}
+
+
+
+
+
+
+
 
 
 /* NOTE AP — CONTENT TO HELP CENTER VISUAL SYSTEM */
@@ -7099,21 +7021,14 @@ html.embedded-content-form .content-form-wrap .form-panel{background:#fff!import
  .content-form-wrap .approval-panel .phase-labels{font-size:8px!important}
  .expand-dialog textarea{min-height:45vh!important}
 }
-:root[data-theme="dark"] .content-form-wrap .form-panel{background:#1b2921!important;border-color:#34483a!important}
-:root[data-theme="dark"] .content-form-wrap .form-title-row h1,
-:root[data-theme="dark"] .content-form-wrap .form-section-heading h2,
-:root[data-theme="dark"] .content-form-wrap .approval-status-row b{color:#edf5ef!important}
-:root[data-theme="dark"] .content-form-wrap .form-section-heading p,
-:root[data-theme="dark"] .content-form-wrap .form-title-row .muted{color:#a8b9ae!important}
-:root[data-theme="dark"] .content-form-wrap .field>span{color:#c3d2c8!important}
-:root[data-theme="dark"] .content-form-wrap .field input,
-:root[data-theme="dark"] .content-form-wrap .field select,
-:root[data-theme="dark"] .content-form-wrap .field textarea{background:#142119!important;color:#edf5ef!important;border-color:#405348!important}
-:root[data-theme="dark"] .content-form-wrap #contentForm[data-editable="false"] .field input:disabled,
-:root[data-theme="dark"] .content-form-wrap #contentForm[data-editable="false"] .field select:disabled,
-:root[data-theme="dark"] .content-form-wrap #contentForm[data-editable="false"] .field textarea:disabled{background:#202f26!important;color:#d2dfd6!important;-webkit-text-fill-color:#d2dfd6!important;border-color:#405348!important}
-:root[data-theme="dark"] .content-form-wrap .approval-panel .approval-status-row{background:#202f26!important;border-color:#405348!important}
-:root[data-theme="dark"] .content-form-wrap .form-bottom-actions .secondary-btn{background:#1b2921!important;color:#a7e2d8!important;border-color:#405348!important}
+
+
+
+
+
+
+
+
 :root[data-theme="dark"] .expand-dialog{background:#1b2921!important;border-color:#405348!important}
 :root[data-theme="dark"] .expand-dialog>div b{color:#edf5ef!important}
 :root[data-theme="dark"] .expand-dialog textarea{background:#142119!important;color:#edf5ef!important;border-color:#405348!important}
@@ -7465,20 +7380,9 @@ html.embedded-content-form .form-bottom-actions .primary-btn{
 
 /* FINAL FIX — popup wrapper was explicitly painted dark green by global theme rules */
 body .content-modal-dialog,
-:root[data-theme="dark"] .content-modal-dialog,
-:root[data-theme="system"] .content-modal-dialog,
-:root[data-theme="dark"] body .content-modal-dialog,
-:root[data-theme="system"] body .content-modal-dialog{
-  background:transparent!important;
-  background-color:transparent!important;
-  background-image:none!important;
-}
+
 body .content-modal-dialog iframe,
-:root[data-theme="dark"] .content-modal-dialog iframe,
-:root[data-theme="system"] .content-modal-dialog iframe{
-  background:transparent!important;
-  background-color:transparent!important;
-}
+
 
 
 /* EMBEDDED FORM: outrank the dark-theme selectors on the document root */
@@ -7542,12 +7446,7 @@ body .content-modal-dialog iframe,
 
 
 /* Parent document dark-theme rule also paints the popup wrapper green. */
-:root[data-theme="dark"] .content-modal-dialog,
-:root[data-theme="system"] .content-modal-dialog{
-  background:transparent!important;
-  background-color:transparent!important;
-  background-image:none!important;
-}
+
 
 
 /* NOTE AP — Tambah Konten Baru: transparent popup canvas, readable form controls */
@@ -7669,21 +7568,8 @@ html[data-theme] body .content-modal-dialog {
 
 
 /* Add Content popup: override the more-specific dark theme surface */
-:root[data-theme="dark"] body .content-modal-dialog,
-:root[data-theme="system"] body .content-modal-dialog,
-:root[data-theme="dark"] .content-modal-dialog,
-:root[data-theme="system"] .content-modal-dialog,
-html[data-theme="dark"] body .content-modal-dialog {
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-  box-shadow: none !important;
-}
-:root[data-theme="dark"] body .content-modal-dialog iframe,
-:root[data-theme="system"] body .content-modal-dialog iframe {
-  background: transparent !important;
-  background-color: transparent !important;
-}
+
+
 
 
 /* ROOT FIX — remove the green tint from the modal OVERLAY */

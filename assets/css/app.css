@@ -6417,3 +6417,256 @@ html body #calendarPage .calendar-day-cell.is-drop-target:hover{
 :root[data-theme="dark"] .content-form-wrap #contentForm[data-editable="false"] .field select:disabled,
 :root[data-theme="dark"] .content-form-wrap #contentForm[data-editable="false"] .field textarea:disabled{background:#202f26!important;color:#d2dfd6!important;border-color:#405348!important}
 :root[data-theme="dark"] .content-form-wrap .approval-panel .approval-status-row{background:#202f26!important;border-color:#405348!important}
+
+
+/* NOTE AP — CONTENT TO HELP CENTER VISUAL SYSTEM */
+:root{
+  --na-surface:#ffffff;
+  --na-surface-soft:#fbfdfc;
+  --na-border:#e7edf0;
+  --na-text:#293b4d;
+  --na-muted:#8291a0;
+  --na-orange:#f28c38;
+  --na-teal:#20b6a6;
+  --na-teal-deep:#168f86;
+  --na-page-shadow:0 8px 26px rgba(40,61,79,.055);
+}
+#contentPage,#kanbanPage,#visitPage,#settingsPage,#helpPage{
+  max-width:1500px;margin:0 auto;padding:38px 42px 30px;color:var(--na-text);
+}
+#contentPage .content-page-heading,#kanbanPage .kanban-heading,
+#visitPage .visit-heading,#settingsPage .settings-heading,#helpPage .help-heading{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;margin:0 0 23px;
+}
+#contentPage h1,#kanbanPage h1,#visitPage h1,#settingsPage h1,#helpPage h1{
+  margin:0;color:#293b4d;font:800 27px/1.25 "Plus Jakarta Sans",sans-serif;letter-spacing:-.7px;
+}
+#contentPage .eyebrow,#kanbanPage .eyebrow,#visitPage .eyebrow,
+#settingsPage .eyebrow,#helpPage .eyebrow{color:#168f86;font-weight:800;letter-spacing:1.45px}
+#contentPage .muted,#kanbanPage .muted,#visitPage .muted,
+#settingsPage .muted,#helpPage .muted{color:#8291a0;line-height:1.65;font-size:12px}
+#contentPage .primary-btn,#kanbanPage .primary-btn,#visitPage .primary-btn,
+#settingsPage .primary-btn,#helpPage .primary-btn{
+  background:linear-gradient(135deg,#f28c38,#f5a04e);border:0;border-radius:11px;
+  box-shadow:0 6px 16px rgba(242,140,56,.18);font-weight:750;
+}
+#contentPage .primary-btn:hover,#kanbanPage .primary-btn:hover,#visitPage .primary-btn:hover,
+#settingsPage .primary-btn:hover,#helpPage .primary-btn:hover{background:#df792b}
+
+/* Konten — filters and list remain connected to the existing renderer */
+#contentPage .content-filter-panel,#contentPage .content-list-panel{
+  border:1px solid var(--na-border);border-radius:17px;background:#fff;box-shadow:var(--na-page-shadow);
+}
+#contentPage .content-list-panel{overflow:hidden}
+#contentPage .content-list-heading{padding:20px 22px;border-bottom:1px solid #edf1f3}
+#contentPage .content-list-heading h2{font:800 15px "Plus Jakarta Sans";color:#304456}
+#contentPage .content-table-wrap{border-radius:0 0 17px 17px}
+#contentPage .content-table th{background:#f5faf9;color:#758b8c}
+#contentPage .content-table td{color:#627486}
+#contentPage .content-table tbody tr:hover td{background:#f5fbfa}
+#contentPage .content-table td:first-child{color:#304456}
+#contentPage .content-empty{min-height:210px;display:grid;justify-items:center;align-content:center}
+#contentPage .filter-reset-btn{border-radius:10px;border-color:#e3eceb;background:#fff;color:#688080}
+
+/* Kanban — retain all seven workflow columns and drag/drop affordances */
+#kanbanPage .kanban-heading{margin-bottom:22px}
+#kanbanPage .kanban-board{
+  display:grid;grid-template-columns:repeat(7,minmax(220px,1fr));gap:13px;
+  overflow-x:auto;align-items:start;padding:2px 2px 16px;scrollbar-width:thin;
+}
+#kanbanPage .kanban-column{
+  min-width:220px;padding:13px;border:1px solid #e4eeec;border-radius:16px;
+  background:linear-gradient(180deg,#f5faf9 0%,#f8fbfc 100%);box-shadow:0 4px 15px rgba(40,61,79,.035);
+}
+#kanbanPage .kanban-column>header{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:3px 2px 12px;border-bottom:1px solid #e7efed;margin-bottom:12px;
+}
+#kanbanPage .kanban-column>header h2{font:800 10px "Plus Jakarta Sans";letter-spacing:.7px;color:#4e7475}
+#kanbanPage .kanban-column>header>span{border-radius:8px;background:#e6f5f2;color:#168f86;padding:5px 8px;font-size:10px;font-weight:800}
+#kanbanPage .kanban-cards{display:grid;gap:10px;min-height:80px}
+#kanbanPage .kanban-card{
+  border:1px solid #e7edf0;border-radius:13px;background:#fff;
+  box-shadow:0 4px 13px rgba(40,61,79,.045);padding:13px;transition:transform .18s,border-color .18s,box-shadow .18s;
+}
+#kanbanPage .kanban-card:hover{transform:translateY(-2px);border-color:#b9e4de;box-shadow:0 8px 18px rgba(40,61,79,.075)}
+#kanbanPage .kanban-card h3,#kanbanPage .kanban-card-title{color:#304456}
+#kanbanPage .kanban-add-slot{
+  width:100%;margin-top:11px;border:1px dashed #c8dedb;border-radius:10px;background:rgba(255,255,255,.65);
+  color:#168f86;padding:10px;font-weight:700;font-size:10px;transition:.18s;
+}
+#kanbanPage .kanban-column.drop-target{background:#edf9f6;border-color:#77cfc4}
+
+/* Visit — clear overview, schedule controls and readable table */
+#visitPage .visit-overview-grid{display:grid;grid-template-columns:minmax(280px,.78fr) minmax(0,1.7fr);gap:17px;align-items:start}
+#visitPage .visit-card,#visitPage .visit-table-panel,#visitPage .visit-editor{
+  border:1px solid var(--na-border);border-radius:17px;background:#fff;box-shadow:var(--na-page-shadow);
+}
+#visitPage .visit-card{padding:20px}
+#visitPage .visit-card-heading h2,#visitPage .visit-heading-title h2{font:800 15px "Plus Jakarta Sans";color:#304456}
+#visitPage .visit-today-summary{border-radius:12px;background:#f6faf9;padding:12px}
+#visitPage .visit-metric-card{border:1px solid #e8eff0;border-radius:12px;background:#fff}
+#visitPage .visit-main-card{min-width:0}
+#visitPage .visit-table-wrap{overflow:auto;border:1px solid #e8eef0;border-radius:13px;background:#fff}
+#visitPage .visit-table th{background:#f3faf8;color:#718b89;font-size:9px;letter-spacing:.6px;white-space:nowrap}
+#visitPage .visit-table td{color:#5e7180;font-size:11px}
+#visitPage .visit-table tbody tr:hover td{background:#f7fbfa}
+#visitPage .visit-table-toolbar{gap:10px;flex-wrap:wrap}
+#visitPage .visit-add-schedule-btn{border-radius:11px;background:#fff7ef;border:1px dashed #f1c69e;color:#cb762e;font-weight:750}
+#visitPage .visit-page-btn,#visitPage .visit-actions button{border-radius:9px}
+#visitPage .visit-page-btn:hover{border-color:#9ddbd3;color:#168f86}
+#visitPage .visit-form input:focus,#visitPage .visit-form select:focus,#visitPage .visit-form textarea:focus,
+#visitPage .visit-inline-input:focus{border-color:#20b6a6;box-shadow:0 0 0 3px rgba(32,182,166,.12)}
+
+/* Setelan — consistent navigation rail and solid settings surfaces */
+#settingsPage .settings-layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:17px;align-items:start}
+#settingsPage .settings-nav,#settingsPage .settings-content{
+  border:1px solid var(--na-border);border-radius:17px;background:#fff;box-shadow:var(--na-page-shadow);
+}
+#settingsPage .settings-nav{padding:10px;display:grid;gap:5px;position:sticky;top:18px}
+#settingsPage .settings-nav-item{
+  border:1px solid transparent;border-radius:11px;padding:12px 11px;background:transparent;
+  color:#718293;text-align:left;transition:.18s;
+}
+#settingsPage .settings-nav-item:hover{background:#f5faf9;color:#168f86}
+#settingsPage .settings-nav-item.active{background:#eaf8f5;border-color:#d6efea;color:#168f86}
+#settingsPage .settings-nav-item b{font-size:11px}
+#settingsPage .settings-nav-item small{color:#91a0a9;font-size:9px}
+#settingsPage .settings-panel{padding:24px}
+#settingsPage .settings-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:18px}
+#settingsPage .settings-panel-head h2{font:800 16px "Plus Jakarta Sans";color:#304456}
+#settingsPage .settings-panel-head p{color:#8291a0;font-size:11px;line-height:1.6}
+#settingsPage .settings-field{color:#52697a;font-weight:700;font-size:10px;gap:8px}
+#settingsPage .settings-field input,#settingsPage .settings-field select,#settingsPage .settings-field textarea{
+  border:1px solid #e3ebee;border-radius:10px;background:#fbfdfd;color:#304456;padding:11px 12px;
+}
+#settingsPage .settings-field input:focus,#settingsPage .settings-field select:focus,#settingsPage .settings-field textarea:focus{
+  outline:none;border-color:#20b6a6;box-shadow:0 0 0 3px rgba(32,182,166,.11);
+}
+#settingsPage .settings-info-note{border:1px solid #e2efed;border-radius:11px;background:#f5fbfa;color:#64807d;padding:12px 14px;line-height:1.65}
+#settingsPage .settings-integration-card,#settingsPage .settings-data-actions article,
+#settingsPage .settings-team-placeholder{border:1px solid #e8eef0;border-radius:13px;background:#fff}
+#settingsPage .settings-status{border-radius:999px;background:#eaf8f5;color:#168f86;padding:7px 10px;font-size:9px;font-weight:800}
+#settingsPage .settings-status.pending{background:#fff3e6;color:#c77b32}
+#settingsPage .settings-preference-row{padding:16px 0;border-bottom:1px solid #edf1f3}
+#settingsPage .settings-preference-row b{color:#34495a}
+#settingsPage .settings-preference-row p{color:#8291a0;font-size:10px;line-height:1.55}
+
+/* Bantuan — guide, chat and FAQ as distinct readable sections */
+#helpPage .help-welcome-card{
+  display:flex;align-items:center;gap:20px;padding:23px 25px;margin:0 0 19px;
+  border:1px solid #e6efee;border-radius:17px;
+  background:linear-gradient(115deg,#eaf8f5 0%,#f4f9ff 58%,#fff5eb 100%);
+  box-shadow:var(--na-page-shadow);
+}
+#helpPage .help-welcome-icon{width:52px;height:52px;flex:0 0 52px;border-radius:16px;background:#fff;color:#168f86;box-shadow:0 5px 15px rgba(40,61,79,.07);font:800 25px "Plus Jakarta Sans"}
+#helpPage .help-kicker{color:#168f86;font-size:9px;font-weight:800;letter-spacing:1.3px}
+#helpPage .help-welcome-card h2{margin:5px 0 6px;color:#304456;font:800 17px "Plus Jakarta Sans"}
+#helpPage .help-welcome-card p{margin:0;color:#788b98;font-size:11px;line-height:1.6}
+#helpPage .help-topic-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 22px}
+#helpPage .help-topic-card{
+  min-height:132px;padding:17px;border:1px solid #e7edf0;border-radius:14px;background:#fff;box-shadow:0 4px 15px rgba(40,61,79,.035);
+}
+#helpPage .help-topic-card>span{width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:#e8f7f4;color:#168f86;margin-bottom:11px}
+#helpPage .help-topic-card b{color:#34495a;font:800 11px "Plus Jakarta Sans"}
+#helpPage .help-topic-card p{margin:6px 0 0;color:#8291a0;font-size:10px;line-height:1.6}
+#helpPage .help-chat-block,#helpPage .help-faq-section,#helpPage .help-note{
+  border:1px solid var(--na-border);border-radius:16px;background:#fff;box-shadow:var(--na-page-shadow);
+}
+#helpPage .help-chat-block{padding:19px 21px}
+#helpPage .help-faq-section{padding:21px;margin-top:18px}
+#helpPage .help-section-heading h2{font:800 16px "Plus Jakarta Sans";color:#304456}
+#helpPage .help-faq-item{border-bottom:1px solid #edf1f3;padding:14px 2px}
+#helpPage .help-faq-item:last-child{border-bottom:0}
+#helpPage .help-faq-item summary{color:#40596a;font-size:11px;font-weight:750;cursor:pointer;list-style:none}
+#helpPage .help-faq-item summary::-webkit-details-marker{display:none}
+#helpPage .help-faq-item summary:after{content:"＋";float:right;color:#168f86;font-size:15px}
+#helpPage .help-faq-item[open] summary:after{content:"−"}
+#helpPage .help-faq-item p{color:#8291a0;font-size:10px;line-height:1.7;margin:10px 0 2px}
+#helpPage .help-note{margin-top:17px;padding:15px 18px;background:#fffaf4;border-color:#f5e7d8}
+#helpPage .help-note b{color:#bd762f;font-size:11px}
+#helpPage .help-note p{color:#8b8d89;font-size:10px;line-height:1.65;margin:5px 0 0}
+
+/* Modal backdrop: truly clear page behind the form; keep the form cards opaque */
+.content-modal{
+  background:transparent!important;
+  background-color:transparent!important;
+  -webkit-backdrop-filter:blur(1px)!important;
+  backdrop-filter:blur(1px)!important;
+  padding:20px!important;
+}
+.content-modal-dialog{
+  width:min(1160px,calc(100vw - 48px))!important;
+  height:min(900px,calc(100vh - 40px))!important;
+  max-height:calc(100vh - 40px)!important;
+  overflow:hidden!important;background:transparent!important;
+  box-shadow:none!important;border-radius:18px!important;
+}
+.content-modal-dialog iframe{
+  width:100%!important;height:100%!important;min-height:0!important;
+  border:0!important;background:transparent!important;border-radius:18px!important;
+}
+.content-modal-close{
+  position:absolute!important;top:12px!important;right:12px!important;
+  margin:0!important;float:none!important;z-index:8!important;
+  border-color:#e4ecea!important;color:#4d6970!important;
+  box-shadow:0 4px 14px rgba(30,55,70,.1)!important;
+}
+.content-modal-close:hover{background:#eaf8f5!important;color:#168f86!important;border-color:#bfe7e1!important}
+@media(max-width:1100px){
+  #kanbanPage .kanban-board{grid-template-columns:repeat(7,minmax(210px,1fr))}
+  #visitPage .visit-overview-grid{grid-template-columns:1fr}
+  #settingsPage .settings-layout{grid-template-columns:210px minmax(0,1fr)}
+  #helpPage .help-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  #contentPage,#kanbanPage,#visitPage,#settingsPage,#helpPage{padding:23px 15px 25px}
+  #contentPage .content-page-heading,#kanbanPage .kanban-heading,#visitPage .visit-heading,
+  #settingsPage .settings-heading,#helpPage .help-heading{align-items:flex-start;flex-direction:column;gap:13px}
+  #contentPage h1,#kanbanPage h1,#visitPage h1,#settingsPage h1,#helpPage h1{font-size:24px}
+  #contentPage .content-page-heading .primary-btn,#kanbanPage .kanban-heading .primary-btn{width:100%;justify-content:center}
+  #kanbanPage .kanban-board{grid-template-columns:repeat(7,minmax(225px,1fr));gap:10px}
+  #visitPage .visit-card{padding:14px}
+  #settingsPage .settings-layout{grid-template-columns:1fr;gap:12px}
+  #settingsPage .settings-nav{position:static;display:flex;overflow-x:auto;gap:6px;padding:8px}
+  #settingsPage .settings-nav-item{min-width:145px;flex:0 0 auto}
+  #settingsPage .settings-panel{padding:16px}
+  #helpPage .help-topic-grid{grid-template-columns:1fr 1fr;gap:9px}
+  #helpPage .help-topic-card{padding:13px;min-height:128px}
+  #helpPage .help-welcome-card{align-items:flex-start;padding:17px;gap:13px}
+  #helpPage .help-welcome-icon{width:42px;height:42px;flex-basis:42px}
+  #helpPage .help-welcome-card h2{font-size:14px}
+  #helpPage .help-chat-block,#helpPage .help-faq-section{padding:14px}
+  .content-modal{padding:0!important;-webkit-backdrop-filter:blur(.5px)!important;backdrop-filter:blur(.5px)!important}
+  .content-modal-dialog{width:100vw!important;height:100dvh!important;max-height:100dvh!important;border-radius:0!important}
+  .content-modal-dialog iframe{border-radius:0!important}
+  .content-modal-close{top:9px!important;right:9px!important;width:34px!important;height:34px!important}
+}
+:root[data-theme="dark"] #contentPage .content-list-panel,
+:root[data-theme="dark"] #kanbanPage .kanban-column,
+:root[data-theme="dark"] #kanbanPage .kanban-card,
+:root[data-theme="dark"] #visitPage .visit-card,
+:root[data-theme="dark"] #visitPage .visit-table-wrap,
+:root[data-theme="dark"] #settingsPage .settings-nav,
+:root[data-theme="dark"] #settingsPage .settings-content,
+:root[data-theme="dark"] #helpPage .help-topic-card,
+:root[data-theme="dark"] #helpPage .help-chat-block,
+:root[data-theme="dark"] #helpPage .help-faq-section{background:#18271f;border-color:#35483b;color:#dce9e0}
+:root[data-theme="dark"] #contentPage h1,:root[data-theme="dark"] #kanbanPage h1,
+:root[data-theme="dark"] #visitPage h1,:root[data-theme="dark"] #settingsPage h1,
+:root[data-theme="dark"] #helpPage h1{color:#edf5ef}
+:root[data-theme="dark"] #settingsPage .settings-panel-head h2,
+:root[data-theme="dark"] #helpPage .help-welcome-card h2,
+:root[data-theme="dark"] #helpPage .help-topic-card b{color:#e5eee8}
+@media(prefers-color-scheme:dark){
+ :root[data-theme="system"] #contentPage .content-list-panel,
+ :root[data-theme="system"] #kanbanPage .kanban-column,
+ :root[data-theme="system"] #kanbanPage .kanban-card,
+ :root[data-theme="system"] #visitPage .visit-card,
+ :root[data-theme="system"] #visitPage .visit-table-wrap,
+ :root[data-theme="system"] #settingsPage .settings-nav,
+ :root[data-theme="system"] #settingsPage .settings-content,
+ :root[data-theme="system"] #helpPage .help-topic-card,
+ :root[data-theme="system"] #helpPage .help-chat-block,
+ :root[data-theme="system"] #helpPage .help-faq-section{background:#18271f;border-color:#35483b;color:#dce9e0}
+}

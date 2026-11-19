@@ -1001,3 +1001,144 @@ html body #helpPage .help-chat-block .chat-thread-title b,
 html body #helpPage .help-chat-block .chat-message p{
   color:#263548!important;-webkit-text-fill-color:#263548!important;
 }
+
+
+/* NOTE AP — GLOBAL RESPONSIVE PASS
+   Desktop, tablet and mobile layout refinements.
+   Keep page behavior and existing interactions unchanged. */
+html,body{max-width:100%;overflow-x:hidden}
+body{min-width:320px}
+.app-shell,.main-area,.page-wrap,
+#dashboardPage,#calendarPage,#contentPage,#kanbanPage,#visitPage,#helpPage,#settingsPage{
+  min-width:0;max-width:100%;
+}
+.main-area{min-width:0}
+.page-wrap{width:100%}
+#dashboardPage>*,
+#calendarPage>*,
+#contentPage>*,
+#kanbanPage>*,
+#visitPage>*,
+#helpPage>*,
+#settingsPage>*{min-width:0;max-width:100%}
+.content-grid,.calendar-workspace,.visit-overview-grid,
+.settings-layout,.chat-workspace{min-width:0}
+.content-table-wrap,.visit-table-wrap,.calendar-grid-scroll,
+#kanbanPage .kanban-board{max-width:100%;overscroll-behavior-x:contain}
+.content-table-wrap,.visit-table-wrap{overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+.content-table,.visit-table{min-width:680px}
+#contentPage .content-filter-panel{display:flex;flex-wrap:wrap;align-items:end}
+#contentPage .content-search{flex:1 1 220px;min-width:0}
+#contentPage .content-filter{flex:1 1 145px;min-width:0}
+#contentPage .content-filter input,
+#contentPage .content-filter select,
+#contentPage .content-search input{width:100%;max-width:100%}
+#calendarPage .calendar-workspace{grid-template-columns:minmax(0,1.55fr) minmax(260px,.8fr)}
+#calendarPage .calendar-main-panel,#calendarPage .calendar-agenda-panel{min-width:0}
+#calendarPage .calendar-grid-scroll{overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+#calendarPage .note-ap-calendar-grid{min-width:560px}
+#kanbanPage .kanban-board{grid-template-columns:repeat(7,minmax(215px,1fr));overflow-x:auto!important}
+#kanbanPage .kanban-column{min-width:0}
+#visitPage .visit-overview-grid{grid-template-columns:minmax(0,.8fr) minmax(0,1.7fr)}
+#visitPage .visit-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+#visitPage .visit-table-toolbar{display:flex;flex-wrap:wrap;align-items:center}
+#visitPage .visit-selection-controls,
+#visitPage .visit-display-control{min-width:0;flex-wrap:wrap}
+#settingsPage .settings-layout{grid-template-columns:230px minmax(0,1fr)}
+#settingsPage .settings-content,#settingsPage .settings-panel{min-width:0}
+#settingsPage .settings-form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+#helpPage .help-topic-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+#helpPage .help-chat-block .chat-workspace{min-width:0}
+#helpPage .help-chat-block .chat-sidebar,
+#helpPage .help-chat-block .chat-thread{min-width:0}
+#helpPage .help-chat-block .chat-messages{overflow-y:auto;overscroll-behavior:contain}
+.content-modal{padding:clamp(8px,2vw,24px)}
+.content-modal-dialog{width:min(1160px,100%);max-width:100%;min-width:0}
+.content-modal-dialog iframe{min-width:0}
+.calendar-item-dialog,.expand-dialog{max-width:calc(100vw - 24px);min-width:0}
+input,select,textarea,button{max-width:100%}
+img,svg,video,canvas{max-width:100%}
+
+@media(max-width:1100px){
+  .page-wrap{padding:30px 26px 26px!important}
+  #calendarPage{padding:30px 26px 26px!important}
+  #calendarPage .calendar-workspace{grid-template-columns:minmax(0,1fr)}
+  #calendarPage .calendar-agenda-panel{width:100%}
+  #visitPage .visit-overview-grid{grid-template-columns:minmax(0,1fr)}
+  #settingsPage .settings-layout{grid-template-columns:200px minmax(0,1fr)}
+  #helpPage .help-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  .sidebar{z-index:50;width:min(290px,84vw);height:100dvh;overflow-y:auto}
+  .mobile-top{position:sticky;top:0;z-index:40;display:flex!important;height:58px;padding:0 15px;box-shadow:0 2px 10px rgba(35,50,71,.035)}
+  .main-area{margin-left:0!important;width:100%;min-width:0}
+  .page-wrap{padding:22px 15px 24px!important}
+  #calendarPage,#contentPage,#kanbanPage,#visitPage,#settingsPage,#helpPage{
+    width:100%;padding:22px 15px 24px!important
+  }
+  .welcome-row,.content-page-heading,.calendar-page-heading,.kanban-heading,
+  .visit-heading,.settings-heading,.help-heading{
+    align-items:flex-start!important;flex-direction:column!important;gap:12px!important
+  }
+  .welcome-row>div:first-child{min-width:0}
+  .welcome-row .muted{max-width:none}
+  .header-actions{width:100%;flex-wrap:wrap}
+  .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .content-grid{grid-template-columns:minmax(0,1fr)!important}
+  #calendarPage .calendar-insight-strip{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #calendarPage .calendar-insight-card:last-child{grid-column:1/-1}
+  #calendarPage .calendar-toolbar{flex-wrap:wrap;gap:10px}
+  #calendarPage .calendar-toolbar-tools{width:100%;flex-wrap:wrap}
+  #calendarPage .calendar-view-switch{max-width:100%;overflow-x:auto}
+  #contentPage .content-page-heading .primary-btn,
+  #kanbanPage .kanban-heading .primary-btn,
+  #visitPage .visit-heading .primary-btn{width:100%;justify-content:center}
+  #contentPage .content-filter-panel{display:grid!important;grid-template-columns:minmax(0,1fr)!important}
+  #contentPage .content-search,#contentPage .content-filter{width:100%;min-width:0}
+  #contentPage .content-filter-panel>*{width:100%;min-width:0}
+  #kanbanPage .kanban-board{grid-template-columns:repeat(7,minmax(225px,1fr))!important}
+  #visitPage .visit-overview-grid{grid-template-columns:minmax(0,1fr)!important}
+  #visitPage .visit-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #visitPage .visit-main-heading{flex-wrap:wrap}
+  #visitPage .visit-selection-controls{width:100%;display:flex;flex-wrap:wrap}
+  #settingsPage .settings-layout{grid-template-columns:minmax(0,1fr)!important}
+  #settingsPage .settings-nav{position:static!important;display:flex!important;overflow-x:auto!important;max-width:100%;white-space:nowrap;scrollbar-width:thin}
+  #settingsPage .settings-nav-item{flex:0 0 150px!important;min-width:150px!important}
+  #settingsPage .settings-form-grid{grid-template-columns:minmax(0,1fr)!important}
+  #settingsPage .settings-panel-head{flex-wrap:wrap}
+  #helpPage .help-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #helpPage .help-welcome-card{align-items:flex-start;gap:13px}
+  #helpPage .help-chat-block .chat-workspace{grid-template-columns:minmax(0,1fr)!important;height:auto!important;min-height:0!important}
+  #helpPage .help-chat-block .chat-sidebar{max-height:190px;overflow-y:auto}
+  #helpPage .help-chat-block .chat-thread{min-height:390px}
+  .content-modal{padding:0!important;align-items:stretch!important}
+  .content-modal-dialog{width:100vw!important;height:100dvh!important;max-height:100dvh!important;border-radius:0!important}
+  .content-modal-dialog iframe{height:100%!important;border-radius:0!important}
+  .content-modal-close{top:8px!important;right:8px!important}
+  .calendar-item-dialog{width:calc(100vw - 20px)!important;max-width:calc(100vw - 20px)!important}
+  .notification-popover{position:fixed;top:68px;right:10px;width:min(340px,calc(100vw - 20px))}
+}
+@media(max-width:480px){
+  .page-wrap{padding:18px 12px 22px!important}
+  #calendarPage,#contentPage,#kanbanPage,#visitPage,#settingsPage,#helpPage{padding:18px 12px 22px!important}
+  .welcome-row h1,.page-wrap h1{font-size:21px!important}
+  .stats-grid{gap:8px!important}
+  .stat-card{padding:12px!important;min-height:108px}
+  .stat-card strong,.stat-number{font-size:22px!important}
+  .panel{padding:14px!important}
+  #calendarPage .calendar-insight-strip{grid-template-columns:minmax(0,1fr)!important}
+  #calendarPage .calendar-insight-card:last-child{grid-column:auto}
+  #calendarPage .calendar-page-actions{display:grid;grid-template-columns:minmax(0,1fr)}
+  #visitPage .visit-metrics{grid-template-columns:minmax(0,1fr)!important}
+  #helpPage .help-topic-grid{grid-template-columns:minmax(0,1fr)!important}
+  #helpPage .help-topic-card{min-height:0}
+  #settingsPage .settings-nav-item{flex-basis:138px!important;min-width:138px!important}
+  .content-modal-dialog>.content-form-wrap{padding:22px 12px 18px!important}
+  .content-form-wrap .form-title-row h1{font-size:20px!important}
+  .form-actions>div,.form-bottom-actions>div{grid-template-columns:minmax(0,1fr)!important}
+  .form-actions>div .primary-btn,.form-bottom-actions>div .primary-btn{grid-column:auto!important}
+  .notification-popover{right:8px;width:calc(100vw - 16px)}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}

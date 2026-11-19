@@ -199,6 +199,64 @@ html.embedded-content-form body .approval-panel .approved-pill{background:rgba(3
 #contentForm>.approval-panel .comment-actions .primary-btn,
 html.embedded-content-form body .approval-panel .comment-actions .primary-btn{background:#f28c38!important;border-color:#f28c38!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
 #contentForm>.approval-panel .team-comment{background:rgba(255,255,255,.56)!important;border:1px solid rgba(203,213,225,.65)!important;border-radius:10px!important}
+
+/* FINAL APPROVAL PALETTE — overrides legacy light/dark/system rules */
+:root.embedded-content-form[data-theme="dark"] body .approval-panel *,
+:root.embedded-content-form[data-theme="system"] body .approval-panel *,
+html.embedded-content-form body .approval-panel *{
+  color:#64748b!important;
+  -webkit-text-fill-color:#64748b!important;
+}
+:root.embedded-content-form[data-theme="dark"] body .approval-panel .form-section-heading h2,
+:root.embedded-content-form[data-theme="system"] body .approval-panel .form-section-heading h2,
+:root.embedded-content-form[data-theme="dark"] body .approval-panel h3,
+:root.embedded-content-form[data-theme="system"] body .approval-panel h3{
+  color:#475569!important;-webkit-text-fill-color:#475569!important;
+}
+:root.embedded-content-form[data-theme="dark"] body .approval-panel .approval-status-row,
+:root.embedded-content-form[data-theme="system"] body .approval-panel .approval-status-row{
+  background:rgba(255,255,255,.27)!important;
+  background-color:rgba(255,255,255,.27)!important;
+  border:1px solid rgba(255,255,255,.62)!important;
+}
+:root.embedded-content-form[data-theme="dark"] body .approval-panel .comments-block,
+:root.embedded-content-form[data-theme="system"] body .approval-panel .comments-block,
+:root.embedded-content-form[data-theme="dark"] body .approval-panel .history-block,
+:root.embedded-content-form[data-theme="system"] body .approval-panel .history-block{
+  background:rgba(255,255,255,.20)!important;
+  background-color:rgba(255,255,255,.20)!important;
+  border-color:rgba(255,255,255,.62)!important;
+}
+:root.embedded-content-form[data-theme="dark"] body .approval-panel .approve-btn,
+:root.embedded-content-form[data-theme="system"] body .approval-panel .approve-btn{
+  background:rgba(32,182,166,.10)!important;
+  background-color:rgba(32,182,166,.10)!important;
+  border:1px solid rgba(32,182,166,.28)!important;
+  color:#159d91!important;-webkit-text-fill-color:#159d91!important;
+}
+:root.embedded-content-form[data-theme="dark"] body .approval-panel .pending-pill,
+:root.embedded-content-form[data-theme="system"] body .approval-panel .pending-pill{
+  background:#fff1e5!important;background-color:#fff1e5!important;
+  color:#bd6d27!important;-webkit-text-fill-color:#bd6d27!important;
+}
+:root.embedded-content-form[data-theme="dark"] body .approval-panel .approved-pill,
+:root.embedded-content-form[data-theme="system"] body .approval-panel .approved-pill{
+  background:rgba(32,182,166,.12)!important;
+  background-color:rgba(32,182,166,.12)!important;
+  color:#159d91!important;-webkit-text-fill-color:#159d91!important;
+}
+:root.embedded-content-form[data-theme="dark"] body .approval-panel .team-comment,
+:root.embedded-content-form[data-theme="system"] body .approval-panel .team-comment{
+  background:rgba(255,255,255,.56)!important;
+  background-color:rgba(255,255,255,.56)!important;
+  border:1px solid rgba(203,213,225,.65)!important;
+}
+:root.embedded-content-form[data-theme="dark"] body .approval-panel .comment-actions .primary-btn,
+:root.embedded-content-form[data-theme="system"] body .approval-panel .comment-actions .primary-btn{
+  background:#f28c38!important;background-color:#f28c38!important;
+  border-color:#f28c38!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+}
+
 `;
        
 doc.head.append(style);

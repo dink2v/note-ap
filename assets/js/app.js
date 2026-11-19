@@ -170,6 +170,90 @@ html.embedded-content-form .expand-dialog textarea{
  color:#263548!important;
 }
 `;
+
+/* NOTE AP — rebuilt glassmorphism popup skin (visual only) */
+style.textContent += `
+html.embedded-content-form,
+html.embedded-content-form body,
+html.embedded-content-form body .app-shell,
+html.embedded-content-form body .main-area,
+html.embedded-content-form body .page-wrap,
+html.embedded-content-form body .content-form-wrap,
+html.embedded-content-form body #contentForm,
+html.embedded-content-form body .form-section-heading,
+html.embedded-content-form body .form-grid,
+html.embedded-content-form body .field,
+html.embedded-content-form body .form-bottom-actions,
+html.embedded-content-form body .comments-block,
+html.embedded-content-form body .history-block {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: #263548 !important;
+}
+html.embedded-content-form body {
+  color-scheme: light !important;
+}
+html.embedded-content-form body .form-panel,
+html.embedded-content-form body .approval-panel {
+  background: rgba(255,255,255,.34) !important;
+  background-color: rgba(255,255,255,.34) !important;
+  background-image: none !important;
+  -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
+  backdrop-filter: blur(20px) saturate(150%) !important;
+  border: 1px solid rgba(255,255,255,.62) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 12px 34px rgba(31,55,78,.08), inset 0 1px 0 rgba(255,255,255,.55) !important;
+  padding: 22px !important;
+  margin: 0 0 18px !important;
+}
+html.embedded-content-form body .form-title-row h1,
+html.embedded-content-form body .form-section-heading h2,
+html.embedded-content-form body .field > span,
+html.embedded-content-form body .approval-panel h3 {
+  color: #263548 !important;
+  -webkit-text-fill-color: #263548 !important;
+}
+html.embedded-content-form body .form-title-row .muted,
+html.embedded-content-form body .form-section-heading p,
+html.embedded-content-form body .field-help {
+  color: #64748b !important;
+  -webkit-text-fill-color: #64748b !important;
+}
+html.embedded-content-form body .field input,
+html.embedded-content-form body .field select,
+html.embedded-content-form body .field textarea,
+html.embedded-content-form body .expand-dialog textarea {
+  background: rgba(255,255,255,.88) !important;
+  background-color: rgba(255,255,255,.88) !important;
+  color: #263548 !important;
+  -webkit-text-fill-color: #263548 !important;
+  border: 1px solid rgba(203,213,225,.9) !important;
+  border-radius: 11px !important;
+  box-shadow: 0 3px 12px rgba(31,55,78,.045) !important;
+}
+html.embedded-content-form body .field input:focus,
+html.embedded-content-form body .field select:focus,
+html.embedded-content-form body .field textarea:focus {
+  border-color: #20b6a6 !important;
+  box-shadow: 0 0 0 3px rgba(32,182,166,.14) !important;
+}
+html.embedded-content-form body .form-section-heading {
+  border-bottom: 1px solid rgba(100,116,139,.18) !important;
+}
+html.embedded-content-form body .approval-status-row,
+html.embedded-content-form body .comments-block,
+html.embedded-content-form body .history-block {
+  background: rgba(255,255,255,.24) !important;
+  border: 1px solid rgba(255,255,255,.55) !important;
+  border-radius: 13px !important;
+}
+@media(max-width:760px) {
+  html.embedded-content-form body .form-panel,
+  html.embedded-content-form body .approval-panel { padding: 16px 13px !important; }
+}
+`;
        doc.head.append(style);
       }
       if(!child.__noteApEscapeBound){

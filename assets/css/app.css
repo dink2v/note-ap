@@ -6670,3 +6670,62 @@ html body #calendarPage .calendar-day-cell.is-drop-target:hover{
  :root[data-theme="system"] #helpPage .help-chat-block,
  :root[data-theme="system"] #helpPage .help-faq-section{background:#18271f;border-color:#35483b;color:#dce9e0}
 }
+
+
+/* Embedded form canvas: only the dialog canvas is transparent, cards remain solid */
+html.embedded-content-form,
+html.embedded-content-form body,
+html.embedded-content-form .app-shell,
+html.embedded-content-form .main-area,
+html.embedded-content-form .page-wrap,
+html.embedded-content-form .content-form-wrap{
+  background:transparent!important;
+  background-color:transparent!important;
+}
+html.embedded-content-form body{min-height:100%;overflow-x:hidden}
+html.embedded-content-form .sidebar,
+html.embedded-content-form .mobile-top,
+html.embedded-content-form .form-breadcrumb,
+html.embedded-content-form .form-title-row>div>.eyebrow,
+html.embedded-content-form .form-title-row>div>.muted,
+html.embedded-content-form .form-title-row>a,
+html.embedded-content-form .page-footer{display:none!important}
+html.embedded-content-form .main-area{margin:0!important;min-height:0!important}
+html.embedded-content-form .page-wrap.content-form-wrap{
+  width:100%!important;max-width:none!important;margin:0!important;
+  padding:25px 30px 24px!important;
+}
+html.embedded-content-form .form-title-row{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  margin:0 0 18px!important;padding:0 46px 0 0!important;
+}
+html.embedded-content-form .form-title-row h1{
+  color:#293b4d!important;font-size:23px!important;letter-spacing:-.5px!important;
+}
+html.embedded-content-form .content-form-wrap .form-panel{
+  background:#fff!important;background-color:#fff!important;
+  border:1px solid #e7edf0!important;border-radius:15px!important;
+  box-shadow:0 5px 20px rgba(30,55,70,.055)!important;
+}
+html.embedded-content-form .content-form-wrap .form-panel .field input,
+html.embedded-content-form .content-form-wrap .form-panel .field select,
+html.embedded-content-form .content-form-wrap .form-panel .field textarea{
+  background:#fff!important;
+}
+html.embedded-content-form .content-form-wrap .form-bottom-actions{
+  background:transparent!important;padding:0 0 10px!important;
+}
+html.embedded-content-form .content-form-wrap .form-bottom-actions>div{
+  display:flex!important;gap:9px!important;
+}
+html.embedded-content-form .content-form-wrap .form-bottom-actions .primary-btn{
+  grid-column:auto!important;
+}
+@media(max-width:700px){
+ html.embedded-content-form .page-wrap.content-form-wrap{padding:18px 13px 20px!important}
+ html.embedded-content-form .form-title-row{padding-right:42px!important}
+ html.embedded-content-form .form-title-row h1{font-size:20px!important}
+ html.embedded-content-form .content-form-wrap .form-panel{padding:17px 13px!important}
+ html.embedded-content-form .content-form-wrap .form-bottom-actions>div{display:grid!important;grid-template-columns:1fr 1fr!important}
+ html.embedded-content-form .content-form-wrap .form-bottom-actions>div .primary-btn{grid-column:1/-1!important}
+}

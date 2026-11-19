@@ -156,9 +156,6 @@ html,body{background:transparent!important;background-color:transparent!importan
     grid-column:span 1!important;
   }
 }
-`;
-       
-
 
 /* Approval & History palette: match the soft slate/teal styling used above. */
 #contentForm>.approval-panel,
@@ -202,8 +199,9 @@ html.embedded-content-form body .approval-panel .approved-pill{background:rgba(3
 #contentForm>.approval-panel .comment-actions .primary-btn,
 html.embedded-content-form body .approval-panel .comment-actions .primary-btn{background:#f28c38!important;border-color:#f28c38!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
 #contentForm>.approval-panel .team-comment{background:rgba(255,255,255,.56)!important;border:1px solid rgba(203,213,225,.65)!important;border-radius:10px!important}
-
-      doc.head.append(style);
+`;
+       
+doc.head.append(style);
       }
       if(!child.__noteApEscapeBound){
         child.addEventListener('keydown',event=>{if(event.key==='Escape')closeContentModal();});

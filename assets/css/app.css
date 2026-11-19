@@ -6341,3 +6341,79 @@ html body #calendarPage .calendar-day-cell.is-drop-target:hover{
 :root[data-theme="dark"] #contentPage .content-filter input{background:#101d16!important;color:#edf5ef!important;border-color:#3b5143!important}
 :root[data-theme="dark"] #contentPage .content-table th{background:#223329!important;color:#cbd9cf!important;border-color:#405746!important}
 :root[data-theme="dark"] #contentPage .content-table tbody tr:hover td{background:#20372b!important}
+
+
+/* NOTE AP — Add Content & Detail Content: unified original workspace UI */
+.content-form-wrap{max-width:1120px!important;padding-top:28px!important}
+.content-form-wrap .form-breadcrumb{font-size:11px!important;color:#9aa79f!important;gap:11px!important;margin-bottom:22px!important}
+.content-form-wrap .form-breadcrumb a{color:#7f9187!important}
+.content-form-wrap .form-breadcrumb b{color:#159b8e!important}
+.content-form-wrap .form-title-row{align-items:center!important;gap:18px!important;margin-bottom:24px!important}
+.content-form-wrap .form-title-row .eyebrow{font-size:10px!important;letter-spacing:1.5px!important;font-weight:800!important;color:#159b8e!important;margin-bottom:7px!important}
+.content-form-wrap .form-title-row h1{font-size:27px!important;line-height:1.25!important;color:#293d34!important;letter-spacing:-.7px!important}
+.content-form-wrap .form-title-row .muted{font-size:13px!important;color:#819188!important;margin-top:7px!important;line-height:1.6!important}
+.content-form-wrap .form-panel{padding:25px 27px!important;margin-bottom:18px!important;border:1px solid #e5eee9!important;border-radius:17px!important;background:#fff!important;box-shadow:0 8px 25px rgba(34,72,52,.045)!important}
+.content-form-wrap .form-section-heading{gap:14px!important;padding-bottom:17px!important;margin-bottom:21px!important;border-color:#edf2ef!important}
+.content-form-wrap .form-section-heading .section-number{width:36px!important;height:36px!important;border-radius:11px!important;background:#fff0e4!important;color:#d97726!important;font-size:11px!important}
+.content-form-wrap .form-section-heading h2{font-size:15px!important;color:#2d4238!important;letter-spacing:-.15px!important}
+.content-form-wrap .form-section-heading p{font-size:11px!important;color:#8b9991!important;line-height:1.55!important}
+.content-form-wrap .form-grid{gap:19px 20px!important}
+.content-form-wrap .field{gap:8px!important}
+.content-form-wrap .field>span{font-size:11px!important;color:#52665b!important;font-weight:750!important}
+.content-form-wrap .field input,.content-form-wrap .field select,.content-form-wrap .field textarea{
+ border:1px solid #e3ebe6!important;border-radius:10px!important;background:#fbfdfc!important;
+ color:#30443a!important;font:12px "DM Sans",sans-serif!important;padding:11px 13px!important;
+}
+.content-form-wrap .field input,.content-form-wrap .field select{height:43px!important}
+.content-form-wrap .field textarea{min-height:94px!important;line-height:1.7!important;resize:vertical!important}
+.content-form-wrap .field textarea[name="body"],.content-form-wrap .field textarea[name="visualBody"]{min-height:150px!important}
+.content-form-wrap .field textarea[name="caption"]{min-height:130px!important}
+.content-form-wrap .field input:focus,.content-form-wrap .field select:focus,.content-form-wrap .field textarea:focus{
+ border-color:#20b6a6!important;box-shadow:0 0 0 3px rgba(32,182,166,.11)!important;background:#fff!important;
+}
+.content-form-wrap .field-help{font-size:10px!important;color:#93a198!important;line-height:1.5!important}
+.content-form-wrap .maximize-btn{align-self:flex-start!important;border:0!important;background:transparent!important;color:#159b8e!important;font-size:10px!important;font-weight:750!important;padding:3px 0!important;cursor:pointer!important}
+.content-form-wrap .approval-panel .approval-status-row{padding:14px 16px!important;border:1px solid #e7efea!important;border-radius:12px!important;background:#f8fbf9!important}
+.content-form-wrap .approval-panel .phase-track{margin-top:18px!important}
+.content-form-wrap .approval-panel .comments-block,.content-form-wrap .approval-panel .history-block{margin-top:23px!important;padding-top:19px!important;border-top:1px solid #edf2ef!important}
+.content-form-wrap .approval-panel h3{font-size:10px!important;letter-spacing:1px!important;color:#71847a!important;font-weight:800!important}
+.content-form-wrap .form-actions{padding:10px 0 20px!important;gap:12px!important}
+.content-form-wrap .form-actions>div{gap:9px!important;flex-wrap:wrap!important}
+.content-form-wrap .primary-btn{min-height:42px!important;border-radius:10px!important;background:#f28c38!important;color:#fff!important;font-size:11px!important;font-weight:750!important;box-shadow:0 5px 14px rgba(242,140,56,.16)!important}
+.content-form-wrap .secondary-btn{min-height:40px!important;border-radius:10px!important;background:#fff!important;color:#168f86!important;border:1px solid #d9ebe5!important;font-size:11px!important}
+.content-form-wrap .detail-edit-top{margin-left:auto!important}
+.content-form-wrap .detail-edit-top.is-editing{background:#fff5e9!important;color:#c87529!important;border-color:#f4d7b8!important}
+.content-form-wrap #contentForm[data-editable="false"] .field input:disabled,
+.content-form-wrap #contentForm[data-editable="false"] .field select:disabled,
+.content-form-wrap #contentForm[data-editable="false"] .field textarea:disabled{
+ opacity:1!important;background:#f7faf8!important;color:#53665c!important;border-color:#e9efeb!important;
+ cursor:default!important;
+}
+.content-form-wrap #contentForm[data-editable="false"] .field>span{color:#718278!important}
+.content-form-wrap .page-footer{margin-top:14px!important;color:#9aa79f!important;font-size:10px!important}
+@media(max-width:700px){
+ .content-form-wrap{padding:22px 14px 24px!important}
+ .content-form-wrap .form-title-row{align-items:flex-start!important;flex-wrap:wrap!important}
+ .content-form-wrap .form-title-row h1{font-size:23px!important}
+ .content-form-wrap .form-panel{padding:19px 15px!important;border-radius:14px!important}
+ .content-form-wrap .form-grid{grid-template-columns:1fr!important;gap:15px!important}
+ .content-form-wrap .field.full{grid-column:auto!important}
+ .content-form-wrap .field textarea[name="body"],.content-form-wrap .field textarea[name="visualBody"]{min-height:125px!important}
+ .content-form-wrap .form-actions{flex-direction:column!important;align-items:stretch!important}
+ .content-form-wrap .form-actions>div{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;width:100%!important}
+ .content-form-wrap .form-actions>div .primary-btn{grid-column:1/-1!important}
+ .content-form-wrap .detail-edit-top{margin-left:0!important}
+}
+:root[data-theme="dark"] .content-form-wrap .form-panel{background:#1b2921!important;border-color:#34483a!important}
+:root[data-theme="dark"] .content-form-wrap .form-title-row h1,
+:root[data-theme="dark"] .content-form-wrap .form-section-heading h2{color:#edf5ef!important}
+:root[data-theme="dark"] .content-form-wrap .form-section-heading p,
+:root[data-theme="dark"] .content-form-wrap .form-title-row .muted{color:#a8b9ae!important}
+:root[data-theme="dark"] .content-form-wrap .field>span{color:#c3d2c8!important}
+:root[data-theme="dark"] .content-form-wrap .field input,
+:root[data-theme="dark"] .content-form-wrap .field select,
+:root[data-theme="dark"] .content-form-wrap .field textarea{background:#142119!important;color:#edf5ef!important;border-color:#405348!important}
+:root[data-theme="dark"] .content-form-wrap #contentForm[data-editable="false"] .field input:disabled,
+:root[data-theme="dark"] .content-form-wrap #contentForm[data-editable="false"] .field select:disabled,
+:root[data-theme="dark"] .content-form-wrap #contentForm[data-editable="false"] .field textarea:disabled{background:#202f26!important;color:#d2dfd6!important;border-color:#405348!important}
+:root[data-theme="dark"] .content-form-wrap .approval-panel .approval-status-row{background:#202f26!important;border-color:#405348!important}

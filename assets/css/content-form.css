@@ -1,0 +1,32 @@
+/* Dedicated styles: Add Content form inside its own page/iframe. */
+html.embedded-content-form,html.embedded-content-form body,
+html.embedded-content-form body .app-shell,html.embedded-content-form body .main-area,
+html.embedded-content-form body .page-wrap,html.embedded-content-form body .content-form-wrap,
+html.embedded-content-form body #contentForm,html.embedded-content-form body .form-panel,
+html.embedded-content-form body .approval-panel,html.embedded-content-form body .form-section-heading,
+html.embedded-content-form body .form-grid,html.embedded-content-form body .field,
+html.embedded-content-form body .approval-status-row,html.embedded-content-form body .comments-block,
+html.embedded-content-form body .history-block,html.embedded-content-form body .form-bottom-actions{
+ background:transparent!important;background-color:transparent!important;background-image:none!important;
+ box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+html.embedded-content-form body .form-panel,html.embedded-content-form body .approval-panel{
+ border:0!important;border-radius:0!important;border-bottom:1px solid rgba(100,116,139,.20)!important;
+}
+html.embedded-content-form body,html.embedded-content-form body .form-title-row h1,
+html.embedded-content-form body .form-section-heading h2,html.embedded-content-form body .field>span{
+ color:#263548!important;-webkit-text-fill-color:#263548!important;
+}
+html.embedded-content-form body .form-title-row .muted,
+html.embedded-content-form body .form-section-heading p,html.embedded-content-form body .field-help{
+ color:#64748b!important;-webkit-text-fill-color:#64748b!important;
+}
+html.embedded-content-form body .field input,html.embedded-content-form body .field select,
+html.embedded-content-form body .field textarea,html.embedded-content-form body .expand-dialog textarea{
+ background:rgba(255,255,255,.96)!important;background-color:rgba(255,255,255,.96)!important;
+ color:#263548!important;-webkit-text-fill-color:#263548!important;
+}
+html.embedded-content-form body .content-form-wrap{max-width:none!important}
+html.embedded-content-form body .form-panel{padding:18px 0!important}
+html.embedded-content-form body .form-grid{gap:14px!important}
+@media(max-width:700px){html.embedded-content-form body .content-form-wrap{padding:28px 15px 20px!important}}

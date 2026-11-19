@@ -385,7 +385,17 @@ html.embedded-content-form body .content-form-wrap > section.approval-panel{
   border:1px solid #263548!important;
   border-radius:18px!important;
 }
-`;
+
+/* FINAL GLASS SURFACE: show the backdrop through a light blur */
+html.embedded-content-form body .content-form-wrap > #contentForm > section.form-panel,
+html.embedded-content-form body .content-form-wrap > section.approval-panel{
+  background:rgba(255,255,255,.56)!important;
+  background-color:rgba(255,255,255,.56)!important;
+  background-image:none!important;
+  -webkit-backdrop-filter:blur(4px) saturate(120%)!important;
+  backdrop-filter:blur(4px) saturate(120%)!important;
+}
+  `;
        
 doc.head.append(style);
       }

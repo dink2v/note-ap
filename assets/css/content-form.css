@@ -497,10 +497,13 @@ html.embedded-content-form body .content-form-wrap > section.approval-panel{
   border-radius:18px!important;
 }
 
-/* FINAL PANEL OPACITY: clearer surfaces while retaining a visible backdrop */
+
+/* FINAL GLASS SURFACE: show the backdrop through a light blur */
 html.embedded-content-form body .content-form-wrap > #contentForm > section.form-panel,
 html.embedded-content-form body .content-form-wrap > section.approval-panel{
-  background:rgba(255,255,255,.78)!important;
-  background-color:rgba(255,255,255,.78)!important;
+  background:rgba(255,255,255,.56)!important;
+  background-color:rgba(255,255,255,.56)!important;
   background-image:none!important;
+  -webkit-backdrop-filter:blur(4px) saturate(120%)!important;
+  backdrop-filter:blur(4px) saturate(120%)!important;
 }

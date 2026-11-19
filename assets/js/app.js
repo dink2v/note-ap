@@ -386,14 +386,14 @@ html.embedded-content-form body .content-form-wrap > section.approval-panel{
   border-radius:18px!important;
 }
 
-/* FINAL GLASS SURFACE: show the backdrop through a light blur */
+/* FINAL GLASS SURFACE: clearer backdrop with minimal blur */
 html.embedded-content-form body .content-form-wrap > #contentForm > section.form-panel,
 html.embedded-content-form body .content-form-wrap > section.approval-panel{
-  background:rgba(255,255,255,.56)!important;
-  background-color:rgba(255,255,255,.56)!important;
+  background:rgba(255,255,255,.42)!important;
+  background-color:rgba(255,255,255,.42)!important;
   background-image:none!important;
-  -webkit-backdrop-filter:blur(4px) saturate(120%)!important;
-  backdrop-filter:blur(4px) saturate(120%)!important;
+  -webkit-backdrop-filter:blur(1px) saturate(115%)!important;
+  backdrop-filter:blur(1px) saturate(115%)!important;
 }
   `;
        

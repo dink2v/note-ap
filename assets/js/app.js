@@ -320,8 +320,8 @@ html.embedded-content-form body .content-form-wrap .approval-panel .team-comment
 }
 /* Approval & History outer section is a sibling of #contentForm.
    Keep only this outer wrapper transparent; inner status/comment surfaces stay styled. */
-html.embedded-content-form body .content-form-wrap > section.form-panel.approval-panel,
-html body .content-form-wrap > section.form-panel.approval-panel{
+html.embedded-content-form body .content-form-wrap > section.approval-panel,
+html body .content-form-wrap > section.approval-panel{
   background:transparent!important;
   background-color:transparent!important;
   background-image:none!important;

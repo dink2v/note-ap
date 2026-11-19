@@ -143,3 +143,24 @@ html.embedded-content-form body #contentForm>section.form-panel:first-child .for
     grid-column:span 1!important;
   }
 }
+
+
+/* Keep Materi & Arahan Visual paired like Informasi Konten */
+html.embedded-content-form body #contentForm>section.form-panel:nth-child(2) .form-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:20px 26px!important;
+}
+html.embedded-content-form body #contentForm>section.form-panel:nth-child(2) .form-grid>.field{
+  grid-column:span 1!important;
+  min-width:0!important;
+}
+@media(max-width:760px){
+  html.embedded-content-form body #contentForm>section.form-panel:nth-child(2) .form-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:14px 12px!important;
+  }
+  html.embedded-content-form body #contentForm>section.form-panel:nth-child(2) .form-grid>.field{
+    grid-column:span 1!important;
+  }
+}

@@ -318,6 +318,20 @@ html.embedded-content-form body .content-form-wrap .approval-panel .team-comment
   background-color:rgba(255,255,255,.56)!important;
   border:1px solid rgba(203,213,225,.65)!important;
 }
+/* Final outer Approval panel surface: match the translucent light panels. */
+:root.embedded-content-form body .content-form-wrap section.form-panel.approval-panel,
+html.embedded-content-form body .content-form-wrap section.form-panel.approval-panel{
+  background:rgba(255,255,255,.43)!important;
+  background-color:rgba(255,255,255,.43)!important;
+  background-image:none!important;
+  border:1px solid rgba(255,255,255,.76)!important;
+  border-radius:18px!important;
+  box-shadow:0 12px 32px rgba(31,55,78,.07),inset 0 1px 0 rgba(255,255,255,.6)!important;
+  -webkit-backdrop-filter:blur(9px) saturate(135%)!important;
+  backdrop-filter:blur(9px) saturate(135%)!important;
+  color:#64748b!important;
+}
+
 
 `;
        

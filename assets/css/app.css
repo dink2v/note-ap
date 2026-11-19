@@ -2966,3 +2966,42 @@ body .content-modal{
 
 /* NOTE AP — LIGHT THEME ONLY */
 :root{color-scheme:light!important}
+
+
+/* NOTE AP — final Add Content popup surface */
+.content-modal{
+ position:fixed!important;inset:0!important;z-index:120!important;
+ display:none;align-items:center!important;justify-content:center!important;
+ padding:24px!important;background:rgba(15,23,42,.34)!important;
+ -webkit-backdrop-filter:blur(7px)!important;backdrop-filter:blur(7px)!important;
+}
+.content-modal.open{display:flex!important}
+body.modal-open{overflow:hidden!important}
+.content-modal-dialog{
+ position:relative!important;display:flex!important;flex-direction:column!important;
+ width:min(1000px,calc(100vw - 48px))!important;
+ height:min(920px,calc(100dvh - 48px))!important;
+ max-height:calc(100dvh - 48px)!important;overflow:hidden!important;
+ border:1px solid rgba(255,255,255,.55)!important;border-radius:22px!important;
+ background:transparent!important;background-color:transparent!important;
+ box-shadow:0 28px 90px rgba(15,23,42,.24)!important;
+}
+.content-modal-dialog iframe{
+ display:block!important;flex:1 1 auto!important;width:100%!important;height:100%!important;
+ min-height:0!important;border:0!important;background:transparent!important;
+ border-radius:0 0 22px 22px!important;
+}
+.content-modal-close{
+ position:absolute!important;top:14px!important;right:14px!important;z-index:10!important;
+ width:38px!important;height:38px!important;margin:0!important;float:none!important;
+ display:grid!important;place-items:center!important;border:1px solid rgba(203,213,225,.9)!important;
+ border-radius:12px!important;background:rgba(255,255,255,.92)!important;color:#475569!important;
+ font-size:24px!important;line-height:1!important;box-shadow:0 5px 18px rgba(15,23,42,.10)!important;
+}
+.content-modal-close:hover{background:#fff!important;color:#f28c38!important;border-color:#f28c38!important}
+@media(max-width:700px){
+ .content-modal{padding:10px!important}
+ .content-modal-dialog{width:calc(100vw - 20px)!important;height:calc(100dvh - 20px)!important;max-height:calc(100dvh - 20px)!important;border-radius:18px!important}
+ .content-modal-dialog iframe{border-radius:0 0 18px 18px!important}
+ .content-modal-close{top:10px!important;right:10px!important;width:35px!important;height:35px!important}
+}

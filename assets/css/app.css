@@ -7666,3 +7666,21 @@ html[data-theme] body .content-modal-dialog {
   background-image: none !important;
   box-shadow: none !important;
 }
+
+
+/* Add Content popup: override the more-specific dark theme surface */
+:root[data-theme="dark"] body .content-modal-dialog,
+:root[data-theme="system"] body .content-modal-dialog,
+:root[data-theme="dark"] .content-modal-dialog,
+:root[data-theme="system"] .content-modal-dialog,
+html[data-theme="dark"] body .content-modal-dialog {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+:root[data-theme="dark"] body .content-modal-dialog iframe,
+:root[data-theme="system"] body .content-modal-dialog iframe {
+  background: transparent !important;
+  background-color: transparent !important;
+}

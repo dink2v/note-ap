@@ -83,11 +83,10 @@ html.embedded-content-form .form-section-heading p,
 html.embedded-content-form .field-help{color:#64748b!important}
 html.embedded-content-form .form-panel,
 html.embedded-content-form .approval-panel{
- background:rgba(255,255,255,.48)!important;background-color:rgba(255,255,255,.48)!important;
- border:1px solid rgba(255,255,255,.78)!important;border-radius:16px!important;
- padding:22px 24px 24px!important;margin:0 0 16px!important;
- box-shadow:0 8px 24px rgba(38,53,72,.055)!important;
- -webkit-backdrop-filter:blur(10px)!important;backdrop-filter:blur(10px)!important;
+ background:transparent!important;background-color:transparent!important;background-image:none!important;
+ border:0!important;border-bottom:1px solid rgba(100,116,139,.18)!important;
+ border-radius:0!important;padding:22px 2px 24px!important;margin:0 0 16px!important;
+ box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;
 }
 html.embedded-content-form .form-section-heading{margin:0 0 18px!important;padding:0 0 14px!important;border-bottom:1px solid rgba(100,116,139,.16)!important}
 html.embedded-content-form .form-section-heading h2{color:#263548!important;font-weight:800!important}
@@ -110,7 +109,7 @@ html.embedded-content-form .field textarea:focus{
 }
 html.embedded-content-form .section-number{background:#fff0e4!important;color:#d97726!important}
 html.embedded-content-form .maximize-btn{color:#159d91!important;background:rgba(32,182,166,.08)!important;border:1px solid rgba(32,182,166,.18)!important;border-radius:7px!important;padding:5px 9px!important}
-html.embedded-content-form .approval-status-row{background:rgba(255,255,255,.56)!important;border:1px solid rgba(100,116,139,.16)!important;border-radius:12px!important}
+html.embedded-content-form .approval-status-row{background:transparent!important;background-color:transparent!important;border:1px solid rgba(100,116,139,.16)!important;border-radius:12px!important}
 html.embedded-content-form .approval-status-row small,
 html.embedded-content-form .approval-status-row b,
 html.embedded-content-form .approval-panel h3,

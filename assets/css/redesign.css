@@ -695,13 +695,13 @@ html body #contentModal.content-modal .content-modal-dialog iframe{
 
 
 /* FINAL SETELAN + BANTUAN VISUAL ALIGNMENT — match the colorful workspace cards. */
-#settingsPage,#helpPage{color:#233247!important}
+#settingsPage,#helpPage{color:#263238!important}
 #settingsPage .settings-heading,#helpPage .help-heading{
   display:flex!important;align-items:center!important;justify-content:space-between!important;
   gap:18px!important;margin-bottom:22px!important;
 }
 #settingsPage .settings-heading h1,#helpPage .help-heading h1{
-  color:#233247!important;font:800 27px/1.25 "Plus Jakarta Sans",sans-serif!important;
+  color:#263238!important;font:800 27px/1.25 "Plus Jakarta Sans",sans-serif!important;
   letter-spacing:-.8px!important;margin:5px 0 7px!important;
 }
 #settingsPage .settings-heading .muted,#helpPage .help-heading .muted{
@@ -732,7 +732,7 @@ html body #contentModal.content-modal .content-modal-dialog iframe{
 #settingsPage .settings-nav-item:nth-child(3)>span:first-child{background:#F1EBFF!important;color:#8061C5!important}
 #settingsPage .settings-nav-item:nth-child(4)>span:first-child{background:#EAF2FF!important;color:#5485D7!important}
 #settingsPage .settings-nav-item:nth-child(5)>span:first-child{background:#FCEBF2!important;color:#B65C80!important}
-#settingsPage .settings-nav-item b{display:block!important;color:#34445B!important;font-size:11px!important;font-weight:800!important}
+#settingsPage .settings-nav-item b{display:block!important;color:#344054!important;font-size:11px!important;font-weight:800!important}
 #settingsPage .settings-nav-item small{display:block!important;color:#8794A6!important;font-size:9px!important;margin-top:3px!important}
 #settingsPage .settings-nav-item:hover{background:#F7FAFC!important;border-color:#E7ECF2!important}
 #settingsPage .settings-nav-item.active{
@@ -751,7 +751,7 @@ html body #contentModal.content-modal .content-modal-dialog iframe{
   gap:14px!important;padding:0 0 15px!important;margin:0 0 18px!important;
   border-bottom:1px solid #E9EEF3!important;
 }
-#settingsPage .settings-panel-head h2{color:#263D56!important;font:800 16px "Plus Jakarta Sans",sans-serif!important}
+#settingsPage .settings-panel-head h2{color:#263238!important;font:800 16px "Plus Jakarta Sans",sans-serif!important}
 #settingsPage .settings-panel-head p{color:#748196!important;font-size:11px!important;line-height:1.65!important}
 #settingsPage .settings-status{
   background:#E4F7F2!important;color:#168F83!important;border:1px solid #CDEDE6!important;
@@ -760,7 +760,7 @@ html body #contentModal.content-modal .content-modal-dialog iframe{
 #settingsPage .settings-status.pending{background:#FFF1E5!important;color:#B96724!important;border-color:#F7D8BE!important}
 #settingsPage .settings-field{color:#475569!important;font-size:11px!important;font-weight:750!important;gap:8px!important}
 #settingsPage .settings-field input,#settingsPage .settings-field select,#settingsPage .settings-field textarea{
-  background:#FBFCFE!important;color:#263548!important;border:1px solid #DCE5ED!important;
+  background:#FBFCFE!important;color:#344054!important;border:1px solid #DCE5ED!important;
   border-radius:11px!important;padding:11px 13px!important;
 }
 #settingsPage .settings-field input:focus,#settingsPage .settings-field select:focus,#settingsPage .settings-field textarea:focus{
@@ -782,9 +782,9 @@ html body #contentModal.content-modal .content-modal-dialog iframe{
 #settingsPage .settings-team-placeholder{padding:22px!important;text-align:center!important}
 #settingsPage .settings-team-placeholder>span{background:#F1EBFF!important;color:#8061C5!important;border-radius:13px!important}
 #settingsPage .settings-preference-row{border-bottom:1px solid #E9EEF3!important;padding:17px 0!important}
-#settingsPage .settings-preference-row b{color:#34445B!important;font-size:12px!important}
+#settingsPage .settings-preference-row b{color:#344054!important;font-size:12px!important}
 #settingsPage .settings-preference-row p,#settingsPage .settings-footnote{color:#748196!important;font-size:10px!important;line-height:1.7!important}
-#settingsPage .settings-preference-row select{background:#FBFCFE!important;color:#263548!important;border:1px solid #DCE5ED!important;border-radius:10px!important;padding:10px 12px!important}
+#settingsPage .settings-preference-row select{background:#FBFCFE!important;color:#344054!important;border:1px solid #DCE5ED!important;border-radius:10px!important;padding:10px 12px!important}
 #settingsPage .settings-actions{padding-top:17px!important}
 #helpPage .help-welcome-card{
   background:linear-gradient(115deg,#E4F7F2 0%,#EAF2FF 55%,#FFF0E1 100%)!important;

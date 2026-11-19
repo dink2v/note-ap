@@ -54,7 +54,35 @@ html.embedded-content-form body .expand-dialog textarea {
   color: #263548 !important;
   -webkit-text-fill-color: #263548 !important;
 }
-</style><link rel="stylesheet" href="assets/css/content-form.css?v=20261119-caption-paired-9"></head><body>
+
+/* Approval & History outer panel: force the same light glass surface as the other sections. */
+html.embedded-content-form body #contentForm > section.form-panel.approval-panel{
+  background:rgba(255,255,255,.43)!important;
+  background-color:rgba(255,255,255,.43)!important;
+  background-image:none!important;
+  border:1px solid rgba(255,255,255,.76)!important;
+  border-radius:18px!important;
+  box-shadow:0 12px 32px rgba(31,55,78,.07),inset 0 1px 0 rgba(255,255,255,.6)!important;
+  -webkit-backdrop-filter:blur(9px) saturate(135%)!important;
+  backdrop-filter:blur(9px) saturate(135%)!important;
+  color:#64748b!important;
+}
+html.embedded-content-form body #contentForm > section.form-panel.approval-panel .form-section-heading{
+  background:transparent!important;
+  border-color:rgba(100,116,139,.18)!important;
+}
+html.embedded-content-form body #contentForm > section.form-panel.approval-panel .form-section-heading h2,
+html.embedded-content-form body #contentForm > section.form-panel.approval-panel h3{
+  color:#475569!important;-webkit-text-fill-color:#475569!important;
+}
+html.embedded-content-form body #contentForm > section.form-panel.approval-panel .form-section-heading p,
+html.embedded-content-form body #contentForm > section.form-panel.approval-panel .phase-labels,
+html.embedded-content-form body #contentForm > section.form-panel.approval-panel .no-comments,
+html.embedded-content-form body #contentForm > section.form-panel.approval-panel #historyEmpty,
+html.embedded-content-form body #contentForm > section.form-panel.approval-panel #historyList{
+  color:#64748b!important;-webkit-text-fill-color:#64748b!important;
+}
+</style><link rel="stylesheet" href="assets/css/content-form.css?v=20261119-approval-outer-panel-15"></head><body>
 <div class="app-shell"><aside class="sidebar" id="sidebar"><a class="brand" href="index.html"><span class="brand-mark">N</span><span><b>Note AP</b><small>Apotek Prapatan</small></span></a><div class="nav-label">WORKSPACE</div><nav class="nav-list"><a class="nav-link" href="index.html"><span>▦</span>Dashboard</a><a class="nav-link" href="kalender.html"><span>▦</span>Kalender</a><a class="nav-link active" href="konten.html"><span>▤</span>Konten</a><a class="nav-link" href="kanban.html"><span>▥</span>Kanban</a><a class="nav-link" href="visit.html"><span>↗</span>Visit</a></nav><div class="nav-spacer"></div><div class="nav-label">PREFERENSI</div><nav class="nav-list"><a class="nav-link" href="setelan.html"><span>⚙</span>Setelan</a><a class="nav-link" href="bantuan.html"><span>?</span>Bantuan</a></nav><div class="sidebar-footer"><span class="avatar">AP</span><span><b>Apotek Prapatan</b><small>Workspace internal</small></span><span class="more">•••</span></div></aside>
 <main class="main-area"><header class="mobile-top"><button id="menuToggle" aria-label="Buka menu">☰</button><b>Note AP</b><span class="avatar">AP</span></header><div class="page-wrap content-form-wrap">
 <div class="form-breadcrumb"><a href="index.html">Dashboard</a><span>/</span><a href="konten.html">Konten</a><span>/</span><b>Tambah Konten</b></div>

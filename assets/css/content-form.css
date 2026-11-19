@@ -310,3 +310,65 @@ html.embedded-content-form body .approval-panel *{
   background:#f28c38!important;background-color:#f28c38!important;
   border-color:#f28c38!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
 }
+
+
+/* Specificity fix: beat legacy .content-form-wrap .approval-panel navy/slate rules */
+html.embedded-content-form body .content-form-wrap .approval-panel,
+html.embedded-content-form body .content-form-wrap .approval-panel *{
+  color:#64748b!important;
+  -webkit-text-fill-color:#64748b!important;
+}
+html.embedded-content-form body .content-form-wrap .approval-panel .form-section-heading h2,
+html.embedded-content-form body .content-form-wrap .approval-panel h3,
+html.embedded-content-form body .content-form-wrap .approval-panel .approval-status-row b{
+  color:#475569!important;
+  -webkit-text-fill-color:#475569!important;
+}
+html.embedded-content-form body .content-form-wrap .approval-panel .form-section-heading p,
+html.embedded-content-form body .content-form-wrap .approval-panel .approval-status-row small,
+html.embedded-content-form body .content-form-wrap .approval-panel .phase-labels,
+html.embedded-content-form body .content-form-wrap .approval-panel .no-comments,
+html.embedded-content-form body .content-form-wrap .approval-panel #historyEmpty,
+html.embedded-content-form body .content-form-wrap .approval-panel #historyList,
+html.embedded-content-form body .content-form-wrap .approval-panel #commentList,
+html.embedded-content-form body .content-form-wrap .approval-panel .team-comment,
+html.embedded-content-form body .content-form-wrap .approval-panel .team-comment small{
+  color:#64748b!important;
+  -webkit-text-fill-color:#64748b!important;
+}
+html.embedded-content-form body .content-form-wrap .approval-panel .approval-status-row{
+  background:rgba(255,255,255,.27)!important;
+  background-color:rgba(255,255,255,.27)!important;
+  border:1px solid rgba(255,255,255,.62)!important;
+}
+html.embedded-content-form body .content-form-wrap .approval-panel .comments-block,
+html.embedded-content-form body .content-form-wrap .approval-panel .history-block{
+  background:rgba(255,255,255,.20)!important;
+  background-color:rgba(255,255,255,.20)!important;
+  border-color:rgba(255,255,255,.62)!important;
+}
+html.embedded-content-form body .content-form-wrap .approval-panel .approve-btn{
+  background:rgba(32,182,166,.10)!important;
+  background-color:rgba(32,182,166,.10)!important;
+  border:1px solid rgba(32,182,166,.28)!important;
+  color:#159d91!important;
+  -webkit-text-fill-color:#159d91!important;
+}
+html.embedded-content-form body .content-form-wrap .approval-panel .pending-pill{
+  background:#fff1e5!important;background-color:#fff1e5!important;
+  color:#bd6d27!important;-webkit-text-fill-color:#bd6d27!important;
+}
+html.embedded-content-form body .content-form-wrap .approval-panel .approved-pill{
+  background:rgba(32,182,166,.12)!important;
+  background-color:rgba(32,182,166,.12)!important;
+  color:#159d91!important;-webkit-text-fill-color:#159d91!important;
+}
+html.embedded-content-form body .content-form-wrap .approval-panel .comment-actions .primary-btn{
+  background:#f28c38!important;background-color:#f28c38!important;
+  border-color:#f28c38!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+}
+html.embedded-content-form body .content-form-wrap .approval-panel .team-comment{
+  background:rgba(255,255,255,.56)!important;
+  background-color:rgba(255,255,255,.56)!important;
+  border:1px solid rgba(203,213,225,.65)!important;
+}

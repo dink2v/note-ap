@@ -7112,3 +7112,42 @@ html.embedded-content-form .content-form-wrap .form-panel{background:#fff!import
 :root[data-theme="dark"] .expand-dialog{background:#1b2921!important;border-color:#405348!important}
 :root[data-theme="dark"] .expand-dialog>div b{color:#edf5ef!important}
 :root[data-theme="dark"] .expand-dialog textarea{background:#142119!important;color:#edf5ef!important;border-color:#405348!important}
+
+
+/* FINAL EMBEDDED CANVAS TRANSPARENCY — keep only form cards opaque */
+html.embedded-content-form,
+html.embedded-content-form body,
+html.embedded-content-form body::before,
+html.embedded-content-form body::after,
+html.embedded-content-form .app-shell,
+html.embedded-content-form .app-shell::before,
+html.embedded-content-form .main-area,
+html.embedded-content-form .main-area::before,
+html.embedded-content-form .page-wrap,
+html.embedded-content-form .page-wrap::before,
+html.embedded-content-form .content-form-wrap,
+html.embedded-content-form .content-form-wrap::before,
+html.embedded-content-form .form-title-row,
+html.embedded-content-form .form-bottom-actions{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+html.embedded-content-form .main-area,
+html.embedded-content-form .page-wrap.content-form-wrap{
+  border:0!important;outline:0!important;
+}
+html.embedded-content-form .content-form-wrap .form-panel{
+  background:#fff!important;
+  background-color:#fff!important;
+  box-shadow:0 7px 24px rgba(38,60,76,.045)!important;
+}
+html.embedded-content-form .content-form-wrap .form-panel.approval-panel{
+  background:#fff!important;background-color:#fff!important;
+}
+html.embedded-content-form .content-form-wrap .field input,
+html.embedded-content-form .content-form-wrap .field select,
+html.embedded-content-form .content-form-wrap .field textarea{
+  background:#fbfcfd!important;
+}

@@ -123,3 +123,23 @@ html.embedded-content-form body .form-title-row>div{order:1!important;min-width:
   html.embedded-content-form body .form-bottom-actions>div{display:grid!important;grid-template-columns:1fr 1fr!important;width:100%!important}
   html.embedded-content-form body .form-bottom-actions>div .primary-btn{grid-column:1/-1!important}
 }
+
+/* FINAL: keep Informasi Konten paired at every viewport width */
+html.embedded-content-form body #contentForm>section.form-panel:first-child .form-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:20px 26px!important;
+}
+html.embedded-content-form body #contentForm>section.form-panel:first-child .form-grid>.field{
+  grid-column:span 1!important;
+  min-width:0!important;
+}
+@media(max-width:760px){
+  html.embedded-content-form body #contentForm>section.form-panel:first-child .form-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:14px 12px!important;
+  }
+  html.embedded-content-form body #contentForm>section.form-panel:first-child .form-grid>.field{
+    grid-column:span 1!important;
+  }
+}

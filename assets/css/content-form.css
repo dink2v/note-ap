@@ -58,6 +58,7 @@ html.embedded-content-form body .form-grid{
   display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
   align-items:start!important;gap:20px 26px!important;
 }
+html.embedded-content-form body #contentForm>section.form-panel:first-child .form-grid>.field{grid-column:span 1!important}
 html.embedded-content-form body .field{
   display:flex!important;flex-direction:column!important;gap:8px!important;
   min-width:0!important;width:100%!important;

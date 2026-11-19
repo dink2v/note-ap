@@ -82,6 +82,7 @@ html,body{background:transparent!important;background-color:transparent!importan
 .form-section-heading{display:flex!important;align-items:center!important;gap:12px!important;margin:0 0 20px!important;padding:0 0 14px!important;border-bottom:1px solid rgba(100,116,139,.18)!important;background:transparent!important}
 .form-section-heading h2,.approval-panel h3,.field>span{color:#263548!important;-webkit-text-fill-color:#263548!important}
 .form-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start!important;gap:20px 26px!important}
+#contentForm>section.form-panel:first-child .form-grid>.field{grid-column:span 1!important}
 .field{display:flex!important;flex-direction:column!important;gap:8px!important;min-width:0!important;width:100%!important}
 .field>span{font-size:11px!important;font-weight:750!important}
 .field input,.field select,.field textarea,.expand-dialog textarea{

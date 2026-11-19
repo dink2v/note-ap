@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f9fc"><title>Tambah Konten — Note AP</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/app.css?v=20261119-isolated-modals-1"><link rel="stylesheet" href="assets/css/redesign.css?v=20261119-isolated-modals-1"><script>
+if(window.self!==window.top)document.documentElement.classList.add("embedded-content-form");
+</script><style id="noteap-embedded-transparent-fix">
+html.embedded-content-form,
+html.embedded-content-form body,
+html.embedded-content-form body .app-shell,
+html.embedded-content-form body .main-area,
+html.embedded-content-form body .page-wrap,
+html.embedded-content-form body .content-form-wrap,
+html.embedded-content-form body #contentForm,
+html.embedded-content-form body #contentForm > .form-panel,
+html.embedded-content-form body .form-panel,
+html.embedded-content-form body .approval-panel,
+html.embedded-content-form body .form-section-heading,
+html.embedded-content-form body .form-grid,
+html.embedded-content-form body .field,
+html.embedded-content-form body .approval-status-row,
+html.embedded-content-form body .comments-block,
+html.embedded-content-form body .history-block,
+html.embedded-content-form body .form-bottom-actions {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+html.embedded-content-form body .form-panel,
+html.embedded-content-form body .approval-panel {
+  border: 0 !important;
+  border-radius: 0 !important;
+  border-bottom: 1px solid rgba(100,116,139,.20) !important;
+}
+html.embedded-content-form body,
+html.embedded-content-form body .form-title-row h1,
+html.embedded-content-form body .form-section-heading h2,
+html.embedded-content-form body .field > span {
+  color: #263548 !important;
+  -webkit-text-fill-color: #263548 !important;
+}
+html.embedded-content-form body .form-title-row .muted,
+html.embedded-content-form body .form-section-heading p,
+html.embedded-content-form body .field-help {
+  color: #64748b !important;
+  -webkit-text-fill-color: #64748b !important;
+}
+html.embedded-content-form body .field input,
+html.embedded-content-form body .field select,
+html.embedded-content-form body .field textarea,
+html.embedded-content-form body .expand-dialog textarea {
+  background: rgba(255,255,255,.96) !important;
+  background-color: rgba(255,255,255,.96) !important;
+  color: #263548 !important;
+  -webkit-text-fill-color: #263548 !important;
+}
+</style><link rel="stylesheet" href="assets/css/content-form.css?v=20261119-caption-paired-9"></head><body>
+<div class="app-shell"><aside class="sidebar" id="sidebar"><a class="brand" href="index.html"><span class="brand-mark">N</span><span><b>Note AP</b><small>Apotek Prapatan</small></span></a><div class="nav-label">WORKSPACE</div><nav class="nav-list"><a class="nav-link" href="index.html"><span>▦</span>Dashboard</a><a class="nav-link" href="kalender.html"><span>▦</span>Kalender</a><a class="nav-link active" href="konten.html"><span>▤</span>Konten</a><a class="nav-link" href="kanban.html"><span>▥</span>Kanban</a><a class="nav-link" href="visit.html"><span>↗</span>Visit</a></nav><div class="nav-spacer"></div><div class="nav-label">PREFERENSI</div><nav class="nav-list"><a class="nav-link" href="setelan.html"><span>⚙</span>Setelan</a><a class="nav-link" href="bantuan.html"><span>?</span>Bantuan</a></nav><div class="sidebar-footer"><span class="avatar">AP</span><span><b>Apotek Prapatan</b><small>Workspace internal</small></span><span class="more">•••</span></div></aside>
+<main class="main-area"><header class="mobile-top"><button id="menuToggle" aria-label="Buka menu">☰</button><b>Note AP</b><span class="avatar">AP</span></header><div class="page-wrap content-form-wrap">
+<div class="form-breadcrumb"><a href="index.html">Dashboard</a><span>/</span><a href="konten.html">Konten</a><span>/</span><b>Tambah Konten</b></div>
+<section class="form-title-row"><div><div class="eyebrow">CONTENT WORKSPACE</div><h1>Tambah Konten Baru</h1><p class="muted">Lengkapi detail, materi, dan alur persetujuan konten.</p></div><a class="secondary-btn" href="index.html">← Kembali</a></section>
+<form id="contentForm">
+<section class="form-panel"><div class="form-section-heading"><span class="section-number">01</span><div><h2>Informasi Konten</h2><p>Informasi utama dan pengelompokan konten.</p></div></div>
+<div class="form-grid">
+<label class="field"><span>Judul <i>*</i></span><input name="title" required maxlength="160" placeholder="Masukkan judul konten"></label>
+<label class="field"><span>Platform <i>*</i></span><select name="platform" required><option value="">Pilih platform</option><option value="Instagram">Instagram</option><option value="TikTok">TikTok</option></select></label>
+<label class="field"><span>Format Konten <i>*</i></span><select name="format" required><option value="">Pilih format</option><option value="Video">Video</option><option value="Reels">Reels</option><option value="Feed">Feed</option><option value="Carousel">Carousel</option></select></label>
+<label class="field"><span>Durasi / Slide <i>*</i></span><input name="duration" required placeholder="Contoh: 30 detik / 5 slide"></label>
+<label class="field"><span>Pilar Konten <i>*</i></span><select name="pillar" required><option value="">Pilih pilar konten</option><option>Edukasi Kesehatan</option><option>Entertainment & Engagement</option><option>Spiritual & Value</option><option>People & Service</option><option>Culture & People</option><option>Social Impact</option></select></label>
+<label class="field"><span>Status <i>*</i></span><select name="status" required><option>Ideation</option><option>Planning</option><option>Production</option><option>Editing</option><option>Review</option><option>Ready to Publish</option><option>Published</option></select></label>
+<label class="field"><span>Tanggal & Waktu Posting <i>*</i></span><input type="datetime-local" name="postDateTime" required></label>
+<label class="field"><span>Referensi Konten </span><input name="reference" type="url" placeholder="Tempel link referensi konten (jika ada)"></label>
+</div></section>
+<section class="form-panel"><div class="form-section-heading"><span class="section-number">02</span><div><h2>Materi & Arahan Visual </h2><p>Semua kolom pada bagian ini boleh dikosongkan.</p></div></div>
+<div class="form-grid materi-grid">
+<div class="field"><span>Hook / Opening</span><textarea name="hook" rows="4" placeholder="Kalimat pembuka untuk menarik perhatian audiens..."></textarea><button type="button" class="maximize-btn" data-expand="hook">⛶ Maximize</button></div>
+<div class="field"><span>Visual (Hook / Opening)</span><textarea name="visualHook" rows="4" placeholder="Jelaskan visual pembuka, angle kamera, footage, atau desain..."></textarea><button type="button" class="maximize-btn" data-expand="visualHook">⛶ Maximize</button></div>
+<div class="field"><span>Body (Naskah)</span><textarea name="body" rows="7" placeholder="Tuliskan isi utama konten secara lengkap..."></textarea><button type="button" class="maximize-btn" data-expand="body">⛶ Maximize</button></div>
+<div class="field"><span>Visual (Body)</span><textarea name="visualBody" rows="7" placeholder="Arahan visual untuk setiap bagian isi konten..."></textarea><button type="button" class="maximize-btn" data-expand="visualBody">⛶ Maximize</button></div>
+<div class="field"><span>CTA (Call to Action)</span><textarea name="cta" rows="3" placeholder="Contoh: Like, follow, comment, save, klik link bio..."></textarea><button type="button" class="maximize-btn" data-expand="cta">⛶ Maximize</button><small class="field-help">Arahkan audiens melakukan tindakan setelah melihat konten.</small></div>
+<div class="field"><span>Visual (CTA)</span><textarea name="visualCta" rows="3" placeholder="Visual yang menarik untuk call to action..."></textarea><button type="button" class="maximize-btn" data-expand="visualCta">⛶ Maximize</button></div>
+</div></section>
+<section class="form-panel"><div class="form-section-heading"><span class="section-number">03</span><div><h2>Caption & Catatan </h2><p>Caption dan catatan tambahan boleh dikosongkan.</p></div></div>
+<div class="form-grid caption-grid">
+<div class="field"><span>Caption</span><textarea name="caption" rows="6" placeholder="Sematkan hashtag, tagar, dan deskripsi postingan."></textarea><button type="button" class="maximize-btn" data-expand="caption">⛶ Maximize</button></div>
+<div class="field"><span>Catatan / Notes</span><textarea name="notes" rows="4" placeholder="Catatan untuk properti, arahan produksi, atau detail tambahan konten..."></textarea><button type="button" class="maximize-btn" data-expand="notes">⛶ Maximize</button></div>
+</div></section>
+</form>
+<section class="form-panel approval-panel"><div class="form-section-heading"><span class="section-number">04</span><div><h2>Approval & History </h2><p>Bagian ini dapat dilengkapi setelah konten dibuat.</p></div></div>
+<div class="approval-status-row"><div><small>FASE BERJALAN</small><b id="phaseName">Ideation</b></div><span class="pending-pill" id="approvalState">Pending</span></div>
+<div class="phase-track"><span class="phase-active"></span><span></span><span></span><span></span></div><div class="phase-labels"><span>Ideation</span><span>Planning</span><span>Production</span><span>Published</span></div>
+<button type="button" class="approve-btn" id="approvePhase">✓ Approve Fase Ideation</button>
+<div class="comments-block"><h3>KOMENTAR TIM</h3><p class="no-comments" id="noComments">Belum ada komentar aktif</p><div id="commentList"></div><label class="field"><textarea id="teamComment" rows="3" placeholder="Tulis komentar/revisi..."></textarea></label><div class="comment-actions"><button type="button" class="primary-btn" id="sendComment">Kirim</button></div></div>
+<div class="history-block"><h3>RIWAYAT AKTIVITAS</h3><p id="historyEmpty">Belum ada riwayat aktivitas pada konten ini.</p><ul id="historyList"></ul></div>
+</section>
+<div class="form-actions form-bottom-actions"><button type="button" class="secondary-btn" id="closeForm">Tutup</button><div><button type="button" class="secondary-btn" id="duplicateForm">Duplicate</button><button type="submit" form="contentForm" class="primary-btn">Simpan Konten <span>→</span></button></div></div>
+<footer class="page-footer">Note AP <span>•</span> Content Planning & Management System <span class="demo-tag">MODE PREVIEW</span></footer>
+</div></main></div><div class="toast" id="toast" role="status"></div><div class="expand-overlay" id="expandOverlay" hidden><div class="expand-dialog"><div><b id="expandTitle">Edit teks</b><button type="button" id="closeExpand">✕</button></div><textarea id="expandedText"></textarea><button type="button" class="primary-btn" id="applyExpand">Selesai</button></div></div><script src="assets/js/config.js"></script><script src="assets/js/tambah-konten.js?v=20261119-isolated-modals-1"></script></body></html>

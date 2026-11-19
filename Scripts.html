@@ -1,0 +1,76 @@
+<script>
+(function(){
+  const $ = (id) => document.getElementById(id);
+  const formatDate = (value) => {
+    if (!value) return null;
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? null : date;
+  };
+  const today = new Date();
+  const dateText = new Intl.DateTimeFormat('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(today);
+  $('todayDate').textContent = dateText.charAt(0).toUpperCase()+dateText.slice(1)+' · Berikut ringkasan aktivitas kontenmu hari ini.';
+  document.querySelector('.eyebrow').textContent = new Intl.DateTimeFormat('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(today).toUpperCase();
+
+  function setCount(id,value){ $(id).textContent = Number(value || 0).toLocaleString('id-ID'); }
+  function renderDashboard(data){
+    const contents = data.contents || [];
+    const countFormat = (terms) => contents.filter(item => terms.includes(String(item.format||'').toLowerCase())).length;
+    setCount('reelsCount',countFormat(['reels','reel']));
+    setCount('feedCount',countFormat(['single post','feed','single']));
+    setCount('carouselCount',countFormat(['carousel','carousel post']));
+    const published = contents.filter(item => String(item.status||'').toLowerCase()==='published').length;
+    const scheduled = contents.filter(item => ['ready to publish','scheduled','terjadwal'].includes(String(item.status||'').toLowerCase())).length;
+    setCount('publishedCount',published);
+    setCount('scheduledCount',scheduled);
+    $('lastUpdated').textContent = 'Data diperbarui · '+new Intl.DateTimeFormat('id-ID',{hour:'2-digit',minute:'2-digit'}).format(new Date());
+
+    const upcoming = contents.filter(item => item.postingDate && String(item.status||'').toLowerCase()!=='published')
+      .sort((a,b)=>(String(a.postingDate)+' '+String(a.postingTime||'')).localeCompare(String(b.postingDate)+' '+String(b.postingTime||''))).slice(0,4);
+    const list = $('upcomingList');
+    if(!upcoming.length){ list.innerHTML='<div class="empty-state">Belum ada konten yang dijadwalkan.</div>'; return; }
+    list.innerHTML = upcoming.map(item => {
+      const d = formatDate(item.postingDate+'T00:00:00');
+      const day = d ? new Intl.DateTimeFormat('id-ID',{day:'2-digit'}).format(d) : '—';
+      const month = d ? new Intl.DateTimeFormat('id-ID',{month:'short'}).format(d) : '';
+      const title = escapeHtml(item.title || 'Tanpa judul');
+      const meta = [item.platform,item.format,item.postingTime].filter(Boolean).map(escapeHtml).join(' · ');
+      return '<div class="upcoming-item"><div class="date-box"><strong>'+day+'</strong><span>'+month+'</span></div><div class="upcoming-info"><strong>'+title+'</strong><div class="upcoming-meta">'+(meta||'Detail belum tersedia')+'</div></div><span class="status-pill">'+escapeHtml(item.status||'Planning')+'</span></div>';
+    }).join('');
+  }
+  function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+  function loadData(){
+    if(window.google && google.script && google.script.run){
+      google.script.run.withSuccessHandler(renderDashboard).withFailureHandler(err=>{
+        $('lastUpdated').textContent='Gagal memuat data';
+        $('upcomingList').innerHTML='<div class="empty-state">Data belum dapat dimuat. Periksa koneksi Apps Script.</div>';
+        console.error(err);
+      }).getInitialData();
+    } else {
+      $('lastUpdated').textContent='Mode pratinjau';
+      renderDashboard({contents:[]});
+    }
+  }
+  function openMenu(){ $('sidebar').classList.add('open'); $('sidebarBackdrop').classList.add('show'); }
+  function closeMenu(){ $('sidebar').classList.remove('open'); $('sidebarBackdrop').classList.remove('show'); }
+  $('mobileMenuButton').addEventListener('click',openMenu);
+  $('sidebarClose').addEventListener('click',closeMenu);
+  $('sidebarBackdrop').addEventListener('click',closeMenu);
+  document.querySelectorAll('[data-nav]').forEach(link=>link.addEventListener('click',e=>{
+    e.preventDefault();
+    const page=link.dataset.nav;
+    if(page==='Visit'){
+      if(window.google && google.script && google.script.run){
+        google.script.run.withSuccessHandler(settings=>{const url=settings && settings.VISIT ? settings.VISIT.value : ''; if(url) window.open(url,'_blank'); else alert('URL Visit belum diatur pada sheet Setting.');}).getSettings();
+      } else { alert('Link Visit akan disambungkan pada tahap integrasi.'); }
+    } else if(page!=='Dashboard') {
+      alert('Halaman '+page+' akan kita bangun pada tahap berikutnya.');
+    }
+    closeMenu();
+  }));
+  function newContent(){alert('Form Konten Baru akan kita buat pada tahap CRUD Konten.');}
+  $('newContentButton').addEventListener('click',newContent);
+  $('mobileNewContent').addEventListener('click',newContent);
+  loadData();
+})();
+</script>

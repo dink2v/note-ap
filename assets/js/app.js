@@ -61,7 +61,47 @@
         const style=doc.createElement('style');
         style.id='noteap-modal-style';
         style.textContent='.sidebar,.mobile-top,.form-breadcrumb,.form-title-row > a.secondary-btn,.page-footer{display:none!important}.main-area{margin-left:0!important}.content-form-wrap{max-width:none!important;padding:34px 38px 24px!important}@media(max-width:700px){.content-form-wrap{padding:28px 15px 20px!important}}html,body{background:transparent!important;background-color:transparent!important}.content-form-wrap{background:transparent!important;background-color:transparent!important}:root{--green:#f28c38;--green-dark:#df792b;--ink:#26372f;--muted:#74847b;--line:#e8efea}.form-panel{background:#fff!important;border-color:#e8efea!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 5px 20px rgba(31,67,48,.055)!important}.section-number{background:#fff0e4!important;color:#d9752b!important}.primary-btn{background:#f28c38!important;box-shadow:0 6px 16px rgba(242,140,56,.22)!important}.primary-btn:hover{background:#df792b!important}.secondary-btn{border-color:#cce9e5!important;color:#138f87!important}.secondary-btn:hover{background:#effaf8!important;border-color:#20b6a6!important}.maximize-btn{color:#159b91!important}.field input:focus,.field select:focus,.field textarea:focus{border-color:#f28c38!important;box-shadow:0 0 0 3px rgba(242,140,56,.13)!important}.form-title-row #detailEditTop{display:inline-flex!important;align-items:center;justify-content:center;order:2;margin-left:auto;flex:0 0 auto;position:relative;z-index:2}.form-title-row>div{order:1;min-width:0}.form-title-row{gap:14px;align-items:flex-start!important}'
-        doc.head.append(style);
+        style.textContent += `
+/* ADD CONTENT ONLY — force transparent canvas above dark-theme form rules */
+html.embedded-content-form,html.embedded-content-form body,
+html.embedded-content-form .app-shell,html.embedded-content-form .main-area,
+html.embedded-content-form .page-wrap.content-form-wrap,
+html.embedded-content-form #contentForm,
+html.embedded-content-form .form-panel,
+html.embedded-content-form .form-section-heading,
+html.embedded-content-form .form-grid,
+html.embedded-content-form .field,
+html.embedded-content-form .approval-panel,
+html.embedded-content-form .approval-status-row,
+html.embedded-content-form .comments-block,
+html.embedded-content-form .history-block,
+html.embedded-content-form .form-actions,
+html.embedded-content-form .form-bottom-actions {
+ background:transparent!important;background-color:transparent!important;
+ background-image:none!important;box-shadow:none!important;
+}
+html.embedded-content-form .form-panel{
+ border:0!important;border-bottom:1px solid rgba(120,145,155,.3)!important;
+ border-radius:0!important;padding:22px 2px 25px!important;
+}
+html.embedded-content-form .form-title-row h1,
+html.embedded-content-form .form-section-heading h2,
+html.embedded-content-form .form-section-heading p,
+html.embedded-content-form .field>span,
+html.embedded-content-form .field-help,
+html.embedded-content-form .approval-panel,
+html.embedded-content-form .comments-block,
+html.embedded-content-form .history-block{color:#344b59!important}
+html.embedded-content-form .field input,
+html.embedded-content-form .field select,
+html.embedded-content-form .field textarea,
+html.embedded-content-form .expand-dialog textarea{
+ background:#fff!important;background-color:#fff!important;color:#263b4b!important;
+ -webkit-text-fill-color:#263b4b!important;border:1px solid #d9e3e8!important;
+}
+html.embedded-content-form .section-number{background:#fff0e4!important;color:#d9752b!important}
+`;
+       doc.head.append(style);
       }
       if(!child.__noteApEscapeBound){
         child.addEventListener('keydown',event=>{if(event.key==='Escape')closeContentModal();});

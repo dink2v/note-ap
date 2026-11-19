@@ -31,20 +31,25 @@ html.embedded-content-form body .form-panel{padding:18px 0!important}
 html.embedded-content-form body .form-grid{gap:14px!important}
 @media(max-width:700px){html.embedded-content-form body .content-form-wrap{padding:28px 15px 20px!important}}
 
-/* Keep the first two required fields in one horizontal row. */
-html.embedded-content-form body #contentForm > .form-panel:first-of-type .form-grid{
- display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+/* First row: Title on the left, Platform on the right. */
+html.embedded-content-form body #contentForm > section.form-panel:first-child .form-grid{
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+ align-items:start!important;
 }
-html.embedded-content-form body #contentForm > .form-panel:first-of-type .form-grid > .field:nth-child(1),
-html.embedded-content-form body #contentForm > .form-panel:first-of-type .form-grid > .field:nth-child(2){
- grid-column:span 1!important;min-width:0;
+html.embedded-content-form body #contentForm > section.form-panel:first-child .form-grid > .field:nth-child(1),
+html.embedded-content-form body #contentForm > section.form-panel:first-child .form-grid > .field:nth-child(2){
+ display:flex!important;
+ grid-column:auto!important;
+ width:100%!important;
+ min-width:0!important;
 }
 @media(max-width:420px){
- html.embedded-content-form body #contentForm > .form-panel:first-of-type .form-grid{
-  grid-template-columns:1fr!important;
+ html.embedded-content-form body #contentForm > section.form-panel:first-child .form-grid{
+  grid-template-columns:minmax(0,1fr)!important;
  }
- html.embedded-content-form body #contentForm > .form-panel:first-of-type .form-grid > .field:nth-child(1),
- html.embedded-content-form body #contentForm > .form-panel:first-of-type .form-grid > .field:nth-child(2){
-  grid-column:1/-1!important;
+ html.embedded-content-form body #contentForm > section.form-panel:first-child .form-grid > .field:nth-child(1),
+ html.embedded-content-form body #contentForm > section.form-panel:first-child .form-grid > .field:nth-child(2){
+  grid-column:1!important;
  }
 }

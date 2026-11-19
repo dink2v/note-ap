@@ -2966,4 +2966,3 @@ body .content-modal{
 
 /* NOTE AP — LIGHT THEME ONLY */
 :root{color-scheme:light!important}
-:root[data-theme],:root[data-theme="dark"],:root[data-theme="system"]{color-scheme:light!important}

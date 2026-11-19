@@ -33,7 +33,7 @@
     contentModal.setAttribute('aria-hidden','false');
     document.body.classList.add('modal-open');
     const createUrl=new URL('./tambah-konten.html',document.baseURI);
-    createUrl.searchParams.set('noteapv','20261119-materi-grid-source-fix-8');
+    createUrl.searchParams.set('noteapv','20261119-approval-transparent-cache-17');
     if(postingDate)createUrl.searchParams.set('date',postingDate);
     const target=createUrl.href;
     if(!contentModalFrame.getAttribute('src')||contentModalFrame.src!==target)contentModalFrame.src=target;
@@ -45,7 +45,7 @@
     contentModal.setAttribute('aria-hidden','false');
     document.body.classList.add('modal-open');
     const detailUrl=new URL('./tambah-konten.html',document.baseURI);
-    detailUrl.searchParams.set('noteapv','20261119-materi-grid-source-fix-8');
+    detailUrl.searchParams.set('noteapv','20261119-approval-transparent-cache-17');
     detailUrl.searchParams.set('mode','detail');
     detailUrl.searchParams.set('id',String(item.id||''));
     contentModalFrame.src=detailUrl.href;

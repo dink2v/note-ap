@@ -516,3 +516,23 @@ html body #visitPage .visit-calendar-event-chip.cancelled{background:#FCEAF0!imp
   html body #visitPage .visit-month-nav{margin-left:0!important;flex:1 1 100%!important;justify-content:space-between!important}
   html body #visitPage .visit-display-control{margin-left:auto!important}
 }
+
+
+/* VISIT FIX: empty fourth row is an add-entry placeholder, not a selected row */
+html body #visitPage #visitTableBody>tr.visit-placeholder-row,
+html body #visitPage #visitTableBody>tr.visit-placeholder-row>td{
+  background:#F8FBFF!important;
+  border-color:#DCE8EF!important;
+  box-shadow:none!important;
+  outline:0!important;
+}
+html body #visitPage #visitTableBody>tr.visit-placeholder-row:hover>td{
+  background:#F3F8FC!important;
+  border-color:#DCE8EF!important;
+}
+html body #visitPage #visitTableBody>tr.visit-placeholder-row.is-visit-checked>td,
+html body #visitPage #visitTableBody>tr.visit-placeholder-row.selected>td{
+  background:#F8FBFF!important;
+  border-color:#DCE8EF!important;
+  box-shadow:none!important;
+}

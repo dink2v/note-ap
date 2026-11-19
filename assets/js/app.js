@@ -77,7 +77,7 @@ html,body{background:transparent!important;background-color:transparent!importan
   width:100%!important;min-width:0!important;box-sizing:border-box!important;
   margin:0 0 20px!important;padding:25px 27px!important;
   background:rgba(255,255,255,.43)!important;background-color:rgba(255,255,255,.43)!important;
-  background-image:none!important;border:1px solid rgba(255,255,255,.76)!important;
+  background-image:none!important;border:1px solid #E2EAF1!important;
   border-radius:18px!important;box-shadow:0 12px 32px rgba(31,55,78,.07),inset 0 1px 0 rgba(255,255,255,.6)!important;
   -webkit-backdrop-filter:blur(9px) saturate(135%)!important;backdrop-filter:blur(9px) saturate(135%)!important;
 }
@@ -383,7 +383,7 @@ html.embedded-content-form body .content-form-wrap > section.approval-panel .com
 /* Subtle outline for the transparent Approval & History wrapper */
 html.embedded-content-form body .content-form-wrap > section.approval-panel,
 html body .content-form-wrap > section.approval-panel{
-  border:1px solid rgba(255,255,255,.76)!important;
+  border:1px solid #E2EAF1!important;
   border-radius:18px!important;
 }
 `;

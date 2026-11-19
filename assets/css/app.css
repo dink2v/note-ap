@@ -6215,3 +6215,14 @@ body #calendarPage{
   .content-form-wrap .form-grid{grid-template-columns:1fr}
 }
 @media(hover:none){#calendarPage .calendar-day-add{opacity:1}}
+
+
+/* Final override: drag-over calendar cell must not receive a green fill. */
+html body #calendarPage .calendar-day-cell.is-drop-target,
+html body #calendarPage .calendar-day-cell.is-drop-target:hover{
+  background:transparent!important;
+  background-color:transparent!important;
+  box-shadow:none!important;
+  outline:2px dashed rgba(21,157,145,.65)!important;
+  outline-offset:-4px!important;
+}

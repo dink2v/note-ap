@@ -692,3 +692,157 @@ html body #contentModal.content-modal .content-modal-dialog iframe{
   background-color:transparent!important;
   border:0!important;
 }
+
+
+/* FINAL SETELAN + BANTUAN VISUAL ALIGNMENT — match the colorful workspace cards. */
+#settingsPage,#helpPage{color:#233247!important}
+#settingsPage .settings-heading,#helpPage .help-heading{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  gap:18px!important;margin-bottom:22px!important;
+}
+#settingsPage .settings-heading h1,#helpPage .help-heading h1{
+  color:#233247!important;font:800 27px/1.25 "Plus Jakarta Sans",sans-serif!important;
+  letter-spacing:-.8px!important;margin:5px 0 7px!important;
+}
+#settingsPage .settings-heading .muted,#helpPage .help-heading .muted{
+  color:#748196!important;font-size:12px!important;line-height:1.65!important;
+}
+#settingsPage .settings-version{
+  background:#FFF1E5!important;border:1px solid #F7D8BE!important;
+  color:#B96724!important;border-radius:10px!important;padding:8px 11px!important;
+}
+#settingsPage .settings-layout{grid-template-columns:238px minmax(0,1fr)!important;gap:16px!important}
+#settingsPage .settings-nav,#settingsPage .settings-content{
+  background:#fff!important;border:1px solid #E7ECF2!important;border-radius:17px!important;
+  box-shadow:0 10px 28px rgba(35,50,71,.055)!important;
+}
+#settingsPage .settings-nav{padding:10px!important;gap:6px!important}
+#settingsPage .settings-nav-item{
+  display:flex!important;align-items:center!important;gap:11px!important;
+  min-height:54px!important;padding:9px 11px!important;border:1px solid transparent!important;
+  border-radius:12px!important;background:transparent!important;color:#64748b!important;
+}
+#settingsPage .settings-nav-item>span:first-child{
+  width:34px!important;height:34px!important;flex:0 0 34px!important;
+  display:grid!important;place-items:center!important;border-radius:11px!important;
+  background:#F1F4F8!important;color:#64748b!important;font-size:16px!important;
+}
+#settingsPage .settings-nav-item:nth-child(1)>span:first-child{background:#FFF0E1!important;color:#C8752B!important}
+#settingsPage .settings-nav-item:nth-child(2)>span:first-child{background:#E4F7F2!important;color:#168F83!important}
+#settingsPage .settings-nav-item:nth-child(3)>span:first-child{background:#F1EBFF!important;color:#8061C5!important}
+#settingsPage .settings-nav-item:nth-child(4)>span:first-child{background:#EAF2FF!important;color:#5485D7!important}
+#settingsPage .settings-nav-item:nth-child(5)>span:first-child{background:#FCEBF2!important;color:#B65C80!important}
+#settingsPage .settings-nav-item b{display:block!important;color:#34445B!important;font-size:11px!important;font-weight:800!important}
+#settingsPage .settings-nav-item small{display:block!important;color:#8794A6!important;font-size:9px!important;margin-top:3px!important}
+#settingsPage .settings-nav-item:hover{background:#F7FAFC!important;border-color:#E7ECF2!important}
+#settingsPage .settings-nav-item.active{
+  background:#E8F8F5!important;border-color:#CDEDE6!important;color:#168F83!important;
+  box-shadow:inset 3px 0 0 #20B6A6!important;
+}
+#settingsPage .settings-nav-item.active>span:first-child{background:#CFF1E9!important;color:#087F75!important}
+#settingsPage .settings-nav-item.active b{color:#087F75!important}
+#settingsPage .settings-content{padding:0!important;overflow:hidden!important}
+#settingsPage .settings-panel{
+  padding:23px!important;margin:0!important;border:0!important;border-radius:17px!important;
+  background:#fff!important;box-shadow:none!important;
+}
+#settingsPage .settings-panel-head{
+  display:flex!important;align-items:flex-start!important;justify-content:space-between!important;
+  gap:14px!important;padding:0 0 15px!important;margin:0 0 18px!important;
+  border-bottom:1px solid #E9EEF3!important;
+}
+#settingsPage .settings-panel-head h2{color:#263D56!important;font:800 16px "Plus Jakarta Sans",sans-serif!important}
+#settingsPage .settings-panel-head p{color:#748196!important;font-size:11px!important;line-height:1.65!important}
+#settingsPage .settings-status{
+  background:#E4F7F2!important;color:#168F83!important;border:1px solid #CDEDE6!important;
+  padding:7px 10px!important;border-radius:999px!important;font-size:9px!important;font-weight:800!important;
+}
+#settingsPage .settings-status.pending{background:#FFF1E5!important;color:#B96724!important;border-color:#F7D8BE!important}
+#settingsPage .settings-field{color:#475569!important;font-size:11px!important;font-weight:750!important;gap:8px!important}
+#settingsPage .settings-field input,#settingsPage .settings-field select,#settingsPage .settings-field textarea{
+  background:#FBFCFE!important;color:#263548!important;border:1px solid #DCE5ED!important;
+  border-radius:11px!important;padding:11px 13px!important;
+}
+#settingsPage .settings-field input:focus,#settingsPage .settings-field select:focus,#settingsPage .settings-field textarea:focus{
+  background:#fff!important;border-color:#20B6A6!important;box-shadow:0 0 0 3px rgba(32,182,166,.12)!important;
+}
+#settingsPage .settings-info-note{
+  background:#EAF8F5!important;border:1px solid #D1EEE7!important;border-radius:12px!important;
+  color:#426F69!important;padding:13px 15px!important;font-size:11px!important;line-height:1.7!important;
+}
+#settingsPage .settings-integration-card,#settingsPage .settings-data-actions article,#settingsPage .settings-team-placeholder,
+#settingsPage .reference-category-card{
+  background:#FBFCFE!important;border:1px solid #E5EBF2!important;border-radius:14px!important;
+  box-shadow:0 4px 12px rgba(35,50,71,.035)!important;
+}
+#settingsPage .settings-integration-card{padding:15px!important}
+#settingsPage .settings-google-mark{background:#EAF2FF!important;color:#3979B8!important;border-radius:11px!important}
+#settingsPage .settings-data-actions article{padding:16px!important}
+#settingsPage .settings-data-actions article>span{background:#FFF0E1!important;color:#C8752B!important;border-radius:11px!important}
+#settingsPage .settings-team-placeholder{padding:22px!important;text-align:center!important}
+#settingsPage .settings-team-placeholder>span{background:#F1EBFF!important;color:#8061C5!important;border-radius:13px!important}
+#settingsPage .settings-preference-row{border-bottom:1px solid #E9EEF3!important;padding:17px 0!important}
+#settingsPage .settings-preference-row b{color:#34445B!important;font-size:12px!important}
+#settingsPage .settings-preference-row p,#settingsPage .settings-footnote{color:#748196!important;font-size:10px!important;line-height:1.7!important}
+#settingsPage .settings-preference-row select{background:#FBFCFE!important;color:#263548!important;border:1px solid #DCE5ED!important;border-radius:10px!important;padding:10px 12px!important}
+#settingsPage .settings-actions{padding-top:17px!important}
+#helpPage .help-welcome-card{
+  background:linear-gradient(115deg,#E4F7F2 0%,#EAF2FF 55%,#FFF0E1 100%)!important;
+  border:1px solid #DCEAEF!important;border-radius:18px!important;
+  box-shadow:0 10px 26px rgba(35,50,71,.055)!important;padding:24px 26px!important;
+}
+#helpPage .help-welcome-icon{background:#fff!important;color:#168F83!important;border:1px solid #CDEDE6!important;box-shadow:0 5px 14px rgba(32,182,166,.10)!important}
+#helpPage .help-kicker{color:#168F83!important}
+#helpPage .help-welcome-card h2{color:#263D56!important;font-size:18px!important}
+#helpPage .help-welcome-card p{color:#64748b!important;font-size:11px!important;line-height:1.7!important}
+#helpPage .help-topic-grid{gap:13px!important}
+#helpPage .help-topic-card{
+  position:relative!important;min-height:135px!important;padding:18px!important;
+  border:1px solid #E4EAF1!important;border-radius:15px!important;background:#fff!important;
+  box-shadow:0 7px 18px rgba(35,50,71,.045)!important;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease!important;
+}
+#helpPage .help-topic-card:nth-child(6n+1){background:linear-gradient(145deg,#fff 55%,#FFF2E5)!important}
+#helpPage .help-topic-card:nth-child(6n+2){background:linear-gradient(145deg,#fff 55%,#EAF8F5)!important}
+#helpPage .help-topic-card:nth-child(6n+3){background:linear-gradient(145deg,#fff 55%,#F1EDFF)!important}
+#helpPage .help-topic-card:nth-child(6n+4){background:linear-gradient(145deg,#fff 55%,#EAF2FF)!important}
+#helpPage .help-topic-card:nth-child(6n+5){background:linear-gradient(145deg,#fff 55%,#FCEBF2)!important}
+#helpPage .help-topic-card:nth-child(6n){background:linear-gradient(145deg,#fff 55%,#FFF8E6)!important}
+#helpPage .help-topic-card:hover{transform:translateY(-2px)!important;border-color:#B9E6DE!important;box-shadow:0 11px 24px rgba(35,50,71,.075)!important}
+#helpPage .help-topic-card>span{background:#E8F8F5!important;color:#168F83!important;border:1px solid #CDEDE6!important}
+#helpPage .help-topic-card:nth-child(3n+1)>span{background:#FFF0E1!important;color:#C8752B!important;border-color:#F7D8BE!important}
+#helpPage .help-topic-card:nth-child(3n)>span{background:#EAF2FF!important;color:#5485D7!important;border-color:#D4E3FA!important}
+#helpPage .help-topic-card b{color:#263D56!important;font-size:12px!important}
+#helpPage .help-topic-card p{color:#64748b!important;font-size:10.5px!important;line-height:1.7!important}
+#helpPage .help-chat-block,#helpPage .help-faq-section{
+  background:#fff!important;border:1px solid #E4EAF1!important;border-radius:17px!important;
+  box-shadow:0 8px 22px rgba(35,50,71,.045)!important;
+}
+#helpPage .help-chat-block{padding:20px!important}
+#helpPage .help-chat-summary{padding:2px!important}
+#helpPage .help-chat-summary-copy .eyebrow{color:#168F83!important}
+#helpPage .help-chat-summary-copy strong{color:#263D56!important;font-size:17px!important}
+#helpPage .help-chat-summary-copy .muted{color:#748196!important}
+#helpPage .help-chat-chevron{background:#E8F8F5!important;color:#168F83!important;border-radius:10px!important}
+#helpPage .help-faq-section{padding:21px!important;margin-top:18px!important}
+#helpPage .help-section-heading h2{color:#263D56!important;font:800 17px "Plus Jakarta Sans",sans-serif!important}
+#helpPage .help-faq-item{border-bottom:1px solid #E9EEF3!important;padding:15px 3px!important}
+#helpPage .help-faq-item summary{color:#34445B!important;font-size:12px!important;font-weight:750!important;line-height:1.55!important}
+#helpPage .help-faq-item summary:after{color:#168F83!important;font-weight:800!important}
+#helpPage .help-faq-item p{color:#64748b!important;font-size:11px!important;line-height:1.75!important}
+#settingsPage .page-footer,#helpPage .page-footer{margin-top:24px!important}
+@media(max-width:900px){
+ #settingsPage .settings-layout{grid-template-columns:1fr!important}
+ #settingsPage .settings-nav{position:static!important;display:flex!important;overflow-x:auto!important;gap:7px!important}
+ #settingsPage .settings-nav-item{min-width:160px!important;flex:0 0 auto!important}
+}
+@media(max-width:650px){
+ #settingsPage .settings-heading,#helpPage .help-heading{align-items:flex-start!important}
+ #settingsPage .settings-heading h1,#helpPage .help-heading h1{font-size:23px!important}
+ #settingsPage .settings-panel{padding:16px!important}
+ #settingsPage .settings-panel-head{flex-direction:column!important}
+ #settingsPage .settings-data-actions{grid-template-columns:1fr!important}
+ #helpPage .help-welcome-card{padding:18px!important}
+ #helpPage .help-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #helpPage .help-topic-card{min-height:130px!important;padding:14px!important}
+ #helpPage .help-faq-section{padding:15px!important}
+}

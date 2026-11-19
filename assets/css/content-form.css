@@ -409,3 +409,16 @@ html body #contentForm > section.form-panel.approval-panel{
   backdrop-filter:none!important;
   box-shadow:none!important;
 }
+
+
+/* Correct target: Approval section is a sibling after #contentForm, not its child. */
+html.embedded-content-form body .content-form-wrap > section.form-panel.approval-panel,
+html body .content-form-wrap > section.form-panel.approval-panel{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}

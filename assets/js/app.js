@@ -33,7 +33,7 @@
     contentModal.setAttribute('aria-hidden','false');
     document.body.classList.add('modal-open');
     const createUrl=new URL('./tambah-konten.html',document.baseURI);
-    createUrl.searchParams.set('noteapv','20261119-approval-transparent-cache-17');
+    createUrl.searchParams.set('noteapv','20261119-approval-actual-sibling-18');
     if(postingDate)createUrl.searchParams.set('date',postingDate);
     const target=createUrl.href;
     if(!contentModalFrame.getAttribute('src')||contentModalFrame.src!==target)contentModalFrame.src=target;
@@ -45,7 +45,7 @@
     contentModal.setAttribute('aria-hidden','false');
     document.body.classList.add('modal-open');
     const detailUrl=new URL('./tambah-konten.html',document.baseURI);
-    detailUrl.searchParams.set('noteapv','20261119-approval-transparent-cache-17');
+    detailUrl.searchParams.set('noteapv','20261119-approval-actual-sibling-18');
     detailUrl.searchParams.set('mode','detail');
     detailUrl.searchParams.set('id',String(item.id||''));
     contentModalFrame.src=detailUrl.href;
@@ -318,17 +318,17 @@ html.embedded-content-form body .content-form-wrap .approval-panel .team-comment
   background-color:rgba(255,255,255,.56)!important;
   border:1px solid rgba(203,213,225,.65)!important;
 }
-/* Final outer Approval panel surface: match the translucent light panels. */
-:root.embedded-content-form body .content-form-wrap section.form-panel.approval-panel,
-html.embedded-content-form body .content-form-wrap section.form-panel.approval-panel{
-  background:rgba(255,255,255,.43)!important;
-  background-color:rgba(255,255,255,.43)!important;
+/* Approval & History outer section is a sibling of #contentForm.
+   Keep only this outer wrapper transparent; inner status/comment surfaces stay styled. */
+html.embedded-content-form body .content-form-wrap > section.form-panel.approval-panel,
+html body .content-form-wrap > section.form-panel.approval-panel{
+  background:transparent!important;
+  background-color:transparent!important;
   background-image:none!important;
-  border:1px solid rgba(255,255,255,.76)!important;
-  border-radius:18px!important;
-  box-shadow:0 12px 32px rgba(31,55,78,.07),inset 0 1px 0 rgba(255,255,255,.6)!important;
-  -webkit-backdrop-filter:blur(9px) saturate(135%)!important;
-  backdrop-filter:blur(9px) saturate(135%)!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
   color:#64748b!important;
 }
 

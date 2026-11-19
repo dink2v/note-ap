@@ -4804,7 +4804,7 @@ body #calendarPage .calendar-event-chip.feed{background:#263b30!important;border
 body #calendarPage .calendar-event-chip.feed b,body #calendarPage .calendar-event-chip.feed small{color:#d1ead3!important}
 body #calendarPage .calendar-event-chip.other{background:#303a35!important;border-color:#53645a!important;border-left-color:#b5c2bb!important}
 body #calendarPage .calendar-event-chip.other b,body #calendarPage .calendar-event-chip.other small{color:#e0e8e3!important}
-body #calendarPage .calendar-day-cell.is-drop-target{background:#1d493b!important;outline:2px dashed #8bb7a0!important;outline-offset:-4px!important}
+body body #calendarPage .calendar-day-cell.is-drop-target{background:transparent!important;box-shadow:none!important;outline:2px dashed rgba(21,157,145,.65)!important;outline-offset:-4px!important}
 body #calendarPage .calendar-agenda-date{background:#1b4036!important;color:#c4d9cc!important}
 body #calendarPage .calendar-agenda-copy b{color:#e1ebe5!important}
 body #calendarPage .calendar-agenda-copy small,body #calendarPage .calendar-planner-footnote{color:#91a79e!important}

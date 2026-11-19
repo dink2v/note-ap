@@ -208,3 +208,47 @@ html.embedded-content-form body #contentForm>section.form-panel:nth-child(3) .ca
     grid-column:span 1!important;
   }
 }
+
+
+/* Approval & History palette: match the soft slate/teal styling used above. */
+#contentForm>.approval-panel,
+html.embedded-content-form body .approval-panel{color:#64748b!important}
+#contentForm>.approval-panel .form-section-heading h2,
+#contentForm>.approval-panel h3,
+html.embedded-content-form body .approval-panel .form-section-heading h2,
+html.embedded-content-form body .approval-panel h3{color:#475569!important;-webkit-text-fill-color:#475569!important}
+#contentForm>.approval-panel .form-section-heading p,
+#contentForm>.approval-panel .approval-status-row small,
+#contentForm>.approval-panel .phase-labels,
+#contentForm>.approval-panel .no-comments,
+#contentForm>.approval-panel #historyEmpty,
+#contentForm>.approval-panel #historyList,
+#contentForm>.approval-panel #commentList,
+#contentForm>.approval-panel .team-comment,
+#contentForm>.approval-panel .team-comment small,
+html.embedded-content-form body .approval-panel .form-section-heading p,
+html.embedded-content-form body .approval-panel .approval-status-row small,
+html.embedded-content-form body .approval-panel .phase-labels,
+html.embedded-content-form body .approval-panel .no-comments,
+html.embedded-content-form body .approval-panel #historyEmpty,
+html.embedded-content-form body .approval-panel #historyList,
+html.embedded-content-form body .approval-panel #commentList,
+html.embedded-content-form body .approval-panel .team-comment,
+html.embedded-content-form body .approval-panel .team-comment small{color:#64748b!important;-webkit-text-fill-color:#64748b!important}
+#contentForm>.approval-panel .approval-status-row,
+html.embedded-content-form body .approval-panel .approval-status-row{background:rgba(255,255,255,.27)!important;border:1px solid rgba(255,255,255,.62)!important}
+#contentForm>.approval-panel .approval-status-row b,
+html.embedded-content-form body .approval-panel .approval-status-row b{color:#475569!important;-webkit-text-fill-color:#475569!important}
+#contentForm>.approval-panel .comments-block,
+#contentForm>.approval-panel .history-block,
+html.embedded-content-form body .approval-panel .comments-block,
+html.embedded-content-form body .approval-panel .history-block{background:rgba(255,255,255,.20)!important;border-color:rgba(255,255,255,.62)!important}
+#contentForm>.approval-panel .approve-btn,
+html.embedded-content-form body .approval-panel .approve-btn{background:rgba(32,182,166,.10)!important;border:1px solid rgba(32,182,166,.28)!important;color:#159d91!important;-webkit-text-fill-color:#159d91!important}
+#contentForm>.approval-panel .pending-pill,
+html.embedded-content-form body .approval-panel .pending-pill{background:#fff1e5!important;color:#bd6d27!important;-webkit-text-fill-color:#bd6d27!important}
+#contentForm>.approval-panel .approved-pill,
+html.embedded-content-form body .approval-panel .approved-pill{background:rgba(32,182,166,.12)!important;color:#159d91!important;-webkit-text-fill-color:#159d91!important}
+#contentForm>.approval-panel .comment-actions .primary-btn,
+html.embedded-content-form body .approval-panel .comment-actions .primary-btn{background:#f28c38!important;border-color:#f28c38!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+#contentForm>.approval-panel .team-comment{background:rgba(255,255,255,.56)!important;border:1px solid rgba(203,213,225,.65)!important;border-radius:10px!important}

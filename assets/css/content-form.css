@@ -53,3 +53,25 @@ html.embedded-content-form body #contentForm > section.form-panel:first-child .f
   grid-column:1!important;
  }
 }
+
+
+/* Arrange the content-writing fields in paired left/right columns. */
+html.embedded-content-form body #contentForm > section.form-panel:nth-of-type(2) .form-grid,
+html.embedded-content-form body #contentForm > section.form-panel:nth-of-type(3) .form-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  align-items:start!important;
+  gap:16px!important;
+}
+html.embedded-content-form body #contentForm > section.form-panel:nth-of-type(2) .form-grid > .field,
+html.embedded-content-form body #contentForm > section.form-panel:nth-of-type(3) .form-grid > .field{
+  grid-column:auto!important;
+  width:100%!important;
+  min-width:0!important;
+}
+@media(max-width:620px){
+  html.embedded-content-form body #contentForm > section.form-panel:nth-of-type(2) .form-grid,
+  html.embedded-content-form body #contentForm > section.form-panel:nth-of-type(3) .form-grid{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+}

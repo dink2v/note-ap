@@ -3005,3 +3005,21 @@ body.modal-open{overflow:hidden!important}
  .content-modal-dialog iframe{border-radius:0 0 18px 18px!important}
  .content-modal-close{top:10px!important;right:10px!important;width:35px!important;height:35px!important}
 }
+
+
+/* NOTE AP — glass backdrop for the rebuilt Add Content popup */
+.content-modal,
+body .content-modal {
+ background: rgba(15,23,42,.13) !important;
+ -webkit-backdrop-filter: blur(13px) saturate(125%) !important;
+ backdrop-filter: blur(13px) saturate(125%) !important;
+}
+body .content-modal-dialog {
+ background: rgba(255,255,255,.18) !important;
+ background-color: rgba(255,255,255,.18) !important;
+ border: 1px solid rgba(255,255,255,.68) !important;
+ -webkit-backdrop-filter: blur(24px) saturate(155%) !important;
+ backdrop-filter: blur(24px) saturate(155%) !important;
+ box-shadow: 0 28px 90px rgba(15,23,42,.18), inset 0 1px 0 rgba(255,255,255,.55) !important;
+}
+body .content-modal-dialog iframe { background: transparent !important; }

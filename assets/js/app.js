@@ -66,7 +66,7 @@
 .sidebar,.mobile-top,.form-breadcrumb,.form-title-row > a.secondary-btn,.page-footer{display:none!important}
 .main-area{margin-left:0!important}
 html,body{background:transparent!important;background-color:transparent!important}
-.content-form-wrap{width:100%!important;max-width:1440px!important;margin:0 auto!important;padding:30px clamp(22px,3.5vw,52px) 30px!important;box-sizing:border-box!important;background:transparent!important;display:block!important}
+.content-form-wrap{width:100%!important;max-width:1440px!important;margin:0 auto!important;padding:26px clamp(18px,2vw,28px) 28px!important;box-sizing:border-box!important;background:transparent!important;display:block!important}
 #contentForm{display:block!important;width:100%!important}
 .form-title-row{display:flex!important;align-items:flex-start!important;gap:14px!important;margin:0 0 22px!important;padding-right:48px!important}
 .form-title-row h1{color:#263548!important;font-weight:800!important}
@@ -97,7 +97,7 @@ html,body{background:transparent!important;background-color:transparent!importan
 .field textarea[name="caption"],.field textarea[name="notes"]{min-height:165px!important}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none!important;border-color:#20b6a6!important;box-shadow:0 0 0 3px rgba(32,182,166,.14)!important}
 .field input::placeholder,.field textarea::placeholder{color:#94a3b8!important;-webkit-text-fill-color:#94a3b8!important}
-#contentForm>section.form-panel:first-child .field.full{grid-column:1/-1!important}
+#contentForm>section.form-panel:first-child .field.full{grid-column:auto!important}
 #contentForm>section.form-panel:nth-of-type(2) .field.full,
 #contentForm>section.form-panel:nth-of-type(3) .field.full{grid-column:auto!important}
 .maximize-btn{align-self:flex-start!important;color:#159d91!important;background:rgba(32,182,166,.08)!important;border:1px solid rgba(32,182,166,.2)!important;border-radius:8px!important;padding:6px 10px!important;font-weight:750!important}

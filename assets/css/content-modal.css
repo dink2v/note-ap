@@ -10,7 +10,7 @@
 #contentModal.content-modal.open{display:flex}
 body.modal-open{overflow:hidden}
 #contentModal .content-modal-dialog{
-  position:relative;width:min(50vw,760px);min-width:min(560px,100%);
+  position:relative;width:min(76vw,1040px);min-width:min(680px,100%);
   height:min(90vh,900px);max-height:90vh;overflow:hidden;
   margin:0;padding:0;background:transparent!important;
   background-color:transparent!important;background-image:none!important;

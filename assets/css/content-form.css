@@ -17,7 +17,7 @@ html.embedded-content-form body .form-bottom-actions{
 }
 html.embedded-content-form body .content-form-wrap{
   display:block!important;width:100%!important;max-width:1440px!important;
-  margin:0 auto!important;padding:30px clamp(22px,3.5vw,52px) 30px!important;
+  margin:0 auto!important;padding:26px clamp(18px,2vw,28px) 28px!important;
   box-sizing:border-box!important;
 }
 html.embedded-content-form body #contentForm{display:block!important;width:100%!important}
@@ -87,7 +87,7 @@ html.embedded-content-form body .field textarea:focus{
 }
 html.embedded-content-form body .field input::placeholder,
 html.embedded-content-form body .field textarea::placeholder{color:#94a3b8!important;-webkit-text-fill-color:#94a3b8!important}
-html.embedded-content-form body #contentForm>section.form-panel:first-child .field.full{grid-column:1/-1!important}
+html.embedded-content-form body #contentForm>section.form-panel:first-child .field.full{grid-column:auto!important}
 html.embedded-content-form body #contentForm>section.form-panel:nth-of-type(2) .field.full,
 html.embedded-content-form body #contentForm>section.form-panel:nth-of-type(3) .field.full{grid-column:auto!important}
 html.embedded-content-form body .maximize-btn{

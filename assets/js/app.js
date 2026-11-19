@@ -1794,10 +1794,3 @@ function renderVisitCalendar(visits){
 
 
 })();
-/* FINAL PANEL OPACITY: clearer surfaces while retaining a visible backdrop */
-html.embedded-content-form body .content-form-wrap > #contentForm > section.form-panel,
-html.embedded-content-form body .content-form-wrap > section.approval-panel{
-  background:rgba(255,255,255,.78)!important;
-  background-color:rgba(255,255,255,.78)!important;
-  background-image:none!important;
-}

@@ -5,7 +5,7 @@
   background:rgba(255,255,255,.50)!important;
   background-color:rgba(255,255,255,.50)!important;
   background-image:none!important;
-  -webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
 }
 #contentModal.content-modal.open{display:flex}
 body.modal-open{overflow:hidden}

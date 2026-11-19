@@ -7385,3 +7385,74 @@ html.embedded-content-form .expand-dialog textarea{
   html.embedded-content-form .form-bottom-actions>div{display:grid!important;grid-template-columns:1fr 1fr!important;width:100%!important}
   html.embedded-content-form .form-bottom-actions>div .primary-btn{grid-column:1/-1!important}
 }
+
+
+/* HARD OVERRIDE: every surface inside embedded content form is transparent */
+html.embedded-content-form,
+html.embedded-content-form body,
+html.embedded-content-form body *,
+html.embedded-content-form body *::before,
+html.embedded-content-form body *::after{
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+html.embedded-content-form body,
+html.embedded-content-form .app-shell,
+html.embedded-content-form .main-area,
+html.embedded-content-form .page-wrap,
+html.embedded-content-form #contentForm,
+html.embedded-content-form .form-panel,
+html.embedded-content-form .form-section-heading,
+html.embedded-content-form .form-grid,
+html.embedded-content-form .field,
+html.embedded-content-form .form-bottom-actions,
+html.embedded-content-form .approval-status-row,
+html.embedded-content-form .comments-block,
+html.embedded-content-form .history-block{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border-color:rgba(255,255,255,.26)!important;
+}
+html.embedded-content-form .field input,
+html.embedded-content-form .field select,
+html.embedded-content-form .field textarea{
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  border:1px solid rgba(255,255,255,.7)!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  box-shadow:none!important;
+}
+html.embedded-content-form .field input::placeholder,
+html.embedded-content-form .field textarea::placeholder{color:rgba(255,255,255,.62)!important}
+html.embedded-content-form .field>span,
+html.embedded-content-form .form-title-row h1,
+html.embedded-content-form .form-section-heading h2,
+html.embedded-content-form .form-section-heading p,
+html.embedded-content-form .field-help,
+html.embedded-content-form .approval-panel *,
+html.embedded-content-form .form-breadcrumb,
+html.embedded-content-form .form-breadcrumb *{
+  color:#fff!important;
+}
+html.embedded-content-form .form-title-row button,
+html.embedded-content-form .form-title-row a,
+html.embedded-content-form .form-bottom-actions button,
+html.embedded-content-form .maximize-btn,
+html.embedded-content-form .approve-btn,
+html.embedded-content-form .comment-actions button{
+  background:transparent!important;
+  background-color:transparent!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.62)!important;
+  box-shadow:none!important;
+}
+html.embedded-content-form .form-bottom-actions .primary-btn{
+  border-color:#f28c38!important;color:#fff!important;
+}
+.content-modal-dialog,
+.content-modal-dialog iframe{
+  background:transparent!important;background-color:transparent!important;
+}

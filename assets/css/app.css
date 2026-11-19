@@ -7539,3 +7539,12 @@ body .content-modal-dialog iframe,
 :root.embedded-content-form[data-theme="system"] body .approval-panel *{
   color:#fff!important;
 }
+
+
+/* Parent document dark-theme rule also paints the popup wrapper green. */
+:root[data-theme="dark"] .content-modal-dialog,
+:root[data-theme="system"] .content-modal-dialog{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+}

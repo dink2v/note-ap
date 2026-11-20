@@ -164,15 +164,24 @@ if(pageParams.get('mode')==='detail'){
   document.querySelector('.form-bottom-actions')?.insertBefore(topEdit,document.getElementById('closeForm'));
   editButton?.remove();
   document.getElementById('duplicateForm')?.setAttribute('hidden','');
-  topEdit.addEventListener('click',()=>{
-   if(!editMode){
-    editMode=true;
-    setFormLocked(false);
-    topEdit.textContent='Sedang Mengedit';
-    topEdit.classList.add('is-editing');
-    topEdit.setAttribute('aria-label','Mode edit konten aktif');
-    showToast('Mode edit aktif. Ubah kolom yang diperlukan lalu klik Simpan Konten.');
-   }
+  topEdit.addEventListener('click',event=>{
+   event.preventDefault();
+   event.stopPropagation();
+   editMode=true;
+   setFormLocked(false);
+   // Pastikan setiap kontrol benar-benar aktif pada mode edit.
+   form.querySelectorAll('input,select,textarea,button[data-expand]').forEach(element=>{
+    element.disabled=false;
+    element.removeAttribute('disabled');
+    element.removeAttribute('readonly');
+    element.setAttribute('aria-disabled','false');
+   });
+   const save=document.querySelector('button[type="submit"][form="contentForm"]');
+   if(save){save.hidden=false;save.disabled=false;save.removeAttribute('disabled');}
+   topEdit.textContent='Mode Edit Aktif';
+   topEdit.classList.add('is-editing');
+   topEdit.setAttribute('aria-label','Mode edit konten aktif');
+   showToast('Mode edit aktif. Semua kolom sudah bisa diubah. Klik Simpan Konten setelah selesai.');
    const firstField=form.elements.namedItem('title');
    if(firstField){firstField.focus();firstField.select?.();}
   });

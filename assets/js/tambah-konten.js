@@ -112,7 +112,7 @@ const initialCalendarDate=pageParams.get('date');
    if(index<0)throw new Error('Data konten tidak ditemukan di penyimpanan browser ini. Data tidak diubah.');
    const now=new Date().toISOString(),updated={...items[index],...makeItemFromForm(),updatedAt:now};
    updated.history=[...(Array.isArray(items[index].history)?items[index].history:[]),{type:'Konten diperbarui melalui Detail Konten',at:now}];
-   items[index]=updated;writeItems(items);detailItem=updated;fillForm(updated);editMode=false;setFormLocked(true);const topEdit=document.getElementById('detailEditTop');if(topEdit){topEdit.textContent='Edit Konten';topEdit.classList.remove('is-editing');topEdit.setAttribute('aria-label','Aktifkan mode edit konten');}showToast('Perubahan berhasil disimpan. Detail kembali ke mode baca.');postSaved(updated.id,'local','detail');
+   items[index]=updated;writeItems(items);detailItem=updated;fillForm(updated);editMode=false;setFormLocked(true);const topEdit=document.getElementById('detailEditBottom');if(topEdit){topEdit.textContent='Edit Konten';topEdit.classList.remove('is-editing');topEdit.setAttribute('aria-label','Aktifkan mode edit konten');}showToast('Perubahan berhasil disimpan. Detail kembali ke mode baca.');postSaved(updated.id,'local','detail');
   }else{
    const item=makeItemFromForm(),now=new Date(),id='NAP-'+now.getTime().toString(36).toUpperCase();
    const saved={...item,id,createdAt:now.toISOString(),updatedAt:now.toISOString(),storage:'local',approvals:[],comments:[],history:[{type:'Konten dibuat melalui Note AP',at:now.toISOString()}]};
@@ -134,7 +134,7 @@ document.getElementById('duplicateForm').addEventListener('click',()=>{
   // langsung dari elemen agar Duplicate tetap menyalin seluruh isi konten.
   [...form.elements].forEach(element=>{if(element.name&&'value'in element)data[element.name]=element.value;});
   form.reset();Object.entries(data).forEach(([key,value])=>{if(form.elements[key])form.elements[key].value=value;});
- if(detailMode){detailMode=false;editMode=true;detailItem=null;setFormLocked(false);document.querySelector('.form-title-row h1').textContent='Tambah Konten Baru';document.getElementById('detailEditTop')?.remove();}
+ if(detailMode){detailMode=false;editMode=true;detailItem=null;setFormLocked(false);document.querySelector('.form-title-row h1').textContent='Tambah Konten Baru';document.getElementById('detailEditBottom')?.remove();}
  showToast('Isi form berhasil diduplikasi.');window.scrollTo({top:0,behavior:'smooth'});
 });
 const editButton=document.getElementById('editForm');
@@ -157,12 +157,13 @@ if(pageParams.get('mode')==='detail'){
   setFormLocked(true);
   const topEdit=document.createElement('button');
   topEdit.type='button';
-  topEdit.id='detailEditTop';
+  topEdit.id='detailEditBottom';
   topEdit.className='secondary-btn detail-edit-top';
   topEdit.textContent='Edit Konten';
   topEdit.setAttribute('aria-label','Aktifkan mode edit konten');
-  titleRow?.appendChild(topEdit);
+  document.querySelector('.form-bottom-actions')?.insertBefore(topEdit,document.getElementById('closeForm'));
   editButton?.remove();
+  document.getElementById('duplicateForm')?.setAttribute('hidden','');
   topEdit.addEventListener('click',()=>{
    if(!editMode){
     editMode=true;

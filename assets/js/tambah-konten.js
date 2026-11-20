@@ -151,8 +151,9 @@ document.getElementById('duplicateForm').addEventListener('click',()=>{
  showToast('Isi form berhasil diduplikasi.');window.scrollTo({top:0,behavior:'smooth'});
 });
 const editButton=document.getElementById('editForm');
-if(pageParams.get('mode')==='detail'){
+if(['detail','edit'].includes(pageParams.get('mode'))){
  detailMode=true;
+ const startInEditMode=pageParams.get('mode')==='edit';
  const title=document.querySelector('.form-title-row h1');
  const titleRow=document.querySelector('.form-title-row');
  if(title)title.textContent='Detail Konten';
@@ -167,41 +168,46 @@ if(pageParams.get('mode')==='detail'){
   detailBaseline=getFormSnapshot();
   form.addEventListener('input',refreshDetailSaveButton);
   form.addEventListener('change',refreshDetailSaveButton);
-  // Detail dibuka dalam mode baca. Pengguna harus menekan Edit Konten
-  // sebelum field dapat diubah; setelah disimpan, kembali ke mode baca.
-  editMode=false;
-  setFormLocked(true);
-  const topEdit=document.createElement('button');
-  topEdit.type='button';
-  topEdit.id='detailEditBottom';
-  topEdit.className='secondary-btn detail-edit-top';
-  topEdit.textContent='Edit Konten';
-  topEdit.setAttribute('aria-label','Aktifkan mode edit konten');
-  document.querySelector('.form-bottom-actions')?.insertBefore(topEdit,document.getElementById('closeForm'));
+  // Mode detail biasa hanya untuk membaca. Mode edit dari popup kalender
+  // langsung membuka field aktif tanpa menampilkan tombol Edit Konten kedua.
+  editMode=startInEditMode;
+  setFormLocked(!editMode);
   editButton?.remove();
   document.getElementById('duplicateForm')?.setAttribute('hidden','');
-  topEdit.addEventListener('click',event=>{
-   event.preventDefault();
-   event.stopPropagation();
-   editMode=true;
-   setFormLocked(false);
-   // Pastikan setiap kontrol benar-benar aktif pada mode edit.
+  if(editMode){
    form.querySelectorAll('input,select,textarea,button[data-expand]').forEach(element=>{
     element.disabled=false;
     element.removeAttribute('disabled');
     element.removeAttribute('readonly');
     element.setAttribute('aria-disabled','false');
    });
-   const save=document.querySelector('button[type="submit"][form="contentForm"]');
-   if(save){save.hidden=true;save.disabled=true;save.removeAttribute('disabled');}
-   refreshDetailSaveButton();
-   topEdit.textContent='Mode Edit Aktif';
-   topEdit.classList.add('is-editing');
-   topEdit.setAttribute('aria-label','Mode edit konten aktif');
-   showToast('Mode edit aktif. Semua kolom sudah bisa diubah. Klik Simpan Konten setelah selesai.');
    const firstField=form.elements.namedItem('title');
-   if(firstField){firstField.focus();firstField.select?.();}
-  });
+   if(firstField)firstField.focus();
+   showToast('Mode edit aktif. Perubahan akan menampilkan tombol Simpan Konten.');
+  }else{
+   const topEdit=document.createElement('button');
+   topEdit.type='button';
+   topEdit.id='detailEditBottom';
+   topEdit.className='secondary-btn detail-edit-top';
+   topEdit.textContent='Edit Konten';
+   topEdit.setAttribute('aria-label','Aktifkan mode edit konten');
+   document.querySelector('.form-bottom-actions')?.insertBefore(topEdit,document.getElementById('closeForm'));
+   topEdit.addEventListener('click',event=>{
+    event.preventDefault();
+    event.stopPropagation();
+    editMode=true;
+    setFormLocked(false);
+    form.querySelectorAll('input,select,textarea,button[data-expand]').forEach(element=>{
+     element.disabled=false;
+     element.removeAttribute('disabled');
+     element.removeAttribute('readonly');
+     element.setAttribute('aria-disabled','false');
+    });
+    const firstField=form.elements.namedItem('title');
+    if(firstField){firstField.focus();firstField.select?.();}
+    showToast('Mode edit aktif. Perubahan akan menampilkan tombol Simpan Konten.');
+   });
+  }
  }else{
   setFormLocked(true);
   if(editButton)editButton.disabled=true;

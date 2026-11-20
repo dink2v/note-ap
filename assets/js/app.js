@@ -847,14 +847,6 @@ doc.head.append(style);
     statusHeader.append(statusLabel,statusValue);
     body.append(statusHeader);
 
-    const intro=document.createElement('div');
-    intro.className='calendar-original-detail-intro';
-    const title=document.createElement('h3');
-    title.textContent=value(data.title);
-    const identity=document.createElement('p');
-    identity.textContent=[value(data.id),formattedDate,postingTime||'Jam belum diatur'].join('  ·  ');
-    intro.append(title,identity);
-    body.append(intro);
 
     const makeSection=(name,content,description='')=>{
       const section=document.createElement('section');

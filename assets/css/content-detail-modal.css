@@ -105,3 +105,117 @@ html body #calendarContentDetailModal .calendar-content-detail-body *:not(button
   background-color:transparent!important;
   background-image:none!important;
 }
+
+
+/* COLOR SYSTEM — match the pastel glass sections in Add Content. */
+html body #calendarContentDetailModal .calendar-item-dialog{
+  background:rgba(255,255,255,.42)!important;
+  background-color:rgba(255,255,255,.42)!important;
+  border:1px solid rgba(71,85,105,.48)!important;
+  border-radius:18px!important;
+  box-shadow:0 12px 32px rgba(31,55,78,.07),inset 0 1px 0 rgba(255,255,255,.6)!important;
+  -webkit-backdrop-filter:blur(1px) saturate(115%)!important;
+  backdrop-filter:blur(1px) saturate(115%)!important;
+  color:#1f2f43!important;
+}
+html body #calendarContentDetailModal .calendar-item-dialog-head,
+html body #calendarContentDetailModal .calendar-content-detail-body,
+html body #calendarContentDetailModal .calendar-item-actions{
+  background:transparent!important;
+  background-color:transparent!important;
+  color:#1f2f43!important;
+}
+html body #calendarContentDetailModal .calendar-item-dialog-head h2,
+html body #calendarContentDetailModal .calendar-original-detail-intro h3,
+html body #calendarContentDetailModal .calendar-original-detail-section h3{
+  color:#1f2f43!important;
+}
+html body #calendarContentDetailModal .calendar-item-dialog-head p,
+html body #calendarContentDetailModal .calendar-original-detail-intro p,
+html body #calendarContentDetailModal .calendar-original-detail-hint,
+html body #calendarContentDetailModal .calendar-original-detail-info-row span{
+  color:#475569!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-status{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  gap:12px!important;padding:13px 16px!important;margin:0 0 14px!important;
+  border:1px solid rgba(8,127,117,.25)!important;border-radius:13px!important;
+  background:rgba(201,240,232,.62)!important;color:#087f75!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-status span{
+  color:#087f75!important;font-size:10px!important;font-weight:800!important;letter-spacing:.08em!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-status strong{
+  display:inline-flex!important;padding:6px 11px!important;border-radius:999px!important;
+  background:#fff!important;color:#087f75!important;font-size:12px!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-intro{
+  padding:17px 18px!important;margin:0 0 16px!important;border-radius:15px!important;
+  border:1px solid rgba(242,140,56,.30)!important;
+  background:rgba(255,239,222,.62)!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-intro h3{
+  margin:0 0 7px!important;font-size:18px!important;font-weight:800!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-intro p{
+  margin:0!important;font-size:12px!important;line-height:1.6!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-section{
+  padding:18px!important;margin:0 0 14px!important;border-radius:16px!important;
+  border:1px solid rgba(71,85,105,.24)!important;
+  box-shadow:0 8px 20px rgba(31,55,78,.035)!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-section:nth-of-type(1){
+  background:rgba(255,239,222,.62)!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-section:nth-of-type(2){
+  background:rgba(222,247,242,.62)!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-section:nth-of-type(3){
+  background:rgba(239,232,255,.62)!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-section:nth-of-type(n+4){
+  background:rgba(226,239,255,.62)!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-section h3{
+  margin:0 0 12px!important;font-size:14px!important;font-weight:800!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-info-row,
+html body #calendarContentDetailModal .calendar-original-detail-copy-item{
+  padding:12px 13px!important;margin:0 0 9px!important;border-radius:11px!important;
+  border:1px solid rgba(100,116,139,.20)!important;
+  background:rgba(255,255,255,.62)!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-info-row:last-child,
+html body #calendarContentDetailModal .calendar-original-detail-copy-item:last-child{
+  margin-bottom:0!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-info-row strong,
+html body #calendarContentDetailModal .calendar-original-detail-copy-item h4{
+  color:#1f2f43!important;font-weight:750!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-copy-item p,
+html body #calendarContentDetailModal .calendar-original-detail-plain{
+  color:#334155!important;line-height:1.65!important;overflow-wrap:anywhere!important;
+}
+html body #calendarContentDetailModal .calendar-original-detail-copy-item p.is-empty,
+html body #calendarContentDetailModal .calendar-original-detail-plain.is-empty{
+  color:#94a3b8!important;font-style:italic!important;
+}
+html body #calendarContentDetailModal .calendar-item-dialog-head>button{
+  background:rgba(255,255,255,.9)!important;color:#475569!important;
+  border:1px solid rgba(203,213,225,.9)!important;border-radius:10px!important;
+}
+html body #calendarContentDetailModal .calendar-item-actions .calendar-item-cancel{
+  background:rgba(255,255,255,.86)!important;color:#475569!important;
+  border:1px solid rgba(203,213,225,.9)!important;border-radius:10px!important;
+}
+html body #calendarContentDetailModal .calendar-item-actions .primary-btn{
+  background:#f28c38!important;background-color:#f28c38!important;
+  border:1px solid #f28c38!important;color:#fff!important;
+  box-shadow:0 5px 14px rgba(242,140,56,.18)!important;
+}
+@media(max-width:600px){
+  html body #calendarContentDetailModal .calendar-original-detail-section{padding:14px!important}
+  html body #calendarContentDetailModal .calendar-original-detail-intro{padding:14px!important}
+}

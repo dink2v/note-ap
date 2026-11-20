@@ -834,19 +834,11 @@ doc.head.append(style);
       const found=values.find(v=>v!==undefined&&v!==null&&String(v).trim()!=='');
       return found===undefined?'—':String(found);
     };
-    const postingDate=String(data.postingDate||data.postDateTime||'').split('T')[0];
-    const postingTime=String(data.postingTime||String(data.postDateTime||'').split('T')[1]||'').slice(0,5);
+    const dateTime=String(data.postDateTime||'');
+    const postingDate=String(data.postingDate||dateTime.split('T')[0]||'');
+    const postingTime=String(data.postingTime||dateTime.split('T')[1]||'').slice(0,5);
     const formattedDate=postingDate?formatContentDate(postingDate):'Belum ditentukan';
-
-    const statusHeader=document.createElement('div');
-    statusHeader.className='calendar-original-detail-status';
-    const statusLabel=document.createElement('span');
-    statusLabel.textContent='STATUS KONTEN';
-    const statusValue=document.createElement('strong');
-    statusValue.textContent=value(data.status);
-    statusHeader.append(statusLabel,statusValue);
-    body.append(statusHeader);
-
+    const formattedDateTime=postingTime?formattedDate+' · '+postingTime:formattedDate;
 
     const makeSection=(name,content,description='')=>{
       const section=document.createElement('section');
@@ -865,28 +857,16 @@ doc.head.append(style);
       return section;
     };
 
-    const info=document.createElement('div');
-    info.className='calendar-original-detail-info';
-    [
-      ['Kategori',value(data.category,data.contentCategory)],
-      ['Pilar',value(data.pillar)],
-      ['Platform',value(data.platform)],
-      ['Format',value(data.format)],
-      ['Tanggal Publish',formattedDate],
-      ['Status',value(data.status)],
-      ['Talent',value(data.talent)]
-    ].forEach(([label,text])=>{
+    const addInfo=(host,label,text)=>{
       const row=document.createElement('div');
       row.className='calendar-original-detail-info-row';
       const key=document.createElement('span');
       key.textContent=label;
       const val=document.createElement('strong');
-      val.textContent=text;
+      val.textContent=value(text);
       row.append(key,val);
-      info.append(row);
-    });
-    makeSection('Informasi Konten',info);
-
+      host.append(row);
+    };
     const addCopy=(host,label,text)=>{
       const wrap=document.createElement('div');
       wrap.className='calendar-original-detail-copy-item';
@@ -899,43 +879,38 @@ doc.head.append(style);
       host.append(wrap);
     };
 
-    const content=document.createElement('div');
-    content.className='calendar-original-detail-copy';
-    addCopy(content,'Hook / Opening',data.hook);
-    addCopy(content,'Isi Konten / Slide',data.body);
-    addCopy(content,'CTA (Call to Action)',data.cta);
-    makeSection('Isi Konten / Slide',content,'Naskah utama konten sesuai urutan penyampaian.');
+    // 01 — same fields and grouping as the Add Content summary.
+    const info=document.createElement('div');
+    info.className='calendar-original-detail-info';
+    [
+      ['Judul',data.title],
+      ['Platform',data.platform],
+      ['Format Konten',data.format],
+      ['Durasi / Slide',data.duration],
+      ['Pilar Konten',data.pillar],
+      ['Status',data.status],
+      ['Tanggal & Waktu Posting',formattedDateTime],
+      ['Referensi Konten',data.reference]
+    ].forEach(([label,text])=>addInfo(info,label,text));
+    makeSection('01 · Informasi Konten',info,'Ringkasan informasi utama konten.');
 
-    const visualValues=[
-      ['Visual Hook',data.visualHook],
-      ['Visual Body',data.visualBody],
-      ['Visual CTA',data.visualCTA??data.visualCta]
-    ];
-    if(visualValues.some(([,v])=>v&&String(v).trim())){
-      const visuals=document.createElement('div');
-      visuals.className='calendar-original-detail-copy';
-      visualValues.forEach(([label,text])=>{if(text&&String(text).trim())addCopy(visuals,label,text);});
-      makeSection('Arahan Visual',visuals,'Panduan visual untuk proses desain atau produksi.');
-    }
+    // 02 — all script and visual direction fields stay together.
+    const materials=document.createElement('div');
+    materials.className='calendar-original-detail-copy';
+    addCopy(materials,'Hook / Opening',data.hook);
+    addCopy(materials,'Visual (Hook / Opening)',data.visualHook);
+    addCopy(materials,'Body (Naskah)',data.body);
+    addCopy(materials,'Visual (Body)',data.visualBody);
+    addCopy(materials,'CTA (Call to Action)',data.cta);
+    addCopy(materials,'Visual (CTA)',data.visualCta??data.visualCTA);
+    makeSection('02 · Materi & Arahan Visual',materials,'Materi naskah dan arahan visual seperti pada form Tambah Konten.');
 
-    if(data.reference&&String(data.reference).trim()){
-      const reference=document.createElement('p');
-      reference.className='calendar-original-detail-plain';
-      reference.textContent=String(data.reference);
-      makeSection('Referensi',reference);
-    }
-
-    const caption=document.createElement('p');
-    caption.className='calendar-original-detail-plain';
-    caption.textContent=value(data.caption);
-    if(!data.caption)caption.classList.add('is-empty');
-    makeSection('Caption',caption);
-
-    const notes=document.createElement('p');
-    notes.className='calendar-original-detail-plain';
-    notes.textContent=value(data.notes);
-    if(!data.notes)notes.classList.add('is-empty');
-    makeSection('Catatan',notes);
+    // 03 — caption and notes, matching the final Add Content section.
+    const extras=document.createElement('div');
+    extras.className='calendar-original-detail-copy';
+    addCopy(extras,'Caption',data.caption);
+    addCopy(extras,'Catatan / Notes',data.notes);
+    makeSection('03 · Caption & Catatan',extras,'Caption dan catatan tambahan konten.');
 
     modal.hidden=false;
     modal.classList.add('open');

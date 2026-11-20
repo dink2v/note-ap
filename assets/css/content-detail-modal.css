@@ -35,3 +35,51 @@
  #calendarContentDetailModal.calendar-item-modal{padding:8px}
  #calendarContentDetailModal .calendar-item-dialog{width:calc(100vw - 16px);max-height:94dvh;border-radius:12px}
 }
+
+/* FINAL — Match the Add Content popup's light glass background. */
+#calendarContentDetailModal.calendar-item-modal{
+  background:rgba(255,255,255,.50)!important;
+  background-color:rgba(255,255,255,.50)!important;
+  background-image:none!important;
+  -webkit-backdrop-filter:blur(3px)!important;
+  backdrop-filter:blur(3px)!important;
+}
+#calendarContentDetailModal .calendar-item-dialog{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+#calendarContentDetailModal .calendar-item-dialog-head,
+#calendarContentDetailModal .calendar-item-actions{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border-color:rgba(100,116,139,.18)!important;
+  box-shadow:none!important;
+}
+#calendarContentDetailModal .calendar-content-detail-body{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+}
+#calendarContentDetailModal .calendar-original-detail-section{
+  background:rgba(255,255,255,.43)!important;
+  background-color:rgba(255,255,255,.43)!important;
+  background-image:none!important;
+  border:1px solid #263548!important;
+  border-radius:18px!important;
+  box-shadow:0 12px 32px rgba(31,55,78,.07),inset 0 1px 0 rgba(255,255,255,.6)!important;
+  -webkit-backdrop-filter:blur(9px) saturate(135%)!important;
+  backdrop-filter:blur(9px) saturate(135%)!important;
+}
+@media(max-width:600px){
+  #calendarContentDetailModal.calendar-item-modal{
+    background:rgba(255,255,255,.50)!important;
+    -webkit-backdrop-filter:blur(3px)!important;
+    backdrop-filter:blur(3px)!important;
+  }
+}

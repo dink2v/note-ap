@@ -67,3 +67,41 @@
 #calendarContentDetailModal .calendar-item-actions{
   border-color:transparent!important;
 }
+
+
+/* OVERRIDE LEGACY THEME — every detail panel must stay transparent. */
+html body #calendarContentDetailModal.calendar-item-modal{
+  background:rgba(255,255,255,.50)!important;
+  background-color:rgba(255,255,255,.50)!important;
+  background-image:none!important;
+  -webkit-backdrop-filter:blur(3px)!important;
+  backdrop-filter:blur(3px)!important;
+}
+html body #calendarContentDetailModal .calendar-item-dialog,
+html body #calendarContentDetailModal .calendar-item-dialog-head,
+html body #calendarContentDetailModal .calendar-content-detail-body,
+html body #calendarContentDetailModal .calendar-item-actions,
+html body #calendarContentDetailModal .calendar-detail-section,
+html body #calendarContentDetailModal .calendar-original-detail-section,
+html body #calendarContentDetailModal .calendar-original-detail-intro,
+html body #calendarContentDetailModal .calendar-original-detail-info-row,
+html body #calendarContentDetailModal .calendar-original-detail-copy-item,
+html body #calendarContentDetailModal .calendar-original-detail-hint{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html body #calendarContentDetailModal .calendar-item-dialog{
+  border:0!important;
+}
+html body #calendarContentDetailModal .calendar-item-dialog-head,
+html body #calendarContentDetailModal .calendar-item-actions{
+  border-color:transparent!important;
+}
+html body #calendarContentDetailModal .calendar-content-detail-body *:not(button):not(input):not(textarea):not(select){
+  background-color:transparent!important;
+  background-image:none!important;
+}

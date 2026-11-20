@@ -84,13 +84,13 @@
   }
 }
 
-/* FINAL CORRECTION — No color tint on calendar detail popup. */
+/* FINAL CORRECTION — Match Add Content backdrop exactly. */
 #calendarContentDetailModal.calendar-item-modal{
-  background:rgba(255,255,255,.06)!important;
-  background-color:rgba(255,255,255,.06)!important;
+  background:rgba(255,255,255,.50)!important;
+  background-color:rgba(255,255,255,.50)!important;
   background-image:none!important;
-  -webkit-backdrop-filter:blur(2px) saturate(105%)!important;
-  backdrop-filter:blur(2px) saturate(105%)!important;
+  -webkit-backdrop-filter:blur(3px)!important;
+  backdrop-filter:blur(3px)!important;
 }
 #calendarContentDetailModal .calendar-item-dialog,
 #calendarContentDetailModal .calendar-item-dialog-head,

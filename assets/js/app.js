@@ -39,14 +39,14 @@
     if(!contentModalFrame.getAttribute('src')||contentModalFrame.src!==target)contentModalFrame.src=target;
     else if(postingDate){try{contentModalFrame.contentWindow.postMessage({type:'NOTE_AP_SET_POSTING_DATE',date:postingDate},'*');}catch(error){}}
   }
-  function openContentDetail(item){
+  function openContentDetail(item,startEditing=false){
     if(!item)return;
     contentModal.classList.add('open');
     contentModal.setAttribute('aria-hidden','false');
     document.body.classList.add('modal-open');
     const detailUrl=new URL('./tambah-konten.html',document.baseURI);
     detailUrl.searchParams.set('noteapv','20261119-approval-actual-sibling-18');
-    detailUrl.searchParams.set('mode','detail');
+    detailUrl.searchParams.set('mode',startEditing?'edit':'detail');
     detailUrl.searchParams.set('id',String(item.id||''));
     contentModalFrame.src=detailUrl.href;
   }
@@ -935,7 +935,8 @@ doc.head.append(style);
     }
     selectedCalendarContent=latestItem;
     closeCalendarContentDetail();
-    openContentDetail(latestItem);
+    // Tombol Edit pada popup kalender langsung membuka form dalam mode edit.
+    openContentDetail(latestItem,true);
   });
   document.getElementById('calendarContentDetailModal')?.addEventListener('click',event=>{if(event.target.id==='calendarContentDetailModal')closeCalendarContentDetail();});
   function openCalendarItemModal(item,dateValue){

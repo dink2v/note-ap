@@ -21,7 +21,7 @@ document.addEventListener('click',event=>{const side=document.getElementById('si
 const overlay=document.getElementById('expandOverlay'),expanded=document.getElementById('expandedText');
 document.querySelectorAll('[data-expand]').forEach(button=>button.addEventListener('click',()=>{if(detailMode&&!editMode)return;expandedField=form.elements[button.dataset.expand];document.getElementById('expandTitle').textContent=button.parentElement.querySelector('span').textContent;expanded.value=expandedField.value;overlay.hidden=false;expanded.focus();}));
 function closeExpand(apply){if(apply&&expandedField)expandedField.value=expanded.value;overlay.hidden=true;expandedField=null;}
-document.getElementById('closeExpand').addEventListener('click',()=>closeExpand(false));document.getElementById('applyExpand').addEventListener('click',()=>closeExpand(true));
+document.getElementById('closeExpand').addEventListener('click',()=>closeExpand(false));document.getElementById('applyExpand').addEventListener('click',()=>{closeExpand(true);refreshDetailSaveButton();});
 document.getElementById('approvePhase').addEventListener('click',()=>showToast('Approval akan tersedia setelah modul kolaborasi diaktifkan.'));
 document.getElementById('sendComment').addEventListener('click',()=>showToast('Komentar dapat ditambahkan setelah konten tersimpan.'));
 function saveThroughAppsScript(payload){
@@ -44,6 +44,18 @@ function saveThroughAppsScript(payload){
   setTimeout(()=>{if(!settled){cleanup();reject(new Error('Server tidak merespons. Periksa URL dan deployment Apps Script.'));}},30000);
  });
 }
+let detailBaseline='';
+function getFormSnapshot(){
+ return JSON.stringify([...form.querySelectorAll('input,select,textarea')].map(element=>[element.name||element.id,element.value]));
+}
+function refreshDetailSaveButton(){
+ if(!detailMode)return;
+ const save=document.querySelector('button[type="submit"][form="contentForm"]');
+ if(!save)return;
+ const changed=editMode&&getFormSnapshot()!==detailBaseline;
+ save.hidden=!changed;
+ save.disabled=!changed;
+}
 function setFormLocked(locked){
  // Kunci/buka setiap field secara eksplisit, termasuk seluruh field di
  // panel 01 Informasi Konten dan panel Materi serta Caption.
@@ -63,6 +75,7 @@ function setFormLocked(locked){
  const save=document.querySelector('button[type="submit"][form="contentForm"]');
  if(save){save.disabled=Boolean(locked);save.hidden=Boolean(locked);}
  form.dataset.editable=String(!locked);
+ if(detailMode)refreshDetailSaveButton();
 }
 function fillForm(item){
  const legacyDateTime=String(item.postDateTime||'');
@@ -112,7 +125,7 @@ const initialCalendarDate=pageParams.get('date');
    if(index<0)throw new Error('Data konten tidak ditemukan di penyimpanan browser ini. Data tidak diubah.');
    const now=new Date().toISOString(),updated={...items[index],...makeItemFromForm(),updatedAt:now};
    updated.history=[...(Array.isArray(items[index].history)?items[index].history:[]),{type:'Konten diperbarui melalui Detail Konten',at:now}];
-   items[index]=updated;writeItems(items);detailItem=updated;fillForm(updated);editMode=false;setFormLocked(true);const topEdit=document.getElementById('detailEditBottom');if(topEdit){topEdit.textContent='Edit Konten';topEdit.classList.remove('is-editing');topEdit.setAttribute('aria-label','Aktifkan mode edit konten');}showToast('Perubahan berhasil disimpan. Detail kembali ke mode baca.');postSaved(updated.id,'local','detail');
+   items[index]=updated;writeItems(items);detailItem=updated;fillForm(updated);detailBaseline=getFormSnapshot();editMode=false;setFormLocked(true);const topEdit=document.getElementById('detailEditBottom');if(topEdit){topEdit.textContent='Edit Konten';topEdit.classList.remove('is-editing');topEdit.setAttribute('aria-label','Aktifkan mode edit konten');}showToast('Perubahan berhasil disimpan. Detail kembali ke mode baca.');postSaved(updated.id,'local','detail');
   }else{
    const item=makeItemFromForm(),now=new Date(),id='NAP-'+now.getTime().toString(36).toUpperCase();
    const saved={...item,id,createdAt:now.toISOString(),updatedAt:now.toISOString(),storage:'local',approvals:[],comments:[],history:[{type:'Konten dibuat melalui Note AP',at:now.toISOString()}]};
@@ -125,7 +138,7 @@ const initialCalendarDate=pageParams.get('date');
    form.reset();
   }
  }catch(error){showToast(error.message||'Konten gagal disimpan.');}
- finally{if(submit){submit.disabled=detailMode&&!editMode;submit.innerHTML='Simpan Konten <span>→</span>';}}
+ finally{if(submit){submit.innerHTML='Simpan Konten <span>→</span>';if(detailMode)refreshDetailSaveButton();else submit.disabled=false;}}
 });
 document.getElementById('closeForm').addEventListener('click',()=>{if(confirm('Tutup popup konten? Perubahan yang belum disimpan akan hilang.')){if(typeof window.noteApContentModalClose==='function')window.noteApContentModalClose();else window.location.href='index.html';}});
 document.getElementById('duplicateForm').addEventListener('click',()=>{
@@ -151,6 +164,9 @@ if(pageParams.get('mode')==='detail'){
  detailItem=readItems().find(item=>String(item.id)===String(id));
  if(detailItem){
   fillForm(detailItem);
+  detailBaseline=getFormSnapshot();
+  form.addEventListener('input',refreshDetailSaveButton);
+  form.addEventListener('change',refreshDetailSaveButton);
   // Detail dibuka dalam mode baca. Pengguna harus menekan Edit Konten
   // sebelum field dapat diubah; setelah disimpan, kembali ke mode baca.
   editMode=false;
@@ -177,7 +193,8 @@ if(pageParams.get('mode')==='detail'){
     element.setAttribute('aria-disabled','false');
    });
    const save=document.querySelector('button[type="submit"][form="contentForm"]');
-   if(save){save.hidden=false;save.disabled=false;save.removeAttribute('disabled');}
+   if(save){save.hidden=true;save.disabled=true;save.removeAttribute('disabled');}
+   refreshDetailSaveButton();
    topEdit.textContent='Mode Edit Aktif';
    topEdit.classList.add('is-editing');
    topEdit.setAttribute('aria-label','Mode edit konten aktif');

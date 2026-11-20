@@ -83,3 +83,29 @@
     backdrop-filter:blur(3px)!important;
   }
 }
+
+/* FINAL CORRECTION — No color tint on calendar detail popup. */
+#calendarContentDetailModal.calendar-item-modal{
+  background:rgba(255,255,255,.06)!important;
+  background-color:rgba(255,255,255,.06)!important;
+  background-image:none!important;
+  -webkit-backdrop-filter:blur(2px) saturate(105%)!important;
+  backdrop-filter:blur(2px) saturate(105%)!important;
+}
+#calendarContentDetailModal .calendar-item-dialog,
+#calendarContentDetailModal .calendar-item-dialog-head,
+#calendarContentDetailModal .calendar-content-detail-body,
+#calendarContentDetailModal .calendar-item-actions{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+#calendarContentDetailModal .calendar-original-detail-section{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  box-shadow:none!important;
+}
